@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowRight, Lock, Loader2 } from 'lucide-react';
+import PacmanGame from './PacmanGame';
 
 interface EmailCaptureProps {
   buttonText?: string;
@@ -42,10 +43,16 @@ const EmailCapture: React.FC<EmailCaptureProps> = ({ buttonText = "ODKLENI DOSTO
 
   if (status === 'success') {
     return (
-      <div className="w-full max-w-md mx-auto text-center p-4 bg-cultured-accent/10 border border-cultured-accent rounded-sm animate-pulse">
-        <p className="font-mono text-cultured-accent font-bold uppercase tracking-widest text-sm">
-          SI NA SEZNAMU. PRIPRAVI DENARNICO.
-        </p>
+      <div className="w-full flex flex-col items-center animate-in fade-in zoom-in duration-500">
+        <div className="text-center mb-8 border-b border-white/10 pb-6 w-full">
+           <p className="font-mono text-cultured-accent font-bold uppercase tracking-widest text-sm mb-2 animate-pulse">
+            DOSTOP ODOBREN. SI NA SEZNAMU.
+          </p>
+          <p className="text-neutral-400 text-xs font-mono">
+            Tvoja prioriteta je zavarovana. Medtem ko čakaš na drop, zberi XP točke.
+          </p>
+        </div>
+        <PacmanGame />
       </div>
     );
   }

@@ -35,11 +35,11 @@ const Countdown: React.FC = () => {
   }, []);
 
   const TimeUnit: React.FC<{ value: number; label: string }> = ({ value, label }) => (
-    <div className="flex flex-col items-center mx-3 md:mx-6">
-      <span className="text-5xl md:text-8xl font-black font-mono tracking-tighter text-white drop-shadow-[0_0_15px_rgba(255,42,77,0.6)]">
+    <div className="flex flex-col items-center mx-3 md:mx-6 group cursor-default transition-transform duration-300 hover:scale-110">
+      <span className="text-5xl md:text-8xl font-black font-mono tracking-tighter text-white drop-shadow-[0_0_15px_rgba(255,42,77,0.6)] transition-all duration-300 group-hover:drop-shadow-[0_0_30px_rgba(255,42,77,0.9)]">
         {value.toString().padStart(2, '0')}
       </span>
-      <span className="text-[10px] md:text-sm uppercase tracking-widest text-cultured-accent mt-2 font-bold">
+      <span className="text-[10px] md:text-sm uppercase tracking-widest text-cultured-accent mt-2 font-bold transition-colors duration-300 group-hover:text-white">
         {label}
       </span>
     </div>
