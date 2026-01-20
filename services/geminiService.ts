@@ -9,7 +9,9 @@ const FALLBACK_MANIFESTO: ManifestoContent = {
 };
 
 export const generateHypeContent = async (): Promise<ManifestoContent> => {
-  const apiKey = process.env.API_KEY;
+  // Safe access for browser environments where process might not be defined
+  const apiKey = typeof process !== 'undefined' ? process.env?.API_KEY : undefined;
+
   if (!apiKey) {
     console.warn("API Key missing, using fallback content.");
     return FALLBACK_MANIFESTO;
