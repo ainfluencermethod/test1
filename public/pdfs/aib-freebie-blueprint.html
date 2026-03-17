@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Blueprint — 7-Day AI Influencer Viral Launch Guide</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+    :root {
+      --bg: #0b0f12;
+      --card: #12181d;
+      --card-2: #0f1418;
+      --accent: #22d3c5;
+      --accent-soft: rgba(34, 211, 197, 0.12);
+      --border: rgba(34, 211, 197, 0.25);
+      --text: #f5fbfb;
+      --body: #b9c8c8;
+      --muted: #6f8484;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at top, rgba(34,211,197,0.10), transparent 30%), var(--bg);
+      color: var(--body);
+      line-height: 1.7;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    @page { size: A4; margin: 0; }
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      page-break-after: always;
+      position: relative;
+      background: var(--bg);
+      overflow: hidden;
+    }
+    .page:last-child { page-break-after: auto; }
+    .page::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), #64f0e5);
+    }
+    .inner { padding: 52px 56px 66px; }
+    .eyebrow {
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      font-size: 9pt;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+    .title { color: var(--text); font-size: 30pt; line-height: 1.08; font-weight: 900; letter-spacing: -1px; }
+    .subtitle { color: var(--accent); font-size: 13pt; text-transform: uppercase; letter-spacing: 2px; margin-top: 12px; }
+    .lead { margin-top: 26px; font-size: 12.2pt; color: var(--body); }
+    .divider { width: 72px; height: 3px; background: var(--accent); margin: 24px 0 30px; }
+    .cover {
+      min-height: 297mm;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px;
+    }
+    .cover h1 { color: var(--text); font-size: 46pt; line-height: 1.02; font-weight: 900; letter-spacing: -2px; }
+    .cover p { max-width: 520px; margin: 24px auto 0; font-size: 13pt; }
+    .brand { margin-top: 48px; color: var(--muted); text-transform: uppercase; letter-spacing: 4px; font-size: 8.5pt; }
+    .grid { display: grid; gap: 16px; }
+    .grid.two { grid-template-columns: 1fr 1fr; }
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 18px 18px 16px;
+      break-inside: avoid;
+    }
+    .card h3 { color: var(--text); font-size: 14pt; margin-bottom: 8px; }
+    .bullet { margin-left: 18px; }
+    .bullet li { margin-bottom: 8px; }
+    .big-num { font-size: 52pt; line-height: 1; color: rgba(34,211,197,0.18); font-weight: 900; }
+    h2 { color: var(--text); font-size: 18pt; margin: 18px 0 10px; }
+    p { margin-bottom: 12px; }
+    .callout {
+      background: var(--accent-soft);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      padding: 16px 18px;
+      border-radius: 16px;
+      margin: 18px 0;
+    }
+    .checklist li { list-style: none; margin-bottom: 10px; }
+    .checklist li::before { content: '✓'; color: var(--accent); margin-right: 10px; font-weight: 800; }
+    .footer {
+      position: absolute;
+      bottom: 26px;
+      left: 0; right: 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 7.5pt;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .small { color: var(--muted); font-size: 10pt; }
+  </style>
+</head>
+<body>
+  <section class="page cover">
+    <div>
+      <div class="eyebrow">AI Influencer Blueprint</div>
+      <h1>THE BLUEPRINT</h1>
+      <div class="subtitle">7-Day AI Influencer Viral Launch Guide</div>
+      <div class="divider" style="margin-inline:auto"></div>
+      <p>From zero to your first viral post in one week. Build your character, train the algorithm, find proven content, and set up monetization fast.</p>
+      <div class="brand">AI Influencer Blueprint</div>
+    </div>
+  </section>
+
+  <section class="page"><div class="inner">
+    <div class="eyebrow">Overview</div>
+    <div class="title">What this guide gives you</div>
+    <div class="divider"></div>
+    <p class="lead">This is not theory. It’s a direct 7-day action plan to launch an AI influencer account with a clear niche, consistent visual identity, repeatable content engine, and a monetization path through Fanvue.</p>
+    <div class="grid two" style="margin-top:28px;">
+      <div class="card"><h3>Foundation</h3><p>Pick a niche with actual demand and clear monetization potential.</p></div>
+      <div class="card"><h3>Model DNA</h3><p>Create a reusable identity that makes your AI character recognizable.</p></div>
+      <div class="card"><h3>Warm-Up Protocol</h3><p>Escape low-view jail by teaching the algorithm who to push you to.</p></div>
+      <div class="card"><h3>Goldmine Content</h3><p>Find viral content that already works and recreate the concept faster.</p></div>
+      <div class="card"><h3>Automation</h3><p>Batch-produce content so you stop posting from panic mode.</p></div>
+      <div class="card"><h3>Monetization</h3><p>Set up Fanvue early so attention turns into revenue, not empty vanity.</p></div>
+    </div>
+    <div class="callout"><strong style="color:var(--text)">Bonus:</strong> The fastest growth usually comes from specificity + consistency + modeled viral formats. That’s the whole game.</div>
+    <div class="footer">The Blueprint · AI Influencer Blueprint</div>
+  </div></section>
+
+  <section class="page"><div class="inner">
+    <div class="eyebrow">Day 1</div>
+    <div class="big-num">01</div>
+    <div class="title">Pick your niche</div>
+    <div class="divider"></div>
+    <p>The niche is the leverage point. It shapes who the audience is, what style of content works, how easy monetization becomes, and whether the algorithm can classify the page fast.</p>
+    <h2>What strong niches look like</h2>
+    <div class="grid two">
+      <div class="card"><h3>Popular angles</h3><p>Gamer girl, cosplay, girl-next-door, athletic, luxury lifestyle, fetish-adjacent, alt, nerdy, couples.</p></div>
+      <div class="card"><h3>Specificity wins</h3><p>Blend physical type + vibe + interest. Example: athletic gamer girl. That makes targeting easy.</p></div>
+    </div>
+    <h2>Use this filter before committing</h2>
+    <ul class="bullet">
+      <li>Does the niche already have pages with serious traction?</li>
+      <li>Can you generate consistent images in this lane?</li>
+      <li>Does the audience have obvious spending behavior?</li>
+    </ul>
+    <div class="callout">Pro tip: generic characters get generic results. A clear, fetishized, or highly legible character concept almost always performs better.</div>
+    <div class="footer">Day 1 · Foundation</div>
+  </div></section>
+
+  <section class="page"><div class="inner">
+    <div class="eyebrow">Day 2</div>
+    <div class="big-num">02</div>
+    <div class="title">Build your DNA file</div>
+    <div class="divider"></div>
+    <p>Your AI character is an asset. The DNA file is the operating system behind it.</p>
+    <div class="grid">
+      <div class="card"><h3>1. Niche statement</h3><p>Write one sentence explaining who she is and who she’s for.</p></div>
+      <div class="card"><h3>2. Prompt anchor</h3><p>Define age, visual traits, body type, styling, vibe, and signature details you’ll reuse in every prompt.</p></div>
+      <div class="card"><h3>3. Reference image</h3><p>Generate 10–15 images and choose the single best one as the visual anchor.</p></div>
+    </div>
+    <h2>Build a swipe file too</h2>
+    <ul class="bullet">
+      <li>Save top-performing reels and TikToks in your niche</li>
+      <li>Note hook, format, angle, caption style, and comments</li>
+      <li>Track posts with high saves and high retention</li>
+    </ul>
+    <div class="callout">Consistency matters more than novelty early on. Your audience should recognize the character in one second.</div>
+    <div class="footer">Day 2 · Build Your AI Model</div>
+  </div></section>
+
+  <section class="page"><div class="inner">
+    <div class="eyebrow">Day 3</div>
+    <div class="big-num">03</div>
+    <div class="title">Launch sequence + account warm-up</div>
+    <div class="divider"></div>
+    <p>New accounts get tested. If the first signals are weak, distribution dies fast. Warm-up is how you avoid 300-view jail.</p>
+    <ul class="checklist">
+      <li>Create the new page from an existing account center if possible</li>
+      <li>Engage 3x per day in your exact niche for 15 minutes each</li>
+      <li>Post your first 5–7 pieces and review outliers immediately</li>
+      <li>Double down on the winning format and kill weak angles fast</li>
+    </ul>
+    <h2>Signals that matter</h2>
+    <p>Watch time rising while skip rate drops is one of the strongest “keep pushing this” signals you can get from the algorithm.</p>
+    <div class="callout">Do not “wait and see.” Train the algorithm actively through your behavior and your content.</div>
+    <div class="footer">Day 3 · Account Warm-Up</div>
+  </div></section>
+
+  <section class="page"><div class="inner">
+    <div class="eyebrow">Day 4</div>
+    <div class="big-num">04</div>
+    <div class="title">Find and recreate what already works</div>
+    <div class="divider"></div>
+    <p>The fastest path to virality is not inventing formats. It’s finding proven concepts and adapting them with your character.</p>
+    <h2>The Goldmine Method</h2>
+    <ul class="bullet">
+      <li>Search your niche and sort by recent winners or most liked</li>
+      <li>Save 10 examples with strong hooks and obvious emotional triggers</li>
+      <li>Identify the core reason each one worked: desire, curiosity, humor, shock, relatability</li>
+      <li>Recreate the concept using your model’s DNA and stronger execution</li>
+    </ul>
+    <div class="card"><h3>What to copy</h3><p>Hook structure, pacing, emotional trigger, camera energy, caption intent.</p></div>
+    <div class="card" style="margin-top:14px;"><h3>What to make your own</h3><p>Your character, your visual identity, your exact scenes, your narrative layer.</p></div>
+    <div class="footer">Day 4 · Goldmine Content</div>
+  </div></section>
+
+  <section class="page"><div class="inner">
+    <div class="eyebrow">Day 5 + 6</div>
+    <div class="title">Automation + algorithm mastery</div>
+    <div class="divider"></div>
+    <h2>Weekly production system</h2>
+    <ul class="checklist">
+      <li>Monday: pick 7 proven concepts</li>
+      <li>Tuesday: generate 20–35 image variations</li>
+      <li>Wednesday: edit, caption, schedule</li>
+      <li>Thursday–Sunday: engage, analyze, and identify outliers</li>
+    </ul>
+    <h2>Metrics to engineer</h2>
+    <div class="grid two">
+      <div class="card"><h3>Watch time</h3><p>Front-load the strongest visual instantly.</p></div>
+      <div class="card"><h3>Skip rate</h3><p>Weak opening = dead post.</p></div>
+      <div class="card"><h3>Saves</h3><p>High-value content gets revisited.</p></div>
+      <div class="card"><h3>Shares</h3><p>Emotion drives free distribution.</p></div>
+      <div class="card"><h3>Comments</h3><p>Clear opinions create conversation.</p></div>
+      <div class="card"><h3>Profile visits</h3><p>Curiosity converts to follows.</p></div>
+    </div>
+    <div class="callout">Batching is a power move. Stop asking “what do I post today?” and start building a machine with inventory.</div>
+    <div class="footer">Day 5–6 · Systems + Signals</div>
+  </div></section>
+
+  <section class="page"><div class="inner">
+    <div class="eyebrow">Day 7</div>
+    <div class="big-num">07</div>
+    <div class="title">Get paid with Fanvue</div>
+    <div class="divider"></div>
+    <p>Followers are not the business. Monetization is the business.</p>
+    <ul class="checklist">
+      <li>Create the Fanvue account using consistent branding</li>
+      <li>Start around $9.99/month</li>
+      <li>Upload the first 5 monetizable pieces of content</li>
+      <li>Put the link in bio everywhere</li>
+      <li>Use stories and teasers to convert free attention into paid traffic</li>
+    </ul>
+    <h2>The math</h2>
+    <p>At $9.99/month, roughly 150 paying subscribers gets you to about $1,500/month. You don’t need millions of followers. You need targeted traffic and a conversion path from day one.</p>
+    <div class="callout">Set up monetization before you feel “ready.” Every follower you gain before that is revenue you delay.</div>
+    <p class="small">Bonus resources in the original PDF include workflow templates and a photorealistic prompt guide.</p>
+    <div class="footer">The Blueprint · © 2026 AI Influencer Blueprint</div>
+  </div></section>
+</body>
+</html>

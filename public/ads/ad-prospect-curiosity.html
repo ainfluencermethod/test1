@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>AI Universa — Curiosity Hook Ad</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background: #0F1117;
+    position: relative;
+  }
+
+  /* Background glow effects */
+  .bg-glow-1 {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(124,92,252,0.25) 0%, transparent 70%);
+    top: -100px;
+    right: -100px;
+    border-radius: 50%;
+    filter: blur(80px);
+  }
+  .bg-glow-2 {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(124,92,252,0.15) 0%, transparent 70%);
+    bottom: -50px;
+    left: -100px;
+    border-radius: 50%;
+    filter: blur(60px);
+  }
+  .bg-grid {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(rgba(124,92,252,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(124,92,252,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 60px;
+  }
+
+  /* Top badge */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(124,92,252,0.15);
+    border: 1px solid rgba(124,92,252,0.3);
+    border-radius: 100px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #A78BFA;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    width: fit-content;
+    margin-bottom: 32px;
+  }
+  .badge-dot {
+    width: 8px;
+    height: 8px;
+    background: #7C5CFC;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #7C5CFC;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  /* Headline */
+  .headline {
+    font-size: 52px;
+    font-weight: 900;
+    color: #FFFFFF;
+    line-height: 1.15;
+    max-width: 640px;
+    margin-bottom: 40px;
+    letter-spacing: -1px;
+  }
+  .headline em {
+    font-style: normal;
+    background: linear-gradient(135deg, #7C5CFC, #A78BFA);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Middle section: image + stats */
+  .middle {
+    display: flex;
+    align-items: flex-end;
+    gap: 40px;
+    flex: 1;
+  }
+
+  .hero-image-wrap {
+    position: relative;
+    width: 380px;
+    height: 440px;
+    flex-shrink: 0;
+  }
+  .hero-image-glow {
+    position: absolute;
+    inset: -20px;
+    background: radial-gradient(ellipse at center bottom, rgba(124,92,252,0.4) 0%, transparent 70%);
+    border-radius: 24px;
+    filter: blur(30px);
+  }
+  .hero-image {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    object-fit: cover;
+    object-position: top center;
+    border: 2px solid rgba(124,92,252,0.3);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+
+  /* Floating stat badge on image */
+  .stat-badge {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(15,17,23,0.9);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(124,92,252,0.4);
+    border-radius: 16px;
+    padding: 14px 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 8px 32px rgba(124,92,252,0.2);
+  }
+  .stat-number {
+    font-size: 28px;
+    font-weight: 800;
+    color: #7C5CFC;
+  }
+  .stat-label {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    font-weight: 500;
+  }
+
+  /* Stats column */
+  .stats-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1;
+  }
+  .stat-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 24px;
+  }
+  .stat-card-number {
+    font-size: 36px;
+    font-weight: 800;
+    color: #FFFFFF;
+    margin-bottom: 4px;
+  }
+  .stat-card-number span {
+    color: #7C5CFC;
+  }
+  .stat-card-label {
+    font-size: 15px;
+    color: rgba(255,255,255,0.5);
+    font-weight: 500;
+  }
+
+  /* Bottom section */
+  .bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 40px;
+  }
+
+  .subtext {
+    font-size: 20px;
+    color: rgba(255,255,255,0.5);
+    font-weight: 500;
+  }
+  .subtext strong {
+    color: rgba(255,255,255,0.8);
+    font-weight: 600;
+  }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #7C5CFC, #6344E0);
+    color: #FFFFFF;
+    font-size: 20px;
+    font-weight: 700;
+    padding: 20px 40px;
+    border-radius: 14px;
+    letter-spacing: 0.5px;
+    box-shadow: 0 8px 32px rgba(124,92,252,0.4), inset 0 1px 0 rgba(255,255,255,0.15);
+    text-decoration: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-glow-1"></div>
+<div class="bg-glow-2"></div>
+<div class="bg-grid"></div>
+
+<div class="container">
+  <div class="badge">
+    <span class="badge-dot"></span>
+    Brezplačna delavnica
+  </div>
+
+  <h1 class="headline">Kako navadni Slovenci zaslužijo z AI — <em>brez tehničnega znanja</em></h1>
+
+  <div class="middle">
+    <div class="hero-image-wrap">
+      <div class="hero-image-glow"></div>
+      <img class="hero-image" src="https://assets.cdn.filesafe.space/TGsyH70nsz7y3hijuqTn/media/69b18f38cab7f7cc28461378.jpeg" alt="Pici">
+      <div class="stat-badge">
+        <span class="stat-number">200M+</span>
+        <span class="stat-label">ogledov</span>
+      </div>
+    </div>
+
+    <div class="stats-column">
+      <div class="stat-card">
+        <div class="stat-card-number"><span>22.000+</span></div>
+        <div class="stat-card-label">prijavljenih učencev</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-number"><span>3</span> dni</div>
+        <div class="stat-card-label">v živo · konkreten sistem</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-number"><span>€0</span></div>
+        <div class="stat-card-label">popolnoma brezplačno</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom">
+    <div class="subtext">
+      <strong>3-dnevna LIVE delavnica</strong> · 15.–17. april 2026
+    </div>
+    <div class="cta">REZERVIRAJ MESTO →</div>
+  </div>
+</div>
+
+</body>
+</html>

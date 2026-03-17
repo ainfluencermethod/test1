@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Universa — Kalkulator Dobička</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d0f11;
+      --bg-2: #121416;
+      --panel: rgba(26, 29, 33, 0.9);
+      --panel-2: rgba(37, 42, 46, 0.88);
+      --stroke: rgba(255,255,255,0.08);
+      --text: #f7fbfb;
+      --muted: #bac4c8;
+      --muted-2: #8f9ba1;
+      --accent: #4ecdc4;
+      --accent-2: #00e5cc;
+      --accent-soft: rgba(78, 205, 196, 0.16);
+      --green: #6ef3c5;
+      --danger: #ff7d7d;
+      --salary: 2100;
+      --shadow: 0 20px 80px rgba(0, 0, 0, 0.45);
+      --radius: 24px;
+      --radius-sm: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(0, 229, 204, 0.16), transparent 26%),
+        radial-gradient(circle at 85% 15%, rgba(78, 205, 196, 0.12), transparent 24%),
+        radial-gradient(circle at 50% 100%, rgba(78, 205, 196, 0.08), transparent 28%),
+        linear-gradient(180deg, var(--bg), var(--bg-2));
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(120deg, rgba(255,255,255,0.02), transparent 30%, rgba(255,255,255,0.01));
+      mix-blend-mode: screen;
+    }
+
+    .container {
+      width: min(1200px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 32px 0 80px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 24px;
+      align-items: stretch;
+      margin-bottom: 24px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(28, 32, 36, 0.94), rgba(18, 21, 24, 0.96));
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(14px);
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(140deg, rgba(255,255,255,0.08), transparent 22%, rgba(0,229,204,0.18));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    .hero-copy {
+      padding: 36px;
+      min-height: 280px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .badge-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 18px rgba(0,229,204,0.6);
+    }
+
+    h1 {
+      margin: 18px 0 16px;
+      font-size: clamp(2.3rem, 4vw, 4.3rem);
+      line-height: 0.95;
+      letter-spacing: -0.045em;
+      max-width: 10ch;
+    }
+
+    .accent-text {
+      background: linear-gradient(135deg, #dffffd 10%, var(--accent) 42%, var(--accent-2) 85%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-copy p {
+      margin: 0;
+      max-width: 62ch;
+      color: var(--muted);
+      font-size: 1.04rem;
+      line-height: 1.75;
+    }
+
+    .hero-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .pill {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      border: 1px solid rgba(78,205,196,0.2);
+      color: #d7fffb;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .hero-side {
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .micro-label {
+      color: var(--muted-2);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-weight: 700;
+    }
+
+    .big-income {
+      font-size: clamp(2.4rem, 4.4vw, 4.4rem);
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      margin: 8px 0;
+      color: #dcfffd;
+      text-shadow: 0 0 34px rgba(0, 229, 204, 0.35), 0 0 68px rgba(78,205,196,0.18);
+    }
+
+    .glow-box {
+      padding: 22px;
+      border-radius: 22px;
+      background: radial-gradient(circle at 50% 0%, rgba(0,229,204,0.18), transparent 60%), rgba(255,255,255,0.02);
+      border: 1px solid rgba(0,229,204,0.18);
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .summary-item {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .summary-item strong {
+      display: block;
+      margin-top: 8px;
+      font-size: 1.3rem;
+      letter-spacing: -0.03em;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1.02fr 0.98fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .calculator {
+      padding: 28px;
+    }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .section-title h2,
+    .section-title h3 {
+      margin: 0;
+      letter-spacing: -0.04em;
+    }
+
+    .section-title p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .field-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .field {
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .field-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .field label {
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .field small {
+      display: block;
+      color: var(--muted-2);
+      margin-top: 5px;
+      line-height: 1.45;
+    }
+
+    select,
+    input[type="number"] {
+      appearance: none;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(15,18,20,0.92);
+      color: var(--text);
+      border-radius: 14px;
+      padding: 12px 14px;
+      font: inherit;
+      min-width: 130px;
+      outline: none;
+      transition: 0.2s ease;
+    }
+
+    select:focus,
+    input[type="number"]:focus {
+      border-color: rgba(0,229,204,0.5);
+      box-shadow: 0 0 0 4px rgba(0,229,204,0.12);
+    }
+
+    .input-row {
+      display: grid;
+      grid-template-columns: 1fr 118px;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .range-wrap {
+      position: relative;
+      padding-top: 8px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      appearance: none;
+      height: 8px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent) 0%, var(--accent-2) var(--fill, 50%), rgba(255,255,255,0.08) var(--fill, 50%));
+      outline: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      appearance: none;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #f6ffff;
+      border: 3px solid var(--accent-2);
+      box-shadow: 0 0 0 6px rgba(0,229,204,0.16), 0 8px 20px rgba(0,0,0,0.35);
+      cursor: pointer;
+    }
+
+    input[type="range"]::-moz-range-thumb {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #f6ffff;
+      border: 3px solid var(--accent-2);
+      box-shadow: 0 0 0 6px rgba(0,229,204,0.16), 0 8px 20px rgba(0,0,0,0.35);
+      cursor: pointer;
+    }
+
+    .range-labels {
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted-2);
+      font-size: 12px;
+      margin-top: 10px;
+    }
+
+    .results {
+      padding: 28px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .metric {
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.05);
+      min-height: 126px;
+    }
+
+    .metric .value {
+      margin-top: 10px;
+      font-size: clamp(1.55rem, 2.6vw, 2.25rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .metric.primary {
+      grid-column: 1 / -1;
+      background: radial-gradient(circle at 50% 0%, rgba(0,229,204,0.16), transparent 55%), rgba(255,255,255,0.03);
+      border-color: rgba(0,229,204,0.18);
+    }
+
+    .metric.primary .value {
+      color: #ddfffd;
+      text-shadow: 0 0 30px rgba(0,229,204,0.25);
+      font-size: clamp(2rem, 4vw, 3.3rem);
+    }
+
+    .metric p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 14px;
+    }
+
+    .comparison {
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .compare-bars {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 90px 1fr auto;
+      align-items: center;
+      gap: 14px;
+      font-size: 14px;
+    }
+
+    .bar-track {
+      height: 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 22px rgba(0,229,204,0.3);
+      width: 0%;
+      transition: width 0.8s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .bar-fill.salary {
+      background: linear-gradient(90deg, #69737a, #aeb7bd);
+      box-shadow: none;
+    }
+
+    .projection-card,
+    .share-card,
+    .testimonials,
+    .cta-card {
+      margin-top: 24px;
+      padding: 28px;
+    }
+
+    .projection-wrap {
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .projection-legend {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 14px;
+    }
+
+    .legend-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .legend-chip span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .share-card {
+      display: grid;
+      gap: 18px;
+    }
+
+    .share-preview {
+      padding: 22px;
+      border-radius: 22px;
+      background: linear-gradient(145deg, rgba(15,18,20,0.96), rgba(29,35,39,0.96));
+      border: 1px solid rgba(0,229,204,0.16);
+    }
+
+    .share-preview h3 {
+      margin: 0 0 8px;
+      font-size: 1.25rem;
+      letter-spacing: -0.03em;
+    }
+
+    .share-preview p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .share-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .share-stat {
+      padding: 14px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .share-stat strong {
+      display: block;
+      margin-top: 6px;
+      font-size: 1.1rem;
+      letter-spacing: -0.03em;
+    }
+
+    .share-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    button,
+    .cta-link {
+      appearance: none;
+      border: 0;
+      border-radius: 16px;
+      padding: 14px 18px;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+      text-decoration: none;
+    }
+
+    button:hover,
+    .cta-link:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #06211f;
+      box-shadow: 0 14px 30px rgba(0,229,204,0.22);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .testimonial {
+      padding: 20px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .testimonial strong {
+      display: block;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    .testimonial p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .cta-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      background: radial-gradient(circle at 0% 0%, rgba(0,229,204,0.14), transparent 35%), linear-gradient(180deg, rgba(24,28,31,0.96), rgba(14,16,18,0.96));
+    }
+
+    .cta-copy h2 {
+      margin: 0 0 10px;
+      font-size: clamp(1.7rem, 2.7vw, 2.5rem);
+      letter-spacing: -0.04em;
+    }
+
+    .cta-copy p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 56ch;
+      line-height: 1.7;
+    }
+
+    .tiny-note {
+      color: var(--muted-2);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .toast {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(18, 22, 25, 0.96);
+      border: 1px solid rgba(0,229,204,0.2);
+      color: var(--text);
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition: 0.25s ease;
+      max-width: min(360px, calc(100vw - 32px));
+      z-index: 20;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1024px) {
+      .hero,
+      .layout,
+      .testimonials-grid,
+      .share-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .container {
+        width: min(100vw - 20px, 100%);
+        padding-top: 18px;
+      }
+
+      .hero-copy,
+      .hero-side,
+      .calculator,
+      .results,
+      .projection-card,
+      .share-card,
+      .testimonials,
+      .cta-card {
+        padding: 22px;
+      }
+
+      h1 {
+        max-width: none;
+      }
+
+      .results-grid,
+      .summary-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .input-row {
+        grid-template-columns: 1fr;
+      }
+
+      .field-top,
+      .section-title,
+      .bar-row {
+        grid-template-columns: 1fr;
+        display: grid;
+      }
+
+      .bar-row {
+        gap: 8px;
+      }
+
+      .share-actions {
+        flex-direction: column;
+      }
+
+      button,
+      .cta-link {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section class="hero">
+      <div class="card hero-copy">
+        <div class="badge"><span class="badge-dot"></span> AI Universa • Kalkulator Dobička</div>
+        <h1>Koliko lahko <span class="accent-text">zaslužiš</span> z AI storitvami?</h1>
+        <p>
+          Vpiši svoj tempo, ceno in tip storitve — kalkulator ti takoj pokaže realen mesečni potencial,
+          6-mesečno rast in primerjavo s povprečno slovensko plačo.
+        </p>
+        <div class="hero-pills">
+          <span class="pill">100% v slovenščini</span>
+          <span class="pill">Interaktiven izračun</span>
+          <span class="pill">Primeren za začetnike</span>
+        </div>
+      </div>
+
+      <div class="card hero-side">
+        <div class="glow-box">
+          <div class="micro-label">Tvoj trenutni potencial</div>
+          <div id="heroIncome" class="big-income">€0</div>
+          <div class="tiny-note">To je ocenjen mesečni prihodek glede na tvoje trenutne nastavitve.</div>
+        </div>
+        <div class="summary-grid">
+          <div class="summary-item">
+            <div class="micro-label">Urna postavka</div>
+            <strong id="heroHourly">€0/h</strong>
+          </div>
+          <div class="summary-item">
+            <div class="micro-label">6 mesecev</div>
+            <strong id="heroProjection">€0</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="layout">
+      <div class="card calculator">
+        <div class="section-title">
+          <div>
+            <h2>Nastavi svoj AI poslovni model</h2>
+            <p>Premikaj drsnike, testiraj cene in hitro vidi, kako se spremeni rezultat.</p>
+          </div>
+        </div>
+
+        <div class="field-grid">
+          <div class="field">
+            <div class="field-top">
+              <div>
+                <label for="serviceType">Vrsta AI storitve</label>
+                <small>Vsaka storitev ima svoj tipičen cenovni razpon.</small>
+              </div>
+              <select id="serviceType"></select>
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="field-top">
+              <div>
+                <label for="clientsRange">Število strank na mesec</label>
+                <small>Koliko strank ali projektov realno obdelaš v enem mesecu?</small>
+              </div>
+            </div>
+            <div class="input-row">
+              <div class="range-wrap">
+                <input id="clientsRange" type="range" min="1" max="20" step="1" value="4" />
+                <div class="range-labels"><span>1</span><span>20</span></div>
+              </div>
+              <input id="clientsNumber" type="number" min="1" max="20" step="1" value="4" />
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="field-top">
+              <div>
+                <label for="priceRange">Povprečna cena storitve</label>
+                <small id="priceHint">Izberi povprečno ceno glede na tip storitve.</small>
+              </div>
+            </div>
+            <div class="input-row">
+              <div class="range-wrap">
+                <input id="priceRange" type="range" min="500" max="2000" step="50" value="1000" />
+                <div class="range-labels"><span id="priceMin">€500</span><span id="priceMax">€2.000</span></div>
+              </div>
+              <input id="priceNumber" type="number" min="500" max="2000" step="50" value="1000" />
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="field-top">
+              <div>
+                <label for="hoursRange">Ur na teden</label>
+                <small>Koliko časa tedensko si pripravljen_a vložiti v izvajanje storitev?</small>
+              </div>
+            </div>
+            <div class="input-row">
+              <div class="range-wrap">
+                <input id="hoursRange" type="range" min="5" max="40" step="1" value="12" />
+                <div class="range-labels"><span>5 ur</span><span>40 ur</span></div>
+              </div>
+              <input id="hoursNumber" type="number" min="5" max="40" step="1" value="12" />
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="field-top">
+              <div>
+                <label for="experienceRange">Meseci izkušenj</label>
+                <small>Več izkušenj pomeni boljšo prodajo, višje cene in bolj gladko izvedbo.</small>
+              </div>
+            </div>
+            <div class="input-row">
+              <div class="range-wrap">
+                <input id="experienceRange" type="range" min="0" max="12" step="1" value="2" />
+                <div class="range-labels"><span>0</span><span>12+</span></div>
+              </div>
+              <input id="experienceNumber" type="number" min="0" max="12" step="1" value="2" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card results">
+        <div class="section-title">
+          <div>
+            <h3>Tvoj potencialni rezultat</h3>
+            <p>Ocenjen izračun za AI storitve na podlagi tvojih vnosov.</p>
+          </div>
+        </div>
+
+        <div class="results-grid">
+          <div class="metric primary">
+            <div class="micro-label">Mesečni prihodek</div>
+            <div class="value" id="monthlyIncome">€0</div>
+            <p>To je tvoj trenutni bruto potencial na mesec.</p>
+          </div>
+
+          <div class="metric">
+            <div class="micro-label">Letni prihodek</div>
+            <div class="value" id="yearlyIncome">€0</div>
+            <p>Če vztrajaš pri istem tempu skozi celo leto.</p>
+          </div>
+
+          <div class="metric">
+            <div class="micro-label">Urna postavka</div>
+            <div class="value" id="hourlyRate">€0/h</div>
+            <p>Koliko približno ustvariš za vsako vloženo uro.</p>
+          </div>
+        </div>
+
+        <div class="comparison">
+          <div class="micro-label">Primerjava s povprečno slovensko plačo</div>
+          <div class="value" id="salaryMultiple" style="font-size:2rem; font-weight:800; margin-top:10px; letter-spacing:-0.04em;">0.0x povprečne slovenske plače</div>
+          <div class="compare-bars">
+            <div class="bar-row">
+              <strong>Ti</strong>
+              <div class="bar-track"><div class="bar-fill" id="youBar"></div></div>
+              <span id="youBarLabel">€0</span>
+            </div>
+            <div class="bar-row">
+              <strong>Povprečje</strong>
+              <div class="bar-track"><div class="bar-fill salary" id="salaryBar"></div></div>
+              <span>€2.100</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card projection-card">
+      <div class="section-title">
+        <div>
+          <h3>6-mesečna projekcija rasti</h3>
+          <p>Izkušnje povečajo samozavest, ceno in rezultate. Tukaj vidiš, kako se to lahko razvije.</p>
+        </div>
+        <div class="tiny-note" id="growthText">Rast temelji na izbranih mesecih izkušenj.</div>
+      </div>
+      <div class="projection-wrap">
+        <svg id="projectionChart" viewBox="0 0 720 280" preserveAspectRatio="none" aria-label="6-mesečna projekcija prihodka">
+          <defs>
+            <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#4ECDC4" />
+              <stop offset="100%" stop-color="#00E5CC" />
+            </linearGradient>
+            <linearGradient id="areaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="rgba(0,229,204,0.32)" />
+              <stop offset="100%" stop-color="rgba(0,229,204,0.02)" />
+            </linearGradient>
+          </defs>
+          <g id="chartGrid"></g>
+          <path id="chartArea" fill="url(#areaGradient)" d=""></path>
+          <path id="chartLine" fill="none" stroke="url(#lineGradient)" stroke-width="5" stroke-linecap="round" d=""></path>
+          <g id="chartDots"></g>
+          <g id="chartLabels"></g>
+        </svg>
+        <div class="projection-legend">
+          <div class="legend-chip"><span style="background:linear-gradient(135deg,#4ECDC4,#00E5CC)"></span> Ocenjen prihodkovni trend</div>
+          <div id="projectionTotal">Skupaj v 6 mesecih: €0</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card share-card">
+      <div class="section-title">
+        <div>
+          <h3>Share tvoj rezultat</h3>
+          <p>Ustvari screenshot-friendly povzetek, ki ga lahko shraniš ali deliš naprej.</p>
+        </div>
+      </div>
+      <div class="share-preview" id="sharePreview">
+        <div class="micro-label">AI Universa • Moj AI potencial</div>
+        <h3 id="shareHeadline">Z AI storitvijo lahko ciljam na €0 / mesec</h3>
+        <p id="shareDescription">Pri trenutnem tempu bi to pomenilo močan dodaten ali polni prihodek.</p>
+        <div class="share-grid">
+          <div class="share-stat">
+            <div class="micro-label">Storitve</div>
+            <strong id="shareService">—</strong>
+          </div>
+          <div class="share-stat">
+            <div class="micro-label">Stranke</div>
+            <strong id="shareClients">0 / mesec</strong>
+          </div>
+          <div class="share-stat">
+            <div class="micro-label">Urna postavka</div>
+            <strong id="shareHourly">€0/h</strong>
+          </div>
+        </div>
+      </div>
+      <div class="share-actions">
+        <button class="btn-primary" id="shareButton">Kopiraj povzetek</button>
+        <button class="btn-secondary" id="downloadButton">Natisni / shrani kot PDF</button>
+      </div>
+      <div class="tiny-note">Namig: klikni “Natisni / shrani kot PDF”, da si hitro narediš clean screenshot ali PDF povzetek.</div>
+    </section>
+
+    <section class="card testimonials">
+      <div class="section-title">
+        <div>
+          <h3>Kaj lahko pomeni dober začetek</h3>
+          <p>Primeri, kako hitro se lahko zgradi konkreten AI side hustle ali nova kariera.</p>
+        </div>
+      </div>
+      <div class="testimonials-grid">
+        <article class="testimonial">
+          <strong>Nika • AI Content Creation</strong>
+          <p>“Začela sem z osnovnimi AI vsebinami za mala podjetja. Danes delam približno €2.400 na mesec in imam dovolj povpraševanja, da izbiram projekte.”</p>
+        </article>
+        <article class="testimonial">
+          <strong>Žan • AI Agency</strong>
+          <p>“Po 4 mesecih sem imel 3 redne stranke in okoli €4.500 mesečnega prihodka. Največja razlika? Končno sem začel storitev prodajati samozavestno.”</p>
+        </article>
+        <article class="testimonial">
+          <strong>Maja • AI Influencer Management</strong>
+          <p>“To delam part-time ob službi in trenutno sem pri približno €1.800 na mesec. Zame je to najboljša kombinacija fleksibilnosti in zaslužka.”</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="card cta-card">
+      <div class="cta-copy">
+        <h2>Začni svojo AI pot → Pridruži se brezplačni delavnici</h2>
+        <p>
+          Če želiš iz tega potenciala narediti dejanski dohodek, je naslednji korak jasen: nauči se,
+          kako izbrati pravo storitev, postaviti ponudbo in dobiti prve stranke.
+        </p>
+      </div>
+      <a class="cta-link btn-primary" href="https://aiuniversa.si" target="_blank" rel="noopener noreferrer">Pojdi na aiuniversa.si</a>
+    </section>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const services = {
+      influencer: {
+        label: 'AI Influencer Management',
+        min: 500,
+        max: 2000,
+        step: 50,
+        defaultPrice: 1100,
+        unit: 'stranko / mesec',
+        description: 'Upravljanje AI influencer profilov, objav in monetizacije.'
+      },
+      content: {
+        label: 'AI Content Creation',
+        min: 300,
+        max: 1500,
+        step: 50,
+        defaultPrice: 650,
+        unit: 'projekt',
+        description: 'Kreiranje short-form, blog, newsletter in vizualnih vsebin z AI podporo.'
+      },
+      agency: {
+        label: 'AI Agency Services',
+        min: 1000,
+        max: 5000,
+        step: 100,
+        defaultPrice: 2400,
+        unit: 'stranko / mesec',
+        description: 'Celovit AI servis za podjetja: strategija, izvedba in retainer model.'
+      },
+      automation: {
+        label: 'AI Automation Setup',
+        min: 500,
+        max: 3000,
+        step: 50,
+        defaultPrice: 1400,
+        unit: 'projekt',
+        description: 'Postavitev avtomatizacij, workflowov in AI sistemov za prihranek časa.'
+      },
+      chatbot: {
+        label: 'AI Chatbot Development',
+        min: 800,
+        max: 4000,
+        step: 100,
+        defaultPrice: 1800,
+        unit: 'projekt',
+        description: 'Razvoj chatbotov za support, lead capture ali onboarding.'
+      }
+    };
+
+    const els = {
+      serviceType: document.getElementById('serviceType'),
+      clientsRange: document.getElementById('clientsRange'),
+      clientsNumber: document.getElementById('clientsNumber'),
+      priceRange: document.getElementById('priceRange'),
+      priceNumber: document.getElementById('priceNumber'),
+      hoursRange: document.getElementById('hoursRange'),
+      hoursNumber: document.getElementById('hoursNumber'),
+      experienceRange: document.getElementById('experienceRange'),
+      experienceNumber: document.getElementById('experienceNumber'),
+      priceMin: document.getElementById('priceMin'),
+      priceMax: document.getElementById('priceMax'),
+      priceHint: document.getElementById('priceHint'),
+      monthlyIncome: document.getElementById('monthlyIncome'),
+      yearlyIncome: document.getElementById('yearlyIncome'),
+      hourlyRate: document.getElementById('hourlyRate'),
+      salaryMultiple: document.getElementById('salaryMultiple'),
+      youBar: document.getElementById('youBar'),
+      salaryBar: document.getElementById('salaryBar'),
+      youBarLabel: document.getElementById('youBarLabel'),
+      projectionTotal: document.getElementById('projectionTotal'),
+      growthText: document.getElementById('growthText'),
+      heroIncome: document.getElementById('heroIncome'),
+      heroHourly: document.getElementById('heroHourly'),
+      heroProjection: document.getElementById('heroProjection'),
+      chartGrid: document.getElementById('chartGrid'),
+      chartArea: document.getElementById('chartArea'),
+      chartLine: document.getElementById('chartLine'),
+      chartDots: document.getElementById('chartDots'),
+      chartLabels: document.getElementById('chartLabels'),
+      shareHeadline: document.getElementById('shareHeadline'),
+      shareDescription: document.getElementById('shareDescription'),
+      shareService: document.getElementById('shareService'),
+      shareClients: document.getElementById('shareClients'),
+      shareHourly: document.getElementById('shareHourly'),
+      shareButton: document.getElementById('shareButton'),
+      downloadButton: document.getElementById('downloadButton'),
+      toast: document.getElementById('toast')
+    };
+
+    const animatedValues = new WeakMap();
+    const salary = 2100;
+
+    Object.entries(services).forEach(([key, service]) => {
+      const option = document.createElement('option');
+      option.value = key;
+      option.textContent = service.label;
+      els.serviceType.appendChild(option);
+    });
+
+    els.serviceType.value = 'content';
+    els.salaryBar.style.width = '42%';
+
+    function eur(value, compact = false) {
+      return new Intl.NumberFormat('sl-SI', {
+        style: 'currency',
+        currency: 'EUR',
+        maximumFractionDigits: compact ? 0 : 0
+      }).format(value);
+    }
+
+    function setRangeFill(input) {
+      const min = Number(input.min);
+      const max = Number(input.max);
+      const val = Number(input.value);
+      const percent = ((val - min) / (max - min || 1)) * 100;
+      input.style.setProperty('--fill', `${percent}%`);
+    }
+
+    function syncPair(rangeEl, numberEl, { min, max, step }) {
+      const clamp = (value) => Math.min(max, Math.max(min, value));
+      const handle = (value) => {
+        const clean = clamp(Number(value) || min);
+        rangeEl.value = clean;
+        numberEl.value = clean;
+        setRangeFill(rangeEl);
+        update();
+      };
+      rangeEl.min = numberEl.min = min;
+      rangeEl.max = numberEl.max = max;
+      rangeEl.step = numberEl.step = step;
+      rangeEl.addEventListener('input', () => handle(rangeEl.value));
+      numberEl.addEventListener('input', () => handle(numberEl.value));
+      setRangeFill(rangeEl);
+    }
+
+    syncPair(els.clientsRange, els.clientsNumber, { min: 1, max: 20, step: 1 });
+    syncPair(els.hoursRange, els.hoursNumber, { min: 5, max: 40, step: 1 });
+    syncPair(els.experienceRange, els.experienceNumber, { min: 0, max: 12, step: 1 });
+
+    function updatePriceBounds(resetValue = false) {
+      const service = services[els.serviceType.value];
+      els.priceRange.min = els.priceNumber.min = service.min;
+      els.priceRange.max = els.priceNumber.max = service.max;
+      els.priceRange.step = els.priceNumber.step = service.step;
+      els.priceMin.textContent = eur(service.min);
+      els.priceMax.textContent = eur(service.max);
+      els.priceHint.textContent = `${service.description} Tipična cena: ${eur(service.min)}–${eur(service.max)} na ${service.unit}.`;
+      const current = Number(els.priceRange.value);
+      const next = resetValue || current < service.min || current > service.max ? service.defaultPrice : current;
+      els.priceRange.value = next;
+      els.priceNumber.value = next;
+      setRangeFill(els.priceRange);
+    }
+
+    function animateNumber(el, target, formatter) {
+      const from = animatedValues.has(el) ? animatedValues.get(el) : 0;
+      const start = performance.now();
+      const duration = 700;
+      const diff = target - from;
+      function frame(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const value = from + diff * eased;
+        el.textContent = formatter(value);
+        if (progress < 1) {
+          requestAnimationFrame(frame);
+        } else {
+          animatedValues.set(el, target);
+          el.textContent = formatter(target);
+        }
+      }
+      requestAnimationFrame(frame);
+    }
+
+    function linePath(points) {
+      return points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ');
+    }
+
+    function drawProjection(values) {
+      const width = 720;
+      const height = 280;
+      const pad = { top: 18, right: 20, bottom: 50, left: 20 };
+      const chartW = width - pad.left - pad.right;
+      const chartH = height - pad.top - pad.bottom;
+      const maxVal = Math.max(...values) * 1.12;
+      const stepX = chartW / (values.length - 1);
+      const points = values.map((value, index) => ({
+        x: pad.left + index * stepX,
+        y: pad.top + chartH - (value / maxVal) * chartH,
+        value,
+        month: `M${index + 1}`
+      }));
+
+      els.chartGrid.innerHTML = '';
+      els.chartDots.innerHTML = '';
+      els.chartLabels.innerHTML = '';
+
+      for (let i = 0; i < 4; i++) {
+        const y = pad.top + (chartH / 3) * i;
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', pad.left);
+        line.setAttribute('x2', width - pad.right);
+        line.setAttribute('y1', y);
+        line.setAttribute('y2', y);
+        line.setAttribute('stroke', 'rgba(255,255,255,0.07)');
+        line.setAttribute('stroke-width', '1');
+        line.setAttribute('stroke-dasharray', '4 8');
+        els.chartGrid.appendChild(line);
+      }
+
+      const path = linePath(points);
+      const area = `${path} L ${points[points.length - 1].x} ${height - pad.bottom} L ${points[0].x} ${height - pad.bottom} Z`;
+      els.chartLine.setAttribute('d', path);
+      els.chartArea.setAttribute('d', area);
+
+      points.forEach((point, index) => {
+        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        circle.setAttribute('cx', point.x);
+        circle.setAttribute('cy', point.y);
+        circle.setAttribute('r', '5.5');
+        circle.setAttribute('fill', '#0d0f11');
+        circle.setAttribute('stroke', '#00E5CC');
+        circle.setAttribute('stroke-width', '3');
+        els.chartDots.appendChild(circle);
+
+        const month = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        month.setAttribute('x', point.x);
+        month.setAttribute('y', height - 18);
+        month.setAttribute('fill', '#8f9ba1');
+        month.setAttribute('font-size', '12');
+        month.setAttribute('text-anchor', 'middle');
+        month.textContent = `Mesec ${index + 1}`;
+        els.chartLabels.appendChild(month);
+      });
+    }
+
+    function buildProjection(monthly, experienceMonths) {
+      const baseMomentum = 1 + experienceMonths * 0.03;
+      return Array.from({ length: 6 }, (_, idx) => {
+        const growthCurve = 1 + idx * (0.05 + experienceMonths * 0.0075);
+        const compounding = idx === 0 ? 1 : Math.pow(baseMomentum, idx * 0.3);
+        return Math.round(monthly * growthCurve * compounding);
+      });
+    }
+
+    function showToast(message) {
+      els.toast.textContent = message;
+      els.toast.classList.add('show');
+      clearTimeout(showToast._timer);
+      showToast._timer = setTimeout(() => els.toast.classList.remove('show'), 2400);
+    }
+
+    function updateShare({ service, clients, monthlyIncome, hourlyRate, salaryMultiple, projectionTotal }) {
+      els.shareHeadline.textContent = `${service.label} mi lahko prinese približno ${eur(monthlyIncome)} / mesec`;
+      els.shareDescription.textContent = `To je ${salaryMultiple.toFixed(1)}x povprečne slovenske plače. V 6 mesecih bi pri tej dinamiki lahko prišel_a do približno ${eur(projectionTotal)} skupaj.`;
+      els.shareService.textContent = service.label;
+      els.shareClients.textContent = `${clients} / mesec`;
+      els.shareHourly.textContent = `${eur(hourlyRate)}/h`;
+    }
+
+    function update() {
+      const service = services[els.serviceType.value];
+      const clients = Number(els.clientsRange.value);
+      const price = Number(els.priceRange.value);
+      const hoursWeek = Number(els.hoursRange.value);
+      const experienceMonths = Number(els.experienceRange.value);
+
+      const experienceMultiplier = 1 + experienceMonths * 0.045;
+      const consistencyBonus = 1 + Math.min(clients, 10) * 0.012;
+      const monthlyIncome = Math.round(clients * price * experienceMultiplier * consistencyBonus);
+      const yearlyIncome = monthlyIncome * 12;
+      const monthlyHours = hoursWeek * 4.33;
+      const hourlyRate = monthlyHours > 0 ? monthlyIncome / monthlyHours : 0;
+      const salaryMultiple = monthlyIncome / salary;
+      const projection = buildProjection(monthlyIncome, experienceMonths);
+      const projectionTotal = projection.reduce((sum, value) => sum + value, 0);
+
+      animateNumber(els.monthlyIncome, monthlyIncome, value => eur(Math.round(value)));
+      animateNumber(els.yearlyIncome, yearlyIncome, value => eur(Math.round(value)));
+      animateNumber(els.hourlyRate, hourlyRate, value => `${eur(Math.round(value))}/h`);
+      animateNumber(els.heroIncome, monthlyIncome, value => eur(Math.round(value)));
+      animateNumber(els.heroHourly, hourlyRate, value => `${eur(Math.round(value))}/h`);
+      animateNumber(els.heroProjection, projection[5], value => eur(Math.round(value)));
+
+      els.salaryMultiple.textContent = `${salaryMultiple.toFixed(1)}x povprečne slovenske plače`;
+      els.youBarLabel.textContent = eur(monthlyIncome);
+      const maxBarBase = Math.max(monthlyIncome, salary) * 1.12;
+      els.youBar.style.width = `${Math.max(10, (monthlyIncome / maxBarBase) * 100)}%`;
+      els.salaryBar.style.width = `${Math.max(10, (salary / maxBarBase) * 100)}%`;
+      els.growthText.textContent = `Trenutni multiplikator izkušenj: ${experienceMultiplier.toFixed(2)}x`;
+      els.projectionTotal.textContent = `Skupaj v 6 mesecih: ${eur(projectionTotal)}`;
+
+      drawProjection(projection);
+      updateShare({ service, clients, monthlyIncome, hourlyRate, salaryMultiple, projectionTotal });
+    }
+
+    els.serviceType.addEventListener('change', () => {
+      updatePriceBounds(true);
+      update();
+    });
+
+    els.priceRange.addEventListener('input', () => {
+      els.priceNumber.value = els.priceRange.value;
+      setRangeFill(els.priceRange);
+      update();
+    });
+
+    els.priceNumber.addEventListener('input', () => {
+      const service = services[els.serviceType.value];
+      const clean = Math.min(service.max, Math.max(service.min, Number(els.priceNumber.value) || service.min));
+      els.priceNumber.value = clean;
+      els.priceRange.value = clean;
+      setRangeFill(els.priceRange);
+      update();
+    });
+
+    els.shareButton.addEventListener('click', async () => {
+      const text = [
+        'AI Universa — Moj AI potencial',
+        els.shareHeadline.textContent,
+        els.shareDescription.textContent,
+        `Storitev: ${els.shareService.textContent}`,
+        `Stranke na mesec: ${els.shareClients.textContent}`,
+        `Urna postavka: ${els.shareHourly.textContent}`,
+        'Več na: https://aiuniversa.si'
+      ].join('\n');
+
+      try {
+        await navigator.clipboard.writeText(text);
+        showToast('Povzetek je kopiran v clipboard.');
+      } catch (error) {
+        showToast('Clipboard ni dovoljen. Označi in kopiraj povzetek ročno.');
+      }
+    });
+
+    els.downloadButton.addEventListener('click', () => window.print());
+
+    updatePriceBounds(true);
+    update();
+  </script>
+</body>
+</html>

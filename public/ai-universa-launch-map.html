@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Universa Launch Map</title>
+  <style>
+    :root {
+      --bg: #06101f;
+      --bg-2: #0a172b;
+      --panel: rgba(10, 23, 43, 0.72);
+      --panel-strong: rgba(6, 16, 31, 0.9);
+      --line: rgba(87, 224, 255, 0.22);
+      --line-strong: rgba(87, 224, 255, 0.55);
+      --cyan: #57e0ff;
+      --blue: #7aa2ff;
+      --violet: #c172ff;
+      --green: #62ffb1;
+      --amber: #ffd166;
+      --red: #ff758f;
+      --text: #e9f6ff;
+      --muted: #8ea6c9;
+      --shadow: 0 0 0 1px rgba(87, 224, 255, 0.14), 0 10px 30px rgba(0, 0, 0, 0.45), 0 0 24px rgba(87, 224, 255, 0.08);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(87, 224, 255, 0.12), transparent 28%),
+        radial-gradient(circle at 85% 15%, rgba(193, 114, 255, 0.12), transparent 24%),
+        radial-gradient(circle at 50% 90%, rgba(122, 162, 255, 0.1), transparent 26%),
+        linear-gradient(180deg, #04101d 0%, #06101f 35%, #081427 100%);
+      overflow-x: hidden;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::before {
+      background-image:
+        linear-gradient(rgba(87, 224, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(87, 224, 255, 0.05) 1px, transparent 1px);
+      background-size: 36px 36px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.8), rgba(0,0,0,.35));
+    }
+
+    body::after {
+      background:
+        repeating-linear-gradient(180deg, rgba(255,255,255,0.015) 0 2px, transparent 2px 4px);
+      opacity: 0.12;
+      mix-blend-mode: screen;
+    }
+
+    .shell {
+      position: relative;
+      z-index: 1;
+      width: min(1600px, calc(100vw - 32px));
+      margin: 20px auto 40px;
+    }
+
+    .topbar {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .briefing,
+    .legend,
+    .phase,
+    .spotlight,
+    .footer-card {
+      background: linear-gradient(180deg, rgba(12, 28, 51, 0.88), rgba(6, 16, 31, 0.86));
+      border: 1px solid rgba(87, 224, 255, 0.18);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .briefing {
+      padding: 20px 22px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .briefing::after {
+      content: "";
+      position: absolute;
+      top: -80px;
+      right: -40px;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(87, 224, 255, 0.15), transparent 65%);
+      pointer-events: none;
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(87, 224, 255, 0.25);
+      color: var(--cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 14px;
+      background: rgba(87, 224, 255, 0.06);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 4vw, 54px);
+      line-height: 1;
+      letter-spacing: 0.02em;
+    }
+
+    .subtitle {
+      margin: 12px 0 0;
+      color: var(--muted);
+      max-width: 72ch;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .legend {
+      padding: 18px;
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+
+    .legend h3,
+    .spotlight h3,
+    .footer-card h3 {
+      margin: 0;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--cyan);
+    }
+
+    .legend-grid,
+    .mini-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .legend-item,
+    .mini-stat {
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.025);
+      border: 1px solid rgba(255,255,255,0.06);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .legend-item strong,
+    .mini-stat strong {
+      color: var(--text);
+    }
+
+    .status-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      box-shadow: 0 0 12px currentColor;
+    }
+
+    .dot.done { color: var(--green); background: var(--green); }
+    .dot.progress { color: var(--amber); background: var(--amber); }
+    .dot.blocked { color: var(--red); background: var(--red); }
+    .dot.live { color: var(--cyan); background: var(--cyan); }
+
+    .map {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(300px, 1fr));
+      gap: 18px;
+      align-items: start;
+      margin-bottom: 18px;
+      position: relative;
+    }
+
+    .map::before {
+      content: "";
+      position: absolute;
+      left: 16.66%;
+      right: 16.66%;
+      top: 74px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(87, 224, 255, 0.55), rgba(193, 114, 255, 0.55), rgba(87, 224, 255, 0.55), transparent);
+      box-shadow: 0 0 16px rgba(87, 224, 255, 0.25);
+      z-index: 0;
+    }
+
+    .phase {
+      position: relative;
+      padding: 18px;
+      min-height: 860px;
+      overflow: hidden;
+    }
+
+    .phase::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(87,224,255,0.08), transparent 22%);
+      pointer-events: none;
+    }
+
+    .phase-head {
+      position: sticky;
+      top: 10px;
+      z-index: 3;
+      padding-bottom: 12px;
+      margin-bottom: 12px;
+      background: linear-gradient(180deg, rgba(6, 16, 31, 0.98) 0%, rgba(6, 16, 31, 0.82) 60%, rgba(6, 16, 31, 0) 100%);
+    }
+
+    .phase-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--cyan);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+    }
+
+    .phase h2 {
+      margin: 8px 0 6px;
+      font-size: 28px;
+      line-height: 1.05;
+    }
+
+    .phase p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .stack {
+      display: grid;
+      gap: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .node {
+      position: relative;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: linear-gradient(180deg, rgba(12, 26, 46, 0.92), rgba(7, 16, 31, 0.94));
+      overflow: hidden;
+      transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+    }
+
+    .node:hover {
+      transform: translateY(-2px);
+      border-color: rgba(87,224,255,0.28);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.34), 0 0 26px rgba(87,224,255,0.08);
+    }
+
+    .node::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(87, 224, 255, 0.45), transparent 38%, transparent 62%, rgba(193, 114, 255, 0.35));
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      opacity: .6;
+    }
+
+    .node button {
+      appearance: none;
+      width: 100%;
+      text-align: left;
+      cursor: pointer;
+      background: transparent;
+      border: 0;
+      color: inherit;
+      padding: 15px 16px 14px;
+      display: grid;
+      gap: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .node-title-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .node-title {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.25;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+    }
+
+    .node-sub {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      font-size: 11px;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+    }
+
+    .badge.done { color: var(--green); border-color: rgba(98,255,177,0.25); background: rgba(98,255,177,0.08); }
+    .badge.progress { color: var(--amber); border-color: rgba(255,209,102,0.25); background: rgba(255,209,102,0.08); }
+    .badge.blocked { color: var(--red); border-color: rgba(255,117,143,0.25); background: rgba(255,117,143,0.08); }
+    .badge.priority { color: var(--cyan); border-color: rgba(87,224,255,0.3); background: rgba(87,224,255,0.08); }
+    .badge.live { color: var(--violet); border-color: rgba(193,114,255,0.28); background: rgba(193,114,255,0.08); }
+
+    .toggle {
+      flex: 0 0 auto;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      color: var(--cyan);
+      border: 1px solid rgba(87,224,255,0.2);
+      background: rgba(87,224,255,0.06);
+      font-weight: 700;
+      font-size: 16px;
+      box-shadow: inset 0 0 10px rgba(87,224,255,0.08);
+    }
+
+    .node-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .35s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    .node.open .node-content {
+      max-height: 900px;
+    }
+
+    .node-body {
+      padding: 0 16px 16px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .node-body ul {
+      margin: 8px 0 0;
+      padding-left: 18px;
+    }
+
+    .node-body li + li { margin-top: 6px; }
+
+    .node-connector {
+      position: absolute;
+      left: 50%;
+      top: -10px;
+      width: 2px;
+      height: 10px;
+      background: linear-gradient(180deg, transparent, rgba(87,224,255,0.3));
+    }
+
+    .pulse {
+      animation: pulse 2.6s ease-in-out infinite;
+    }
+
+    .spotlights {
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .spotlight,
+    .footer-card {
+      padding: 18px;
+    }
+
+    .spotlight p,
+    .footer-card p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+      margin: 8px 0 0;
+    }
+
+    .spotlight-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .callout {
+      border-radius: 16px;
+      padding: 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .callout strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 18px;
+    }
+
+    .route {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .route-step {
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(87,224,255,0.06);
+      border: 1px solid rgba(87,224,255,0.18);
+      color: var(--text);
+      font-size: 12px;
+      position: relative;
+    }
+
+    .route-step:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      right: -14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--cyan);
+      font-weight: 700;
+    }
+
+    .small-note {
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--muted);
+      opacity: 0.9;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(87,224,255,0.18), 0 0 22px rgba(87,224,255,0.08); }
+      50% { box-shadow: 0 0 0 8px rgba(87,224,255,0), 0 0 30px rgba(87,224,255,0.16); }
+    }
+
+    @media (max-width: 1180px) {
+      .topbar,
+      .spotlights,
+      .footer-grid,
+      .map { grid-template-columns: 1fr; }
+      .map::before { display: none; }
+      .phase { min-height: auto; }
+      .phase-head { position: relative; top: 0; background: transparent; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <section class="topbar">
+      <div class="briefing">
+        <div class="kicker">Mission Briefing · Internal Launch Command Map</div>
+        <h1>AI Universa Launch Flow</h1>
+        <p class="subtitle">
+          Dark-mode operational mind map for the full AI Universa launch: traffic acquisition, workbook delivery loop, 3-day live event, password-gated platform reveal, and cart-close conversion push. Click any node to expand mission details.
+        </p>
+        <div class="route" aria-label="Core launch path">
+          <div class="route-step">Traffic Sources</div>
+          <div class="route-step">Opt-in + Survey</div>
+          <div class="route-step">WhatsApp + Workbooks</div>
+          <div class="route-step">3-Day Live Event</div>
+          <div class="route-step">Password Reveal</div>
+          <div class="route-step">Offer Pages + Cart</div>
+        </div>
+      </div>
+
+      <aside class="legend">
+        <h3>Status legend</h3>
+        <div class="status-row">
+          <span class="status-pill"><span class="dot done"></span>Done</span>
+          <span class="status-pill"><span class="dot progress"></span>In Progress</span>
+          <span class="status-pill"><span class="dot blocked"></span>Blocked</span>
+          <span class="status-pill"><span class="dot live"></span>Core Strategy</span>
+        </div>
+        <div class="legend-grid">
+          <div class="legend-item"><strong>Launch date:</strong> April 15, 2026</div>
+          <div class="legend-item"><strong>Market:</strong> Slovenia</div>
+          <div class="legend-item"><strong>Paid media:</strong> €860/day during pre-event</div>
+          <div class="legend-item"><strong>Core differentiators:</strong> workbook delivery loop + live password reveal + separate free-resource platform</div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="map">
+      <article class="phase">
+        <div class="phase-head">
+          <div class="phase-label">Phase 01 · Infiltration Window</div>
+          <h2>PRE EVENT</h2>
+          <p>March 25 → April 14. Acquire leads, qualify intent, move people into WhatsApp, and preload value before the event starts.</p>
+        </div>
+        <div class="stack">
+          <div class="node open pulse">
+            <div class="node-connector"></div>
+            <button type="button" data-node-toggle>
+              <div class="node-title-row">
+                <div>
+                  <h3 class="node-title">Launch Narrative Canvas</h3>
+                  <div class="node-sub">Master strategy doc shaping the entire funnel narrative, messaging, and flow logic.</div>
+                </div>
+                <div class="toggle">−</div>
+              </div>
+              <div class="badge-row">
+                <span class="badge priority">Core Strategy</span>
+                <span class="badge progress">🔄 Ops Active</span>
+              </div>
+            </button>
+            <div class="node-content">
+              <div class="node-body">
+                <ul>
+                  <li>Defines positioning for AI Universa launch and ties all content assets into one story.</li>
+                  <li>Controls how traffic enters, how leads are nurtured, and how the event escalates into sales.</li>
+                  <li>Should stay visually central because every downstream node inherits from this narrative system.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="node open">
+            <button type="button" data-node-toggle>
+              <div class="node-title-row">
+                <div>
+                  <h3 class="node-title">Traffic Sources Grid</h3>
+                  <div class="node-sub">All roads push to the opt-in page and survey checkpoint.</div>
+                </div>
+                <div class="toggle">−</div>
+              </div>
+              <div class="badge-row">
+                <span class="badge done">✅ Creative stack built</span>
+                <span class="badge priority">High Visibility</span>
+              </div>
+            </button>
+            <div class="node-content">
+              <div class="node-body">
+                <ul>
+                  <li>Instagram Story</li>
+                  <li>Instagram Bio</li>
+                  <li>YouTube Trailer</li>
+                  <li>Emails to old list + new list</li>
+                  <li>Ads: 3 image + 3 video prospecting</li>
+                  <li>Ads: 3 image + 3 video retargeting</li>
+                  <li>Week 1 = testing, Week 2+ = scale winners</li>
+                  <li>Social media content calendar supports organic distribution</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="node open">
+            <button type="button" data-node-toggle>
+              <div class="node-title-row">
+                <div>
+                  <h3 class="node-title">Opt-In Page → Survey for Lead Quality</h3>
+                  <div class="node-sub">Main LP captures emails, then adds qualification via survey + mini VSL checkpoint.</div>
+                </div>
+                <div class="toggle">−</div>
+              </div>
+              <div class="badge-row">
+                <span class="badge done">✅ Registration LP built</span>
+                <span class="badge blocked">❌ Deploy blocked</span>
+                <span class="badge blocked">❌ GA4 blocked</span>
+              </div>
+            </button>
+            <div class="node-content">
+              <div class="node-body">
+                <ul>
+                  <li>Primary destination: <strong>aiuniversa.si</strong></li>
+                  <li>Collects lead info and routes into a survey for lead quality.</li>
+                  <li>Mini VSL can be embedded post opt-in to increase intent before WhatsApp join.</li>
+                  <li>Lead capture checkpoint should track page → survey → WhatsApp progression.</li>
+                  <li>Hostinger access still needed to deploy live domain build.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="node open pulse">
+            <button type="button" data-node-toggle>
+              <div class="node-title-row">
+                <div>
+                  <h3 class="node-title">Workbook Delivery Loop via WhatsApp</h3>
+                  <div class="node-sub">Key differentiator. Email pushes to WhatsApp, WhatsApp delivers workbooks, workbooks deepen commitment.</div>
+                </div>
+                <div class="toggle">−</div>
+              </div>
+              <div class="badge-row">
+                <span class="badge priority">Mission-Critical</span>
+                <span class="badge done">✅ 18 WhatsApp messages</span>
+                <span class="badge done">✅ 29 email sequences</span>
+              </div>
+            </button>
+            <div class="node-content">
+              <div class="node-body">
+                <ul>
+                  <li><strong>On signup:</strong> Delovni Zvezek #1 — <em>What to expect from the event</em></li>
+                  <li><strong>Day 1:</strong> Delovni Zvezek #2 — <em>Prompt Pack bonus</em></li>
+                  <li><strong>Day 2:</strong> Delovni Zvezek #3 — <em>Value creation &amp; landing clients</em></li>
+                  <li>Workbooks are delivered through WhatsApp, not just email.</li>
+                  <li>Email messaging should repeatedly redirect leads into WhatsApp to claim/download workbook assets.</li>
+                  <li>This creates a retention loop: email → WhatsApp → resource claim → event attendance.</li>
+                  <li>WhatsApp registrations and workbook downloads should be treated as a separate conversion layer, not a side effect.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="node">
+            <button type="button" data-node-toggle>
+              <div class="node-title-row">
+                <div>
+                  <h3 class="node-title">Email + Reminder Infrastructure</h3>
+                  <div class="node-sub">Lead capture emails, confirmations, reminders, and old-lead reactivation.</div>
+                </div>
+                <div class="toggle">+</div>
+              </div>
+              <div class="badge-row">
+                <span class="badge done">✅ 29 email sequences</span>
+                <span class="badge done">✅ GHL setup guide</span>
+              </div>
+            </button>
+            <div class="node-content">
+              <div class="node-body">
+                <ul>
+                  <li>5 lead capture emails for old leads</li>
+                  <li>Confirmation email</li>
+                  <li>Reminder emails</li>
+                  <li>Full email marketing sequence aligned with organic promo calendar</li>
+                  <li>GHL guide already prepared for implementation</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="node">
+            <button type="button" data-node-toggle>
+              <div class="node-title-row">
+                <div>
+                  <h3 class="node-title">Content Arsenal</h3>
+                  <div class="node-sub">Assets that warm traffic before the live room opens.</div>
+                </div>
+                <div class="toggle">+</div>
+              </div>
+              <div class="badge-row">
+                <span class="badge done">✅ Trailer</span>
+                <span class="badge done">✅ 3 VSL scripts</span>
+                <span class="badge done">✅ Social calendar</span>
+              </div>
+            </button>
+            <div class="node-content">
+              <div class="node-body">
+                <ul>
+                  <li>Trailer</li>
+                  <li>Main VSL variants / scripts</li>
+                  <li>Student Wins Vlog</li>
+                  <li>YouTube descriptions already prepared</li>
+                  <li>Organic content calendar should sync with paid media learnings</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="node">
+            <button type="button" data-node-toggle>
+              <div class="node-title-row">
+                <div>
+                  <h3 class="node-title">Monetization + Tracking Layer</h3>
+                  <div class="node-sub">Front-end revenue leaks and measurement must be visible before event starts.</div>
+                </div>
+                <div class="toggle">+</div>
+              </div>
+              <div class="badge-row">
+                <span class="badge done">✅ Upsell €14.99</span>
+                <span class="badge blocked">❌ Meta Pixel blocked</span>
+                <span class="badge blocked">❌ GA4 tracking blocked</span>
+              </div>
+            </button>
+            <div class="node-content">
+              <div class="node-body">
+                <ul>
+                  <li>Upsell 1 mini product: €14.99</li>
+                  <li>Lead Capture Checkpoint system should report opt-ins, survey completions, WhatsApp joins, workbook claims.</li>
+                  <li>Analytics Dashboard should aggregate launch performance by source and stage.</li>
+                  <li>Meta Pixel blocked until Meta Business account is available.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="phase">
+        <div class="phase-head">
+          <div class="phase-label">Phase 02 · Live Operation</div>
+          <h2>EVENT</h2>
+          <p>April 15 → 17. Run the 3-day workshop, weaponize attendance with the password reveal, and shift free value onto the separate platform.</p>
+        </div>
+        <div class="stack">
+          <div class="node open pulse">
+            <button type="button" data-node-toggle>
+              <div class="node-title-row">
+                <div>
+                  <h3 class="node-title">3-Day LIVE YouTube Workshop</h3>
+                  <div class="node-sub">Main event spine. Landing page switches into event mode.</div>
+                </div>
+                <div class="toggle">−</div>
+              </div>
+              <div class="badge-row">
+                <span class="badge live">Live Core</span>
+                <span class="badge progress">🔄 Event setup</span>
+              </div>
+            </button>
+            <div class="node-content">
+              <div class="node-body">
+                <ul>
+                  <li>Day 1: AI Income Models / AI Influencerji</li>
+                  <li>Day 2: Build Your First AI Business / AI Influencerji continuation</li>
+                  <li>Day 3: Scale &amp; Automate / AI Influencerji continuation</li>
+                  <li>Main VSL plays during event.</li>
+                  <li>Landing page transitions from lead capture mode into event mode.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="node open">
+            <button type="button" data-node-toggle>
+              <div class="node-title-row">
+                <div>
+                  <h3 class="node-title">Day 1 Spotlight: Blueprint from 0 to Viral</h3>
+                  <div class="node-sub">Secret tools + workflows packaged under the AI Influencerji umbrella.</div>
+                </div>
+                <div class="toggle">−</div>
+              </div>
+              <div class="badge-row">
+                <span class="badge priority">Attendance Driver</span>
+                <span class="badge live">1 Hour Feature</span>
+              </div>
+            </button>
+            <div class="node-content">
+              <div class="node-body">
+                <ul>
+                  <li>Explicitly framed as high-value insider content to make Day 1 unmissable.</li>
+                  <li>Pairs well with the password reveal mechanic by making viewers stay to unlock the next environment.</li>
+                  <li>Should feel like the bridge from inspiration to system access.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="node open pulse">
+            <button type="button" data-node-toggle>
+              <div class="node-title-row">
+                <div>
+                  <h3 class="node-title">Password Reveal LIVE on Day 1</h3>
+                  <div class="node-sub">Gamification mechanic. “I’ll reveal the password LIVE.” Drives attendance and pulls users into a separate platform.</div>
+                </div>
+                <div class="toggle">−</div>
+              </div>
+              <div class="badge-row">
+                <span class="badge priority">Key Differentiator</span>
+                <span class="badge live">Gamification</span>
+              </div>
+            </button>
+            <div class="node-content">
+              <div class="node-body">
+                <ul>
+                  <li>Password is announced inside the live system on Day 1 only.</li>
+                  <li>Creates urgency to attend live rather than catch replay later.</li>
+                  <li>Unlocks access context for the external free resource platform.</li>
+                  <li>Should be visually prominent and mentioned across pre-event reminders.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="node open">
+            <button type="button" data-node-toggle>
+              <div class="node-title-row">
+                <div>
+                  <h3 class="node-title">Separate Platform: app.aiuniversa.si</h3>
+                  <div class="node-sub">Free resource hub unlocked and explained during the live event.</div>
+                </div>
+                <div class="toggle">−</div>
+              </div>
+              <div class="badge-row">
+                <span class="badge priority">Platform Asset</span>
+                <span class="badge progress">🔄 Architecture implied</span>
+              </div>
+            </button>
+            <div class="node-content">
+              <div class="node-body">
+                <ul>
+                  <li>AI main dashboard</li>
+                  <li>AI Agencija section</li>
+                  <li>Kalkulator Dobička showing €5000</li>
+                  <li>VSI Zvezki section for all workbooks</li>
+                  <li>Acts as a separate environment for free resources rather than crowding the main LP.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="node">
+            <button type="button" data-node-toggle>
+              <div class="node-title-row">
+                <div>
+                  <h3 class="node-title">Event Messaging Engine</h3>
+                  <div class="node-sub">Email + WhatsApp sequences keep people moving between live sessions and workbook unlocks.</div>
+                </div>
+                <div class="toggle">+</div>
+              </div>
+              <div class="badge-row">
+                <span class="badge done">✅ Email system</span>
+                <span class="badge done">✅ WhatsApp system</span>
+              </div>
+            </button>
+            <div class="node-content">
+              <div class="node-body">
+                <ul>
+                  <li>Full email marketing sequence with organic promotional calendar.</li>
+                  <li>WhatsApp sequence: 18+ messages with visual mockups.</li>
+                  <li>Email → WhatsApp → Workbook delivery loop remains active during event days.</li>
+                  <li>Reminders should amplify Day 1 password reveal and Day 2/3 workbook bonuses.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="node">
+            <button type="button" data-node-toggle>
+              <div class="node-title-row">
+                <div>
+                  <h3 class="node-title">Workbook Progression During Event</h3>
+                  <div class="node-sub">Value staircase across the 3 live days.</div>
+                </div>
+                <div class="toggle">+</div>
+              </div>
+              <div class="badge-row">
+                <span class="badge priority">Retention Layer</span>
+              </div>
+            </button>
+            <div class="node-content">
+              <div class="node-body">
+                <ul>
+                  <li>Signup unlocks expectation-setting workbook.</li>
+                  <li>Day 1 unlocks Prompt Pack bonus workbook.</li>
+                  <li>Day 2 unlocks value creation &amp; client-landing workbook.</li>
+                  <li>By Day 3, the full stack prepares people for the paid transition.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="phase">
+        <div class="phase-head">
+          <div class="phase-label">Phase 03 · Extraction & Close</div>
+          <h2>CART OPEN</h2>
+          <p>April 17 → 21. Move from event momentum into a 5-day sales push with layered urgency, multiple dark-themed pages, and visible prize-stack tension.</p>
+        </div>
+        <div class="stack">
+          <div class="node open pulse">
+            <button type="button" data-node-toggle>
+              <div class="node-title-row">
+                <div>
+                  <h3 class="node-title">Offer Pages Go Live</h3>
+                  <div class="node-sub">Dark-themed sales pages connected directly to the event narrative.</div>
+                </div>
+                <div class="toggle">−</div>
+              </div>
+              <div class="badge-row">
+                <span class="badge progress">🔄 Offer page in progress</span>
+                <span class="badge priority">Revenue Switch</span>
+              </div>
+            </button>
+            <div class="node-content">
+              <div class="node-body">
+                <ul>
+                  <li>Multiple dark-themed sales pages should mirror the mind map aesthetic and event energy.</li>
+                  <li>Normal: €899.99</li>
+                  <li>VIP: €2,499.99</li>
+                  <li>Should feel like a continuation of the 3-day event, not a separate random sales sequence.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="node open">
+            <button type="button" data-node-toggle>
+              <div class="node-title-row">
+                <div>
+                  <h3 class="node-title">Cart Open Email Cadence</h3>
+                  <div class="node-sub">Daily persuasion + layered urgency windows.</div>
+                </div>
+                <div class="toggle">−</div>
+              </div>
+              <div class="badge-row">
+                <span class="badge done">✅ 5 daily emails</span>
+                <span class="badge done">✅ 4 urgency emails</span>
+              </div>
+            </button>
+            <div class="node-content">
+              <div class="node-body">
+                <ul>
+                  <li>5 cart-open emails, 1 per day</li>
+                  <li>Closing urgency emails at 72h, 48h, 24h, and 12h</li>
+                  <li>Message flow should tie back to the event proof, workbook value, and system access promise.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="node open">
+            <button type="button" data-node-toggle>
+              <div class="node-title-row">
+                <div>
+                  <h3 class="node-title">Sweepstakes + Countdown Pressure</h3>
+                  <div class="node-sub">Scarcity layer stacked on top of the standard close sequence.</div>
+                </div>
+                <div class="toggle">−</div>
+              </div>
+              <div class="badge-row">
+                <span class="badge priority">Urgency Layer</span>
+              </div>
+            </button>
+            <div class="node-content">
+              <div class="node-body">
+                <ul>
+                  <li>Sweepstakes: car, 3× MacBook Pro, iPhone</li>
+                  <li>Countdown timer runs to cart close</li>
+                  <li>Prize stack should reinforce action-now behavior without overshadowing core offer value.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="node">
+            <button type="button" data-node-toggle>
+              <div class="node-title-row">
+                <div>
+                  <h3 class="node-title">Checkout + Payment Layer</h3>
+                  <div class="node-sub">Conversion plumbing already mapped, needs clean activation on live pages.</div>
+                </div>
+                <div class="toggle">+</div>
+              </div>
+              <div class="badge-row">
+                <span class="badge done">✅ Stripe + Klarna guide</span>
+              </div>
+            </button>
+            <div class="node-content">
+              <div class="node-body">
+                <ul>
+                  <li>Payment processing guide already created for Stripe + Klarna.</li>
+                  <li>Needs to be synced with final offer page implementation and pricing tier selection.</li>
+                  <li>Should preserve clean path from event CTA to order completion.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="node">
+            <button type="button" data-node-toggle>
+              <div class="node-title-row">
+                <div>
+                  <h3 class="node-title">Post-Event Funnel Continuity</h3>
+                  <div class="node-sub">Sales pages stay connected to all free-event assets and prior touchpoints.</div>
+                </div>
+                <div class="toggle">+</div>
+              </div>
+              <div class="badge-row">
+                <span class="badge priority">Narrative Consistency</span>
+              </div>
+            </button>
+            <div class="node-content">
+              <div class="node-body">
+                <ul>
+                  <li>Sales funnel should reference the 3-day journey, workbook progression, and unlocked platform resources.</li>
+                  <li>Use dark-themed page variants as continuation of the heist/blueprint vibe rather than a jarring design pivot.</li>
+                  <li>Keep bridge from event-mode landing page into offer page visually and narratively clean.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="spotlights">
+      <div class="spotlight">
+        <h3>High-importance signal paths</h3>
+        <p>The boss’s board makes two things non-negotiable: workbook delivery is a strategic mechanism, and the Day 1 password reveal is a live-attendance weapon. Those need to sit near the center of every launch conversation.</p>
+        <div class="spotlight-grid">
+          <div class="callout">
+            <strong>Loop #1 — Acquisition to retention</strong>
+            Traffic source → opt-in → survey → WhatsApp join → workbook claim → event attendance
+          </div>
+          <div class="callout">
+            <strong>Loop #2 — Live attendance to platform access</strong>
+            Day 1 attendance → password reveal → app.aiuniversa.si access → all resources in one place
+          </div>
+          <div class="callout">
+            <strong>Loop #3 — Value to sale</strong>
+            3-day event → workbook stack → offer pages → urgency emails → checkout
+          </div>
+          <div class="callout">
+            <strong>Weak points currently blocked</strong>
+            Meta Pixel, GA4 tracking, and LP deployment are still the obvious blind spots.
+          </div>
+        </div>
+      </div>
+
+      <div class="spotlight">
+        <h3>Operational snapshot</h3>
+        <div class="mini-grid" style="margin-top:14px;">
+          <div class="mini-stat"><strong>Done:</strong> LP build, email sequences, WhatsApp sequence, ad creatives, VSL scripts, GHL guide, payment guide, YouTube descriptions, social calendar</div>
+          <div class="mini-stat"><strong>In progress:</strong> Offer page build, live event architecture, separate resource platform alignment</div>
+          <div class="mini-stat"><strong>Blocked:</strong> Meta Pixel setup, aiuniversa.si deployment, GA4 tracking</div>
+          <div class="mini-stat"><strong>Design intent:</strong> dark, premium, mission-briefing aesthetic across launch surfaces</div>
+        </div>
+        <p class="small-note">Internal read: if this gets shown to boss, the visual hierarchy should make workbook strategy and gamified live password unlock impossible to miss.</p>
+      </div>
+    </section>
+
+    <section class="footer-grid">
+      <div class="footer-card">
+        <h3>Primary domains</h3>
+        <p><strong>aiuniversa.si</strong> = capture + event shell<br><strong>app.aiuniversa.si</strong> = gated free-resource platform</p>
+      </div>
+      <div class="footer-card">
+        <h3>Launch timing</h3>
+        <p><strong>Pre-event:</strong> Mar 25 – Apr 14<br><strong>Live event:</strong> Apr 15 – 17<br><strong>Cart open:</strong> Apr 17 – 21</p>
+      </div>
+      <div class="footer-card">
+        <h3>Interaction</h3>
+        <p>Click any node to collapse or expand details. The map is built as a standalone HTML file with embedded CSS + JS so it can be dropped straight into the public folder.</p>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const toggles = document.querySelectorAll('[data-node-toggle]');
+    toggles.forEach((toggle) => {
+      const node = toggle.closest('.node');
+      const icon = node.querySelector('.toggle');
+      toggle.addEventListener('click', () => {
+        node.classList.toggle('open');
+        icon.textContent = node.classList.contains('open') ? '−' : '+';
+      });
+    });
+  </script>
+</body>
+</html>

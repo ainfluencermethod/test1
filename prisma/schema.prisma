@@ -1,0 +1,243 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DATABASE_URL_UNPOOLED")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String
+  passwordHash String
+  role         String   @default("admin")
+  createdAt    DateTime @default(now())
+}
+
+model Character {
+  id             String         @id @default(cuid())
+  name           String
+  niche          String
+  referenceImage String?
+  driveLink      String?
+  description    String?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  pipelineItems  PipelineItem[]
+  watchlist      WatchlistItem[]
+}
+
+model WatchlistItem {
+  id          String    @id @default(cuid())
+  characterId String
+  character   Character @relation(fields: [characterId], references: [id], onDelete: Cascade)
+  username    String
+  profileUrl  String
+  notes       String?
+  lastChecked DateTime?
+  avgViews    String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@unique([characterId, username])
+}
+
+model Task {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  status      String   @default("todo")
+  priority    String   @default("medium")
+  assignee    String?
+  projectId   String?
+  project     Project? @relation(fields: [projectId], references: [id])
+  dueDate     DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Project {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  status      String   @default("active")
+  color       String   @default("#8B5CF6")
+  tasks       Task[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Document {
+  id        String   @id @default(cuid())
+  title     String
+  content   String
+  category  String   @default("general")
+  tags      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model TeamMember {
+  id          String   @id @default(cuid())
+  name        String
+  role        String
+  type        String   @default("agent")
+  avatar      String?
+  description String?
+  status      String   @default("active")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model MissionStatement {
+  id        String   @id @default(cuid())
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Agent {
+  id           String     @id @default(cuid())
+  name         String
+  role         String
+  department   String
+  status       String     @default("idle")
+  currentTask  String?
+  avatar       String?
+  skills       String?
+  type         String     @default("agent")
+  parentId     String?
+  parent       Agent?     @relation("AgentHierarchy", fields: [parentId], references: [id])
+  children     Agent[]    @relation("AgentHierarchy")
+  cronSchedule String?
+  restrictions String?
+  systemPrompt String?
+  model        String?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  activities   Activity[]
+}
+
+model Activity {
+  id        String   @id @default(cuid())
+  agentId   String?
+  agent     Agent?   @relation(fields: [agentId], references: [id])
+  action    String
+  details   String?
+  category  String?
+  status    String   @default("completed")
+  createdAt DateTime @default(now())
+}
+
+model ChatMessage {
+  id         String   @id @default(cuid())
+  fromAgent  String
+  toAgent    String?
+  channel    String   @default("general")
+  message    String
+  createdAt  DateTime @default(now())
+}
+
+model LaunchChecklist {
+  id        String   @id @default(cuid())
+  item      String
+  checked   Boolean  @default(false)
+  updatedAt DateTime @updatedAt
+}
+
+model LaunchEmail {
+  id          String   @id @default(cuid())
+  day         Int
+  subject     String
+  previewText String   @default("")
+  body        String   @default("")
+  sendTime    String   @default("")
+  ctaLink     String   @default("")
+  status      String   @default("draft")
+  updatedAt   DateTime @updatedAt
+}
+
+model ABTest {
+  id            String   @id @default(cuid())
+  pageName      String
+  elementName   String
+  variantA      String
+  variantB      String
+  activeVariant String   @default("A")
+  notes         String   @default("")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model PageEdit {
+  id          String   @id @default(cuid())
+  pageName    String
+  sectionName String
+  content     String
+  suggestions String   @default("")
+  updatedAt   DateTime @updatedAt
+}
+
+model XReport {
+  id        String       @id @default(cuid())
+  date      DateTime     @unique
+  summary   String?
+  status    String       @default("pending")
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  items     XReportItem[]
+}
+
+model XReportItem {
+  id             String   @id @default(cuid())
+  reportId       String
+  report         XReport  @relation(fields: [reportId], references: [id], onDelete: Cascade)
+  tweetId        String?
+  author         String?
+  authorHandle   String?
+  content        String
+  summary        String
+  category       String
+  url            String?
+  engagement     String?
+  deepResearch   String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model PipelineRun {
+  id        String         @id @default(cuid())
+  niche     String
+  date      DateTime       @default(now())
+  status    String         @default("research")
+  items     PipelineItem[]
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+}
+
+model PipelineItem {
+  id               String      @id @default(cuid())
+  runId            String
+  run              PipelineRun @relation(fields: [runId], references: [id], onDelete: Cascade)
+  characterId      String?
+  character        Character?  @relation(fields: [characterId], references: [id])
+  sourceUrl        String?
+  sourceAccount    String?
+  sourceViews      String?
+  sourceConcept    String?
+  videoPath        String?
+  extractedFrame   String?
+  recreatedImage   String?
+  motionVideoPath  String?
+  finalVideoPath   String?
+  driveUploadUrl   String?
+  isTransition     Boolean     @default(false)
+  step             String      @default("research")
+  approved         Boolean     @default(false)
+  notes            String?
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+}

@@ -1,0 +1,2240 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Universa — VSL Production Bible</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+  :root {
+    --bg: #0D0F11;
+    --card: #1A1D21;
+    --card-hover: #22262B;
+    --accent: #7C5CFC;
+    --accent-glow: #b388ff;
+    --cta-green: #6bfb82;
+    --text: #ffffff;
+    --text-muted: #B8B8B8;
+    --text-dim: #6B7280;
+    --border: #2A2D32;
+    --purple-deep: #0a0c1e;
+    --purple-mid: #2e1065;
+    --purple-dark: #4c1d95;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --success: #22c55e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page-break { page-break-before: always; }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, var(--purple-deep) 0%, var(--purple-mid) 50%, var(--purple-dark) 100%);
+    padding: 80px 60px;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 4px solid var(--accent);
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(124,92,252,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: 20%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(107,251,130,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .header-content { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; }
+  .header-label {
+    display: inline-block;
+    background: rgba(124,92,252,0.2);
+    border: 1px solid rgba(124,92,252,0.4);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent-glow);
+    margin-bottom: 20px;
+  }
+  .header h1 {
+    font-size: 48px;
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, #fff 0%, var(--accent-glow) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .header p {
+    font-size: 18px;
+    color: var(--text-muted);
+    max-width: 700px;
+    line-height: 1.7;
+  }
+  .header-meta {
+    display: flex;
+    gap: 30px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+  }
+  .header-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+  .header-meta-item .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  /* Container */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px;
+  }
+
+  /* Section */
+  .section {
+    margin-bottom: 60px;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--accent), var(--purple-dark));
+    font-size: 18px;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+  .section-subtitle {
+    font-size: 14px;
+    color: var(--text-dim);
+    margin-top: 2px;
+  }
+
+  /* Card */
+  .card {
+    background: var(--card);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    padding: 32px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--accent);
+    border-radius: 12px 12px 0 0;
+  }
+  .card-green::before { background: var(--cta-green); }
+  .card-amber::before { background: var(--warning); }
+  .card-red::before { background: var(--danger); }
+
+  .card h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+  .card h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--accent-glow);
+  }
+  .card p, .card li {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+  .card ul { padding-left: 20px; margin-bottom: 12px; }
+  .card li { margin-bottom: 6px; }
+
+  /* Color Palette */
+  .palette-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .color-swatch {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .swatch-color {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .swatch-info {
+    padding: 12px;
+    background: var(--card);
+  }
+  .swatch-name {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  .swatch-hex {
+    font-size: 12px;
+    color: var(--text-dim);
+    font-family: monospace;
+  }
+
+  /* Scene Card */
+  .scene-card {
+    background: var(--card);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+  .scene-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 28px;
+    background: rgba(124,92,252,0.06);
+    border-bottom: 1px solid var(--border);
+  }
+  .scene-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--accent), var(--purple-dark));
+    font-size: 20px;
+    font-weight: 900;
+    flex-shrink: 0;
+  }
+  .scene-meta h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .scene-meta .badges {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .badge-time { background: rgba(124,92,252,0.2); color: var(--accent-glow); }
+  .badge-shot { background: rgba(107,251,130,0.15); color: var(--cta-green); }
+  .badge-duration { background: rgba(245,158,11,0.15); color: var(--warning); }
+  .badge-energy-low { background: rgba(107,114,128,0.2); color: #9ca3af; }
+  .badge-energy-building { background: rgba(245,158,11,0.15); color: var(--warning); }
+  .badge-energy-high { background: rgba(239,68,68,0.15); color: var(--danger); }
+  .badge-energy-climax { background: rgba(124,92,252,0.3); color: #d4bfff; }
+
+  .scene-body {
+    padding: 24px 28px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .scene-field { }
+  .scene-field.full { grid-column: 1 / -1; }
+  .field-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 6px;
+  }
+  .field-value {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+  .field-value.script {
+    background: rgba(124,92,252,0.06);
+    border-left: 3px solid var(--accent);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+  }
+  .field-value.overlay {
+    background: rgba(107,251,130,0.06);
+    border-left: 3px solid var(--cta-green);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    font-weight: 600;
+    color: var(--cta-green);
+  }
+
+  .scene-transitions {
+    padding: 16px 28px;
+    background: rgba(0,0,0,0.2);
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 40px;
+    font-size: 13px;
+  }
+  .transition-label {
+    color: var(--text-dim);
+    font-weight: 600;
+    margin-right: 8px;
+  }
+  .transition-value { color: var(--text-muted); }
+
+  /* Section Divider */
+  .section-divider {
+    text-align: center;
+    padding: 40px 0;
+    position: relative;
+  }
+  .section-divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--border);
+  }
+  .section-divider span {
+    position: relative;
+    background: var(--bg);
+    padding: 8px 24px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  /* Checklist */
+  .checklist { list-style: none; padding: 0; }
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+  .checklist li::before {
+    content: '☐';
+    font-size: 16px;
+    color: var(--accent);
+    flex-shrink: 0;
+    margin-top: -1px;
+  }
+
+  /* Grid */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+  }
+
+  /* Table */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+  }
+  .data-table th {
+    text-align: left;
+    padding: 10px 16px;
+    background: rgba(124,92,252,0.1);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--accent-glow);
+    border-bottom: 1px solid var(--border);
+  }
+  .data-table td {
+    padding: 10px 16px;
+    font-size: 14px;
+    color: var(--text-muted);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 40px 60px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  /* TOC */
+  .toc-list { list-style: none; padding: 0; }
+  .toc-list li {
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .toc-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: rgba(124,92,252,0.15);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+  .toc-text {
+    font-size: 16px;
+    font-weight: 500;
+  }
+  .toc-page {
+    margin-left: auto;
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+
+  @media print {
+    body { background: var(--bg) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .container { padding: 40px; }
+    .page-break { page-break-before: always; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-content">
+    <div class="header-label">🎬 Production Bible</div>
+    <h1>VSL Moodboard &<br>Storyboard</h1>
+    <p>Comprehensive visual production guide for the AI Universa Video Sales Letters. Everything a video editor needs to produce all three VSL variations.</p>
+    <div class="header-meta">
+      <div class="header-meta-item"><span class="dot"></span> Event: AI Universa · 15.–17. april 2026</div>
+      <div class="header-meta-item"><span class="dot"></span> Creator: Pici / Nepridiprav</div>
+      <div class="header-meta-item"><span class="dot"></span> Target: ~4:30 per VSL</div>
+      <div class="header-meta-item"><span class="dot"></span> Language: Slovenian</div>
+      <div class="header-meta-item"><span class="dot"></span> Version: 1.0 · March 2026</div>
+    </div>
+  </div>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<div class="container">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">📑</div>
+      <div>
+        <div class="section-title">Table of Contents</div>
+      </div>
+    </div>
+    <div class="card">
+      <ul class="toc-list">
+        <li><span class="toc-num">1</span><span class="toc-text">Moodboard — Visual References & Style Guide</span></li>
+        <li><span class="toc-num">2</span><span class="toc-text">Storyboard — VSL 1: "The Proof" (Scene-by-Scene)</span></li>
+        <li><span class="toc-num">3</span><span class="toc-text">Shot List — Production Day Checklist</span></li>
+        <li><span class="toc-num">4</span><span class="toc-text">Post-Production Notes — Editing & Export Guide</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== -->
+<!-- PART 1: MOODBOARD -->
+<!-- ============================== -->
+
+<div class="page-break"></div>
+<div class="container">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">1</div>
+      <div>
+        <div class="section-title">Moodboard</div>
+        <div class="section-subtitle">Visual References & Style Guide</div>
+      </div>
+    </div>
+
+    <!-- Color Palette -->
+    <div class="card">
+      <h3>🎨 Color Palette</h3>
+      <p style="margin-bottom: 20px;">The entire VSL lives in a dark, premium, tech-forward world. Purple is the dominant accent — it signals premium AI/tech. Green is reserved exclusively for CTAs and monetary figures to create instant visual association with "action" and "money."</p>
+      
+      <h4>Primary Backgrounds</h4>
+      <div class="palette-grid">
+        <div class="color-swatch">
+          <div class="swatch-color" style="background: #0a0c1e;"></div>
+          <div class="swatch-info"><div class="swatch-name">Deep Space</div><div class="swatch-hex">#0a0c1e</div></div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background: #2e1065;"></div>
+          <div class="swatch-info"><div class="swatch-name">Purple Core</div><div class="swatch-hex">#2e1065</div></div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background: #4c1d95;"></div>
+          <div class="swatch-info"><div class="swatch-name">Purple Bright</div><div class="swatch-hex">#4c1d95</div></div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background: #0D0F11;"></div>
+          <div class="swatch-info"><div class="swatch-name">Card Dark</div><div class="swatch-hex">#0D0F11</div></div>
+        </div>
+      </div>
+
+      <h4>Accent Colors</h4>
+      <div class="palette-grid">
+        <div class="color-swatch">
+          <div class="swatch-color" style="background: #7c3aed;"></div>
+          <div class="swatch-info"><div class="swatch-name">Purple Accent</div><div class="swatch-hex">#7c3aed</div></div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background: #b388ff;"></div>
+          <div class="swatch-info"><div class="swatch-name">Purple Glow</div><div class="swatch-hex">#b388ff</div></div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background: #6bfb82;"><span style="color:#000;font-weight:700;">CTA</span></div>
+          <div class="swatch-info"><div class="swatch-name">Neon Green (CTA Only)</div><div class="swatch-hex">#6bfb82</div></div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background: #ffffff;"><span style="color:#000;font-weight:700;">Aa</span></div>
+          <div class="swatch-info"><div class="swatch-name">Text White</div><div class="swatch-hex">#ffffff</div></div>
+        </div>
+      </div>
+
+      <h4>Usage Rules</h4>
+      <ul>
+        <li><strong>Green (#6bfb82)</strong> — ONLY for CTA buttons, "BREZPLAČNO" text, and € money figures. Never decorative.</li>
+        <li><strong>Purple glow (#b388ff)</strong> — For highlights, underlines, emphasis text. Can be used as rim light color.</li>
+        <li><strong>White</strong> — All headings, main body text overlays. Always bold sans-serif (Inter, Montserrat, or similar).</li>
+        <li><strong>Deep backgrounds</strong> — All lower thirds, text backgrounds use #0a0c1e at 85% opacity.</li>
+      </ul>
+    </div>
+
+    <!-- Lighting & Camera -->
+    <div class="card">
+      <h3>💡 Lighting & Camera Setup</h3>
+      <div class="grid-2">
+        <div>
+          <h4>Lighting Design</h4>
+          <ul>
+            <li><strong>Key light:</strong> Single softbox at 45° camera-left, slightly above eye level. Soft, controlled — creates dimension without harsh shadows.</li>
+            <li><strong>Rim/hair light:</strong> LED strip or tube light at camera-right-rear, gelled deep purple (#7c3aed). Creates a purple edge on shoulder/head that separates subject from background.</li>
+            <li><strong>Background:</strong> Completely dark or very minimal. If any set dressing, light it with dim purple LED strips. Aim for near-black with subtle purple gradients.</li>
+            <li><strong>Fill:</strong> Minimal to none. Let the shadows be deep. Crushed blacks are part of the look.</li>
+            <li><strong>Overall ratio:</strong> High contrast, 4:1 or 5:1 key-to-fill ratio. Moody, cinematic.</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Camera Settings</h4>
+          <ul>
+            <li><strong>Lens:</strong> 35mm f/1.8 (or 50mm f/1.4 on crop sensor)</li>
+            <li><strong>Aperture:</strong> f/1.8–f/2.0 for shallow depth of field</li>
+            <li><strong>ISO:</strong> Keep as low as possible (100–400)</li>
+            <li><strong>Frame rate:</strong> 24fps for cinematic feel</li>
+            <li><strong>Resolution:</strong> 4K (downscale to 1080p in post for extra sharpness)</li>
+            <li><strong>Color profile:</strong> S-Log3 or V-Log if available. Otherwise, flattest picture profile available.</li>
+            <li><strong>White balance:</strong> Manual 5600K for key light. Let the purple rim stay purple naturally.</li>
+            <li><strong>Framing:</strong> Rule of thirds — eyes at upper third. Slight headroom. Subject offset to one side to leave space for text overlays on the opposite side.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Visual Style -->
+    <div class="card">
+      <h3>🎥 Visual Style Guide</h3>
+      
+      <h4>Talking Head Shots</h4>
+      <p>Two setups needed — <strong>Medium shot</strong> (chest up) for most dialogue, and <strong>Close-up</strong> (face/shoulders) for intense moments, hooks, and CTAs. Both with shallow DOF, dark background, purple rim light. Subject looks directly into camera (no teleprompter look — natural, eye-to-eye connection).</p>
+      
+      <h4 style="margin-top: 20px;">B-Roll Style</h4>
+      <ul>
+        <li><strong>Screen recordings:</strong> Clean, high-res captures of dashboards, analytics, social media profiles. Apply a subtle purple tint to the screen edges. Use smooth mouse movements — never jerky.</li>
+        <li><strong>Screenshots reveals:</strong> Student results appear with a smooth scale-up + slight bounce animation. Add a subtle glow/shadow behind each screenshot.</li>
+        <li><strong>AI tools montage:</strong> Quick cuts (0.5–1s each) of various AI interfaces — ChatGPT, Midjourney, analytics dashboards. All slightly desaturated with purple overlay.</li>
+        <li><strong>Lifestyle B-roll:</strong> If available — laptop on desk, phone notifications, modern workspace. All dark-lit with purple accent lighting.</li>
+      </ul>
+
+      <h4 style="margin-top: 20px;">Kinetic Typography</h4>
+      <ul>
+        <li><strong>Font:</strong> Inter Black or Montserrat ExtraBold. Always uppercase for impact text.</li>
+        <li><strong>Animation:</strong> Text slams in from below with a slight overshoot bounce. Hold 2–3 seconds. Fade or scale-out.</li>
+        <li><strong>Positioning:</strong> Lower third for subtitles/emphasis. Center screen for standalone text slides. Numbers (€1,840, 12,300) get extra size + green color (#6bfb82).</li>
+        <li><strong>Key numbers always animated:</strong> Counter/odometer effect for monetary figures (€0 → €1,840 rapid count).</li>
+        <li><strong>Drop shadow:</strong> Every text overlay gets a subtle black shadow (2px offset, 8px blur) for readability against any background.</li>
+      </ul>
+
+      <h4 style="margin-top: 20px;">Transitions</h4>
+      <ul>
+        <li><strong>Standard cut:</strong> Sharp cut on dialogue. Most common transition (70% of cuts).</li>
+        <li><strong>Smooth zoom:</strong> 1.05x scale punch-in between takes of the same shot (to hide jump cuts). Very common in modern YouTube VSLs.</li>
+        <li><strong>Whip pan:</strong> Fast horizontal wipe between major sections (Hook → Opportunity, Proof → Event, etc.).</li>
+        <li><strong>Glitch effect:</strong> Short (3–5 frame) RGB split + horizontal offset glitch for emphasis moments (big numbers, bold claims).</li>
+        <li><strong>Fade to black:</strong> Only between major sections. 0.5s fade. Never within sections.</li>
+      </ul>
+
+      <h4 style="margin-top: 20px;">Color Grade</h4>
+      <ul>
+        <li><strong>Overall:</strong> Desaturated by 15–20%. Crushed blacks (lift shadows slightly then crush).</li>
+        <li><strong>Split toning:</strong> Purple (#4c1d95) in shadows, teal (#0d9488) in highlights. Subtle — don't overdo.</li>
+        <li><strong>Skin tones:</strong> Protect skin tones from the color grade. Use a qualified secondary to keep natural warmth.</li>
+        <li><strong>Contrast:</strong> High contrast overall. S-curve in Lumetri/DaVinci — push whites, crush blacks.</li>
+        <li><strong>Vignette:</strong> Subtle corner vignette (-0.3 to -0.5) to draw eye to center.</li>
+      </ul>
+    </div>
+
+    <!-- Reference Creators -->
+    <div class="card">
+      <h3>🎯 Reference Creators & Style Notes</h3>
+      <div class="grid-3">
+        <div>
+          <h4>Iman Gadzhi's VSLs</h4>
+          <p>Study for: Clean talking head framing, dramatic single-source lighting, confidence in delivery, premium feel. His "Monetize" VSL is the gold standard structure. Note how the background is almost completely black with minimal set design — all focus on the speaker.</p>
+        </div>
+        <div>
+          <h4>Alex Hormozi</h4>
+          <p>Study for: Bold kinetic typography overlays, rapid cuts between sentences (no dead air), screenshot proof-stacking technique. His editing pace is relentless — every 2-3 seconds has a visual change (zoom, text, cut). Adapt this energy for the proof stack section.</p>
+        </div>
+        <div>
+          <h4>Modern Course VSLs</h4>
+          <p>Study for: Student result reveals (screenshot slides in, zooms to key metric), event date countdown graphics, CTA button animations, lower-third name/result bars. The "social proof wall" technique — multiple results shown rapidly in sequence.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Audio -->
+    <div class="card">
+      <h3>🔊 Audio & Sound Design</h3>
+      <div class="grid-2">
+        <div>
+          <h4>Background Music</h4>
+          <ul>
+            <li><strong>Style:</strong> Dark, electronic ambient. Think Hans Zimmer "Time" meets tech startup trailer. Deep bass, subtle synth pads, building tension.</li>
+            <li><strong>Volume:</strong> -18dB to -22dB under dialogue. Never compete with voice.</li>
+            <li><strong>Dynamics:</strong> Start minimal in Hook, build through Opportunity, peak during Proof Stack transitions, drop for Event explanation, rise again for CTA.</li>
+            <li><strong>Track change:</strong> Subtle shift at each major section. Don't use the same loop throughout.</li>
+            <li>Search terms: "dark cinematic ambient" "tech trailer music" "epic corporate dark"</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Sound Effects</h4>
+          <ul>
+            <li><strong>Whoosh:</strong> On every whip pan transition and text slam-in. Short, punchy.</li>
+            <li><strong>UI click/pop:</strong> Subtle digital sound when text appears or screenshots reveal. Think iOS notification but softer.</li>
+            <li><strong>Bass drop:</strong> Sub-bass hit (80Hz, 0.3s) on big number reveals (€41,127, 200M+).</li>
+            <li><strong>Cash register / "cha-ching":</strong> Subtle, not cheesy. On first money mention only (€1,840).</li>
+            <li><strong>Tension riser:</strong> Reverse cymbal or synth swell leading into each new section.</li>
+            <li><strong>Glitch sound:</strong> Digital artifacts sound paired with glitch visual transition.</li>
+          </ul>
+        </div>
+      </div>
+      <div style="margin-top: 16px;">
+        <h4>Voice Recording</h4>
+        <ul>
+          <li><strong>Microphone:</strong> Condenser or dynamic broadcast mic (SM7B, Rode NT1). Close placement for intimate feel.</li>
+          <li><strong>Room:</strong> Dead room, no reverb. The voice should sound dry, present, and close.</li>
+          <li><strong>Processing:</strong> Light compression (3:1), de-ess, high-pass at 80Hz. No heavy EQ — keep it natural.</li>
+          <li><strong>Delivery:</strong> Pici speaks confident, conversational Slovenian. Not shouty. Not monotone. Varies pace — slower for emphasis, faster when stacking proof. Pauses before big reveals.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============================== -->
+<!-- PART 2: STORYBOARD -->
+<!-- ============================== -->
+
+<div class="page-break"></div>
+<div class="container">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">2</div>
+      <div>
+        <div class="section-title">Storyboard</div>
+        <div class="section-subtitle">VSL 1: "The Proof" — Scene-by-Scene Breakdown</div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom: 40px;">
+      <h3>📋 VSL 1 Overview</h3>
+      <p style="margin-bottom: 16px;"><strong>Total Duration:</strong> ~4:35 &nbsp;|&nbsp; <strong>Tone:</strong> Confident, concrete, proof-heavy &nbsp;|&nbsp; <strong>Best For:</strong> Retargeting ads, warm audiences, IG Reels/YouTube Ads</p>
+      <table class="data-table">
+        <tr><th>Section</th><th>Timestamp</th><th>Scenes</th><th>Energy Arc</th></tr>
+        <tr><td>Hook</td><td>0:00 – 0:15</td><td>1–3</td><td>⚡ Immediate high impact</td></tr>
+        <tr><td>The Opportunity</td><td>0:15 – 1:00</td><td>4–7</td><td>📈 Building, aspirational</td></tr>
+        <tr><td>Proof Stack</td><td>1:00 – 2:15</td><td>8–15</td><td>🔥 High energy, rapid-fire proof</td></tr>
+        <tr><td>The Event</td><td>2:15 – 3:15</td><td>16–19</td><td>📢 Informative, exciting</td></tr>
+        <tr><td>Authority</td><td>3:15 – 3:35</td><td>20–21</td><td>💪 Confident, trust-building</td></tr>
+        <tr><td>Bonuses + Urgency + CTA</td><td>3:35 – 4:35</td><td>22–26</td><td>🚀 Climax, action-driving</td></tr>
+      </table>
+    </div>
+
+    <!-- ======================== -->
+    <!-- SECTION: HOOK -->
+    <!-- ======================== -->
+    <div class="section-divider"><span>🎯 HOOK — 0:00–0:15</span></div>
+
+    <!-- Scene 1 -->
+    <div class="scene-card">
+      <div class="scene-header">
+        <div class="scene-num">01</div>
+        <div class="scene-meta">
+          <h3>The Number Drop</h3>
+          <div class="badges">
+            <span class="badge badge-time">0:00 – 0:05</span>
+            <span class="badge badge-shot">Close-up</span>
+            <span class="badge badge-duration">5s</span>
+            <span class="badge badge-energy-high">⚡ High</span>
+          </div>
+        </div>
+      </div>
+      <div class="scene-body">
+        <div class="scene-field">
+          <div class="field-label">Visual Description</div>
+          <div class="field-value">Pici's face fills the frame — close-up, eyes locked on camera. Shallow DOF, dark background with purple rim light visible on the edge of his jaw/ear. He speaks with intensity. At "€1,840" — the number slams onto screen in large kinetic typography (green #6bfb82, Inter Black, 120pt equivalent). At "12,300 sledilcev" — second number appears below.</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Camera Movement</div>
+          <div class="field-value">Static start, then slow 1.02x zoom-in over 5 seconds. Barely perceptible but creates subconscious tension.</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Script / Audio</div>
+          <div class="field-value script">"€1,840 na mesec. 12,300 sledilcev. V šestih tednih."</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Text Overlay</div>
+          <div class="field-value overlay">€1,840 / mesec &nbsp;&nbsp;|&nbsp;&nbsp; 12,300 sledilcev &nbsp;&nbsp;|&nbsp;&nbsp; 6 tednov</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Music / SFX</div>
+          <div class="field-value">Deep bass drone starts immediately. Subtle whoosh on each number appearance. Cha-ching SFX on "€1,840".</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Mood</div>
+          <div class="field-value">Immediate shock value. Viewer must be stopped in their scroll within 1 second. No warm-up.</div>
+        </div>
+      </div>
+      <div class="scene-transitions">
+        <div><span class="transition-label">IN:</span><span class="transition-value">Cold open — no intro, no logo, straight to face</span></div>
+        <div><span class="transition-label">OUT:</span><span class="transition-value">Quick cut to Scene 2</span></div>
+      </div>
+    </div>
+
+    <!-- Scene 2 -->
+    <div class="scene-card">
+      <div class="scene-header">
+        <div class="scene-num">02</div>
+        <div class="scene-meta">
+          <h3>The Proof Screenshot</h3>
+          <div class="badges">
+            <span class="badge badge-time">0:05 – 0:10</span>
+            <span class="badge badge-shot">Screen Recording / B-roll</span>
+            <span class="badge badge-duration">5s</span>
+            <span class="badge badge-energy-high">⚡ High</span>
+          </div>
+        </div>
+      </div>
+      <div class="scene-body">
+        <div class="scene-field">
+          <div class="field-label">Visual Description</div>
+          <div class="field-value">Full-screen screenshot of Luka's profile — his social media stats and earnings visible. Screenshot scales up from 90% to 100% with a subtle bounce. Purple glow border around the screenshot. Key metrics (follower count, revenue) highlighted with green circles or underlines animated in.</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Camera Movement</div>
+          <div class="field-value">Ken Burns slow zoom into the revenue metric on the screenshot.</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Script / Audio</div>
+          <div class="field-value script">"To ni moj rezultat — to je rezultat 22-letnega študenta iz Maribora, ki je začel brez izkušenj, brez publike, brez obraz pred kamero."</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Text Overlay</div>
+          <div class="field-value overlay">Lower third: "LUKA · 22 let · Študent iz Maribora"</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Music / SFX</div>
+          <div class="field-value">Music continues building. UI pop sound when screenshot appears. Subtle digital texture underneath.</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Mood</div>
+          <div class="field-value">Credibility. Real screenshot = real proof. The viewer's inner voice: "Wait, that's real?"</div>
+        </div>
+      </div>
+      <div class="scene-transitions">
+        <div><span class="transition-label">IN:</span><span class="transition-value">Quick cut from close-up</span></div>
+        <div><span class="transition-label">OUT:</span><span class="transition-value">Cut back to Pici (Scene 3)</span></div>
+      </div>
+    </div>
+
+    <!-- Scene 3 -->
+    <div class="scene-card">
+      <div class="scene-header">
+        <div class="scene-num">03</div>
+        <div class="scene-meta">
+          <h3>The Hook Close</h3>
+          <div class="badges">
+            <span class="badge badge-time">0:10 – 0:15</span>
+            <span class="badge badge-shot">Medium</span>
+            <span class="badge badge-duration">5s</span>
+            <span class="badge badge-energy-building">📈 Building</span>
+          </div>
+        </div>
+      </div>
+      <div class="scene-body">
+        <div class="scene-field">
+          <div class="field-label">Visual Description</div>
+          <div class="field-value">Back to Pici, now in medium shot (chest up). Slightly different angle or zoom level from Scene 1 to create visual variety. He leans slightly forward — conspiratorial, like sharing a secret. Expression shifts to confident half-smile on "brezplačno."</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Camera Movement</div>
+          <div class="field-value">Static. Clean medium framing. Subject on left third, open space on right for potential text overlay.</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Script / Audio</div>
+          <div class="field-value script">"In on ni edini. Ostani do konca, ker ti bom pokazal točno, kako se pridružiš — brezplačno."</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Text Overlay</div>
+          <div class="field-value overlay">"BREZPLAČNO" appears on right side in green (#6bfb82), large, with bounce animation</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Music / SFX</div>
+          <div class="field-value">Music dips slightly — creates a breath before the next section. Whoosh on "brezplačno" text appearance.</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Mood</div>
+          <div class="field-value">Retention hook. "Stay till the end" — gives viewer a reason to keep watching. Transition from shock to curiosity.</div>
+        </div>
+      </div>
+      <div class="scene-transitions">
+        <div><span class="transition-label">IN:</span><span class="transition-value">Cut from screenshot</span></div>
+        <div><span class="transition-label">OUT:</span><span class="transition-value">Whip pan transition to Section 2</span></div>
+      </div>
+    </div>
+
+    <!-- ======================== -->
+    <!-- SECTION: THE OPPORTUNITY -->
+    <!-- ======================== -->
+    <div class="section-divider"><span>💡 THE OPPORTUNITY — 0:15–1:00</span></div>
+
+    <!-- Scene 4 -->
+    <div class="scene-card">
+      <div class="scene-header">
+        <div class="scene-num">04</div>
+        <div class="scene-meta">
+          <h3>AI is NOW — B-Roll Montage</h3>
+          <div class="badges">
+            <span class="badge badge-time">0:15 – 0:25</span>
+            <span class="badge badge-shot">B-Roll Montage</span>
+            <span class="badge badge-duration">10s</span>
+            <span class="badge badge-energy-building">📈 Building</span>
+          </div>
+        </div>
+      </div>
+      <div class="scene-body">
+        <div class="scene-field">
+          <div class="field-label">Visual Description</div>
+          <div class="field-value">Rapid montage (1–1.5s per shot): AI dashboard with analytics graphs rising → ChatGPT interface generating content → Social media analytics showing growth curves → Stock footage of someone on laptop in dark room with purple lighting. All slightly desaturated with purple color wash. Overlay text "AI NI PRIHODNOST" appears, then glitches into "AI JE ZDAJ."</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Camera Movement</div>
+          <div class="field-value">Each B-roll clip has its own subtle movement — slow pans, zooms. Creates energy through variety.</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Script / Audio</div>
+          <div class="field-value script">"Poslušaj. AI ni prihodnost — AI je zdaj. Vsak dan nastajajo novi načini zaslužka, ki jih večina ljudi sploh ne pozna."</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Text Overlay</div>
+          <div class="field-value overlay">"AI NI PRIHODNOST" → glitch effect → "AI JE ZDAJ" (large, centered)</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Music / SFX</div>
+          <div class="field-value">Music builds — add rhythmic pulse. Whoosh on each B-roll cut. Glitch sound on text transition. Sub bass hit on "ZDAJ."</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Mood</div>
+          <div class="field-value">Exciting, urgent. The future is here and you're either in or you're out. Visual energy should make AI feel tangible and real.</div>
+        </div>
+      </div>
+      <div class="scene-transitions">
+        <div><span class="transition-label">IN:</span><span class="transition-value">Whip pan from Hook section</span></div>
+        <div><span class="transition-label">OUT:</span><span class="transition-value">Cut to Pici talking head</span></div>
+      </div>
+    </div>
+
+    <!-- Scene 5 -->
+    <div class="scene-card">
+      <div class="scene-header">
+        <div class="scene-num">05</div>
+        <div class="scene-meta">
+          <h3>The Big Number</h3>
+          <div class="badges">
+            <span class="badge badge-time">0:25 – 0:35</span>
+            <span class="badge badge-shot">Medium + Text Slide</span>
+            <span class="badge badge-duration">10s</span>
+            <span class="badge badge-energy-building">📈 Building</span>
+          </div>
+        </div>
+      </div>
+      <div class="scene-body">
+        <div class="scene-field">
+          <div class="field-label">Visual Description</div>
+          <div class="field-value">Pici in medium shot, speaking directly. When he mentions "€41,127" — hard cut to a full-screen text slide: dark purple background, the number "€41,127+" in massive green typography with a counter/odometer animation (numbers rolling up from €0). Below in white: "zaslužka študentov". Hold for 2 seconds on the number.</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Camera Movement</div>
+          <div class="field-value">Talking head: static. Text slide: number has subtle floating animation (slight up-down drift).</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Script / Audio</div>
+          <div class="field-value script">"Medtem ko se drugi sprašujejo, ali je 'prepozno' — moji študentje že zaslužijo. In ne govorim o teoriji. Govorim o navadnih ljudeh iz Slovenije, ki so v zadnjih mesecih zgradili realne prihodke z AI."</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Text Overlay</div>
+          <div class="field-value overlay">€41,127+ ZASLUŽKA ŠTUDENTOV</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Music / SFX</div>
+          <div class="field-value">Deep bass drop when number appears. Counter/ticker sound during odometer animation. Music continues ambient underneath.</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Mood</div>
+          <div class="field-value">Impressive, credible. The aggregate number creates a "this is real and bigger than I thought" moment.</div>
+        </div>
+      </div>
+      <div class="scene-transitions">
+        <div><span class="transition-label">IN:</span><span class="transition-value">Cut from B-roll montage</span></div>
+        <div><span class="transition-label">OUT:</span><span class="transition-value">Cut back to Pici</span></div>
+      </div>
+    </div>
+
+    <!-- Scene 6 -->
+    <div class="scene-card">
+      <div class="scene-header">
+        <div class="scene-num">06</div>
+        <div class="scene-meta">
+          <h3>Real People, Real Results</h3>
+          <div class="badges">
+            <span class="badge badge-time">0:35 – 0:50</span>
+            <span class="badge badge-shot">Medium</span>
+            <span class="badge badge-duration">15s</span>
+            <span class="badge badge-energy-building">📈 Building</span>
+          </div>
+        </div>
+      </div>
+      <div class="scene-body">
+        <div class="scene-field">
+          <div class="field-label">Visual Description</div>
+          <div class="field-value">Pici in medium shot, slightly different framing than before (use 1.05x punch-in to differentiate). Animated lower-third bullet points appear one by one as he describes the characteristics: "brez ekipe" (checkmark) → "brez pisarne" (checkmark) → "brez predhodnega znanja" (checkmark). Green checkmark icons appear with each point.</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Camera Movement</div>
+          <div class="field-value">Very slow zoom-in (1.0x → 1.03x over 15 seconds). Builds intimacy as content gets more personal.</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Script / Audio</div>
+          <div class="field-value script">"...brez ekipe, brez pisarne, brez predhodnega znanja. Razlika med njimi in vsemi ostalimi? Odločili so se, da bodo začeli."</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Text Overlay</div>
+          <div class="field-value overlay">✅ Brez ekipe &nbsp;&nbsp; ✅ Brez pisarne &nbsp;&nbsp; ✅ Brez predhodnega znanja</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Music / SFX</div>
+          <div class="field-value">UI pop on each checkmark appearance. Music stays ambient, slightly rising. Brief pause in music on "Odločili so se, da bodo začeli" for emphasis.</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Mood</div>
+          <div class="field-value">Relatable. Viewer sees themselves: "I don't have a team either, I don't have an office either..." Building identification.</div>
+        </div>
+      </div>
+      <div class="scene-transitions">
+        <div><span class="transition-label">IN:</span><span class="transition-value">Cut from number slide</span></div>
+        <div><span class="transition-label">OUT:</span><span class="transition-value">Cut to Scene 7</span></div>
+      </div>
+    </div>
+
+    <!-- Scene 7 -->
+    <div class="scene-card">
+      <div class="scene-header">
+        <div class="scene-num">07</div>
+        <div class="scene-meta">
+          <h3>Your Turn — Bridge to Proof</h3>
+          <div class="badges">
+            <span class="badge badge-time">0:50 – 1:00</span>
+            <span class="badge badge-shot">Close-up</span>
+            <span class="badge badge-duration">10s</span>
+            <span class="badge badge-energy-high">🔥 High</span>
+          </div>
+        </div>
+      </div>
+      <div class="scene-body">
+        <div class="scene-field">
+          <div class="field-label">Visual Description</div>
+          <div class="field-value">Cut to tight close-up of Pici. He looks directly into camera with conviction. This is the "you too" moment. Background darkens slightly (reduce rim light intensity in post). The words "TOČNO TO PRILOŽNOST IMAŠ ZDAJ TUDI TI" appear centered in bold white, word by word, in sync with speech.</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Camera Movement</div>
+          <div class="field-value">Static close-up. Let the words do the work. No movement — stillness creates weight.</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Script / Audio</div>
+          <div class="field-value script">"Točno to priložnost imaš zdaj tudi ti."</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Text Overlay</div>
+          <div class="field-value overlay">TOČNO TO PRILOŽNOST IMAŠ ZDAJ TUDI TI.</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Music / SFX</div>
+          <div class="field-value">Music drops to near-silence. Just voice + subtle bass. Then a rising tension swell into the Proof Stack section. Whoosh on text appearance.</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Mood</div>
+          <div class="field-value">Direct, personal. Eye contact + silence + bold statement = maximum impact. This is the pivot — from "others did it" to "YOU can do it."</div>
+        </div>
+      </div>
+      <div class="scene-transitions">
+        <div><span class="transition-label">IN:</span><span class="transition-value">Cut from medium shot</span></div>
+        <div><span class="transition-label">OUT:</span><span class="transition-value">Whip pan + glitch transition into Proof Stack</span></div>
+      </div>
+    </div>
+
+    <!-- ======================== -->
+    <!-- SECTION: PROOF STACK -->
+    <!-- ======================== -->
+    <div class="section-divider"><span>🔥 PROOF STACK — 1:00–2:15</span></div>
+
+    <!-- Scene 8 -->
+    <div class="scene-card">
+      <div class="scene-header">
+        <div class="scene-num">08</div>
+        <div class="scene-meta">
+          <h3>Proof Intro</h3>
+          <div class="badges">
+            <span class="badge badge-time">1:00 – 1:07</span>
+            <span class="badge badge-shot">Medium</span>
+            <span class="badge badge-duration">7s</span>
+            <span class="badge badge-energy-high">🔥 High</span>
+          </div>
+        </div>
+      </div>
+      <div class="scene-body">
+        <div class="scene-field">
+          <div class="field-label">Visual Description</div>
+          <div class="field-value">Pici in medium shot. Confident lean back. He gestures openly — "let me show you." Brief flash of all six student photos/screenshots in a grid behind him (pre-composed graphic, 6 squares in 2×3 grid, slightly blurred/teaser, with purple overlay). Grid appears for 1.5 seconds as a visual preview.</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Camera Movement</div>
+          <div class="field-value">Static. The visual interest comes from the graphic overlay, not camera movement.</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Script / Audio</div>
+          <div class="field-value script">"Naj ti povem o konkretnih ljudeh."</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Music / SFX</div>
+          <div class="field-value">Energy shift — music becomes more rhythmic, beat-driven. Sets the pace for rapid proof stacking. Tension riser (reverse cymbal) into first testimonial.</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Mood</div>
+          <div class="field-value">Transition moment. "Here comes the evidence." The grid preview creates anticipation.</div>
+        </div>
+      </div>
+      <div class="scene-transitions">
+        <div><span class="transition-label">IN:</span><span class="transition-value">Whip pan + glitch from Opportunity section</span></div>
+        <div><span class="transition-label">OUT:</span><span class="transition-value">Quick cut to first testimonial</span></div>
+      </div>
+    </div>
+
+    <!-- Scene 9: Luka -->
+    <div class="scene-card">
+      <div class="scene-header">
+        <div class="scene-num">09</div>
+        <div class="scene-meta">
+          <h3>Testimonial: Luka Kovač</h3>
+          <div class="badges">
+            <span class="badge badge-time">1:07 – 1:18</span>
+            <span class="badge badge-shot">Screen + Talking Head</span>
+            <span class="badge badge-duration">11s</span>
+            <span class="badge badge-energy-high">🔥 High</span>
+          </div>
+        </div>
+      </div>
+      <div class="scene-body">
+        <div class="scene-field">
+          <div class="field-label">Visual Description</div>
+          <div class="field-value">Split: First 2s — Luka's screenshot/profile photo scales in from center. Lower-third card appears: "LUKA KOVAČ · 22 · Študent, Maribor". Then key metrics animate in one at a time: "12,300 sledilcev" (white) → "€1,840/mesec" (green) → "6 tednov" (purple accent) → "2 uri/dan" (white). Each metric has its own line with an icon. Then cut to Pici in medium shot for the verbal delivery. Use picture-in-picture: Luka's screenshot shrinks to upper-right corner while Pici talks.</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Camera Movement</div>
+          <div class="field-value">Screenshot: Ken Burns zoom to metrics. Talking head: static medium shot.</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Script / Audio</div>
+          <div class="field-value script">"Luka Kovač. 22 let, študent iz Maribora. Začel je z ničlo. V 6 tednih — 12,300 sledilcev in €1,840 na mesec. Dela 2 uri na dan."</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Text Overlay</div>
+          <div class="field-value overlay">Lower-third: LUKA KOVAČ · 22 let · Maribor<br>Stats: 12,300 sledilcev → €1,840/mesec → 6 tednov → 2 uri/dan</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Music / SFX</div>
+          <div class="field-value">UI pop on each metric. Sub bass on "€1,840". Music keeps rhythmic pace — this section should feel like a montage.</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Mood</div>
+          <div class="field-value">Impressive, aspirational. Young guy, no experience, massive results. Viewers think "he's like me."</div>
+        </div>
+      </div>
+      <div class="scene-transitions">
+        <div><span class="transition-label">IN:</span><span class="transition-value">Quick cut from proof intro</span></div>
+        <div><span class="transition-label">OUT:</span><span class="transition-value">Smooth zoom transition to next testimonial</span></div>
+      </div>
+    </div>
+
+    <!-- Scene 10: Ana -->
+    <div class="scene-card">
+      <div class="scene-header">
+        <div class="scene-num">10</div>
+        <div class="scene-meta">
+          <h3>Testimonial: Ana Horvat</h3>
+          <div class="badges">
+            <span class="badge badge-time">1:18 – 1:29</span>
+            <span class="badge badge-shot">Screen + Talking Head</span>
+            <span class="badge badge-duration">11s</span>
+            <span class="badge badge-energy-high">🔥 High</span>
+          </div>
+        </div>
+      </div>
+      <div class="scene-body">
+        <div class="scene-field">
+          <div class="field-label">Visual Description</div>
+          <div class="field-value">Same format as Scene 9 but mirrored (screenshot slides in from left). Ana's profile/photo with lower-third: "ANA HORVAT · 34 · Mama, Ljubljana". Metrics: "€780 → €2,100/mesec" (use arrow animation showing growth, numbers count up), "3 meseci", "Ob otrocih" (with a subtle relevant emoji). Cut to Pici with PIP of Ana's screenshot in upper-left.</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Camera Movement</div>
+          <div class="field-value">Screenshot: slow zoom. Talking head: slight punch-in (1.03x) to differentiate from Luka's scene.</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Script / Audio</div>
+          <div class="field-value script">"Ana Horvat. 34 let, mama dveh otrok iz Ljubljane. Prvi mesec — €780. Po treh mesecih? €2,100 na mesec. Ob otrocih."</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Text Overlay</div>
+          <div class="field-value overlay">ANA HORVAT · 34 let · Ljubljana<br>€780 → €2,100/mesec · 3 meseci · Ob otrocih</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Music / SFX</div>
+          <div class="field-value">Same rhythm as Scene 9. The arrow/growth animation gets a rising whoosh. Sub bass on "€2,100".</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Mood</div>
+          <div class="field-value">Relatable, emotional. A mom doing it alongside kids. Breaks the "I don't have time" objection.</div>
+        </div>
+      </div>
+      <div class="scene-transitions">
+        <div><span class="transition-label">IN:</span><span class="transition-value">Smooth zoom from Scene 9</span></div>
+        <div><span class="transition-label">OUT:</span><span class="transition-value">Smooth zoom to Scene 11</span></div>
+      </div>
+    </div>
+
+    <!-- Scene 11: Matej -->
+    <div class="scene-card">
+      <div class="scene-header">
+        <div class="scene-num">11</div>
+        <div class="scene-meta">
+          <h3>Testimonial: Matej Zupan</h3>
+          <div class="badges">
+            <span class="badge badge-time">1:29 – 1:39</span>
+            <span class="badge badge-shot">Screen + Talking Head</span>
+            <span class="badge badge-duration">10s</span>
+            <span class="badge badge-energy-high">🔥 High</span>
+          </div>
+        </div>
+      </div>
+      <div class="scene-body">
+        <div class="scene-field">
+          <div class="field-label">Visual Description</div>
+          <div class="field-value">Matej's screenshot reveals from right. Lower-third: "MATEJ ZUPAN · 28 · Programer, Celje". Key metric: "€4,750" in large green text — this is the highest individual number so far, make it visually bigger. Sub-metric: "2 meseca · Poleg redne službe". Cut to Pici, more animated — the numbers are getting bigger.</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Camera Movement</div>
+          <div class="field-value">Quick zoom into the €4,750 figure on the screenshot. Talking head: medium shot, different framing.</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Script / Audio</div>
+          <div class="field-value script">"Matej Zupan. 28 let, programer iz Celja. Odprl je AI agencijo poleg redne službe. €4,750 v dveh mesecih — brez da bi dal odpoved."</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Text Overlay</div>
+          <div class="field-value overlay">MATEJ ZUPAN · 28 let · Celje<br>€4,750 · 2 meseca · Poleg redne službe</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Music / SFX</div>
+          <div class="field-value">Bigger bass drop on €4,750 — this is the proof stack's crescendo moment. Brief glitch effect on the number for emphasis.</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Mood</div>
+          <div class="field-value">Impressive, ambitious. Someone with a job adding serious side income. "I could do that too."</div>
+        </div>
+      </div>
+      <div class="scene-transitions">
+        <div><span class="transition-label">IN:</span><span class="transition-value">Smooth zoom from Scene 10</span></div>
+        <div><span class="transition-label">OUT:</span><span class="transition-value">Quick cut to Scene 12</span></div>
+      </div>
+    </div>
+
+    <!-- Scene 12: Nina -->
+    <div class="scene-card">
+      <div class="scene-header">
+        <div class="scene-num">12</div>
+        <div class="scene-meta">
+          <h3>Testimonial: Nina Krajnc</h3>
+          <div class="badges">
+            <span class="badge badge-time">1:39 – 1:48</span>
+            <span class="badge badge-shot">Screen + Talking Head</span>
+            <span class="badge badge-duration">9s</span>
+            <span class="badge badge-energy-high">🔥 High</span>
+          </div>
+        </div>
+      </div>
+      <div class="scene-body">
+        <div class="scene-field">
+          <div class="field-label">Visual Description</div>
+          <div class="field-value">Nina's TikTok profile screenshot — 23,000+ followers visible. Lower-third: "NINA KRAJNC · 20 · Študentka, Koper". Metric highlight: "23,000+ sledilcev" + "Sponzorske pogodbe" with a handshake/deal icon. The youth angle is key — show TikTok UI elements to emphasize the platform. Cut to Pici with amused, proud expression. Emphasis on "Pri dvajsetih."</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Camera Movement</div>
+          <div class="field-value">TikTok screenshot: scroll effect (as if scrolling through her profile). Talking head: static close-up.</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Script / Audio</div>
+          <div class="field-value script">"Nina Krajnc. 20 let, študentka iz Kopra. 23,000+ sledilcev na TikToku. Podpisuje sponzorske pogodbe. Pri dvajsetih."</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Text Overlay</div>
+          <div class="field-value overlay">NINA KRAJNC · 20 let · Koper<br>23,000+ sledilcev · Sponzorske pogodbe · Pri 20 letih</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Music / SFX</div>
+          <div class="field-value">Lighter energy momentarily — matches youth/fun TikTok vibe. UI scroll sounds. Pop on "Pri dvajsetih."</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Mood</div>
+          <div class="field-value">Inspiring, youthful energy. If a 20-year-old student can do it... Addresses age objection.</div>
+        </div>
+      </div>
+      <div class="scene-transitions">
+        <div><span class="transition-label">IN:</span><span class="transition-value">Quick cut from Matej</span></div>
+        <div><span class="transition-label">OUT:</span><span class="transition-value">Quick cut to Scene 13</span></div>
+      </div>
+    </div>
+
+    <!-- Scene 13: Gregor -->
+    <div class="scene-card">
+      <div class="scene-header">
+        <div class="scene-num">13</div>
+        <div class="scene-meta">
+          <h3>Testimonial: Gregor Vidmar</h3>
+          <div class="badges">
+            <span class="badge badge-time">1:48 – 1:58</span>
+            <span class="badge badge-shot">Screen + Talking Head</span>
+            <span class="badge badge-duration">10s</span>
+            <span class="badge badge-energy-high">🔥 High</span>
+          </div>
+        </div>
+      </div>
+      <div class="scene-body">
+        <div class="scene-field">
+          <div class="field-label">Visual Description</div>
+          <div class="field-value">This is the most emotionally powerful testimonial — lead with it visually. Gregor's results screenshot with dramatic reveal: start on a dark screen with just "BREZPOSELN" in red text, then it transforms/dissolves into "€2,300/MESEC" in bright green. This visual contrast tells the whole story in 2 seconds. Lower-third: "GREGOR VIDMAR · 41 · Novo mesto". Cut to Pici with serious, empathetic expression.</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Camera Movement</div>
+          <div class="field-value">Text transition: static. Talking head: slow zoom-in (emotional moment).</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Script / Audio</div>
+          <div class="field-value script">"Gregor Vidmar. 41 let. Bil je brezposeln. Iz Novega mesta. Od dobesednega niča do €2,300 na mesec v treh mesecih."</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Text Overlay</div>
+          <div class="field-value overlay">BREZPOSELN → €2,300/MESEC (dramatic color transition)<br>GREGOR VIDMAR · 41 let · Novo mesto · 3 meseci</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Music / SFX</div>
+          <div class="field-value">Music drops to minimal for "Bil je brezposeln" — let it hit. Then swells back when showing the result. Emotional synth pad. Deep bass on €2,300.</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Mood</div>
+          <div class="field-value">Emotional gut punch. This breaks the "but my situation is different/worse" objection. If someone unemployed can do it...</div>
+        </div>
+      </div>
+      <div class="scene-transitions">
+        <div><span class="transition-label">IN:</span><span class="transition-value">Quick cut from Nina</span></div>
+        <div><span class="transition-label">OUT:</span><span class="transition-value">Quick cut to Scene 14</span></div>
+      </div>
+    </div>
+
+    <!-- Scene 14: Tina -->
+    <div class="scene-card">
+      <div class="scene-header">
+        <div class="scene-num">14</div>
+        <div class="scene-meta">
+          <h3>Testimonial: Tina Novak</h3>
+          <div class="badges">
+            <span class="badge badge-time">1:58 – 2:07</span>
+            <span class="badge badge-shot">Screen + Talking Head</span>
+            <span class="badge badge-duration">9s</span>
+            <span class="badge badge-energy-high">🔥 High</span>
+          </div>
+        </div>
+      </div>
+      <div class="scene-body">
+        <div class="scene-field">
+          <div class="field-label">Visual Description</div>
+          <div class="field-value">Tina's screenshot with dual metrics: Left side shows "15 ur/teden PRIHRANEK" with a clock icon, right side shows "€1,600/mesec PASIVNO" in green. The "passive income" angle is different from previous testimonials — emphasize "PASIVNO" with a glow effect. Lower-third: "TINA NOVAK · 31 · Podjetnica, Kranj". Cut to Pici with satisfied nod.</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Camera Movement</div>
+          <div class="field-value">Split-metric graphic: slight bounce-in animation. Talking head: static.</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Script / Audio</div>
+          <div class="field-value script">"In Tina Novak. 31 let, podjetnica iz Kranja. Prihrani 15 ur na teden in zasluži €1,600 na mesec pasivnega prihodka."</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Text Overlay</div>
+          <div class="field-value overlay">TINA NOVAK · 31 let · Kranj<br>🕐 15 ur/teden prihranek · €1,600/mesec PASIVNO</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Music / SFX</div>
+          <div class="field-value">Steady energy. Dual pop sounds for the two metrics appearing. Cash register subtle SFX on "pasivno."</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Mood</div>
+          <div class="field-value">Smart, efficient. Appeals to busy professionals. Time saved + money made = double value proposition.</div>
+        </div>
+      </div>
+      <div class="scene-transitions">
+        <div><span class="transition-label">IN:</span><span class="transition-value">Quick cut from Gregor</span></div>
+        <div><span class="transition-label">OUT:</span><span class="transition-value">Cut to proof conclusion</span></div>
+      </div>
+    </div>
+
+    <!-- Scene 15: Proof Conclusion -->
+    <div class="scene-card">
+      <div class="scene-header">
+        <div class="scene-num">15</div>
+        <div class="scene-meta">
+          <h3>Proof Stack Conclusion</h3>
+          <div class="badges">
+            <span class="badge badge-time">2:07 – 2:15</span>
+            <span class="badge badge-shot">Close-up</span>
+            <span class="badge badge-duration">8s</span>
+            <span class="badge badge-energy-climax">🎯 Climax</span>
+          </div>
+        </div>
+      </div>
+      <div class="scene-body">
+        <div class="scene-field">
+          <div class="field-label">Visual Description</div>
+          <div class="field-value">Close-up on Pici, maximum intensity. Behind him (or overlaid), all six testimonial photos/names briefly flash in a rapid montage (0.3s each) before settling into a clean close-up. He speaks with absolute conviction. On "brezplačno" — text appears in green, same treatment as Scene 3. On "čez 35 dni" — a countdown graphic briefly appears: "35 DNI".</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Camera Movement</div>
+          <div class="field-value">Static close-up. Steady, locked off. The stillness after the rapid proof stack creates power.</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Script / Audio</div>
+          <div class="field-value script">"Ti ljudje niso genije. Niso imeli sreče. Uporabili so sistem, ki ti ga bom pokazal — brezplačno — čez 35 dni."</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Text Overlay</div>
+          <div class="field-value overlay">BREZPLAČNO · ČEZ 35 DNI</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Music / SFX</div>
+          <div class="field-value">Music builds to mini-crescendo, then drops. Brief silence. Then transition whoosh into Event section. This is a "breath" moment.</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Mood</div>
+          <div class="field-value">Powerful conclusion. Six proofs stacked, now the direct bridge: these aren't special people, they used a system, and you can too.</div>
+        </div>
+      </div>
+      <div class="scene-transitions">
+        <div><span class="transition-label">IN:</span><span class="transition-value">Cut from Tina</span></div>
+        <div><span class="transition-label">OUT:</span><span class="transition-value">Fade to black (0.5s) → Event section</span></div>
+      </div>
+    </div>
+
+    <!-- ======================== -->
+    <!-- SECTION: THE EVENT -->
+    <!-- ======================== -->
+    <div class="section-divider"><span>📢 THE EVENT — 2:15–3:15</span></div>
+
+    <!-- Scene 16 -->
+    <div class="scene-card">
+      <div class="scene-header">
+        <div class="scene-num">16</div>
+        <div class="scene-meta">
+          <h3>Event Reveal — Title Card</h3>
+          <div class="badges">
+            <span class="badge badge-time">2:15 – 2:25</span>
+            <span class="badge badge-shot">Text Slide + Medium</span>
+            <span class="badge badge-duration">10s</span>
+            <span class="badge badge-energy-building">📈 Building</span>
+          </div>
+        </div>
+      </div>
+      <div class="scene-body">
+        <div class="scene-field">
+          <div class="field-label">Visual Description</div>
+          <div class="field-value">Full-screen animated title card: Deep purple gradient background. "AI UNIVERSA" logo/text animates in — large, centered, with subtle particle effects or light rays emanating from behind the text. Below: "15.–17. APRIL 2026" in white, and "BREZPLAČNO" in green. The whole graphic feels like a movie poster reveal. Hold for 3 seconds, then cut to Pici in medium shot explaining.</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Camera Movement</div>
+          <div class="field-value">Title card: slow drift/parallax on layers. Talking head: static medium.</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Script / Audio</div>
+          <div class="field-value script">"Organiziram 3-dnevni brezplačni workshop v živo na YouTubu. Ime: AI Universa."</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Text Overlay</div>
+          <div class="field-value overlay">AI UNIVERSA<br>15.–17. APRIL 2026 · V ŽIVO NA YOUTUBE · BREZPLAČNO</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Music / SFX</div>
+          <div class="field-value">New music cue — slightly more upbeat/hopeful. Cinematic reveal sound (orchestral hit + synth swell) on title card appearance. Sparkle/shimmer SFX on text animation.</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Mood</div>
+          <div class="field-value">Grand reveal. This is the first time the viewer sees what they're being invited to. Make it feel like a movie premiere.</div>
+        </div>
+      </div>
+      <div class="scene-transitions">
+        <div><span class="transition-label">IN:</span><span class="transition-value">Fade from black (out of Proof section)</span></div>
+        <div><span class="transition-label">OUT:</span><span class="transition-value">Cut to 3-day breakdown</span></div>
+      </div>
+    </div>
+
+    <!-- Scene 17 -->
+    <div class="scene-card">
+      <div class="scene-header">
+        <div class="scene-num">17</div>
+        <div class="scene-meta">
+          <h3>Day-by-Day Breakdown</h3>
+          <div class="badges">
+            <span class="badge badge-time">2:25 – 2:55</span>
+            <span class="badge badge-shot">Graphics + Talking Head</span>
+            <span class="badge badge-duration">30s</span>
+            <span class="badge badge-energy-building">📈 Building</span>
+          </div>
+        </div>
+      </div>
+      <div class="scene-body">
+        <div class="scene-field">
+          <div class="field-label">Visual Description</div>
+          <div class="field-value">Animated infographic showing three cards/columns, each revealing in sequence:
+          <br><br><strong>Card 1 (Dan 1):</strong> Purple card with "DAN 1" header, icon of camera/content, "AI Influencer Workflows" title, brief description. Connects visually back to Luka's result.
+          <br><br><strong>Card 2 (Dan 2):</strong> Slides in from right. "DAN 2" header, briefcase icon, "AI Agency Workflows" title. Connects to Matej.
+          <br><br><strong>Card 3 (Dan 3):</strong> Slides in from right. "DAN 3" header, robot/bot icon, "AI Agenti & Claw Bot V ŽIVO" title. Car emoji/icon for prize draw.
+          <br><br>Between each card reveal, quick cut to Pici describing it. PIP of the 3-day graphic stays in corner.</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Camera Movement</div>
+          <div class="field-value">Graphics: slide-in animations. Talking head: alternating medium and close-up (use punch-in for variety).</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Script / Audio</div>
+          <div class="field-value script">"Dan 1 — AI Influencer Workflows. Pokazal ti bom, kako zaslužiti z vsebinami brez da pokažeš obraz. Točno tako, kot je naredil Luka.
+
+Dan 2 — AI Agency Workflows. Kako zgradiš agencijo brez ekipe in brez pisarne. Isto, kar dela Matej poleg službe.
+
+Dan 3 — AI Agenti & Claw Bot V ŽIVO. Pred tvojimi očmi bom zgradil AI agenta v realnem času. Plus — žrebanje za avto."</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Text Overlay</div>
+          <div class="field-value overlay">DAN 1: AI Influencer Workflows<br>DAN 2: AI Agency Workflows<br>DAN 3: AI Agenti & Claw Bot V ŽIVO + 🚗 Žrebanje za avto</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Music / SFX</div>
+          <div class="field-value">Upbeat pulse continues. Whoosh on each card reveal. On "žrebanje za avto" — brief exciting stinger (game show-style), car engine rev SFX.</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Mood</div>
+          <div class="field-value">Clear, structured, exciting. Each day promises tangible value. The car mention is the cherry on top.</div>
+        </div>
+      </div>
+      <div class="scene-transitions">
+        <div><span class="transition-label">IN:</span><span class="transition-value">Cut from title card</span></div>
+        <div><span class="transition-label">OUT:</span><span class="transition-value">Cut to Scene 18</span></div>
+      </div>
+    </div>
+
+    <!-- Scene 18 -->
+    <div class="scene-card">
+      <div class="scene-header">
+        <div class="scene-num">18</div>
+        <div class="scene-meta">
+          <h3>LIVE Emphasis</h3>
+          <div class="badges">
+            <span class="badge badge-time">2:55 – 3:08</span>
+            <span class="badge badge-shot">Close-up</span>
+            <span class="badge badge-duration">13s</span>
+            <span class="badge badge-energy-high">🔥 High</span>
+          </div>
+        </div>
+      </div>
+      <div class="scene-body">
+        <div class="scene-field">
+          <div class="field-label">Visual Description</div>
+          <div class="field-value">Tight close-up on Pici. Intense, direct eye contact. When he says "V ŽIVO" — the text flashes on screen in large red/white text with a pulsing "LIVE" indicator dot animation (like a YouTube Live badge). When he says "24 ur" — a countdown clock graphic briefly appears. He's creating urgency about the live nature — not a replay, not evergreen, LIVE.</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Camera Movement</div>
+          <div class="field-value">Static close-up, slowly tightening (1.0x → 1.04x zoom). Increases intensity.</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Script / Audio</div>
+          <div class="field-value script">"To ni posnetek. To ni webinar, ki si ga lahko pogledaš kadarkoli. To je V ŽIVO. Replay bo na voljo 24 ur — potem izgine."</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Text Overlay</div>
+          <div class="field-value overlay">🔴 V ŽIVO &nbsp;&nbsp;|&nbsp;&nbsp; ⏰ Replay: 24 ur — potem IZGINE</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Music / SFX</div>
+          <div class="field-value">Music intensifies. Ticking clock SFX under "24 ur". Dramatic stinger on "potem izgine." Brief silence after.</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Mood</div>
+          <div class="field-value">Urgency. FOMO activation. "If I don't show up live, I miss it." The replay limitation makes it scarce.</div>
+        </div>
+      </div>
+      <div class="scene-transitions">
+        <div><span class="transition-label">IN:</span><span class="transition-value">Cut from day breakdown</span></div>
+        <div><span class="transition-label">OUT:</span><span class="transition-value">Cut to Authority section</span></div>
+      </div>
+    </div>
+
+    <!-- ======================== -->
+    <!-- SECTION: AUTHORITY -->
+    <!-- ======================== -->
+    <div class="section-divider"><span>💪 AUTHORITY — 3:15–3:35</span></div>
+
+    <!-- Scene 19 -->
+    <div class="scene-card">
+      <div class="scene-header">
+        <div class="scene-num">19</div>
+        <div class="scene-meta">
+          <h3>The Numbers — Authority Flex</h3>
+          <div class="badges">
+            <span class="badge badge-time">3:15 – 3:25</span>
+            <span class="badge badge-shot">Text Slide + Medium</span>
+            <span class="badge badge-duration">10s</span>
+            <span class="badge badge-energy-high">🔥 High</span>
+          </div>
+        </div>
+      </div>
+      <div class="scene-body">
+        <div class="scene-field">
+          <div class="field-label">Visual Description</div>
+          <div class="field-value">Three massive numbers animate in sequence on dark background, each with its own line:
+          <br>"200M+" (views icon) — counter animation from 0
+          <br>"155,000+" (followers icon) — counter animation
+          <br>"1,000+" (students icon) — counter animation
+          <br>All in white with purple accent glow. Then cut to medium shot of Pici with all three numbers displayed as a lower-third bar beneath him.</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Camera Movement</div>
+          <div class="field-value">Numbers: static with subtle float. Talking head: static medium, strong posture.</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Script / Audio</div>
+          <div class="field-value script">"Zakaj bi mi zaupal? Ker imam 200 milijonov ogledov, 155,000+ sledilcev, in več kot 1,000 študentov, ki so skupaj zaslužili več kot €41,000. Številke ne lažejo."</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Text Overlay</div>
+          <div class="field-value overlay">200M+ ogledov · 155,000+ sledilcev · 1,000+ študentov · €41,127+ zaslužka</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Music / SFX</div>
+          <div class="field-value">Each counter gets its own bass hit + UI sound. Rapid-fire reveals (1.5s apart). Music is confident, strong beat. Glitch transition between numbers.</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Mood</div>
+          <div class="field-value">Pure authority. Numbers speak for themselves. Fast, confident, no explanation needed.</div>
+        </div>
+      </div>
+      <div class="scene-transitions">
+        <div><span class="transition-label">IN:</span><span class="transition-value">Cut from LIVE emphasis</span></div>
+        <div><span class="transition-label">OUT:</span><span class="transition-value">Cut to Scene 20</span></div>
+      </div>
+    </div>
+
+    <!-- Scene 20 -->
+    <div class="scene-card">
+      <div class="scene-header">
+        <div class="scene-num">20</div>
+        <div class="scene-meta">
+          <h3>"Številke ne lažejo" — Mic Drop</h3>
+          <div class="badges">
+            <span class="badge badge-time">3:25 – 3:35</span>
+            <span class="badge badge-shot">Close-up</span>
+            <span class="badge badge-duration">10s</span>
+            <span class="badge badge-energy-climax">🎯 Climax</span>
+          </div>
+        </div>
+      </div>
+      <div class="scene-body">
+        <div class="scene-field">
+          <div class="field-label">Visual Description</div>
+          <div class="field-value">Tight close-up. Pici delivers the line "Številke ne lažejo" with complete calm confidence — not aggressive, just matter-of-fact. The text "ŠTEVILKE NE LAŽEJO" appears in bold white, centered, with a subtle purple underline glow. Hold for 1.5 seconds on the text after he says it. This is a mic-drop moment.</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Camera Movement</div>
+          <div class="field-value">Static. No movement. Absolute confidence requires absolute stillness.</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Script / Audio</div>
+          <div class="field-value script">"Številke ne lažejo."</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Text Overlay</div>
+          <div class="field-value overlay">ŠTEVILKE NE LAŽEJO.</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Music / SFX</div>
+          <div class="field-value">Music drops out completely for this line. Just voice + room tone. The silence IS the emphasis. Then music resumes for bonuses section.</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Mood</div>
+          <div class="field-value">Definitive. No argument left. Trust is established. Transition from "should I trust him?" to "okay, I trust him."</div>
+        </div>
+      </div>
+      <div class="scene-transitions">
+        <div><span class="transition-label">IN:</span><span class="transition-value">Cut from numbers</span></div>
+        <div><span class="transition-label">OUT:</span><span class="transition-value">Quick cut to Bonuses</span></div>
+      </div>
+    </div>
+
+    <!-- ======================== -->
+    <!-- SECTION: BONUSES + URGENCY + CTA -->
+    <!-- ======================== -->
+    <div class="section-divider"><span>🚀 BONUSES + URGENCY + CTA — 3:35–4:35</span></div>
+
+    <!-- Scene 21 -->
+    <div class="scene-card">
+      <div class="scene-header">
+        <div class="scene-num">21</div>
+        <div class="scene-meta">
+          <h3>Bonuses Reveal</h3>
+          <div class="badges">
+            <span class="badge badge-time">3:35 – 3:55</span>
+            <span class="badge badge-shot">Graphics + Medium</span>
+            <span class="badge badge-duration">20s</span>
+            <span class="badge badge-energy-high">🔥 High</span>
+          </div>
+        </div>
+      </div>
+      <div class="scene-body">
+        <div class="scene-field">
+          <div class="field-label">Visual Description</div>
+          <div class="field-value">Two-part visual: First, animated graphic of the AI Prompt Pack — show a stylized mockup (digital document/app icon with purple gradient, "AI PROMPT PACK" text, multiple prompt cards fanning out). Then, the prize reveal: animated graphic showing prizes appearing one by one with excitement — Car silhouette (biggest, center) → 3x MacBook Pro (lined up below-left) → iPhone (below-right). Each prize scales in with a golden/green glow. "NAGRADNA IGRA" header. Cut to Pici in medium shot. He's excited but not cheesy — the prizes are real value adds, not gimmicks.</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Camera Movement</div>
+          <div class="field-value">Graphics: each prize bounces in. Talking head: slightly wider than usual to convey openness/generosity.</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Script / Audio</div>
+          <div class="field-value script">"Vsak, ki se prijavi, dobi brezplačen prompt pack — nabor AI promptov, ki jih lahko takoj uporabiš. In ker želim, da bo to nepozabno — med prijavljenimi žrebam: avto kot glavno nagrado, 3x MacBook Pro in iPhone. Samo za prijavljene. Samo za tiste, ki se odločijo zdaj."</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Text Overlay</div>
+          <div class="field-value overlay">🎁 BREZPLAČEN AI PROMPT PACK<br>🚗 AVTO · 💻 3× MacBook Pro · 📱 iPhone<br>"Samo za prijavljene"</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Music / SFX</div>
+          <div class="field-value">Upbeat, exciting. Prize reveal gets game-show-style stingers. Sparkle/shimmer SFX on each prize. Music energy is at its highest. Car engine rev on car reveal.</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Mood</div>
+          <div class="field-value">Exciting, generous, "too good to be true but it is." Stacking value on top of already-free event.</div>
+        </div>
+      </div>
+      <div class="scene-transitions">
+        <div><span class="transition-label">IN:</span><span class="transition-value">Quick cut from Authority</span></div>
+        <div><span class="transition-label">OUT:</span><span class="transition-value">Cut to Urgency</span></div>
+      </div>
+    </div>
+
+    <!-- Scene 22 -->
+    <div class="scene-card">
+      <div class="scene-header">
+        <div class="scene-num">22</div>
+        <div class="scene-meta">
+          <h3>The 35-Day Question</h3>
+          <div class="badges">
+            <span class="badge badge-time">3:55 – 4:10</span>
+            <span class="badge badge-shot">Close-up</span>
+            <span class="badge badge-duration">15s</span>
+            <span class="badge badge-energy-climax">🎯 Climax</span>
+          </div>
+        </div>
+      </div>
+      <div class="scene-body">
+        <div class="scene-field">
+          <div class="field-label">Visual Description</div>
+          <div class="field-value">Tight close-up on Pici. Serious tone shift — he's no longer selling, he's speaking to you directly as a person. Lighting may slightly darken (can be done in post — reduce exposure by 0.2 stops). No graphics, no text overlays for the first 8 seconds — just Pici's face and voice. Then at "Mesta so omejena" — text appears: "MESTA SO OMEJENA" in white with subtle red urgency glow. At "Ko se zapolni — se zapolni" — text adds: "KO JE POLNO, JE POLNO." with a visual of seats/spots disappearing (animated progress bar filling up).</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Camera Movement</div>
+          <div class="field-value">Very slow zoom-in throughout. Ending tighter than any previous shot. Maximum intimacy.</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Script / Audio</div>
+          <div class="field-value script">"Naslednji 35 dni bo minilo tako ali tako. Vprašanje je samo — ali boš čez 35 dni na istem mestu, ali boš na AI Universi, z vsemi orodji in znanjem, da začneš zaslužiti? Mesta so omejena. Workshop je v živo. Ko se zapolni — se zapolni."</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Text Overlay</div>
+          <div class="field-value overlay">MESTA SO OMEJENA · KO JE POLNO, JE POLNO.</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Music / SFX</div>
+          <div class="field-value">Music drops to minimal — just a low, ominous drone. Ticking clock SFX very quietly underneath. The emptiness creates tension. Rising swell into the CTA.</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Mood</div>
+          <div class="field-value">Serious, personal, urgent. Not hype — genuine concern. "I'm telling you as a friend." The 35-day framing makes the deadline feel real and tangible.</div>
+        </div>
+      </div>
+      <div class="scene-transitions">
+        <div><span class="transition-label">IN:</span><span class="transition-value">Cut from bonuses (tone shift)</span></div>
+        <div><span class="transition-label">OUT:</span><span class="transition-value">Quick cut to final CTA</span></div>
+      </div>
+    </div>
+
+    <!-- Scene 23 -->
+    <div class="scene-card">
+      <div class="scene-header">
+        <div class="scene-num">23</div>
+        <div class="scene-meta">
+          <h3>CTA — URL Reveal</h3>
+          <div class="badges">
+            <span class="badge badge-time">4:10 – 4:20</span>
+            <span class="badge badge-shot">Text Slide + Medium</span>
+            <span class="badge badge-duration">10s</span>
+            <span class="badge badge-energy-climax">🎯 Climax</span>
+          </div>
+        </div>
+      </div>
+      <div class="scene-body">
+        <div class="scene-field">
+          <div class="field-label">Visual Description</div>
+          <div class="field-value">Full-screen CTA slide: Dark background. Center: "aiuniversa.si" in massive white text (the URL). Below: "BREZPLAČNO" in neon green (#6bfb82) with a pulsing glow animation. An animated button-style graphic beneath: "REZERVIRAJ SVOJE MESTO →" with a green button shape. Above: a recap strip showing icons: 🎁 Prompt Pack + 🚗 Avto + 💻 MacBook + 📱 iPhone. The URL should be the most visually dominant element on screen. Hold for 3 seconds, then cut to Pici for the verbal close.</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Camera Movement</div>
+          <div class="field-value">CTA graphic: subtle pulse/breathing animation on the green button. Talking head: medium shot, open posture.</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Script / Audio</div>
+          <div class="field-value script">"Klikni spodaj in rezerviraj svoje brezplačno mesto. Brezplačno. Nič ne tvegaš. Dobiš prompt pack, udeležiš se žrebanja za avto, in za tri dni dobiš vse, kar rabiš, da začneš zaslužiti z AI."</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Text Overlay</div>
+          <div class="field-value overlay">aiuniversa.si<br>BREZPLAČNO — REZERVIRAJ SVOJE MESTO →<br>🎁 Prompt Pack · 🚗 Avto · 💻 3× MacBook · 📱 iPhone</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Music / SFX</div>
+          <div class="field-value">Music at full energy — triumphant, resolved. The tension from urgency section releases into action. Click/UI sounds on CTA button animation. Music should feel like "the answer is here."</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Mood</div>
+          <div class="field-value">Action. Everything has built to this moment. Make it stupidly easy to know what to do: click, sign up, free.</div>
+        </div>
+      </div>
+      <div class="scene-transitions">
+        <div><span class="transition-label">IN:</span><span class="transition-value">Quick cut from urgency</span></div>
+        <div><span class="transition-label">OUT:</span><span class="transition-value">Cut to final close</span></div>
+      </div>
+    </div>
+
+    <!-- Scene 24 -->
+    <div class="scene-card">
+      <div class="scene-header">
+        <div class="scene-num">24</div>
+        <div class="scene-meta">
+          <h3>The Sign-Off</h3>
+          <div class="badges">
+            <span class="badge badge-time">4:20 – 4:30</span>
+            <span class="badge badge-shot">Medium → Close-up</span>
+            <span class="badge badge-duration">10s</span>
+            <span class="badge badge-energy-high">🔥 High</span>
+          </div>
+        </div>
+      </div>
+      <div class="scene-body">
+        <div class="scene-field">
+          <div class="field-label">Visual Description</div>
+          <div class="field-value">Pici in medium shot, gives a confident nod and slight smile. "Vidimo se 15. aprila" — warm, personal. "Klikni zdaj" — leans slightly toward camera. Hard cut to a 5-second end card: The CTA URL "aiuniversa.si" stays on screen with "BREZPLAČNO" below it. Event dates. Subscribe button animation (if YouTube). The end card should remain on screen for at least 5 extra seconds after Pici finishes speaking — let the URL breathe.</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Camera Movement</div>
+          <div class="field-value">Medium shot → quick punch-in to close-up on "Klikni zdaj" (post-production zoom). End card: static.</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Script / Audio</div>
+          <div class="field-value script">"Vidimo se 15. aprila. Klikni zdaj."</div>
+        </div>
+        <div class="scene-field full">
+          <div class="field-label">Text Overlay</div>
+          <div class="field-value overlay">End card: aiuniversa.si · BREZPLAČNO · 15.–17. april 2026 · 19:00 CEST</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Music / SFX</div>
+          <div class="field-value">Music resolves — final chord/note. Clean, satisfying ending. No abrupt cut. Music fades over end card (5s fade). Optional: subtle ambient pad continues under end card.</div>
+        </div>
+        <div class="scene-field">
+          <div class="field-label">Mood</div>
+          <div class="field-value">Warm, confident, final. Not desperate — certain. "I'll see you there" assumes they'll come. The end card gives them time to act.</div>
+        </div>
+      </div>
+      <div class="scene-transitions">
+        <div><span class="transition-label">IN:</span><span class="transition-value">Cut from CTA slide</span></div>
+        <div><span class="transition-label">OUT:</span><span class="transition-value">Hard cut to end card → fade to black</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============================== -->
+<!-- PART 3: SHOT LIST -->
+<!-- ============================== -->
+
+<div class="page-break"></div>
+<div class="container">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">3</div>
+      <div>
+        <div class="section-title">Shot List</div>
+        <div class="section-subtitle">Production Day Checklist</div>
+      </div>
+    </div>
+
+    <!-- Talking Head Setups -->
+    <div class="card">
+      <h3>🎬 Talking Head Setups</h3>
+      <p style="margin-bottom: 16px;">Two primary setups needed. Record all lines for both angles, then alternate in edit.</p>
+      <table class="data-table">
+        <tr><th>Setup</th><th>Framing</th><th>Used In</th><th>Notes</th></tr>
+        <tr><td><strong>Setup A: Medium</strong></td><td>Chest up, subject on left third</td><td>Opportunity, Event, Bonuses, most dialogue</td><td>Main workhorse shot. Leave space on right for text overlays.</td></tr>
+        <tr><td><strong>Setup B: Close-up</strong></td><td>Face/shoulders, tight crop</td><td>Hook, Proof conclusion, Urgency, CTA, key emotional beats</td><td>Maximum intensity moments. Eyes at upper third line.</td></tr>
+      </table>
+      <p style="margin-top: 12px; font-size: 13px; color: var(--text-dim);"><strong>Tip:</strong> If using a single camera, record the full script twice — once medium, once close-up. Or use 4K recording and punch-in digitally for the close-up.</p>
+    </div>
+
+    <!-- B-Roll Checklist -->
+    <div class="card">
+      <h3>📹 B-Roll Needed</h3>
+      <ul class="checklist">
+        <li>AI dashboard screen recording — analytics graphs, growth charts, revenue metrics (30s+ of varied footage)</li>
+        <li>ChatGPT / AI tool interface — typing prompts, generating content (20s)</li>
+        <li>Social media analytics — follower growth graphs, engagement metrics (15s)</li>
+        <li>Someone working on laptop in dark room with purple lighting (lifestyle shot — 15s)</li>
+        <li>Phone with notifications/social media scrolling (close-up of hands — 10s)</li>
+        <li>Modern minimalist workspace with screens showing AI tools (wide establishing — 10s)</li>
+      </ul>
+    </div>
+
+    <!-- Screenshots & Graphics -->
+    <div class="card">
+      <h3>📸 Screenshots & Graphics Needed</h3>
+      <div class="grid-2">
+        <div>
+          <h4>Student Result Screenshots</h4>
+          <ul class="checklist">
+            <li>Luka Kovač — profile + earnings screenshot (12,300 followers, €1,840/mo)</li>
+            <li>Ana Horvat — results screenshot (€780 → €2,100/mo)</li>
+            <li>Matej Zupan — agency results (€4,750 in 2 months)</li>
+            <li>Nina Krajnc — TikTok profile (23,000+ followers)</li>
+            <li>Gregor Vidmar — results (€0 → €2,300/mo)</li>
+            <li>Tina Novak — results (15 hr/wk saved, €1,600 passive)</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Graphics to Create</h4>
+          <ul class="checklist">
+            <li>AI Universa logo/title card animation</li>
+            <li>3-day breakdown infographic (Dan 1, 2, 3 cards)</li>
+            <li>€41,127+ aggregate results slide</li>
+            <li>Authority numbers slide (200M+, 155K+, 1000+)</li>
+            <li>AI Prompt Pack mockup graphic</li>
+            <li>Prize reveal graphic (car, 3× MacBook, iPhone)</li>
+            <li>CTA end card (aiuniversa.si + all bonuses)</li>
+            <li>LIVE indicator badge animation</li>
+            <li>Progress bar "seats filling" animation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Text Overlays -->
+    <div class="card">
+      <h3>✍️ Text Overlays to Prepare</h3>
+      <p style="margin-bottom: 12px;">All kinetic typography animations. Pre-build these as motion graphics templates (MOGRTs) or After Effects compositions for quick editing.</p>
+      <table class="data-table">
+        <tr><th>Text</th><th>Style</th><th>Color</th><th>Animation</th></tr>
+        <tr><td>€1,840 / mesec</td><td>Extra Bold, 120pt</td><td>#6bfb82 (green)</td><td>Odometer count-up + slam</td></tr>
+        <tr><td>12,300 sledilcev</td><td>Bold, 80pt</td><td>#ffffff</td><td>Scale up + bounce</td></tr>
+        <tr><td>BREZPLAČNO</td><td>Extra Bold, 100pt</td><td>#6bfb82 (green)</td><td>Bounce in + glow pulse</td></tr>
+        <tr><td>AI NI PRIHODNOST → AI JE ZDAJ</td><td>Bold, 80pt</td><td>#ffffff → glitch</td><td>Glitch transform</td></tr>
+        <tr><td>€41,127+</td><td>Extra Bold, 140pt</td><td>#6bfb82 (green)</td><td>Counter/odometer from €0</td></tr>
+        <tr><td>✅ Brez ekipe / pisarne / znanja</td><td>Regular, 40pt</td><td>#ffffff</td><td>Fade in one by one</td></tr>
+        <tr><td>Lower-third name cards (×6)</td><td>Semi-Bold, 30pt</td><td>#ffffff on dark bar</td><td>Slide in from left</td></tr>
+        <tr><td>DAN 1/2/3 cards</td><td>Bold headers + Regular body</td><td>Purple + white</td><td>Slide in sequence</td></tr>
+        <tr><td>🔴 V ŽIVO</td><td>Bold, 60pt</td><td>#ef4444 (red)</td><td>Pulse/throb animation</td></tr>
+        <tr><td>200M+ / 155,000+ / 1,000+</td><td>Extra Bold, 120pt each</td><td>#ffffff + glow</td><td>Counter animation, staggered</td></tr>
+        <tr><td>ŠTEVILKE NE LAŽEJO.</td><td>Bold, 80pt</td><td>#ffffff</td><td>Fade in, hold, underline glow</td></tr>
+        <tr><td>aiuniversa.si</td><td>Extra Bold, 120pt</td><td>#ffffff</td><td>Scale up + hold</td></tr>
+        <tr><td>MESTA SO OMEJENA</td><td>Bold, 60pt</td><td>#ffffff + red glow</td><td>Slam in</td></tr>
+      </table>
+    </div>
+
+    <!-- Equipment Checklist -->
+    <div class="card card-amber">
+      <h3>🎒 Equipment Checklist</h3>
+      <div class="grid-2">
+        <div>
+          <h4>Camera & Lens</h4>
+          <ul class="checklist">
+            <li>Camera body (4K capable, S-Log/V-Log preferred)</li>
+            <li>35mm f/1.8 lens (or 50mm f/1.4 on crop)</li>
+            <li>Tripod with fluid head (smooth movements)</li>
+            <li>SD cards (128GB+ recommended)</li>
+            <li>Extra batteries (×3 minimum)</li>
+          </ul>
+          <h4 style="margin-top: 16px;">Audio</h4>
+          <ul class="checklist">
+            <li>Broadcast microphone (SM7B / Rode NT1 / similar)</li>
+            <li>Audio interface or recorder (Focusrite / Zoom)</li>
+            <li>XLR cable</li>
+            <li>Pop filter</li>
+            <li>Boom arm or mic stand</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Lighting</h4>
+          <ul class="checklist">
+            <li>Key light — softbox or large LED panel</li>
+            <li>Rim light — LED tube/strip (RGB capable for purple gel)</li>
+            <li>Purple gel/filter (if not RGB controllable)</li>
+            <li>Light stands (×2)</li>
+            <li>Optional: small LED for background accent</li>
+          </ul>
+          <h4 style="margin-top: 16px;">Set / Other</h4>
+          <ul class="checklist">
+            <li>Black backdrop or dark wall</li>
+            <li>Monitor/field recorder for preview</li>
+            <li>Laptop for teleprompter (if needed)</li>
+            <li>Gaffer tape, clamps, misc grip</li>
+            <li>Slate/clapper for syncing (or hand clap)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============================== -->
+<!-- PART 4: POST-PRODUCTION -->
+<!-- ============================== -->
+
+<div class="page-break"></div>
+<div class="container">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">4</div>
+      <div>
+        <div class="section-title">Post-Production Notes</div>
+        <div class="section-subtitle">Editing, Color Grading & Export Guide</div>
+      </div>
+    </div>
+
+    <!-- Editing Pace -->
+    <div class="card">
+      <h3>✂️ Editing Pace Guide</h3>
+      <p style="margin-bottom: 16px;">The editing rhythm should mirror the emotional arc. Faster cuts = more energy. Slower = more weight.</p>
+      <table class="data-table">
+        <tr><th>Section</th><th>Cuts Per Minute</th><th>Average Shot Length</th><th>Notes</th></tr>
+        <tr><td>Hook (0:00–0:15)</td><td>20–24 CPM</td><td>2.5–3s</td><td>Rapid. Every sentence is a new visual. Maximum scroll-stopping energy.</td></tr>
+        <tr><td>Opportunity (0:15–1:00)</td><td>12–16 CPM</td><td>4–5s</td><td>Moderate. Mix of B-roll montage (fast) and talking head (slower).</td></tr>
+        <tr><td>Proof Stack (1:00–2:15)</td><td>16–20 CPM</td><td>3–4s</td><td>Fast, rhythmic. Each testimonial is its own mini-sequence. Consistent pace.</td></tr>
+        <tr><td>Event (2:15–3:15)</td><td>10–14 CPM</td><td>4–6s</td><td>Slightly slower — informational content. Let the day descriptions breathe.</td></tr>
+        <tr><td>Authority (3:15–3:35)</td><td>16–20 CPM</td><td>3–4s</td><td>Fast number reveals, then dramatic slowdown for "Številke ne lažejo."</td></tr>
+        <tr><td>Bonuses (3:35–3:55)</td><td>14–18 CPM</td><td>3–4s</td><td>Exciting, visual-heavy. Prize reveals are quick, descriptions slightly slower.</td></tr>
+        <tr><td>Urgency (3:55–4:20)</td><td>6–10 CPM</td><td>6–10s</td><td>Slow. Long takes. Let the words land. This is weight, not speed.</td></tr>
+        <tr><td>CTA (4:20–4:35)</td><td>8–12 CPM</td><td>5–7s</td><td>Clear, clean. URL on screen for maximum time. Don't cut away from CTA.</td></tr>
+      </table>
+    </div>
+
+    <!-- Color Grading -->
+    <div class="card">
+      <h3>🎨 Color Grading Specs</h3>
+      <div class="grid-2">
+        <div>
+          <h4>Primary Correction</h4>
+          <ul>
+            <li><strong>Exposure:</strong> Slightly underexpose (-0.3 to -0.5 stops) for dark, moody feel</li>
+            <li><strong>Contrast:</strong> +25 to +35 (high contrast)</li>
+            <li><strong>Highlights:</strong> -15 (retain detail)</li>
+            <li><strong>Shadows:</strong> -20 to -30 (crush blacks)</li>
+            <li><strong>Blacks:</strong> -10 to -15 (deep crush)</li>
+            <li><strong>Whites:</strong> +10 (keep some pop)</li>
+            <li><strong>Saturation:</strong> -15 to -20 (desaturated look)</li>
+            <li><strong>Vibrance:</strong> -5 to -10</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Split Toning</h4>
+          <ul>
+            <li><strong>Shadow hue:</strong> 270° (purple)</li>
+            <li><strong>Shadow saturation:</strong> 15–20%</li>
+            <li><strong>Highlight hue:</strong> 180° (teal/cyan)</li>
+            <li><strong>Highlight saturation:</strong> 8–12%</li>
+            <li><strong>Balance:</strong> -15 (favor shadows)</li>
+          </ul>
+          <h4 style="margin-top: 16px;">Secondary Corrections</h4>
+          <ul>
+            <li><strong>Skin tones:</strong> Use HSL qualifier to isolate skin, boost saturation +10, add slight warmth (+5 orange). Protect from overall desaturation.</li>
+            <li><strong>Vignette:</strong> -0.4 amount, 50 midpoint, 60 roundness</li>
+          </ul>
+        </div>
+      </div>
+      <p style="margin-top: 16px; font-size: 13px; color: var(--text-dim);"><strong>LUT Reference:</strong> If using a LUT as starting point, try "Film Noir" or "Teal & Orange" variants, then shift the orange toward purple in shadows. Commercial LUT packs: Tropic Colour "Dark Moody," Peter McKinnon "Dark & Moody."</p>
+    </div>
+
+    <!-- Text Animation Style -->
+    <div class="card">
+      <h3>🔤 Text Animation Style Guide</h3>
+      <div class="grid-2">
+        <div>
+          <h4>Standard Text Slam</h4>
+          <ul>
+            <li>Duration: 0.3s ease-out</li>
+            <li>Motion: Scale from 120% → 100% + position from 30px below → 0</li>
+            <li>Overshoot: Slight bounce (elastic ease, 1 bounce)</li>
+            <li>Hold: 2–3 seconds</li>
+            <li>Exit: Scale down to 95% + fade (0.2s)</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Counter/Odometer Animation</h4>
+          <ul>
+            <li>Duration: 1.0–1.5s</li>
+            <li>Easing: Ease-out (fast start, slow end)</li>
+            <li>Start: €0 or 0</li>
+            <li>End: Target number</li>
+            <li>Add subtle tick/click SFX during count</li>
+            <li>Final number gets a scale pulse (102% → 100%)</li>
+          </ul>
+        </div>
+      </div>
+      <div style="margin-top: 16px;">
+        <h4>Lower-Third Name Cards</h4>
+        <ul>
+          <li>Background: Semi-transparent dark bar (#0a0c1e at 85%)</li>
+          <li>Height: 60px</li>
+          <li>Entry: Slide in from left, 0.4s ease-out</li>
+          <li>Purple accent line (4px) on top of the bar</li>
+          <li>Text: Name (bold white) · Details (regular, #B8B8B8)</li>
+          <li>Hold: Full duration of the testimonial</li>
+          <li>Exit: Slide out left, 0.3s</li>
+        </ul>
+      </div>
+      <div style="margin-top: 16px;">
+        <h4>Glitch Effect Specs</h4>
+        <ul>
+          <li>Duration: 3–5 frames (0.12–0.2s at 24fps)</li>
+          <li>RGB split: Offset Red +8px right, Blue +8px left</li>
+          <li>Horizontal slice displacement: 3–5 random horizontal slices offset 5–15px</li>
+          <li>Brightness flash: +30% for 1 frame</li>
+          <li>Pair with digital glitch SFX</li>
+          <li>Use sparingly: max 4–5 times per VSL</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Music & SFX -->
+    <div class="card">
+      <h3>🎵 Music & SFX Timing Notes</h3>
+      <table class="data-table">
+        <tr><th>Timestamp</th><th>Audio Event</th><th>Type</th><th>Notes</th></tr>
+        <tr><td>0:00</td><td>Deep bass drone begins</td><td>Music</td><td>Immediate — no silence at start. Grabs attention with the voice.</td></tr>
+        <tr><td>0:02</td><td>Cha-ching on €1,840</td><td>SFX</td><td>Subtle, not comedy. Think premium notification sound.</td></tr>
+        <tr><td>0:05</td><td>UI pop on screenshot</td><td>SFX</td><td>Clean digital sound. Glass tap.</td></tr>
+        <tr><td>0:14</td><td>Music dip (breath)</td><td>Music</td><td>Creates section transition feel.</td></tr>
+        <tr><td>0:15</td><td>Whoosh + new music energy</td><td>Both</td><td>Whip pan transition. Music gets a pulse/beat.</td></tr>
+        <tr><td>0:25</td><td>Glitch SFX on text transform</td><td>SFX</td><td>"AI NI PRIHODNOST → AI JE ZDAJ" glitch.</td></tr>
+        <tr><td>0:35</td><td>Bass drop on €41,127</td><td>SFX</td><td>Sub-bass (60–80Hz), 0.5s decay.</td></tr>
+        <tr><td>0:55</td><td>Music drops near-silent</td><td>Music</td><td>"Točno to priložnost imaš zdaj tudi ti" — voice-only moment.</td></tr>
+        <tr><td>1:00</td><td>Tension riser → beat drop</td><td>Both</td><td>Reverse cymbal into rhythmic proof stack music.</td></tr>
+        <tr><td>1:07–2:07</td><td>Consistent beat under testimonials</td><td>Music</td><td>Keep rhythm steady. UI pops on each stat. Bass hits on € amounts.</td></tr>
+        <tr><td>1:48</td><td>Music drops for "brezposeln"</td><td>Music</td><td>Gregor's story — emotional moment. Let the word hit in near-silence.</td></tr>
+        <tr><td>2:07</td><td>Mini-crescendo → drop</td><td>Music</td><td>Proof conclusion. Music peaks then falls for transition.</td></tr>
+        <tr><td>2:15</td><td>New music cue — upbeat reveal</td><td>Music</td><td>Event title card. Feels like "here's the answer." Cinematic reveal.</td></tr>
+        <tr><td>2:48</td><td>Car engine rev</td><td>SFX</td><td>On "žrebanje za avto." Brief, playful.</td></tr>
+        <tr><td>3:15</td><td>Authority beat — confident</td><td>Music</td><td>Strong, rhythmic. Numbers land on beats.</td></tr>
+        <tr><td>3:28</td><td>Music drops to silence</td><td>Music</td><td>"Številke ne lažejo." — voice only. Max 1.5s silence.</td></tr>
+        <tr><td>3:35</td><td>Exciting music cue</td><td>Music</td><td>Prize reveal. Game show energy. Not cheesy — premium excitement.</td></tr>
+        <tr><td>3:55</td><td>Music drops to drone + clock</td><td>Both</td><td>Urgency section. Ticking clock very low in mix (-30dB). Ominous.</td></tr>
+        <tr><td>4:10</td><td>Music resolves — triumphant</td><td>Music</td><td>CTA. Tension releases. "The answer is here." Full energy.</td></tr>
+        <tr><td>4:25</td><td>Music fade out</td><td>Music</td><td>5-second fade over end card. Clean ending.</td></tr>
+      </table>
+    </div>
+
+    <!-- Export Settings -->
+    <div class="card card-green">
+      <h3>📤 Export Settings</h3>
+      <div class="grid-2">
+        <div>
+          <h4>YouTube (Primary — 16:9)</h4>
+          <ul>
+            <li><strong>Resolution:</strong> 1920×1080 (1080p)</li>
+            <li><strong>Codec:</strong> H.264 (High Profile)</li>
+            <li><strong>Bitrate:</strong> 16–20 Mbps VBR</li>
+            <li><strong>Frame rate:</strong> 24fps</li>
+            <li><strong>Audio:</strong> AAC, 320kbps, stereo</li>
+            <li><strong>Color space:</strong> Rec. 709</li>
+            <li><strong>Container:</strong> .mp4</li>
+            <li><strong>Naming:</strong> <code>VSL1-Proof-YT-v[X].mp4</code></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Instagram Reels / TikTok (Vertical — 9:16)</h4>
+          <ul>
+            <li><strong>Resolution:</strong> 1080×1920</li>
+            <li><strong>Codec:</strong> H.264</li>
+            <li><strong>Bitrate:</strong> 12–16 Mbps VBR</li>
+            <li><strong>Frame rate:</strong> 24fps (or 30fps for IG)</li>
+            <li><strong>Audio:</strong> AAC, 256kbps, stereo</li>
+            <li><strong>Duration:</strong> Cut to 60–90s (Hook + abbreviated Proof + CTA)</li>
+            <li><strong>Safe zones:</strong> Keep all text in center 80% (away from IG UI)</li>
+            <li><strong>Naming:</strong> <code>VSL1-Proof-Reel-v[X].mp4</code></li>
+          </ul>
+        </div>
+      </div>
+      <div style="margin-top: 16px;">
+        <h4>Additional Exports</h4>
+        <ul>
+          <li><strong>Facebook Ads:</strong> Same as YouTube specs. Optionally export 1:1 (1080×1080) version with text repositioned.</li>
+          <li><strong>Archive/Master:</strong> ProRes 422 or DNxHR HQ, 3840×2160, for future re-edits.</li>
+          <li><strong>Thumbnail:</strong> Export a still frame from the hook (Scene 1 or 2) at 1920×1080 PNG for YouTube thumbnail base.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Vertical Cut Notes -->
+    <div class="card">
+      <h3>📱 Vertical Cut (Reels/TikTok) — Special Notes</h3>
+      <p style="margin-bottom: 12px;">The vertical cut is NOT the full VSL. It's a condensed version optimized for mobile-first short-form platforms.</p>
+      <ul>
+        <li><strong>Duration:</strong> 60–90 seconds max</li>
+        <li><strong>Structure:</strong> Hook (0:00–0:10) → 2–3 best testimonials (0:10–0:40) → Event + CTA (0:40–1:00)</li>
+        <li><strong>Skip:</strong> Opportunity section, Authority section, detailed event breakdown — no room</li>
+        <li><strong>Text overlays:</strong> Must be larger (30% bigger than landscape version) for mobile readability</li>
+        <li><strong>Captions:</strong> Add burned-in Slovenian captions (auto-caption or manual). 80% of mobile viewers watch without sound initially.</li>
+        <li><strong>CTA:</strong> End with "Link v bio" instead of "Klikni spodaj" for IG. Show URL briefly but rely on bio link.</li>
+        <li><strong>Aspect ratio conversion:</strong> Crop from 16:9 master, reframe subject to center. May need manual keyframing for medium shots where subject is off-center.</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  AI UNIVERSA · VSL PRODUCTION BIBLE · V1.0 · MARCH 2026
+</div>
+
+</body>
+</html>

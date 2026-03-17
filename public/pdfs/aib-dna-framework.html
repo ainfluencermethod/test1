@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The DNA Framework — Complete AI Character Creation Bible</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap');
+
+    :root {
+      --bg: #0D0F11;
+      --card: #1A1D21;
+      --card-2: #252A2E;
+      --accent: #4ECDC4;
+      --accent-soft: rgba(78, 205, 196, 0.10);
+      --accent-line: rgba(78, 205, 196, 0.26);
+      --text: #FFFFFF;
+      --body: #B8B8B8;
+      --muted: #6F767C;
+      --code-bg: #13171A;
+    }
+
+    @page { size: A4; margin: 0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      background: var(--bg);
+      color: var(--body);
+      font-family: 'Inter', sans-serif;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    body {
+      font-size: 14px;
+      line-height: 1.6;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(78,205,196,0.08), transparent 28%),
+        var(--bg);
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      position: relative;
+      background: var(--bg);
+      page-break-after: always;
+      overflow: hidden;
+    }
+
+    .page:last-child { page-break-after: auto; }
+
+    .page::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--accent);
+    }
+
+    .inner {
+      padding: 30mm 18mm 22mm;
+      min-height: 297mm;
+      position: relative;
+    }
+
+    .cover {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 26mm 22mm;
+    }
+
+    .brand-top,
+    .label {
+      font-size: 11px;
+      line-height: 1.3;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 3.2px;
+      font-weight: 800;
+    }
+
+    .brand-top { margin-bottom: 22px; }
+
+    .cover h1 {
+      color: var(--text);
+      font-size: 44pt;
+      line-height: 0.96;
+      font-weight: 900;
+      letter-spacing: -2px;
+      margin-bottom: 14px;
+    }
+
+    .cover .subtitle {
+      color: var(--text);
+      font-size: 19pt;
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 18px;
+    }
+
+    .cover .tagline {
+      max-width: 560px;
+      margin: 0 auto;
+      color: var(--body);
+      font-size: 14.5pt;
+      line-height: 1.65;
+    }
+
+    .cover .divider,
+    .section-divider {
+      width: 76px;
+      height: 3px;
+      background: var(--accent);
+      margin: 24px 0 30px;
+    }
+
+    .cover .divider { margin: 26px auto 26px; }
+
+    .cover-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 44px;
+      text-align: left;
+    }
+
+    .mini-card,
+    .card,
+    .quote-card,
+    .template-block,
+    .example-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border: 1px solid var(--accent-line);
+      border-radius: 16px;
+    }
+
+    .mini-card {
+      padding: 16px;
+    }
+
+    .mini-card strong {
+      display: block;
+      color: var(--text);
+      font-size: 12px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+    }
+
+    .mini-card span {
+      color: var(--body);
+      font-size: 11.5px;
+      line-height: 1.5;
+      display: block;
+    }
+
+    .title {
+      color: var(--text);
+      font-size: 31pt;
+      line-height: 1.05;
+      font-weight: 900;
+      letter-spacing: -1.1px;
+      margin-top: 8px;
+    }
+
+    .lead {
+      max-width: 88%;
+      color: var(--body);
+      font-size: 14.6px;
+      line-height: 1.75;
+      margin-bottom: 20px;
+    }
+
+    .grid-2,
+    .grid-3,
+    .grid-steps {
+      display: grid;
+      gap: 14px;
+    }
+
+    .grid-2 { grid-template-columns: 1fr 1fr; }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-steps { grid-template-columns: 82px 1fr; align-items: start; }
+
+    .card {
+      padding: 18px 18px 16px;
+      break-inside: avoid;
+    }
+
+    .card h3,
+    .example-card h3,
+    .template-block h3 {
+      color: var(--text);
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .card p,
+    .example-card p,
+    .template-block p,
+    .template-block li,
+    .example-card li,
+    p,
+    li {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--body);
+    }
+
+    p { margin-bottom: 12px; }
+
+    .step-num {
+      color: rgba(78, 205, 196, 0.22);
+      font-size: 48pt;
+      line-height: 0.9;
+      font-weight: 900;
+      letter-spacing: -2px;
+    }
+
+    .step-body h3 {
+      color: var(--text);
+      font-size: 17px;
+      margin-bottom: 6px;
+    }
+
+    .callout {
+      margin: 18px 0 18px;
+      padding: 18px 18px 18px 20px;
+      background: rgba(29, 50, 50, 0.75);
+      border-left: 4px solid var(--accent);
+      border-radius: 14px;
+    }
+
+    .callout strong {
+      color: var(--accent);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 2.2px;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    ul.clean,
+    ul.checklist,
+    ul.tight {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+
+    ul.checklist li,
+    ul.tight li,
+    ul.clean li {
+      margin-bottom: 8px;
+      padding-left: 18px;
+      position: relative;
+    }
+
+    ul.checklist li::before,
+    ul.tight li::before,
+    ul.clean li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--accent);
+      font-weight: 900;
+    }
+
+    .code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.2px;
+      line-height: 1.75;
+      color: var(--accent);
+      background: var(--code-bg);
+      border: 1px solid rgba(78,205,196,0.18);
+      border-radius: 14px;
+      padding: 14px 16px;
+      white-space: pre-wrap;
+      margin: 16px 0;
+    }
+
+    .your-turn {
+      margin-top: 16px;
+      padding: 16px 18px;
+      background: rgba(255,255,255,0.02);
+      border: 1px dashed rgba(78,205,196,0.30);
+      border-radius: 14px;
+    }
+
+    .your-turn .yt-title {
+      color: var(--text);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 800;
+      margin-bottom: 7px;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .template-block,
+    .example-card,
+    .quote-card {
+      padding: 16px;
+    }
+
+    .template-block ul,
+    .example-card ul {
+      list-style: none;
+      margin-top: 8px;
+    }
+
+    .template-block li,
+    .example-card li {
+      padding-left: 0;
+      margin-bottom: 6px;
+    }
+
+    .template-block li strong,
+    .example-card li strong,
+    strong.inline {
+      color: var(--text);
+    }
+
+    .quote-card {
+      min-height: 100%;
+    }
+
+    .quote-card .big {
+      color: var(--text);
+      font-size: 24px;
+      line-height: 1.25;
+      font-weight: 700;
+      letter-spacing: -0.4px;
+      margin-bottom: 18px;
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .footer {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 11mm;
+      text-align: center;
+      color: var(--muted);
+      font-size: 8px;
+      letter-spacing: 2.4px;
+      text-transform: uppercase;
+    }
+
+    .small-gap { margin-top: 10px; }
+    .mid-gap { margin-top: 16px; }
+    .big-gap { margin-top: 24px; }
+
+    .center { text-align: center; }
+
+    .example-head {
+      color: var(--accent);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2.4px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+  <section class="page cover">
+    <div>
+      <div class="brand-top">AI Influencer Blueprint</div>
+      <h1>THE DNA<br>FRAMEWORK</h1>
+      <div class="subtitle">Complete AI Character Creation Bible</div>
+      <div class="divider"></div>
+      <p class="tagline">Build a consistent, recognizable AI influencer from scratch. Lock identity, style, camera language, mood, and prompt structure so your character stops shape-shifting and starts feeling real.</p>
+      <div class="cover-grid">
+        <div class="mini-card"><strong>Identity</strong><span>Define the exact face, body, energy, and visual rules of your character.</span></div>
+        <div class="mini-card"><strong>Consistency</strong><span>Turn one good image into a repeatable system across 100+ outputs.</span></div>
+        <div class="mini-card"><strong>Execution</strong><span>Use templates, prompts, tests, and examples you can deploy today.</span></div>
+      </div>
+      <div class="footer">AI Influencer Blueprint · 1</div>
+    </div>
+  </section>
+
+  <section class="page"><div class="inner">
+    <div class="label">Overview</div>
+    <div class="title">What this guide gives you</div>
+    <div class="section-divider"></div>
+    <p class="lead">A DNA file is the master document behind a believable AI character. When it is vague, the character mutates every time you prompt. When it is precise, you get instant recognition, stronger trust, and content that compounds instead of resetting to zero every post.</p>
+    <div class="grid-2">
+      <div class="card"><h3>What you will build</h3><p>A complete character identity system covering face architecture, body consistency, wardrobe, camera rules, lighting presets, environments, expressions, prompt structure, and a testing workflow.</p></div>
+      <div class="card"><h3>Why it matters</h3><p>Consistency is not aesthetics for aesthetics’ sake. It is memory. Memory creates familiarity. Familiarity creates follows, saves, comments, and conversion.</p></div>
+      <div class="card"><h3>How to use this PDF</h3><p>Read once fast. Read again with your notebook open. By the end, you should have a finished DNA file and 10 test prompts ready to run.</p></div>
+      <div class="card"><h3>The outcome</h3><p>You stop “generating random hot girls” and start operating a recognizable media asset with an identity people can clock in a scroll.</p></div>
+    </div>
+    <div class="callout"><strong>Pro Tip</strong><p>The strongest AI creators treat character design like brand design. Your model is not one image. It is a system with guardrails.</p></div>
+    <div class="quote-card big-gap"><div class="big">If your character can be mistaken for 50 other accounts, the algorithm is not your biggest problem. Your identity is.</div><div class="muted">This guide is built to fix that.</div></div>
+    <div class="footer">AI Influencer Blueprint · 2</div>
+  </div></section>
+
+  <section class="page"><div class="inner">
+    <div class="label">Chapter 1</div>
+    <div class="title">What is a DNA file?</div>
+    <div class="section-divider"></div>
+    <div class="split">
+      <div>
+        <p>A DNA file is the single source of truth for your AI character. It defines what never changes, what can vary, and how every new image should still feel like the same person.</p>
+        <p>Think of it like a creative operating system: face geometry, age band, body proportions, style signature, camera defaults, lighting presets, recurring environments, emotional range, and prompt syntax.</p>
+        <div class="callout"><strong>Pro Tip</strong><p>Write your DNA file before you chase content ideas. Concept without identity creates short-term spikes and long-term slop.</p></div>
+      </div>
+      <div class="quote-card">
+        <div class="big">Consistency = follows because recognition lowers friction.</div>
+        <p>When viewers can recognize your model in half a second, they don’t need to re-decide whether they care. That alone increases retention and profile taps.</p>
+      </div>
+    </div>
+    <div class="grid-2 big-gap">
+      <div class="card"><h3>A weak DNA file sounds like</h3><p>“Brunette girl, pretty face, stylish, realistic.” That gives the model too much room to improvise.</p></div>
+      <div class="card"><h3>A strong DNA file sounds like</h3><p>“24–27, almond hazel eyes, soft square jaw, narrow nose bridge, medium olive skin with visible cheek texture, athletic hourglass frame, silver hoop signature, natural-lux styling.”</p></div>
+    </div>
+    <ul class="checklist big-gap">
+      <li>Define what must stay fixed in every generation.</li>
+      <li>Separate fixed traits from variable scene details.</li>
+      <li>Store one approved reference image and one written DNA file together.</li>
+    </ul>
+    <div class="code">DNA CORE = fixed identity + repeatable style + repeatable camera + repeatable mood + prompt structure</div>
+    <div class="your-turn"><div class="yt-title">Your Turn</div><p>Write one sentence that explains who your character is, what lane she plays in, and what visual memory you want her to create instantly.</p></div>
+    <div class="footer">AI Influencer Blueprint · 3</div>
+  </div></section>
+
+  <section class="page"><div class="inner">
+    <div class="label">Chapter 2</div>
+    <div class="title">Face architecture</div>
+    <div class="section-divider"></div>
+    <p class="lead">Most inconsistency starts in the face. If the generator is free to reinterpret jawline, eye spacing, age, skin texture, or nose shape every time, you are not building a character. You are rolling dice.</p>
+    <div class="grid-steps">
+      <div class="step-num">01</div>
+      <div class="step-body"><h3>Lock the facial skeleton</h3><p>Write down bone structure first: jaw shape, cheekbone prominence, forehead width, chin shape, nose bridge, lip volume, eye shape, brow density, and symmetry level.</p></div>
+      <div class="step-num">02</div>
+      <div class="step-body"><h3>Lock the age impression</h3><p>Use a 3-year range, not a single magical number. “24–27” keeps the vibe stable better than “25 exactly.”</p></div>
+      <div class="step-num">03</div>
+      <div class="step-body"><h3>Lock the texture cues</h3><p>Texture is identity. Freckles, matte skin, dewy finish, under-eye softness, lip texture, baby hairs, subtle pores — these are memory hooks.</p></div>
+    </div>
+    <div class="callout"><strong>Pro Tip</strong><p>Choose 3 “can’t-miss” facial signatures. Example: cat-eye tilt, soft square jaw, full lower lip. If those survive every prompt, the face survives.</p></div>
+    <ul class="checklist">
+      <li>Write 8–12 face descriptors, not 3 vague adjectives.</li>
+      <li>Choose one hero reference image and one backup reference only.</li>
+      <li>Reject outputs that are beautiful but off-model. Pretty is not the same as on-brand.</li>
+    </ul>
+    <div class="code">FACE ANCHOR: medium olive skin, almond hazel eyes, softly arched dark brows, narrow nose bridge, defined cupid's bow, soft square jaw, visible cheek texture, 24–27</div>
+    <div class="your-turn"><div class="yt-title">Your Turn</div><p>List your character’s 3 non-negotiable facial signatures, then write a one-line face anchor prompt using only those traits plus skin tone and age range.</p></div>
+    <div class="footer">AI Influencer Blueprint · 4</div>
+  </div></section>
+
+  <section class="page"><div class="inner">
+    <div class="label">Chapter 3</div>
+    <div class="title">Body consistency</div>
+    <div class="section-divider"></div>
+    <div class="split">
+      <div>
+        <p>Body drift is the silent killer. One image looks petite, the next looks statuesque, the next suddenly reads bodybuilder. Viewers notice even when they cannot articulate it.</p>
+        <p>Define body type in terms of <strong class="inline">proportion</strong>, not only weight words. Use shoulder width, waist contrast, leg length impression, bust balance, glute emphasis, muscle visibility, and posture.</p>
+        <div class="callout"><strong>Pro Tip</strong><p>Use “height impression” instead of exact height when prompting visuals. “Long-legged, medium-tall impression” often stays more stable than writing 5'8.</p></div>
+      </div>
+      <div class="card">
+        <h3>What to specify</h3>
+        <ul class="tight">
+          <li>Body type: slim, athletic, curvy-athletic, petite, etc.</li>
+          <li>Proportion ratio: shoulder-to-waist-to-hip read.</li>
+          <li>Fitness level: soft, toned, visibly athletic, highly defined.</li>
+          <li>Posture defaults: relaxed, upright, feminine, dominant.</li>
+          <li>Leg and torso balance: short torso / long legs, balanced, etc.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="grid-2 big-gap">
+      <div class="card"><h3>Across 100+ images</h3><p>Reuse the same body paragraph in every prompt. Change wardrobe, scene, and expression — not the proportions.</p></div>
+      <div class="card"><h3>Reference tactic</h3><p>Create a body sheet with 4 angles: front standing, 3/4 standing, seated, and walking. Approve one of each before scaling production.</p></div>
+    </div>
+    <div class="code">BODY ANCHOR: athletic hourglass proportions, medium-tall impression, long legs, defined waist, toned shoulders, soft abdominal definition, confident upright posture</div>
+    <div class="your-turn"><div class="yt-title">Your Turn</div><p>Write your body anchor in one sentence. Then define one pose the character should look good in every single time.</p></div>
+    <div class="footer">AI Influencer Blueprint · 5</div>
+  </div></section>
+
+  <section class="page"><div class="inner">
+    <div class="label">Chapter 4</div>
+    <div class="title">Style &amp; wardrobe</div>
+    <div class="section-divider"></div>
+    <p class="lead">Wardrobe is where brand recognition accelerates. A signature necklace, recurring cut of top, repeat jacket silhouette, or fixed palette can do more for memorability than ten extra adjectives in your prompt.</p>
+    <div class="grid-2">
+      <div class="card"><h3>Build a style stack</h3><p>Start with three layers: everyday uniform, “elevated” uniform, and content-specific outfit variations. Each should still feel like the same character, not a costume change into someone else.</p></div>
+      <div class="card"><h3>Pick a palette</h3><p>Choose 2 neutrals + 1 accent habit. Example: black, charcoal, washed denim, plus silver hardware. This keeps outputs legible and premium.</p></div>
+    </div>
+    <div class="callout"><strong>Pro Tip</strong><p>Scroll-speed recognition comes from recurring silhouettes: cropped zip hoodie, oversized blazer, ribbed tank, leather jacket, oversized white shirt. People remember shapes faster than details.</p></div>
+    <ul class="checklist">
+      <li>Define 3 signature outfits with exact descriptors.</li>
+      <li>Choose 2 recurring accessories max.</li>
+      <li>Ban wardrobe pieces that clash with the niche.</li>
+      <li>Keep hair styling compatible with the wardrobe identity.</li>
+    </ul>
+    <div class="code">STYLE ANCHOR: clean luxury streetwear, fitted ribbed tanks, cropped jackets, charcoal-black-silver palette, subtle silver hoops, minimal glossy manicure</div>
+    <div class="your-turn"><div class="yt-title">Your Turn</div><p>Write your character’s default everyday fit, best-performing “hero” fit, and one accessory that should appear in at least 60% of posts.</p></div>
+    <div class="footer">AI Influencer Blueprint · 6</div>
+  </div></section>
+
+  <section class="page"><div class="inner">
+    <div class="label">Chapter 5</div>
+    <div class="title">Camera language</div>
+    <div class="section-divider"></div>
+    <div class="split">
+      <div class="quote-card">
+        <div class="big">Your character should not only look the same. She should feel like she is always shot by the same photographer.</div>
+        <p>Camera language is the invisible glue that turns random scenes into a coherent feed.</p>
+      </div>
+      <div>
+        <p>Define a small set of default framing rules: portrait close-up, waist-up 3/4, full-body with negative space, mirror selfie, low-angle walking shot, etc. Then define your lens behavior: 35mm lifestyle, 50mm portrait, 85mm compressed beauty, or phone-camera realism.</p>
+        <div class="callout"><strong>Pro Tip</strong><p>One account = one camera religion. If half your feed looks like editorial studio and half looks like random Android snapshots, coherence dies.</p></div>
+      </div>
+    </div>
+    <div class="grid-2 big-gap">
+      <div class="card"><h3>Default shots</h3><ul class="tight"><li>40% close portrait</li><li>30% waist-up</li><li>20% full body</li><li>10% experimental</li></ul></div>
+      <div class="card"><h3>Lens rules</h3><ul class="tight"><li>Beauty content: 85mm compressed portrait</li><li>Lifestyle: 35mm natural scene</li><li>Social-native realism: phone camera, slight grain</li></ul></div>
+    </div>
+    <div class="code">CAMERA RULES: eye-level or slightly low angle, 50mm natural portrait look, centered subject with negative space, shallow depth of field, clean subject separation</div>
+    <div class="your-turn"><div class="yt-title">Your Turn</div><p>Create your shot ratio. Decide which 3 framings will make up 80% of your feed and which lens look will own the account.</p></div>
+    <div class="footer">AI Influencer Blueprint · 7</div>
+  </div></section>
+
+  <section class="page"><div class="inner">
+    <div class="label">Chapter 6</div>
+    <div class="title">Lighting presets</div>
+    <div class="section-divider"></div>
+    <p class="lead">Lighting is emotional identity. Keep 3–4 repeatable presets and your character will hold the same mood even when the settings change.</p>
+    <div class="grid-2">
+      <div class="card"><h3>Preset 1 — Golden hour</h3><p>Warm, directional side light. Soft skin glow. Best for aspirational lifestyle, soft glamour, travel, and romantic reels.</p></div>
+      <div class="card"><h3>Preset 2 — Clean studio</h3><p>Bright, controlled, frontal or butterfly-style light. Best for hero beauty shots, brand collabs, product content, and polished thumbnails.</p></div>
+      <div class="card"><h3>Preset 3 — Moody / noir</h3><p>Low-key directional light, deeper shadows, cinematic contrast. Best for teaser content, mystery, nightlife, or alt niches.</p></div>
+      <div class="card"><h3>Preset 4 — Natural window</h3><p>Soft daylight, gentle falloff, believable home or café realism. Best for relatable, girl-next-door, and intimate content.</p></div>
+    </div>
+    <div class="callout"><strong>Pro Tip</strong><p>Do not invent lighting from scratch every time. Name your presets in the DNA file, then insert them like modules inside prompts.</p></div>
+    <ul class="checklist">
+      <li>Pick one default lighting preset used in 50%+ of posts.</li>
+      <li>Assign each preset to a content category.</li>
+      <li>Keep skin rendering similar across all presets.</li>
+    </ul>
+    <div class="code">LIGHTING PRESET: soft golden-hour side light, warm highlights, gentle cheekbone contour, controlled shadow depth, natural skin texture preserved</div>
+    <div class="your-turn"><div class="yt-title">Your Turn</div><p>Name your 4 lighting presets and decide what type of post each preset is allowed to serve.</p></div>
+    <div class="footer">AI Influencer Blueprint · 8</div>
+  </div></section>
+
+  <section class="page"><div class="inner">
+    <div class="label">Chapter 7</div>
+    <div class="title">Environment rules</div>
+    <div class="section-divider"></div>
+    <div class="split">
+      <div>
+        <p>Characters feel real when they appear to exist in a world, not a void. Recurring environments create continuity and implied lifestyle.</p>
+        <p>Define 4–6 “home base” environments: apartment interior, luxury bathroom, gym mirror, café patio, sunset balcony, black SUV passenger seat, etc. Then define the ratio between indoor and outdoor content.</p>
+        <div class="callout"><strong>Pro Tip</strong><p>Pick locations your niche would logically revisit. The world should feel lived in, not like a stock photo scavenger hunt.</p></div>
+      </div>
+      <div class="card">
+        <h3>Environment filters</h3>
+        <ul class="tight">
+          <li>Does this setting match the character’s status and vibe?</li>
+          <li>Does it repeat often enough to become familiar?</li>
+          <li>Does the background distract from the subject?</li>
+          <li>Can you describe it in one clean sentence?</li>
+        </ul>
+      </div>
+    </div>
+    <div class="grid-2 big-gap">
+      <div class="card"><h3>Indoor / outdoor ratio</h3><p>Example: 70% indoor controlled aesthetic, 30% outdoor cinematic lifestyle. Ratios stop your feed from becoming visually random.</p></div>
+      <div class="card"><h3>Background style</h3><p>Minimal and premium beats cluttered and “busy.” Walls, glass, concrete, wood, muted greenery, clean bedding, brushed metal — keep it legible.</p></div>
+    </div>
+    <div class="code">ENVIRONMENT RULE: modern neutral apartment interiors, luxury gym mirrors, rooftop sunset moments, upscale café patios; 70% indoor / 30% outdoor</div>
+    <div class="your-turn"><div class="yt-title">Your Turn</div><p>Choose 5 recurring locations and write one sentence each describing what makes them feel like your character’s world.</p></div>
+    <div class="footer">AI Influencer Blueprint · 9</div>
+  </div></section>
+
+  <section class="page"><div class="inner">
+    <div class="label">Chapter 8</div>
+    <div class="title">Expression library</div>
+    <div class="section-divider"></div>
+    <p class="lead">Expression is behavioral branding. The right face for the right content type makes posts feel intentional. Build 8–12 signature expressions and map each one to a use case.</p>
+    <div class="grid-3">
+      <div class="card"><h3>Soft smile</h3><p>Lifestyle, wellness, “good morning” content.</p></div>
+      <div class="card"><h3>Half smirk</h3><p>Teasers, flirtation, high-curiosity posts.</p></div>
+      <div class="card"><h3>Neutral gaze</h3><p>Beauty shots, product focus, authority.</p></div>
+      <div class="card"><h3>Laughing candid</h3><p>Relatability, behind-the-scenes energy.</p></div>
+      <div class="card"><h3>Bedroom-soft eyes</h3><p>Intimacy, premium subscription conversion.</p></div>
+      <div class="card"><h3>Raised brow</h3><p>Hooks, reactions, meme-led content.</p></div>
+    </div>
+    <div class="callout"><strong>Pro Tip</strong><p>Do not write “seductive expression” and pray. Use physically observable cues: parted lips, softened eyelids, asymmetrical smile, direct eye contact, chin tilt.</p></div>
+    <ul class="checklist">
+      <li>Name every expression in plain language.</li>
+      <li>Map each expression to a content category.</li>
+      <li>Keep mouth shape and eye energy consistent with the niche.</li>
+    </ul>
+    <div class="code">EXPRESSION CUE: direct eye contact, subtle half-smirk, relaxed brows, slightly parted lips, confident but warm energy</div>
+    <div class="your-turn"><div class="yt-title">Your Turn</div><p>Create your top 8 expressions and assign each one to a specific post type: lifestyle, gym, teaser, promo, reply bait, story content, etc.</p></div>
+    <div class="footer">AI Influencer Blueprint · 10</div>
+  </div></section>
+
+  <section class="page"><div class="inner">
+    <div class="label">Chapter 9</div>
+    <div class="title">The full DNA file template</div>
+    <div class="section-divider"></div>
+    <p class="lead">This is the deliverable. Copy this structure into your docs, Notion, or notes app and fill every field. If you skip fields, you invite drift.</p>
+    <div class="template-block">
+      <h3>Identity core</h3>
+      <ul>
+        <li><strong>Name / alias:</strong> </li>
+        <li><strong>Niche statement:</strong> </li>
+        <li><strong>Age range impression:</strong> </li>
+        <li><strong>Core personality words:</strong> </li>
+        <li><strong>Audience fantasy / appeal:</strong> </li>
+      </ul>
+    </div>
+    <div class="template-block mid-gap">
+      <h3>Face system</h3>
+      <ul>
+        <li><strong>Skin tone + texture:</strong> </li>
+        <li><strong>Eye shape / eye color:</strong> </li>
+        <li><strong>Brow style:</strong> </li>
+        <li><strong>Nose shape:</strong> </li>
+        <li><strong>Lips:</strong> </li>
+        <li><strong>Jaw / chin / cheekbones:</strong> </li>
+        <li><strong>Hair color / length / styling defaults:</strong> </li>
+        <li><strong>3 facial non-negotiables:</strong> </li>
+      </ul>
+    </div>
+    <div class="template-block mid-gap">
+      <h3>Body system</h3>
+      <ul>
+        <li><strong>Body type:</strong> </li>
+        <li><strong>Proportion notes:</strong> </li>
+        <li><strong>Fitness level:</strong> </li>
+        <li><strong>Height impression:</strong> </li>
+        <li><strong>Posture defaults:</strong> </li>
+      </ul>
+    </div>
+    <div class="footer">AI Influencer Blueprint · 11</div>
+  </div></section>
+
+  <section class="page"><div class="inner">
+    <div class="label">Chapter 9 · continued</div>
+    <div class="title">Template fields you should not skip</div>
+    <div class="section-divider"></div>
+    <div class="grid-2">
+      <div class="template-block">
+        <h3>Style &amp; recurring details</h3>
+        <ul>
+          <li><strong>Signature outfit 1:</strong> </li>
+          <li><strong>Signature outfit 2:</strong> </li>
+          <li><strong>Palette:</strong> </li>
+          <li><strong>Accessories:</strong> </li>
+          <li><strong>Beauty / grooming notes:</strong> </li>
+        </ul>
+      </div>
+      <div class="template-block">
+        <h3>Camera &amp; lighting</h3>
+        <ul>
+          <li><strong>Default framings:</strong> </li>
+          <li><strong>Lens language:</strong> </li>
+          <li><strong>Best angles:</strong> </li>
+          <li><strong>Lighting preset 1:</strong> </li>
+          <li><strong>Lighting preset 2:</strong> </li>
+          <li><strong>Lighting preset 3:</strong> </li>
+        </ul>
+      </div>
+      <div class="template-block">
+        <h3>World &amp; behavior</h3>
+        <ul>
+          <li><strong>Recurring environments:</strong> </li>
+          <li><strong>Indoor / outdoor ratio:</strong> </li>
+          <li><strong>8–12 expressions:</strong> </li>
+          <li><strong>Emotion-to-content map:</strong> </li>
+        </ul>
+      </div>
+      <div class="template-block">
+        <h3>Prompt system</h3>
+        <ul>
+          <li><strong>Master base prompt:</strong> </li>
+          <li><strong>Negative prompt / exclusions:</strong> </li>
+          <li><strong>Reference image links:</strong> </li>
+          <li><strong>Approved example outputs:</strong> </li>
+          <li><strong>Consistency review notes:</strong> </li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout"><strong>Pro Tip</strong><p>If you cannot hand the DNA file to another operator and have them reproduce the same character, the file is still too weak.</p></div>
+    <div class="code">MINIMUM RULE: one written DNA file + one approved hero reference + one prompt template + one 10-image test set</div>
+    <div class="your-turn"><div class="yt-title">Your Turn</div><p>Duplicate this template now and fill the identity core, face system, and style fields before moving on. Those three sections do most of the heavy lifting.</p></div>
+    <div class="footer">AI Influencer Blueprint · 12</div>
+  </div></section>
+
+  <section class="page"><div class="inner">
+    <div class="label">Chapter 10</div>
+    <div class="title">Prompt engineering for consistency</div>
+    <div class="section-divider"></div>
+    <p class="lead">Prompts work best when they are modular. Stop writing one giant paragraph from scratch every time. Build stacked prompt blocks in a fixed order.</p>
+    <div class="grid-steps">
+      <div class="step-num">01</div>
+      <div class="step-body"><h3>Identity block</h3><p>Name, age impression, face anchor, body anchor, hair, skin, signature traits.</p></div>
+      <div class="step-num">02</div>
+      <div class="step-body"><h3>Style block</h3><p>Wardrobe, palette, accessory rules, grooming details.</p></div>
+      <div class="step-num">03</div>
+      <div class="step-body"><h3>Scene block</h3><p>Environment, action, pose, mood, lighting preset.</p></div>
+      <div class="step-num">04</div>
+      <div class="step-body"><h3>Camera block</h3><p>Framing, angle, lens, depth of field, realism cue.</p></div>
+      <div class="step-num">05</div>
+      <div class="step-body"><h3>Quality / exclusion block</h3><p>Photorealism notes, texture notes, avoiders, anatomy cleanup.</p></div>
+    </div>
+    <div class="callout"><strong>Pro Tip</strong><p>Keep the first two blocks almost identical every time. Most variation should happen in the scene block, not the identity block.</p></div>
+    <div class="code">[IDENTITY] + [STYLE] + [EXPRESSION] + [SCENE] + [LIGHTING] + [CAMERA] + [QUALITY] + [EXCLUSIONS]</div>
+    <div class="your-turn"><div class="yt-title">Your Turn</div><p>Build your reusable prompt skeleton with labeled blocks. Then save it as a template instead of rewriting from memory each session.</p></div>
+    <div class="footer">AI Influencer Blueprint · 13</div>
+  </div></section>
+
+  <section class="page"><div class="inner">
+    <div class="label">Chapter 10 · before / after</div>
+    <div class="title">Bad prompt vs strong prompt</div>
+    <div class="section-divider"></div>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Before</h3>
+        <div class="code">beautiful brunette influencer in a gym selfie, realistic, detailed, attractive face, fit body, good lighting</div>
+        <p>Problem: zero identity. The model has too much freedom. Different person every generation.</p>
+      </div>
+      <div class="card">
+        <h3>After</h3>
+        <div class="code">24–27 year old AI influencer, medium olive skin with natural cheek texture, almond hazel eyes, softly arched dark brows, narrow nose bridge, soft square jaw, full lower lip, long dark brown hair in a sleek ponytail, athletic hourglass build, medium-tall impression, defined waist, toned shoulders, charcoal ribbed crop top, black high-waist leggings, silver hoop earrings, direct eye contact with a subtle half-smirk, luxury gym mirror environment, soft directional overhead lighting with natural skin rendering, waist-up mirror selfie, 50mm phone-camera realism, shallow depth of field, photorealistic, anatomically correct hands, consistent facial identity</div>
+        <p>Now the generator has guardrails. Variation can happen, but identity stays intact.</p>
+      </div>
+    </div>
+    <ul class="checklist big-gap">
+      <li>Always front-load identity before scene details.</li>
+      <li>Use specific visible traits, not generic desirability words.</li>
+      <li>Save your best prompt versions like software builds.</li>
+    </ul>
+    <div class="your-turn"><div class="yt-title">Your Turn</div><p>Take one weak prompt from your current workflow and rewrite it using the 8-block structure. Compare the outputs side by side.</p></div>
+    <div class="footer">AI Influencer Blueprint · 14</div>
+  </div></section>
+
+  <section class="page"><div class="inner">
+    <div class="label">Chapter 11</div>
+    <div class="title">Testing your DNA</div>
+    <div class="section-divider"></div>
+    <p class="lead">Do not call the DNA file finished because one hero image slapped. A real DNA system survives variation. The test is simple: generate 10 images across controlled changes and score them hard.</p>
+    <div class="grid-2">
+      <div class="card"><h3>Test set</h3><ul class="tight"><li>2 close-up portraits</li><li>2 waist-up lifestyle shots</li><li>2 full-body shots</li><li>2 different lighting presets</li><li>2 different environments</li></ul></div>
+      <div class="card"><h3>Scorecard</h3><ul class="tight"><li>Face match /10</li><li>Body match /10</li><li>Style match /10</li><li>Camera consistency /10</li><li>Mood consistency /10</li></ul></div>
+    </div>
+    <div class="callout"><strong>Pro Tip</strong><p>If one category repeatedly fails, do not “hope it gets better.” Strengthen that exact section of the DNA file and retest.</p></div>
+    <ul class="checklist">
+      <li>Average score should be 8/10 or higher across all categories.</li>
+      <li>If face match falls below 7, rebuild the face anchor.</li>
+      <li>If body drifts, reduce pose complexity and tighten body wording.</li>
+      <li>If style drifts, simplify wardrobe vocabulary and accessories.</li>
+    </ul>
+    <div class="code">CONSISTENCY SCORE = (face + body + style + camera + mood) / 5</div>
+    <div class="your-turn"><div class="yt-title">Your Turn</div><p>Run a 10-image test batch, score every image, and write a one-line diagnosis for the lowest-scoring category before editing anything else.</p></div>
+    <div class="footer">AI Influencer Blueprint · 15</div>
+  </div></section>
+
+  <section class="page"><div class="inner">
+    <div class="label">Chapter 12</div>
+    <div class="title">Common mistakes</div>
+    <div class="section-divider"></div>
+    <div class="grid-2">
+      <div class="card"><h3>1. Overwriting identity every prompt</h3><p>Fix: lock your identity block and reuse it almost unchanged.</p></div>
+      <div class="card"><h3>2. Using vague beauty language</h3><p>Fix: replace “gorgeous, stunning, perfect” with observable traits.</p></div>
+      <div class="card"><h3>3. Too many style personas</h3><p>Fix: pick one visual lane and stay inside it for at least 30 posts.</p></div>
+      <div class="card"><h3>4. Inconsistent camera logic</h3><p>Fix: define 3 default framings and one dominant lens feel.</p></div>
+      <div class="card"><h3>5. Falling in love with off-model images</h3><p>Fix: beauty is irrelevant if it breaks recognition. Kill it and move on.</p></div>
+      <div class="card"><h3>6. Testing too little</h3><p>Fix: every serious character needs a batch test, scorecard, and revision cycle.</p></div>
+    </div>
+    <div class="callout"><strong>Pro Tip</strong><p>The worst habit is letting “pretty enough” replace “strategic enough.” Slop can get likes. It rarely builds an empire.</p></div>
+    <div class="code">RULE: if an output cannot be identified as your character without the username attached, it probably does not belong in the feed</div>
+    <div class="your-turn"><div class="yt-title">Your Turn</div><p>Review your last 20 generated images and label each one: on-model, borderline, or off-model. Delete or archive the off-model set.</p></div>
+    <div class="footer">AI Influencer Blueprint · 16</div>
+  </div></section>
+
+  <section class="page"><div class="inner">
+    <div class="label">Bonus</div>
+    <div class="title">DNA file example #1 — goth / alt</div>
+    <div class="section-divider"></div>
+    <div class="example-card">
+      <div class="example-head">Character profile</div>
+      <ul>
+        <li><strong>Name:</strong> Nyx</li>
+        <li><strong>Niche:</strong> gothic nightlife muse with soft-dom energy</li>
+        <li><strong>Face:</strong> pale neutral skin, gray-green almond eyes, sharp inner brow line, narrow aquiline nose, defined cupid’s bow, heart-shaped face</li>
+        <li><strong>Body:</strong> slim-curvy, narrow waist, long leg impression, elegant posture</li>
+        <li><strong>Style:</strong> black leather, lace mesh, silver hardware, platform boots, dark burgundy lip</li>
+        <li><strong>Camera:</strong> 85mm beauty portraits, low-key framing, slight low angle</li>
+        <li><strong>Lighting:</strong> moody noir, neon spill, candlelit shadows</li>
+        <li><strong>World:</strong> velvet interiors, city rooftops, dim bars, black car interiors</li>
+      </ul>
+    </div>
+    <div class="code">PROMPT EXAMPLE: alt AI influencer, 23–26, pale neutral skin, gray-green almond eyes, sharp brows, aquiline nose, heart-shaped face, dark wavy hair, slim-curvy build, black lace and leather outfit, silver cross pendant, direct gaze with subtle smirk, dim velvet bar interior, moody side lighting with red neon spill, cinematic 85mm portrait, photorealistic</div>
+    <ul class="checklist">
+      <li>Use for: nightlife, mystery, teaser posts, premium conversion content.</li>
+      <li>Avoid: bright beach scenes, colorful sporty outfits, bubbly expressions.</li>
+    </ul>
+    <div class="your-turn"><div class="yt-title">Your Turn</div><p>If you want an alt niche, write your own version without copying this aesthetic 1:1. Keep the structure, not the costume.</p></div>
+    <div class="footer">AI Influencer Blueprint · 17</div>
+  </div></section>
+
+  <section class="page"><div class="inner">
+    <div class="label">Bonus</div>
+    <div class="title">DNA file example #2 — athletic</div>
+    <div class="section-divider"></div>
+    <div class="example-card">
+      <div class="example-head">Character profile</div>
+      <ul>
+        <li><strong>Name:</strong> Sienna</li>
+        <li><strong>Niche:</strong> disciplined fitness-lifestyle creator with aspirational but approachable energy</li>
+        <li><strong>Face:</strong> warm tan skin, honey-brown eyes, full brows, straight nose, soft square jaw, natural glossy lips</li>
+        <li><strong>Body:</strong> athletic hourglass, visible glute and shoulder definition, medium-tall impression</li>
+        <li><strong>Style:</strong> premium activewear, fitted zip jackets, monochrome sets, white sneakers, simple gold jewelry</li>
+        <li><strong>Camera:</strong> 35mm lifestyle + 50mm mirror shots</li>
+        <li><strong>Lighting:</strong> bright gym overhead softened by natural fill, sunrise outdoor track light</li>
+        <li><strong>World:</strong> boutique gym, smoothie bar, clean apartment kitchen, rooftop run club vibe</li>
+      </ul>
+    </div>
+    <div class="code">PROMPT EXAMPLE: 24–28 athletic AI influencer, warm tan skin, honey-brown eyes, soft square jaw, sleek dark ponytail, athletic hourglass build with defined shoulders and waist, premium charcoal activewear set, gold studs, confident neutral expression, luxury gym mirror selfie, clean overhead lighting balanced with natural window light, phone-camera realism, photorealistic</div>
+    <ul class="checklist">
+      <li>Use for: routines, transformation bait, lifestyle habits, premium wellness vibe.</li>
+      <li>Avoid: hyper-fashion sets that break the athletic identity.</li>
+    </ul>
+    <div class="your-turn"><div class="yt-title">Your Turn</div><p>Translate your fitness niche into a world, not just a body type. Where does she train, recover, commute, and show discipline?</p></div>
+    <div class="footer">AI Influencer Blueprint · 18</div>
+  </div></section>
+
+  <section class="page"><div class="inner">
+    <div class="label">Bonus</div>
+    <div class="title">DNA file example #3 — girl-next-door</div>
+    <div class="section-divider"></div>
+    <div class="example-card">
+      <div class="example-head">Character profile</div>
+      <ul>
+        <li><strong>Name:</strong> Emma</li>
+        <li><strong>Niche:</strong> relatable soft-lux lifestyle girl with warm, intimate appeal</li>
+        <li><strong>Face:</strong> light warm skin, soft freckles, round hazel eyes, small straight nose, plush lips, softly rounded cheeks</li>
+        <li><strong>Body:</strong> slim-soft proportions, petite-to-medium height impression, gentle posture</li>
+        <li><strong>Style:</strong> oversized knits, white tanks, denim shorts, delicate necklace, natural makeup</li>
+        <li><strong>Camera:</strong> phone-camera realism, natural close framing, eye-level perspective</li>
+        <li><strong>Lighting:</strong> morning window light, golden-hour porch light, soft lamp-lit evenings</li>
+        <li><strong>World:</strong> cozy bedroom, sunny kitchen, bookstore café, passenger-seat errands vibe</li>
+      </ul>
+    </div>
+    <div class="code">PROMPT EXAMPLE: 22–25 relatable AI influencer, light warm skin with soft freckles, hazel round eyes, small straight nose, softly rounded cheeks, medium brown hair, slim-soft build, white ribbed tank and oversized cardigan, delicate gold necklace, gentle smile, cozy sunlit kitchen, soft morning window light, eye-level phone-camera portrait, natural realistic skin texture</div>
+    <ul class="checklist">
+      <li>Use for: story posts, relatable hooks, daily routines, girlfriend-energy content.</li>
+      <li>Avoid: dramatic editorial styling and overly polished luxury sets.</li>
+    </ul>
+    <div class="your-turn"><div class="yt-title">Your Turn</div><p>If your lane is “approachable,” remove any detail that feels too perfect. Warmth beats polish here.</p></div>
+    <div class="footer">AI Influencer Blueprint · 19</div>
+  </div></section>
+
+  <section class="page"><div class="inner">
+    <div class="label">Build sequence</div>
+    <div class="title">The 7-step DNA workflow</div>
+    <div class="section-divider"></div>
+    <div class="grid-steps">
+      <div class="step-num">1</div>
+      <div class="step-body"><h3>Choose the niche fantasy</h3><p>Decide exactly what the character represents in one sentence.</p></div>
+      <div class="step-num">2</div>
+      <div class="step-body"><h3>Write identity anchors</h3><p>Face, body, age impression, style, and world rules.</p></div>
+      <div class="step-num">3</div>
+      <div class="step-body"><h3>Generate 15–20 references</h3><p>Pick one hero image and one backup only.</p></div>
+      <div class="step-num">4</div>
+      <div class="step-body"><h3>Create modular prompt blocks</h3><p>Identity stays fixed, scene changes.</p></div>
+      <div class="step-num">5</div>
+      <div class="step-body"><h3>Run a 10-image consistency test</h3><p>Score outputs without mercy.</p></div>
+      <div class="step-num">6</div>
+      <div class="step-body"><h3>Patch the weak fields</h3><p>Revise the exact section causing drift.</p></div>
+      <div class="step-num">7</div>
+      <div class="step-body"><h3>Scale only after passing</h3><p>Once the DNA holds, batch content aggressively.</p></div>
+    </div>
+    <div class="callout"><strong>Pro Tip</strong><p>The DNA file is not a one-night document. It gets sharper after testing. Version it like product code.</p></div>
+    <div class="code">v1 = first written DNA
+v2 = after 10-image test
+v3 = after first 30 posts and audience feedback</div>
+    <div class="your-turn"><div class="yt-title">Your Turn</div><p>Open your notes and create DNA v1 tonight. Do not leave this PDF as inspiration porn. Turn it into a file.</p></div>
+    <div class="footer">AI Influencer Blueprint · 20</div>
+  </div></section>
+
+  <section class="page"><div class="inner center">
+    <div class="label">Final page</div>
+    <div class="title">Build the character once.<br>Scale the content forever.</div>
+    <div class="section-divider" style="margin-left:auto;margin-right:auto"></div>
+    <p class="lead" style="margin-left:auto;margin-right:auto;max-width:66%;">A strong DNA file turns every future prompt into leverage. Less drift. Less guesswork. More recognition. More trust. More momentum. That’s the whole play.</p>
+    <div class="quote-card big-gap" style="max-width:72%; margin: 0 auto;">
+      <div class="big">The creators who win are not the ones generating the most images. They are the ones building the clearest characters.</div>
+      <p>Now go make yours impossible to confuse with anyone else.</p>
+    </div>
+    <div class="footer">AI Influencer Blueprint · 21</div>
+  </div></section>
+</body>
+</html>

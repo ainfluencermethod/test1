@@ -1,0 +1,57 @@
+{
+  "event_id": "evt_local_aiu_001",
+  "form_response": {
+    "token": "resp_local_aiu_001",
+    "submitted_at": "2026-03-17T17:30:00.000Z",
+    "hidden": {
+      "email": "matej.test@example.com"
+    },
+    "answers": [
+      {
+        "field": { "ref": "full_name", "title": "Ime in priimek" },
+        "type": "text",
+        "text": "Matej Novak"
+      },
+      {
+        "field": { "ref": "email", "title": "Email" },
+        "type": "email",
+        "email": "matej.test@example.com"
+      },
+      {
+        "field": { "ref": "phone", "title": "WhatsApp številka" },
+        "type": "phone_number",
+        "phone_number": "+38640111222"
+      },
+      {
+        "field": { "ref": "interest", "title": "Kaj želiš z AI doseči?" },
+        "type": "choice",
+        "choice": { "label": "Automation and sales systems" }
+      },
+      {
+        "field": { "ref": "ai_maturity", "title": "Kako trenutno uporabljaš AI?" },
+        "type": "choice",
+        "choice": { "label": "Using AI actively in business" }
+      },
+      {
+        "field": { "ref": "budget", "title": "Proračun" },
+        "type": "choice",
+        "choice": { "label": "€5k to €8k" }
+      },
+      {
+        "field": { "ref": "urgency", "title": "Kdaj želiš začeti?" },
+        "type": "choice",
+        "choice": { "label": "This month" }
+      },
+      {
+        "field": { "ref": "blocker", "title": "Kaj te trenutno blokira?" },
+        "type": "text",
+        "text": "Need strategy clarity"
+      },
+      {
+        "field": { "ref": "role", "title": "Tvoja vloga" },
+        "type": "choice",
+        "choice": { "label": "Founder" }
+      }
+    ]
+  }
+}

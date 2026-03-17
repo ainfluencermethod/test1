@@ -1,0 +1,248 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+:root {
+  /* ─── Background System (Hyperliquid) ─── */
+  --bg-base: #050505;
+  --bg-sidebar: #080808;
+  --bg-surface: #0A0A0A;
+  --bg-card: #0A0A0A;
+  --bg-card-hover: #0F0F0F;
+  --bg-elevated: #0F0F0F;
+  --bg-input: #0A0A0A;
+  --border: rgba(255,255,255,0.04);
+  --border-active: rgba(255,255,255,0.08);
+
+  /* ─── Text System ─── */
+  --text-primary: #E8E8E8;
+  --text-secondary: #666666;
+  --text-muted: #333333;
+  --text-dim: #222222;
+
+  /* ─── Accent ─── */
+  --accent: #4ADE80;
+  --accent-hover: #3FCF70;
+  --accent-muted: rgba(74,222,128,0.12);
+
+  /* ─── Brand ─── */
+  --purple: #A78BFA;
+  --purple-muted: rgba(167,139,250,0.12);
+  --gold: #D4A574;
+  --gold-muted: rgba(212,165,116,0.12);
+
+  /* ─── Status Colors ─── */
+  --green: #4ADE80;
+  --green-muted: rgba(74,222,128,0.12);
+  --yellow: #FBBF24;
+  --yellow-muted: rgba(251,191,36,0.12);
+  --red: #F87171;
+  --red-muted: rgba(248,113,113,0.12);
+
+  /* ─── Legacy aliases ─── */
+  --bg: var(--bg-base);
+  --border-hover: var(--border-active);
+  --text: var(--text-primary);
+  --danger: var(--red);
+  --warning: var(--yellow);
+  --info: #3b82f6;
+
+  /* ─── Typography ─── */
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+}
+
+body {
+  background: var(--bg-base);
+  background-image: radial-gradient(ellipse at 50% 50%, #080808 0%, #030303 100%);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Better touch targets on mobile */
+@media (max-width: 640px) {
+  .btn {
+    min-height: 44px;
+  }
+  .badge {
+    padding: 0.375rem 0.75rem;
+  }
+}
+
+/* ─── Card System ─── */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem;
+  transition: border-color 0.2s ease;
+}
+
+.card:hover {
+  border-color: var(--border-active);
+}
+
+/* ─── Button System ─── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.8125rem;
+  transition: all 0.15s;
+  cursor: pointer;
+  border: none;
+  font-family: var(--font-sans);
+  letter-spacing: 0.01em;
+}
+
+.btn-primary {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+.btn-primary:hover {
+  background: var(--accent-muted);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+.btn-secondary:hover {
+  color: var(--text-primary);
+  border-color: var(--border-active);
+}
+
+.btn-danger {
+  background: transparent;
+  color: var(--red);
+  border: 1px solid rgba(248,113,113,0.3);
+}
+
+/* ─── Input System ─── */
+.input {
+  width: 100%;
+  padding: 0.625rem 0.875rem;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.15s;
+  font-family: var(--font-sans);
+}
+.input:focus {
+  border-color: var(--accent);
+}
+
+/* ─── Badge System ─── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.625rem;
+  border-radius: 6px;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.badge-green { background: var(--green-muted); color: var(--green); }
+.badge-yellow { background: var(--yellow-muted); color: var(--yellow); }
+.badge-blue { background: rgba(59,130,246,0.1); color: #6b9ef7; }
+.badge-gray { background: rgba(255,255,255,0.04); color: var(--text-muted); }
+.badge-red { background: var(--red-muted); color: var(--red); }
+.badge-purple { background: var(--purple-muted); color: var(--purple); }
+
+/* ─── Status Dots ─── */
+.step-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.step-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-dim);
+}
+.step-dot.active {
+  background: var(--accent);
+}
+.step-dot.completed {
+  background: var(--green);
+}
+.step-dot.pending {
+  background: var(--text-dim);
+}
+
+/* ─── Typography Utilities ─── */
+.heading-serif {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.heading-sans {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.label-upper {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.font-tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.04);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+/* ─── Animations ─── */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeInUp 0.3s ease-out both;
+}

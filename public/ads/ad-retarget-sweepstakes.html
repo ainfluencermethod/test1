@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>AI Universa — Retarget Sweepstakes Reminder</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background: #0F1117;
+    position: relative;
+  }
+
+  /* Luxurious gold ambient */
+  .bg-glow-gold {
+    position: absolute;
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(251,191,36,0.12) 0%, transparent 70%);
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    filter: blur(120px);
+  }
+  .bg-glow-purple {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(124,92,252,0.1) 0%, transparent 70%);
+    bottom: -150px;
+    right: -100px;
+    border-radius: 50%;
+    filter: blur(80px);
+  }
+  .bg-grid {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(rgba(251,191,36,0.015) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(251,191,36,0.015) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  /* Gold shimmer line at top */
+  .shimmer-top {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #FBBF24, #F59E0B, #FBBF24, transparent);
+    opacity: 0.7;
+  }
+
+  .container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 56px 56px 52px;
+  }
+
+  /* Badge */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, rgba(251,191,36,0.12), rgba(245,158,11,0.08));
+    border: 1px solid rgba(251,191,36,0.3);
+    border-radius: 100px;
+    padding: 10px 22px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #FBBF24;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+  .badge-icon { font-size: 16px; }
+
+  /* Headline */
+  .headline {
+    font-size: 48px;
+    font-weight: 900;
+    color: #FFFFFF;
+    line-height: 1.1;
+    text-align: center;
+    margin-bottom: 8px;
+    letter-spacing: -1.5px;
+  }
+  .headline .gold {
+    background: linear-gradient(135deg, #FBBF24, #F59E0B, #FBBF24);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 20px rgba(251,191,36,0.3));
+  }
+  .sub-headline {
+    font-size: 20px;
+    color: rgba(255,255,255,0.4);
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 44px;
+  }
+
+  /* Prize cards */
+  .prizes {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    margin-bottom: 36px;
+  }
+
+  .prize-card {
+    flex: 1;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(251,191,36,0.12);
+    border-radius: 24px;
+    padding: 36px 20px 32px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .prize-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #FBBF24, #F59E0B);
+  }
+  .prize-card.main-prize {
+    border-color: rgba(251,191,36,0.3);
+    background: linear-gradient(180deg, rgba(251,191,36,0.06) 0%, rgba(255,255,255,0.02) 100%);
+    transform: scale(1.03);
+  }
+  .prize-card.main-prize::before {
+    height: 4px;
+    box-shadow: 0 0 20px rgba(251,191,36,0.3);
+  }
+
+  .prize-emoji {
+    font-size: 56px;
+    margin-bottom: 20px;
+    line-height: 1;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+  }
+  .prize-name {
+    font-size: 22px;
+    font-weight: 800;
+    color: #FFFFFF;
+    margin-bottom: 6px;
+  }
+  .prize-card.main-prize .prize-name {
+    background: linear-gradient(135deg, #FBBF24, #F59E0B);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 24px;
+  }
+  .prize-qty {
+    font-size: 14px;
+    color: rgba(255,255,255,0.35);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .prize-value {
+    margin-top: 16px;
+    display: inline-block;
+    background: rgba(251,191,36,0.08);
+    border: 1px solid rgba(251,191,36,0.15);
+    border-radius: 10px;
+    padding: 8px 18px;
+    font-size: 18px;
+    font-weight: 800;
+    color: #FBBF24;
+  }
+
+  /* Free callout */
+  .free-callout {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: rgba(34,197,94,0.06);
+    border: 1px solid rgba(34,197,94,0.18);
+    border-radius: 18px;
+    padding: 24px 40px;
+    margin-bottom: 32px;
+    width: 100%;
+  }
+  .free-icon {
+    font-size: 36px;
+  }
+  .free-text {
+    flex: 1;
+  }
+  .free-text-main {
+    font-size: 22px;
+    font-weight: 800;
+    color: #4ADE80;
+    margin-bottom: 2px;
+  }
+  .free-text-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.4);
+    font-weight: 500;
+  }
+  .free-price {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .free-price-old {
+    font-size: 18px;
+    color: rgba(255,255,255,0.25);
+    text-decoration: line-through;
+    font-weight: 600;
+  }
+  .free-price-new {
+    font-size: 32px;
+    font-weight: 900;
+    color: #22C55E;
+  }
+
+  /* Retarget nudge */
+  .nudge {
+    text-align: center;
+    font-size: 18px;
+    color: rgba(255,255,255,0.4);
+    font-weight: 500;
+    margin-bottom: auto;
+  }
+  .nudge strong {
+    color: rgba(255,255,255,0.7);
+  }
+
+  /* Bottom */
+  .bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 28px;
+  }
+  .date-info {
+    font-size: 17px;
+    color: rgba(255,255,255,0.4);
+    font-weight: 500;
+  }
+  .date-info strong {
+    color: rgba(255,255,255,0.7);
+    font-weight: 600;
+  }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #FBBF24, #F59E0B);
+    color: #0F1117;
+    font-size: 20px;
+    font-weight: 800;
+    padding: 22px 40px;
+    border-radius: 14px;
+    box-shadow: 0 8px 32px rgba(251,191,36,0.3), inset 0 1px 0 rgba(255,255,255,0.3);
+    text-decoration: none;
+    letter-spacing: 0.3px;
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-glow-gold"></div>
+<div class="bg-glow-purple"></div>
+<div class="bg-grid"></div>
+<div class="shimmer-top"></div>
+
+<div class="container">
+  <div class="badge">
+    <span class="badge-icon">🎁</span>
+    Žrebanje nagrad
+  </div>
+
+  <h1 class="headline">Prijavi se brezplačno in<br>se poteguj za <span class="gold">avto</span></h1>
+  <p class="sub-headline">Med vsemi prijavljenimi žrebamo za vrhunske nagrade.</p>
+
+  <div class="prizes">
+    <!-- MacBook -->
+    <div class="prize-card">
+      <div class="prize-emoji">💻</div>
+      <div class="prize-name">MacBook Pro</div>
+      <div class="prize-qty">3× nagrada</div>
+      <div class="prize-value">3×</div>
+    </div>
+
+    <!-- Car — main prize -->
+    <div class="prize-card main-prize">
+      <div class="prize-emoji">🚗</div>
+      <div class="prize-name">Avtomobil</div>
+      <div class="prize-qty">Glavna nagrada</div>
+      <div class="prize-value">★ #1</div>
+    </div>
+
+    <!-- iPhone -->
+    <div class="prize-card">
+      <div class="prize-emoji">📱</div>
+      <div class="prize-name">iPhone</div>
+      <div class="prize-qty">1× nagrada</div>
+      <div class="prize-value">1×</div>
+    </div>
+  </div>
+
+  <div class="free-callout">
+    <div class="free-icon">✅</div>
+    <div class="free-text">
+      <div class="free-text-main">Prijava je popolnoma brezplačna</div>
+      <div class="free-text-sub">3-dnevna delavnica v živo · vsi prijavljeni sodelujejo v žrebanju</div>
+    </div>
+    <div class="free-price">
+      <div class="free-price-old">€899</div>
+      <div class="free-price-new">€0</div>
+    </div>
+  </div>
+
+  <div class="nudge">Že si pogledal/a stran. <strong>Zakaj ne bi zaključil/a prijave?</strong> Nič ne izgubiš.</div>
+
+  <div class="bottom">
+    <div class="date-info">
+      <strong>15.–17. april 2026</strong> · aiuniversa.si
+    </div>
+    <div class="cta">PRIJAVI SE BREZPLAČNO →</div>
+  </div>
+</div>
+
+</body>
+</html>

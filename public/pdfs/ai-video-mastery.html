@@ -1,0 +1,1877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Video Mastery</title>
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html, body {
+    background: #0D0F11;
+    color: #B8B8B8;
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 11pt;
+    line-height: 1.65;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .page {
+    width: 210mm;
+    height: 297mm;
+    padding: 0;
+    position: relative;
+    page-break-after: always;
+    page-break-inside: avoid;
+    break-after: page;
+    background: #0D0F11;
+    overflow: hidden;
+  }
+
+  .page:last-child {
+    page-break-after: auto;
+    break-after: auto;
+  }
+
+  .teal-bar {
+    width: 100%;
+    height: 4px;
+    background: #4ECDC4;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .page-content {
+    padding: 50px 55px 60px 55px;
+    position: relative;
+    height: calc(297mm - 4px);
+    overflow: hidden;
+  }
+
+  .footer {
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 7.5pt;
+    color: #707070;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* Cover Page */
+  .cover {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    height: calc(297mm - 4px);
+    padding: 80px 60px;
+  }
+
+  .cover-label {
+    font-size: 10pt;
+    color: #4ECDC4;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 30px;
+  }
+
+  .cover-title {
+    font-size: 42pt;
+    font-weight: 800;
+    color: #FFFFFF;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    letter-spacing: -0.5px;
+  }
+
+  .cover-subtitle {
+    font-size: 16pt;
+    color: #B8B8B8;
+    font-weight: 400;
+    line-height: 1.4;
+    margin-bottom: 40px;
+    max-width: 480px;
+  }
+
+  .cover-tagline {
+    font-size: 11pt;
+    color: #707070;
+    font-style: italic;
+    margin-bottom: 60px;
+  }
+
+  .cover-divider {
+    width: 80px;
+    height: 3px;
+    background: #4ECDC4;
+    margin-bottom: 30px;
+  }
+
+  .cover-footer-text {
+    font-size: 9pt;
+    color: #707070;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  /* Section Label */
+  .section-label {
+    font-size: 9pt;
+    color: #4ECDC4;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  /* Section Title */
+  .section-title {
+    font-size: 26pt;
+    font-weight: 700;
+    color: #FFFFFF;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+
+  .section-title-sm {
+    font-size: 20pt;
+    font-weight: 700;
+    color: #FFFFFF;
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+
+  .section-divider {
+    width: 60px;
+    height: 3px;
+    background: #4ECDC4;
+    margin-bottom: 35px;
+  }
+
+  /* Body text */
+  p {
+    margin-bottom: 14px;
+    color: #B8B8B8;
+    font-size: 10.5pt;
+    line-height: 1.7;
+  }
+
+  .text-white {
+    color: #FFFFFF;
+  }
+
+  .text-muted {
+    color: #707070;
+  }
+
+  .text-teal {
+    color: #4ECDC4;
+  }
+
+  strong {
+    color: #FFFFFF;
+    font-weight: 600;
+  }
+
+  /* Headings within content */
+  h3 {
+    font-size: 13pt;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin-bottom: 10px;
+    margin-top: 28px;
+  }
+
+  h4 {
+    font-size: 11pt;
+    font-weight: 600;
+    color: #FFFFFF;
+    margin-bottom: 8px;
+    margin-top: 22px;
+  }
+
+  /* Callout box */
+  .callout {
+    background: #1A2A2A;
+    border-left: 3px solid #4ECDC4;
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 22px 0;
+  }
+
+  .callout p:last-child {
+    margin-bottom: 0;
+  }
+
+  .callout-title {
+    font-size: 9pt;
+    color: #4ECDC4;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  /* Card */
+  .card {
+    background: #1A1D21;
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin: 18px 0;
+  }
+
+  .card p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Numbered steps */
+  .step {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 24px;
+  }
+
+  .step-number {
+    font-size: 28pt;
+    font-weight: 800;
+    color: #4ECDC4;
+    line-height: 1;
+    margin-right: 22px;
+    min-width: 42px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .step-content {
+    flex: 1;
+  }
+
+  .step-title {
+    font-size: 12pt;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin-bottom: 6px;
+  }
+
+  .step-text {
+    color: #B8B8B8;
+    font-size: 10pt;
+    line-height: 1.65;
+  }
+
+  /* Lists */
+  ul, ol {
+    margin: 12px 0 16px 22px;
+    color: #B8B8B8;
+    font-size: 10.5pt;
+  }
+
+  li {
+    margin-bottom: 7px;
+    line-height: 1.6;
+  }
+
+  li strong {
+    color: #FFFFFF;
+  }
+
+  /* Table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 9.5pt;
+  }
+
+  thead th {
+    background: #1A1D21;
+    color: #4ECDC4;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 8pt;
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 2px solid #2A2D31;
+  }
+
+  tbody td {
+    padding: 11px 16px;
+    border-bottom: 1px solid #1A1D21;
+    color: #B8B8B8;
+  }
+
+  tbody tr:hover {
+    background: #12141780;
+  }
+
+  /* Prompt/code blocks */
+  .prompt-block {
+    background: #1A1D21;
+    border-radius: 8px;
+    padding: 18px 22px;
+    margin: 14px 0;
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 9.5pt;
+    line-height: 1.65;
+    color: #B8B8B8;
+    border: 1px solid #2A2D31;
+  }
+
+  .prompt-label {
+    font-size: 8pt;
+    color: #4ECDC4;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+  }
+
+  /* TOC */
+  .toc-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 12px 0;
+    border-bottom: 1px solid #1A1D21;
+  }
+
+  .toc-title {
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 11pt;
+  }
+
+  .toc-page {
+    color: #4ECDC4;
+    font-size: 10pt;
+    font-weight: 600;
+  }
+
+  .toc-subtitle {
+    color: #707070;
+    font-size: 9pt;
+    margin-top: 3px;
+  }
+
+  /* Two-column grid */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 18px 0;
+  }
+
+  .grid-2 .card {
+    margin: 0;
+  }
+
+  /* Spacers */
+  .spacer-sm { height: 16px; }
+  .spacer-md { height: 30px; }
+  .spacer-lg { height: 50px; }
+
+  @media print {
+    .page {
+      page-break-after: always;
+    }
+    .page:last-child {
+      page-break-after: auto;
+    }
+    body {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== COVER PAGE ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="cover">
+    <div class="cover-label">AI Influencer Blueprint</div>
+    <div class="cover-title">AI Video<br>Mastery</div>
+    <div class="cover-divider"></div>
+    <div class="cover-subtitle">The Complete Guide to AI-Generated Video Content</div>
+    <div class="cover-tagline">From still images to viral reels — the exact workflow.</div>
+    <div class="spacer-lg"></div>
+    <div class="cover-footer-text">2026 Edition</div>
+  </div>
+</div>
+
+<!-- ===================== TABLE OF CONTENTS ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Contents</div>
+    <div class="section-title">Table of Contents</div>
+    <div class="section-divider"></div>
+
+    <div class="spacer-md"></div>
+
+    <div class="toc-item">
+      <div>
+        <div class="toc-title">Introduction</div>
+        <div class="toc-subtitle">Why Video is the #1 Growth Lever</div>
+      </div>
+      <div class="toc-page">03</div>
+    </div>
+    <div class="toc-item">
+      <div>
+        <div class="toc-title">Module 01 — The Toolkit</div>
+        <div class="toc-subtitle">Kling 3.0, SeeDance 2.0, Wan 2.2, Veo 3.1</div>
+      </div>
+      <div class="toc-page">05</div>
+    </div>
+    <div class="toc-item">
+      <div>
+        <div class="toc-title">Module 02 — Image-to-Video Workflow</div>
+        <div class="toc-subtitle">From AI character to animated content</div>
+      </div>
+      <div class="toc-page">08</div>
+    </div>
+    <div class="toc-item">
+      <div>
+        <div class="toc-title">Module 03 — Motion Control</div>
+        <div class="toc-subtitle">Camera movements and character animation</div>
+      </div>
+      <div class="toc-page">11</div>
+    </div>
+    <div class="toc-item">
+      <div>
+        <div class="toc-title">Module 04 — Dance &amp; Performance Videos</div>
+        <div class="toc-subtitle">SeeDance 2.0, lip sync, and motion mapping</div>
+      </div>
+      <div class="toc-page">14</div>
+    </div>
+    <div class="toc-item">
+      <div>
+        <div class="toc-title">Module 05 — Post-Production</div>
+        <div class="toc-subtitle">Editing, upscaling, and export optimization</div>
+      </div>
+      <div class="toc-page">17</div>
+    </div>
+    <div class="toc-item">
+      <div>
+        <div class="toc-title">Module 06 — Viral Video Formulas</div>
+        <div class="toc-subtitle">Proven formats that drive engagement</div>
+      </div>
+      <div class="toc-page">20</div>
+    </div>
+    <div class="toc-item">
+      <div>
+        <div class="toc-title">Bonus — Prompt Library</div>
+        <div class="toc-subtitle">20 ready-to-use video generation prompts</div>
+      </div>
+      <div class="toc-page">23</div>
+    </div>
+
+    <div class="footer">AI Influencer Blueprint · AI Video Mastery</div>
+  </div>
+</div>
+
+<!-- ===================== INTRODUCTION PAGE 1 ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Introduction</div>
+    <div class="section-title">Why Video is the #1<br>Growth Lever</div>
+    <div class="section-divider"></div>
+
+    <div class="spacer-sm"></div>
+
+    <p>Static images got you here. Video gets you to the next level.</p>
+
+    <p>Every major platform has made the same bet: <strong>video-first algorithms.</strong> Instagram gives Reels 3x the organic reach of static posts. TikTok is video. YouTube Shorts crossed 70 billion daily views. The math is simple — if you're not creating video, you're leaving 80% of your potential reach on the table.</p>
+
+    <p>For AI influencers, this used to be a problem. Image generation was mature. Video generation was not. The outputs looked janky, uncanny, obviously fake. That changed in 2026.</p>
+
+    <div class="callout">
+      <div class="callout-title">The Inflection Point</div>
+      <p>Kling 3.0 dropped in late 2025 and changed the game. 10-second clips with consistent characters, realistic motion, and controllable camera work. SeeDance 2.0 followed with dance and performance mapping. Wan 2.2 made it open-source. <strong>The "good enough" threshold has been crossed.</strong></p>
+    </div>
+
+    <div class="spacer-sm"></div>
+
+    <p>This guide gives you the exact workflow to turn your existing AI character images into scroll-stopping video content. No theory. No fluff. Just the tools, the settings, and the prompts that work.</p>
+
+    <div class="spacer-md"></div>
+
+    <h3>What You'll Learn</h3>
+
+    <ul>
+      <li><strong>The complete AI video toolkit</strong> — which tools to use and when</li>
+      <li><strong>Image-to-video workflow</strong> — animate your AI characters in minutes</li>
+      <li><strong>Motion control</strong> — cinematic camera movements and character animation</li>
+      <li><strong>Dance and performance content</strong> — trend recreation and lip sync</li>
+      <li><strong>Post-production pipeline</strong> — editing, upscaling, and export settings</li>
+      <li><strong>Viral formulas</strong> — proven video formats that drive engagement</li>
+    </ul>
+
+    <div class="footer">AI Influencer Blueprint · AI Video Mastery · 03</div>
+  </div>
+</div>
+
+<!-- ===================== INTRODUCTION PAGE 2 ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Introduction</div>
+    <div class="section-title-sm">The Numbers Don't Lie</div>
+    <div class="section-divider"></div>
+
+    <div class="spacer-sm"></div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="text-teal" style="font-size: 28pt; font-weight: 800; margin-bottom: 8px;">3x</div>
+        <p style="margin-bottom: 0;"><strong>More reach</strong> on Instagram Reels vs. static carousel posts, on average.</p>
+      </div>
+      <div class="card">
+        <div class="text-teal" style="font-size: 28pt; font-weight: 800; margin-bottom: 8px;">68%</div>
+        <p style="margin-bottom: 0;"><strong>Higher engagement</strong> rate for AI influencer video content vs. image-only accounts.</p>
+      </div>
+      <div class="card">
+        <div class="text-teal" style="font-size: 28pt; font-weight: 800; margin-bottom: 8px;">10s</div>
+        <p style="margin-bottom: 0;"><strong>Generation time</strong> for a Kling 3.0 Pro clip. From still to motion in seconds.</p>
+      </div>
+      <div class="card">
+        <div class="text-teal" style="font-size: 28pt; font-weight: 800; margin-bottom: 8px;">$0.12</div>
+        <p style="margin-bottom: 0;"><strong>Cost per video</strong> with Wan 2.2 running on an RTX 4090. Near-zero marginal cost.</p>
+      </div>
+    </div>
+
+    <div class="spacer-md"></div>
+
+    <div class="callout">
+      <div class="callout-title">Prerequisites</div>
+      <p>This guide assumes you already have an established AI character with consistent image generation (see the <strong>AI Image Mastery</strong> guide). You don't need coding skills. You don't need a GPU for the cloud-based tools. Budget $30–50/month for the premium tiers.</p>
+    </div>
+
+    <div class="spacer-md"></div>
+
+    <p>Let's build your video pipeline.</p>
+
+    <div class="footer">AI Influencer Blueprint · AI Video Mastery · 04</div>
+  </div>
+</div>
+
+<!-- ===================== MODULE 01 — THE TOOLKIT (PAGE 1) ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Module 01</div>
+    <div class="section-title">The Toolkit</div>
+    <div class="section-divider"></div>
+
+    <div class="spacer-sm"></div>
+
+    <p>Four tools. That's all you need. Each one has a specific job, and knowing when to reach for which one is half the battle.</p>
+
+    <div class="spacer-sm"></div>
+
+    <div class="card">
+      <h4 style="margin-top: 0; color: #4ECDC4;">Kling 3.0 — Your Primary Weapon</h4>
+      <p>KlingAI's flagship model. Best-in-class for image-to-video with character consistency. The Pro tier gives you 10-second clips at 1080p with motion control, and the quality is genuinely impressive.</p>
+      <ul>
+        <li><strong>Best for:</strong> Character animation, lifestyle content, product shots</li>
+        <li><strong>Image-to-video:</strong> Upload your AI character image → describe motion → generate</li>
+        <li><strong>Text-to-video:</strong> Works but less consistent for established characters</li>
+        <li><strong>Motion Control:</strong> Camera paths, zoom, pan, orbit — all adjustable</li>
+        <li><strong>Cost:</strong> ~$0.30 per generation (Pro plan), 66 credits/month at $8/mo</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h4 style="margin-top: 0; color: #4ECDC4;">SeeDance 2.0 — Dance &amp; Performance</h4>
+      <p>The specialist. Feed it a reference dance video and your AI character image, and it maps the motion onto your character. The results are shockingly good for trend recreation.</p>
+      <ul>
+        <li><strong>Best for:</strong> Dance trends, performance videos, choreographed content</li>
+        <li><strong>Input:</strong> Reference video + character image → motion-mapped output</li>
+        <li><strong>Limitation:</strong> Works best with full-body shots and clear backgrounds</li>
+        <li><strong>Cost:</strong> Free via Replicate (~$0.05/gen) or run locally with a 24GB GPU</li>
+      </ul>
+    </div>
+
+    <div class="footer">AI Influencer Blueprint · AI Video Mastery · 05</div>
+  </div>
+</div>
+
+<!-- ===================== MODULE 01 — THE TOOLKIT (PAGE 2) ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Module 01</div>
+    <div class="section-title-sm">The Toolkit (continued)</div>
+    <div class="section-divider"></div>
+
+    <div class="spacer-sm"></div>
+
+    <div class="card">
+      <h4 style="margin-top: 0; color: #4ECDC4;">Wan 2.1 / 2.2 — Open Source Power</h4>
+      <p>Alibaba's open-source video generation model. Run it locally for zero per-generation cost, or use it through Replicate and Hugging Face for cheap API access. Version 2.2 added significant quality improvements.</p>
+      <ul>
+        <li><strong>Best for:</strong> Batch generation, experimentation, budget-conscious creators</li>
+        <li><strong>Local setup:</strong> Requires 24GB+ VRAM (RTX 4090 or A6000)</li>
+        <li><strong>Cloud:</strong> Replicate API at ~$0.08–0.12 per generation</li>
+        <li><strong>Limitation:</strong> Slightly less consistent character fidelity than Kling 3.0</li>
+        <li><strong>Cost:</strong> Free (local) or ~$0.10/gen (cloud)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h4 style="margin-top: 0; color: #4ECDC4;">Veo 3.1 — Google's Contender</h4>
+      <p>Google DeepMind's latest. Exceptional at cinematic quality and natural physics. Access through Google AI Studio or the Vertex AI API. The built-in audio generation is a unique advantage.</p>
+      <ul>
+        <li><strong>Best for:</strong> Cinematic content, natural movement, audio-inclusive clips</li>
+        <li><strong>Unique feature:</strong> Native audio generation — ambient sound matched to scene</li>
+        <li><strong>Access:</strong> Google AI Studio (free tier) or Vertex AI API</li>
+        <li><strong>Limitation:</strong> Less control over specific character consistency</li>
+        <li><strong>Cost:</strong> Free tier available, Pro at ~$0.20/gen</li>
+      </ul>
+    </div>
+
+    <div class="spacer-md"></div>
+
+    <div class="callout">
+      <div class="callout-title">The Smart Stack</div>
+      <p><strong>Kling 3.0</strong> for your hero content (the posts that matter). <strong>SeeDance 2.0</strong> for dance trends and performance clips. <strong>Wan 2.2</strong> for batch generation and experimentation. <strong>Veo 3.1</strong> for cinematic one-offs where audio matters. Don't try to use one tool for everything.</p>
+    </div>
+
+    <div class="footer">AI Influencer Blueprint · AI Video Mastery · 06</div>
+  </div>
+</div>
+
+<!-- ===================== MODULE 01 — THE TOOLKIT (PAGE 3 - Table) ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Module 01</div>
+    <div class="section-title-sm">Cost Comparison</div>
+    <div class="section-divider"></div>
+
+    <div class="spacer-sm"></div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Tool</th>
+          <th>Cost / Video</th>
+          <th>Monthly Plan</th>
+          <th>Best Use</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Kling 3.0 Pro</strong></td>
+          <td>~$0.30</td>
+          <td>$8/mo (66 credits)</td>
+          <td>Hero content</td>
+        </tr>
+        <tr>
+          <td><strong>SeeDance 2.0</strong></td>
+          <td>~$0.05</td>
+          <td>Pay-per-use</td>
+          <td>Dance / performance</td>
+        </tr>
+        <tr>
+          <td><strong>Wan 2.2 (local)</strong></td>
+          <td>~$0.12*</td>
+          <td>Free (electricity)</td>
+          <td>Batch / experimentation</td>
+        </tr>
+        <tr>
+          <td><strong>Wan 2.2 (cloud)</strong></td>
+          <td>~$0.10</td>
+          <td>Pay-per-use</td>
+          <td>No GPU option</td>
+        </tr>
+        <tr>
+          <td><strong>Veo 3.1</strong></td>
+          <td>~$0.20</td>
+          <td>Free tier + Pro</td>
+          <td>Cinematic / audio</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="text-muted" style="font-size: 8.5pt;">*Wan 2.2 local cost based on estimated electricity for RTX 4090 generation.</p>
+
+    <div class="spacer-md"></div>
+
+    <h3>Setup Checklist</h3>
+
+    <div class="spacer-sm"></div>
+
+    <div class="step">
+      <div class="step-number">01</div>
+      <div class="step-content">
+        <div class="step-title">Create a KlingAI Account</div>
+        <div class="step-text">Go to klingai.com → Sign up → Subscribe to the Pro plan ($8/mo). This is your bread and butter. Don't skip it.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-number">02</div>
+      <div class="step-content">
+        <div class="step-title">Set Up SeeDance Access</div>
+        <div class="step-text">Access through Replicate (replicate.com) or Hugging Face Spaces. No dedicated account needed — just an API key or free Space.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-number">03</div>
+      <div class="step-content">
+        <div class="step-title">Google AI Studio Access</div>
+        <div class="step-text">Go to aistudio.google.com → Sign in with Google → Enable Veo 3.1. Free tier gives you 50 generations per day.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-number">04</div>
+      <div class="step-content">
+        <div class="step-title">Optional: Local Wan 2.2 Setup</div>
+        <div class="step-text">If you have a 24GB+ GPU: install ComfyUI → download the Wan 2.2 model weights → add the Wan video nodes. Full guide at wan-ai.org.</div>
+      </div>
+    </div>
+
+    <div class="footer">AI Influencer Blueprint · AI Video Mastery · 07</div>
+  </div>
+</div>
+
+<!-- ===================== MODULE 02 — IMAGE-TO-VIDEO (PAGE 1) ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Module 02</div>
+    <div class="section-title">Image-to-Video<br>Workflow</div>
+    <div class="section-divider"></div>
+
+    <div class="spacer-sm"></div>
+
+    <p>This is the core skill. You already have great AI character images. Now you make them move.</p>
+
+    <p>The workflow is deceptively simple: <strong>upload your image → write a motion prompt → generate → review → refine.</strong> The magic is in the motion prompt — how you describe the movement determines everything.</p>
+
+    <div class="spacer-sm"></div>
+
+    <h3>Step 1: Prepare Your Source Image</h3>
+
+    <p>Not every image works well for animation. The best source images for video generation share specific traits:</p>
+
+    <ul>
+      <li><strong>Clean composition</strong> — character clearly visible, not cropped awkwardly</li>
+      <li><strong>Neutral or slight expression</strong> — extreme expressions limit animation possibilities</li>
+      <li><strong>Proper aspect ratio</strong> — 9:16 for Reels/TikTok, 16:9 for YouTube, 1:1 for feed</li>
+      <li><strong>High resolution</strong> — minimum 1024×1024, ideally higher</li>
+      <li><strong>Good lighting</strong> — even, flattering light gives the model more to work with</li>
+    </ul>
+
+    <div class="callout">
+      <div class="callout-title">Pro Tip</div>
+      <p>Generate your source image specifically for video. In Nano Banana Pro, add "poised, neutral expression, slight head tilt, even studio lighting" to your prompt. This gives Kling maximum flexibility for the animation.</p>
+    </div>
+
+    <div class="spacer-sm"></div>
+
+    <h3>Step 2: Kling 3.0 Pro Settings</h3>
+
+    <p>Open KlingAI → Select "Image to Video" → Upload your source image. Then configure:</p>
+
+    <div class="card">
+      <ul>
+        <li><strong>Model:</strong> Kling 3.0 (not 2.x — the difference is significant)</li>
+        <li><strong>Mode:</strong> Pro (Standard works but Pro is noticeably better)</li>
+        <li><strong>Duration:</strong> 5s for first tests, 10s for final content</li>
+        <li><strong>Aspect Ratio:</strong> Match your source image</li>
+        <li><strong>Motion Intensity:</strong> Start at 5/10, adjust based on content type</li>
+        <li><strong>Negative Prompt:</strong> "distortion, morphing, blurry, jittery, glitch"</li>
+      </ul>
+    </div>
+
+    <div class="footer">AI Influencer Blueprint · AI Video Mastery · 08</div>
+  </div>
+</div>
+
+<!-- ===================== MODULE 02 — IMAGE-TO-VIDEO (PAGE 2) ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Module 02</div>
+    <div class="section-title-sm">Motion Prompting</div>
+    <div class="section-divider"></div>
+
+    <div class="spacer-sm"></div>
+
+    <p>The motion prompt is everything. A bad prompt wastes your credits. A great prompt creates content that stops scrolls. Here's the framework:</p>
+
+    <div class="callout">
+      <div class="callout-title">The Motion Prompt Formula</div>
+      <p><strong>[Subject Action] + [Body Details] + [Expression/Mood] + [Camera Movement] + [Environment Detail]</strong></p>
+      <p>Example: "The woman slowly turns her head to the right, her hair gently swaying. She gives a soft, confident smile. Subtle camera push-in. Warm golden hour light."</p>
+    </div>
+
+    <div class="spacer-md"></div>
+
+    <h3>5 Example Prompts (with Explanations)</h3>
+
+    <div class="spacer-sm"></div>
+
+    <div class="prompt-block">
+      <div class="prompt-label">Prompt 01 — The Slow Turn</div>
+      "The woman slowly turns her head from left to right, her eyes meeting the camera with a confident gaze. Hair moves naturally with the motion. Slight smile forms on her lips. Cinematic, 24fps feel."
+    </div>
+    <p class="text-muted" style="font-size: 9pt;"><strong style="color: #707070;">Why it works:</strong> Simple, clear motion. One primary action. Specific details about expression and hair physics.</p>
+
+    <div class="prompt-block">
+      <div class="prompt-label">Prompt 02 — Walking Toward Camera</div>
+      "The woman walks confidently toward the camera on a city street, maintaining eye contact. Her outfit moves naturally with each step. Shallow depth of field, background softly blurred. Smooth tracking shot."
+    </div>
+    <p class="text-muted" style="font-size: 9pt;"><strong style="color: #707070;">Why it works:</strong> Combines character motion with camera style. Depth of field instruction creates cinematic quality.</p>
+
+    <div class="prompt-block">
+      <div class="prompt-label">Prompt 03 — The Hair Flip</div>
+      "The woman tosses her hair back with a quick, playful motion, then looks directly at the camera with a bold expression. Wind catches the hair mid-flip. Bright, high-contrast lighting."
+    </div>
+    <p class="text-muted" style="font-size: 9pt;"><strong style="color: #707070;">Why it works:</strong> Dynamic action with specific physics. The wind detail helps the model create realistic hair movement.</p>
+
+    <div class="prompt-block">
+      <div class="prompt-label">Prompt 04 — Typing / Working</div>
+      "The woman sits at a sleek desk, typing on a laptop. She occasionally glances up at the camera with a focused expression. Soft ambient lighting, modern interior. Camera slowly orbits from side to front."
+    </div>
+    <p class="text-muted" style="font-size: 9pt;"><strong style="color: #707070;">Why it works:</strong> Great for "day in the life" content. The orbit camera adds production value without complex motion.</p>
+
+    <div class="prompt-block">
+      <div class="prompt-label">Prompt 05 — Reaction / Surprise</div>
+      "The woman's eyes widen slightly as she reads something on her phone, then she breaks into a genuine laugh, covering her mouth briefly. Natural, spontaneous feeling. Close-up framing."
+    </div>
+    <p class="text-muted" style="font-size: 9pt;"><strong style="color: #707070;">Why it works:</strong> Emotional range is impressive with Kling 3.0. The specificity of the micro-expressions sells it.</p>
+
+    <div class="footer">AI Influencer Blueprint · AI Video Mastery · 09</div>
+  </div>
+</div>
+
+<!-- ===================== MODULE 02 — IMAGE-TO-VIDEO (PAGE 3) ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Module 02</div>
+    <div class="section-title-sm">Duration &amp; Aspect Ratio Guide</div>
+    <div class="section-divider"></div>
+
+    <div class="spacer-sm"></div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Platform</th>
+          <th>Aspect Ratio</th>
+          <th>Optimal Length</th>
+          <th>Generation Setting</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Instagram Reels</strong></td>
+          <td>9:16</td>
+          <td>7–15 seconds</td>
+          <td>10s clip, trim in edit</td>
+        </tr>
+        <tr>
+          <td><strong>TikTok</strong></td>
+          <td>9:16</td>
+          <td>7–30 seconds</td>
+          <td>10s clip, loop or extend</td>
+        </tr>
+        <tr>
+          <td><strong>YouTube Shorts</strong></td>
+          <td>9:16</td>
+          <td>15–60 seconds</td>
+          <td>Multiple 10s clips stitched</td>
+        </tr>
+        <tr>
+          <td><strong>Instagram Feed</strong></td>
+          <td>1:1 or 4:5</td>
+          <td>3–10 seconds</td>
+          <td>5s clip, loop</td>
+        </tr>
+        <tr>
+          <td><strong>Twitter/X</strong></td>
+          <td>16:9 or 1:1</td>
+          <td>6–15 seconds</td>
+          <td>10s clip</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="spacer-md"></div>
+
+    <div class="callout">
+      <div class="callout-title">Stitching Multiple Clips</div>
+      <p>For longer content, generate multiple 10-second clips and stitch them in CapCut. The trick: use the <strong>last frame of clip A as the source image for clip B.</strong> This maintains visual continuity between segments. Screenshot the final frame, use it as input for the next generation.</p>
+    </div>
+
+    <div class="spacer-md"></div>
+
+    <h3>Common Mistakes to Avoid</h3>
+
+    <ul>
+      <li><strong>Overcomplicating the prompt</strong> — one clear action per clip beats three conflicting ones</li>
+      <li><strong>Ignoring aspect ratio</strong> — mismatched ratios crop your character awkwardly</li>
+      <li><strong>Setting motion intensity too high</strong> — leads to distortion and warping artifacts</li>
+      <li><strong>Skipping the negative prompt</strong> — always include "distortion, morphing, blurry" at minimum</li>
+      <li><strong>Using low-res source images</strong> — garbage in, garbage out applies doubly for video</li>
+    </ul>
+
+    <div class="footer">AI Influencer Blueprint · AI Video Mastery · 10</div>
+  </div>
+</div>
+
+<!-- ===================== MODULE 03 — MOTION CONTROL (PAGE 1) ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Module 03</div>
+    <div class="section-title">Motion Control</div>
+    <div class="section-divider"></div>
+
+    <div class="spacer-sm"></div>
+
+    <p>Motion control is what separates amateur AI video from cinematic AI video. It's the difference between a static image that slightly moves and a clip that feels like it was shot by a professional camera operator.</p>
+
+    <p>Kling 3.0's Motion Control feature lets you define camera paths independently from character movement. This is powerful — and most people don't use it.</p>
+
+    <div class="spacer-md"></div>
+
+    <h3>The Six Camera Movements</h3>
+
+    <div class="spacer-sm"></div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h4 style="margin-top: 0; color: #4ECDC4;">Pan</h4>
+        <p style="margin-bottom: 0;">Camera moves horizontally. Left-to-right reveals are great for "room tour" and "outfit check" content. Use sparingly — it can feel jarring on short clips.</p>
+      </div>
+      <div class="card">
+        <h4 style="margin-top: 0; color: #4ECDC4;">Tilt</h4>
+        <p style="margin-bottom: 0;">Camera moves vertically. Tilt-up from feet to face is classic for "outfit reveal" videos. Tilt-down works for dramatic reveals.</p>
+      </div>
+      <div class="card">
+        <h4 style="margin-top: 0; color: #4ECDC4;">Zoom</h4>
+        <p style="margin-bottom: 0;">Push in for intimacy, pull out for context. Slow zoom-in on face during emotional content. Zoom-out to reveal environment or surprise element.</p>
+      </div>
+      <div class="card">
+        <h4 style="margin-top: 0; color: #4ECDC4;">Orbit</h4>
+        <p style="margin-bottom: 0;">Camera circles the subject. The most cinematic option. Even a quarter-orbit (90°) adds massive production value. Best for beauty and fashion content.</p>
+      </div>
+      <div class="card">
+        <h4 style="margin-top: 0; color: #4ECDC4;">Track</h4>
+        <p style="margin-bottom: 0;">Camera follows the subject's movement. Essential for walking shots. Keeps the character centered while the background moves naturally.</p>
+      </div>
+      <div class="card">
+        <h4 style="margin-top: 0; color: #4ECDC4;">Static</h4>
+        <p style="margin-bottom: 0;">No camera movement. Underrated. Lets the character's motion speak for itself. Best for reaction content and talking-head style clips.</p>
+      </div>
+    </div>
+
+    <div class="footer">AI Influencer Blueprint · AI Video Mastery · 11</div>
+  </div>
+</div>
+
+<!-- ===================== MODULE 03 — MOTION CONTROL (PAGE 2) ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Module 03</div>
+    <div class="section-title-sm">Combining Character + Camera Motion</div>
+    <div class="section-divider"></div>
+
+    <div class="spacer-sm"></div>
+
+    <p>The real magic happens when you layer character animation with camera movement. Here are proven combinations:</p>
+
+    <div class="spacer-sm"></div>
+
+    <div class="step">
+      <div class="step-number">01</div>
+      <div class="step-content">
+        <div class="step-title">Walk + Track (Follow Shot)</div>
+        <div class="step-text">Character walks forward. Camera tracks alongside or follows behind. Classic influencer "walking through the city" content. Set motion intensity to 6/10.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-number">02</div>
+      <div class="step-content">
+        <div class="step-title">Head Turn + Slow Zoom (The Reveal)</div>
+        <div class="step-text">Character turns head toward camera as camera slowly pushes in. Perfect for "POV: someone calls your name" content. Extremely engaging hook.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-number">03</div>
+      <div class="step-content">
+        <div class="step-title">Pose + Orbit (Beauty Shot)</div>
+        <div class="step-text">Character holds a pose or makes subtle movements while camera orbits 90°. Fashion and beauty content staple. Set orbit speed to slow — fast orbits look cheap.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-number">04</div>
+      <div class="step-content">
+        <div class="step-title">Gesture + Static (The Reaction)</div>
+        <div class="step-text">Character reacts with expression or gesture. No camera movement. Lets the performance carry the clip. Best for meme-style content and reactions.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-number">05</div>
+      <div class="step-content">
+        <div class="step-title">Full Body + Tilt Up (The Reveal)</div>
+        <div class="step-text">Camera starts at feet, tilts up slowly to reveal full outfit/character. The "Get Ready With Me" payoff shot. Set tilt speed to match music beat if using audio.</div>
+      </div>
+    </div>
+
+    <div class="spacer-md"></div>
+
+    <div class="callout">
+      <div class="callout-title">Common Mistake</div>
+      <p>Don't combine complex character motion with complex camera motion. If the character is doing a lot (dancing, walking, gesturing), keep the camera simple (static or slow zoom). If the character is still, that's when you go cinematic with the camera. <strong>One element leads, the other supports.</strong></p>
+    </div>
+
+    <div class="footer">AI Influencer Blueprint · AI Video Mastery · 12</div>
+  </div>
+</div>
+
+<!-- ===================== MODULE 03 — MOTION CONTROL (PAGE 3) ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Module 03</div>
+    <div class="section-title-sm">Motion Control Settings Reference</div>
+    <div class="section-divider"></div>
+
+    <div class="spacer-sm"></div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Content Type</th>
+          <th>Character Motion</th>
+          <th>Camera</th>
+          <th>Intensity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Talking head</strong></td>
+          <td>Subtle gestures, expressions</td>
+          <td>Static or slow zoom</td>
+          <td>3–4/10</td>
+        </tr>
+        <tr>
+          <td><strong>Fashion / OOTD</strong></td>
+          <td>Pose, hair flip, turn</td>
+          <td>Orbit or tilt</td>
+          <td>5–6/10</td>
+        </tr>
+        <tr>
+          <td><strong>Lifestyle / Day-in-life</strong></td>
+          <td>Walking, typing, daily action</td>
+          <td>Track or pan</td>
+          <td>5–6/10</td>
+        </tr>
+        <tr>
+          <td><strong>Reaction / POV</strong></td>
+          <td>Expression change, gesture</td>
+          <td>Static</td>
+          <td>4–5/10</td>
+        </tr>
+        <tr>
+          <td><strong>Cinematic / Mood</strong></td>
+          <td>Minimal — slow breathing</td>
+          <td>Slow orbit + zoom</td>
+          <td>2–3/10</td>
+        </tr>
+        <tr>
+          <td><strong>Dance / Performance</strong></td>
+          <td>Full body motion</td>
+          <td>Static or slow track</td>
+          <td>7–8/10</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="spacer-md"></div>
+
+    <h3>Troubleshooting Artifacts</h3>
+
+    <div class="spacer-sm"></div>
+
+    <div class="card">
+      <ul>
+        <li><strong>Warping / morphing face:</strong> Reduce motion intensity to 3–4. Add "maintain facial consistency, no morphing" to prompt. Use negative prompt: "face distortion, warping."</li>
+        <li><strong>Jittery movement:</strong> This usually means conflicting motion instructions. Simplify your prompt to one primary action.</li>
+        <li><strong>Character drifting off-frame:</strong> Add "character stays centered in frame" to prompt. Reduce motion intensity.</li>
+        <li><strong>Unnatural hand movement:</strong> Hands are still the hardest part. Avoid prompts that require detailed hand actions. Keep hands in pockets, on hips, or out of frame when possible.</li>
+        <li><strong>Background warping:</strong> Add "stable background, no distortion" to prompt. Use source images with simpler backgrounds.</li>
+      </ul>
+    </div>
+
+    <div class="footer">AI Influencer Blueprint · AI Video Mastery · 13</div>
+  </div>
+</div>
+
+<!-- ===================== MODULE 04 — DANCE & PERFORMANCE (PAGE 1) ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Module 04</div>
+    <div class="section-title">Dance &amp; Performance<br>Videos</div>
+    <div class="section-divider"></div>
+
+    <div class="spacer-sm"></div>
+
+    <p>Dance trends are the fastest path to viral content on TikTok and Reels. The problem was always getting an AI character to dance convincingly. SeeDance 2.0 solves this.</p>
+
+    <p>The concept is simple: you provide a reference video of someone performing a dance or action, plus your AI character image, and SeeDance maps the motion from the reference onto your character. The result is your AI influencer performing that exact choreography.</p>
+
+    <div class="spacer-md"></div>
+
+    <h3>SeeDance 2.0 Workflow</h3>
+
+    <div class="spacer-sm"></div>
+
+    <div class="step">
+      <div class="step-number">01</div>
+      <div class="step-content">
+        <div class="step-title">Find Your Reference Video</div>
+        <div class="step-text">Browse TikTok or Instagram for trending dances. Download the reference clip — you need the actual video file. Use SaveTT.cc or similar to download. The cleaner the reference (clear body visibility, simple background), the better the output.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-number">02</div>
+      <div class="step-content">
+        <div class="step-title">Prepare Your Character Image</div>
+        <div class="step-text">Use a full-body shot of your AI character. Standing pose works best. Clean background (solid color or simple environment). Resolution should be at least 768×1024. The pose should roughly match the starting pose of the reference video.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-number">03</div>
+      <div class="step-content">
+        <div class="step-title">Run SeeDance 2.0</div>
+        <div class="step-text">Upload both files to SeeDance (via Replicate API or Hugging Face Space). Set output resolution to match your target platform. Processing takes 2–5 minutes depending on clip length. Generate 2–3 variations and pick the best.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-number">04</div>
+      <div class="step-content">
+        <div class="step-title">Review and Clean Up</div>
+        <div class="step-text">Check for artifacts, especially around hands and feet. Minor glitches can be hidden with CapCut transitions, text overlays, or strategic cropping. If the output is too glitchy, try a different source image pose.</div>
+      </div>
+    </div>
+
+    <div class="footer">AI Influencer Blueprint · AI Video Mastery · 14</div>
+  </div>
+</div>
+
+<!-- ===================== MODULE 04 — DANCE & PERFORMANCE (PAGE 2) ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Module 04</div>
+    <div class="section-title-sm">Lip Sync &amp; Audio Matching</div>
+    <div class="section-divider"></div>
+
+    <div class="spacer-sm"></div>
+
+    <p>Lip sync adds another layer of realism to your AI content. While perfect sync is still evolving, there are reliable approaches that work today.</p>
+
+    <div class="spacer-sm"></div>
+
+    <div class="card">
+      <h4 style="margin-top: 0; color: #4ECDC4;">Method 1: Audio-Driven Lip Sync</h4>
+      <p>Use tools like Hedra or Sync Labs to add lip movement to your AI video. Upload your generated video + an audio file, and the tool maps mouth movements to match the speech.</p>
+      <ul>
+        <li><strong>Best for:</strong> Voiceover content, "speaking to camera" clips</li>
+        <li><strong>Quality:</strong> 7/10 — good enough for most content, not perfect</li>
+        <li><strong>Cost:</strong> Hedra starts at $8/mo, Sync Labs has pay-per-use</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h4 style="margin-top: 0; color: #4ECDC4;">Method 2: Music Video Approach</h4>
+      <p>Skip lip sync entirely. Use your AI video clips as a music video — overlay trending audio, let the movement match the vibe rather than the lyrics. This is actually how most viral AI content works.</p>
+      <ul>
+        <li><strong>Best for:</strong> Dance content, aesthetic/mood videos, trend recreation</li>
+        <li><strong>Quality:</strong> 10/10 — no sync issues because there's nothing to sync</li>
+        <li><strong>Cost:</strong> Free (just add music in CapCut)</li>
+      </ul>
+    </div>
+
+    <div class="spacer-md"></div>
+
+    <h3>Creating "Reaction" and "POV" Content</h3>
+
+    <p>These formats are massive on Reels and TikTok, and they're perfect for AI video because they require minimal complex motion:</p>
+
+    <ul>
+      <li><strong>POV: Someone compliments you</strong> — Generate a subtle smile reaction. Static camera. 3–5 seconds. Add text overlay with the scenario.</li>
+      <li><strong>POV: You see your ex</strong> — Hair flip + confident walk. Track camera. Layer trending audio.</li>
+      <li><strong>When he says [X]</strong> — Expression change from neutral to [reaction]. Static camera. Close-up framing. The simpler the motion, the more believable.</li>
+    </ul>
+
+    <div class="callout">
+      <div class="callout-title">The 80/20 Rule</div>
+      <p>80% of viral AI video content uses simple motions: head turns, smiles, hair flips, walking. Don't overcomplicate it. <strong>Simple motion + great audio + good text overlay = viral formula.</strong></p>
+    </div>
+
+    <div class="footer">AI Influencer Blueprint · AI Video Mastery · 15</div>
+  </div>
+</div>
+
+<!-- ===================== MODULE 04 — DANCE & PERFORMANCE (PAGE 3) ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Module 04</div>
+    <div class="section-title-sm">Best Practices for Performance Content</div>
+    <div class="section-divider"></div>
+
+    <div class="spacer-sm"></div>
+
+    <div class="callout">
+      <div class="callout-title">Finding the Right Reference Videos</div>
+      <p>Not all reference videos work equally well with SeeDance 2.0. Here's what to look for:</p>
+    </div>
+
+    <div class="spacer-sm"></div>
+
+    <h4>✓ Good Reference Videos</h4>
+    <ul>
+      <li>Full body visible throughout the entire clip</li>
+      <li>Simple, uncluttered background (solid wall, studio)</li>
+      <li>Consistent lighting — no dramatic shadows or flashing</li>
+      <li>Single person (multi-person confuses the motion extraction)</li>
+      <li>Smooth, deliberate movements (not erratic or extremely fast)</li>
+      <li>15 seconds or less (shorter = higher quality output)</li>
+    </ul>
+
+    <div class="spacer-sm"></div>
+
+    <h4>✗ Bad Reference Videos</h4>
+    <ul>
+      <li>Frequent camera cuts or angle changes</li>
+      <li>Person partially obscured or going off-frame</li>
+      <li>Multiple people dancing (confuses pose detection)</li>
+      <li>Very fast, complex choreography (quality drops sharply)</li>
+      <li>Low resolution or heavy motion blur</li>
+    </ul>
+
+    <div class="spacer-md"></div>
+
+    <h3>Scaling Dance Content</h3>
+
+    <p>Once you find a workflow that produces good results, scale it:</p>
+
+    <ol>
+      <li><strong>Save a library of 20–30 proven reference dances</strong> — clips you know work well with SeeDance</li>
+      <li><strong>Generate 3 character outfits</strong> — same character, different looks, using your image generation pipeline</li>
+      <li><strong>Batch generate</strong> — each reference × each outfit = dozens of unique clips from minimal effort</li>
+      <li><strong>Schedule releases</strong> — one dance video per day keeps the algorithm engaged</li>
+    </ol>
+
+    <div class="spacer-sm"></div>
+
+    <p>This batch approach turns dance content from a creative grind into a repeatable system.</p>
+
+    <div class="footer">AI Influencer Blueprint · AI Video Mastery · 16</div>
+  </div>
+</div>
+
+<!-- ===================== MODULE 05 — POST-PRODUCTION (PAGE 1) ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Module 05</div>
+    <div class="section-title">Post-Production</div>
+    <div class="section-divider"></div>
+
+    <div class="spacer-sm"></div>
+
+    <p>Raw AI-generated video is your starting point, not your final product. Post-production is where you turn a good clip into a scroll-stopping piece of content. The difference between 1K views and 100K views is often in the edit.</p>
+
+    <div class="spacer-md"></div>
+
+    <h3>CapCut Editing Workflow</h3>
+
+    <p>CapCut is the standard for short-form video editing. It's free, fast, and built for Reels/TikTok content. Here's the workflow:</p>
+
+    <div class="spacer-sm"></div>
+
+    <div class="step">
+      <div class="step-number">01</div>
+      <div class="step-content">
+        <div class="step-title">Import &amp; Trim</div>
+        <div class="step-text">Import your AI-generated clip. Trim the first and last 0.5 seconds — AI video models often have slight artifacts at the start/end. Cut to the cleanest portion.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-number">02</div>
+      <div class="step-content">
+        <div class="step-title">Add Music / Audio</div>
+        <div class="step-text">Choose trending audio from CapCut's library or import your own. Match the energy of the visual to the audio. Time cuts and key moments to beat drops.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-number">03</div>
+      <div class="step-content">
+        <div class="step-title">Text Overlays</div>
+        <div class="step-text">Add hook text in the first 1–2 seconds. Use CapCut's built-in text styles or create consistent branded text. Font: bold sans-serif, white with subtle shadow.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-number">04</div>
+      <div class="step-content">
+        <div class="step-title">Color Grade</div>
+        <div class="step-text">AI video often looks slightly flat. Add a subtle contrast boost (+10–15%), slight warmth (+5 temperature), and a touch of saturation (+10%). Don't overdo it.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-number">05</div>
+      <div class="step-content">
+        <div class="step-title">Export</div>
+        <div class="step-text">Export at 1080p, 30fps (or 60fps for dance content). H.265 codec if available. Maximum quality settings. File size shouldn't exceed 50MB for most platforms.</div>
+      </div>
+    </div>
+
+    <div class="footer">AI Influencer Blueprint · AI Video Mastery · 17</div>
+  </div>
+</div>
+
+<!-- ===================== MODULE 05 — POST-PRODUCTION (PAGE 2) ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Module 05</div>
+    <div class="section-title-sm">Upscaling &amp; Quality Enhancement</div>
+    <div class="section-divider"></div>
+
+    <div class="spacer-sm"></div>
+
+    <p>AI-generated video at native resolution can look soft or slightly compressed. Upscaling fixes this and adds a professional polish that separates your content from the crowd.</p>
+
+    <div class="spacer-sm"></div>
+
+    <div class="card">
+      <h4 style="margin-top: 0; color: #4ECDC4;">Topaz Video AI</h4>
+      <p>The gold standard for video upscaling. Takes your 1080p AI video and enhances it to crisp, detailed 4K. The "Iris" model is specifically good for face enhancement.</p>
+      <ul>
+        <li><strong>Best settings:</strong> Iris model, 2x upscale, De-noise at 15, Sharpen at 20</li>
+        <li><strong>Processing time:</strong> ~3–5 minutes per 10-second clip on a decent GPU</li>
+        <li><strong>Cost:</strong> $199 one-time purchase (worth it if you're serious)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h4 style="margin-top: 0; color: #4ECDC4;">Free Alternative: Real-ESRGAN (Video)</h4>
+      <p>Open-source upscaler that runs locally. Not as refined as Topaz but significantly better than raw output.</p>
+      <ul>
+        <li><strong>Best settings:</strong> RealESRGAN_x4plus model, 2x scale</li>
+        <li><strong>Processing time:</strong> Slower than Topaz, ~8–10 minutes per clip</li>
+        <li><strong>Cost:</strong> Free</li>
+      </ul>
+    </div>
+
+    <div class="spacer-md"></div>
+
+    <h3>Export Settings Quick Reference</h3>
+
+    <div class="spacer-sm"></div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Platform</th>
+          <th>Resolution</th>
+          <th>FPS</th>
+          <th>Codec</th>
+          <th>Max Size</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Instagram Reels</strong></td>
+          <td>1080 × 1920</td>
+          <td>30</td>
+          <td>H.264</td>
+          <td>250 MB</td>
+        </tr>
+        <tr>
+          <td><strong>TikTok</strong></td>
+          <td>1080 × 1920</td>
+          <td>30–60</td>
+          <td>H.264</td>
+          <td>287 MB</td>
+        </tr>
+        <tr>
+          <td><strong>YouTube Shorts</strong></td>
+          <td>1080 × 1920</td>
+          <td>30–60</td>
+          <td>H.264/H.265</td>
+          <td>256 MB</td>
+        </tr>
+        <tr>
+          <td><strong>Twitter/X</strong></td>
+          <td>1920 × 1080</td>
+          <td>30–60</td>
+          <td>H.264</td>
+          <td>512 MB</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="footer">AI Influencer Blueprint · AI Video Mastery · 18</div>
+  </div>
+</div>
+
+<!-- ===================== MODULE 05 — POST-PRODUCTION (PAGE 3) ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Module 05</div>
+    <div class="section-title-sm">Batch Processing for Scale</div>
+    <div class="section-divider"></div>
+
+    <div class="spacer-sm"></div>
+
+    <p>Once your workflow is dialed in, the goal is volume. Here's how to turn a 1-video-per-day habit into a 5-video-per-day machine:</p>
+
+    <div class="spacer-sm"></div>
+
+    <div class="card">
+      <h4 style="margin-top: 0; color: #4ECDC4;">The Batch Pipeline</h4>
+      <ol>
+        <li><strong>Monday: Generate source images.</strong> Create 10–15 character images in different poses, outfits, and settings using your image pipeline.</li>
+        <li><strong>Tuesday: Generate videos.</strong> Run all images through Kling 3.0 and SeeDance 2.0. Queue them up and let them process. Aim for 20+ raw clips.</li>
+        <li><strong>Wednesday: Upscale.</strong> Batch-process all videos through Topaz Video AI. Queue overnight if needed.</li>
+        <li><strong>Thursday: Edit.</strong> Open CapCut, assembly-line your edits. Trim, add audio, text overlays, color grade. Export all.</li>
+        <li><strong>Friday: Schedule.</strong> Upload everything to your scheduling tool. Set posts for the next 1–2 weeks.</li>
+      </ol>
+    </div>
+
+    <div class="spacer-md"></div>
+
+    <div class="callout">
+      <div class="callout-title">Assembly Line Mindset</div>
+      <p>Don't create one video from start to finish, then start the next. Do all your image generation at once. All your video generation at once. All your editing at once. <strong>Batching the same task is 3–4x faster</strong> than switching between different tasks constantly. Your brain (and your GPU) work better in focused mode.</p>
+    </div>
+
+    <div class="spacer-md"></div>
+
+    <h3>Recommended Posting Cadence</h3>
+
+    <ul>
+      <li><strong>Instagram Reels:</strong> 1–2 per day (more gets throttled)</li>
+      <li><strong>TikTok:</strong> 2–3 per day (algorithm rewards volume)</li>
+      <li><strong>YouTube Shorts:</strong> 1 per day (consistency > volume)</li>
+      <li><strong>Twitter/X:</strong> 1–2 per day (engagement timing matters more)</li>
+    </ul>
+
+    <p>At 5 unique videos per batch day, one batch session produces a full week of content across all platforms.</p>
+
+    <div class="footer">AI Influencer Blueprint · AI Video Mastery · 19</div>
+  </div>
+</div>
+
+<!-- ===================== MODULE 06 — VIRAL VIDEO FORMULAS (PAGE 1) ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Module 06</div>
+    <div class="section-title">Viral Video<br>Formulas</div>
+    <div class="section-divider"></div>
+
+    <div class="spacer-sm"></div>
+
+    <p>Going viral isn't random. It's formulaic. These five video formats consistently drive high engagement for AI influencer accounts. Each one is optimized for the way people scroll — hook in the first second, payoff before they swipe.</p>
+
+    <div class="spacer-md"></div>
+
+    <div class="step">
+      <div class="step-number">01</div>
+      <div class="step-content">
+        <div class="step-title">"Get Ready With Me" (GRWM)</div>
+        <div class="step-text">
+          <strong>Format:</strong> Multiple clips stitched — outfit reveal, hair styling moment, final look reveal.<br>
+          <strong>Hook:</strong> "Getting ready for [event/situation]..." (text overlay on clip 1)<br>
+          <strong>Middle:</strong> 2–3 transition shots showing different angles or stages<br>
+          <strong>CTA:</strong> Final reveal shot with "Rate this look? 💬" or "Outfit deets in bio"<br>
+          <strong>Length:</strong> 12–20 seconds<br>
+          <strong>Generation:</strong> 3 separate Kling clips → stitch in CapCut → add trending GRWM audio
+        </div>
+      </div>
+    </div>
+
+    <div class="spacer-sm"></div>
+
+    <div class="step">
+      <div class="step-number">02</div>
+      <div class="step-content">
+        <div class="step-title">Dance Trend Recreation</div>
+        <div class="step-text">
+          <strong>Format:</strong> Your AI character performing the current trending dance.<br>
+          <strong>Hook:</strong> The dance itself IS the hook — first beat catches attention<br>
+          <strong>Middle:</strong> Full choreography, matching the original trend closely<br>
+          <strong>CTA:</strong> "Duet this 💃" or "She ate this up 🔥" (engagement bait in comments)<br>
+          <strong>Length:</strong> 7–15 seconds (match the original trend length)<br>
+          <strong>Generation:</strong> SeeDance 2.0 with trending reference → clean up in CapCut → sync original audio
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">AI Influencer Blueprint · AI Video Mastery · 20</div>
+  </div>
+</div>
+
+<!-- ===================== MODULE 06 — VIRAL VIDEO FORMULAS (PAGE 2) ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Module 06</div>
+    <div class="section-title-sm">Viral Formulas (continued)</div>
+    <div class="section-divider"></div>
+
+    <div class="spacer-sm"></div>
+
+    <div class="step">
+      <div class="step-number">03</div>
+      <div class="step-content">
+        <div class="step-title">POV Storytelling</div>
+        <div class="step-text">
+          <strong>Format:</strong> Text-driven narrative with your AI character reacting/performing.<br>
+          <strong>Hook:</strong> "POV: [relatable scenario]" text overlay in first frame<br>
+          <strong>Middle:</strong> Character performs the appropriate reaction or action<br>
+          <strong>CTA:</strong> "Tag someone who does this 😂" or "Part 2? 👀"<br>
+          <strong>Length:</strong> 5–10 seconds (short = rewatchable = higher loop count)<br>
+          <strong>Generation:</strong> Single Kling clip with reaction prompt → add POV text in CapCut → trending audio
+        </div>
+      </div>
+    </div>
+
+    <div class="spacer-sm"></div>
+
+    <div class="step">
+      <div class="step-number">04</div>
+      <div class="step-content">
+        <div class="step-title">Before / After Transformation</div>
+        <div class="step-text">
+          <strong>Format:</strong> Split-screen or transition between two states of your character.<br>
+          <strong>Hook:</strong> The "before" state — casual, messy, undone look<br>
+          <strong>Middle:</strong> Quick transition effect (CapCut has great presets for this)<br>
+          <strong>CTA:</strong> "Which version? 1 or 2?" or "Glow-up check ✨"<br>
+          <strong>Length:</strong> 7–12 seconds<br>
+          <strong>Generation:</strong> Two Kling clips (casual + glam character images) → CapCut transition → beat-synced audio
+        </div>
+      </div>
+    </div>
+
+    <div class="spacer-sm"></div>
+
+    <div class="step">
+      <div class="step-number">05</div>
+      <div class="step-content">
+        <div class="step-title">Day-in-the-Life Montage</div>
+        <div class="step-text">
+          <strong>Format:</strong> Multiple short clips showing your AI character's "daily routine."<br>
+          <strong>Hook:</strong> "A day in my life as a [character identity]" text overlay<br>
+          <strong>Middle:</strong> 4–5 quick scenes: morning coffee, working, walking, sunset<br>
+          <strong>CTA:</strong> "Would you live this life? 💭" or "Follow for daily content"<br>
+          <strong>Length:</strong> 15–30 seconds<br>
+          <strong>Generation:</strong> 4–5 separate Kling clips → stitch in CapCut → lo-fi or trending audio
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">AI Influencer Blueprint · AI Video Mastery · 21</div>
+  </div>
+</div>
+
+<!-- ===================== MODULE 06 — VIRAL VIDEO FORMULAS (PAGE 3) ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Module 06</div>
+    <div class="section-title-sm">Optimal Video Lengths by Platform</div>
+    <div class="section-divider"></div>
+
+    <div class="spacer-sm"></div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Platform</th>
+          <th>Sweet Spot</th>
+          <th>Max Before Drop-off</th>
+          <th>Loop Potential</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Instagram Reels</strong></td>
+          <td>7–15 seconds</td>
+          <td>30 seconds</td>
+          <td>High (short = more loops)</td>
+        </tr>
+        <tr>
+          <td><strong>TikTok</strong></td>
+          <td>7–21 seconds</td>
+          <td>60 seconds</td>
+          <td>Very high</td>
+        </tr>
+        <tr>
+          <td><strong>YouTube Shorts</strong></td>
+          <td>15–45 seconds</td>
+          <td>60 seconds</td>
+          <td>Moderate</td>
+        </tr>
+        <tr>
+          <td><strong>Twitter/X</strong></td>
+          <td>6–15 seconds</td>
+          <td>30 seconds</td>
+          <td>Moderate (autoplay)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="spacer-md"></div>
+
+    <div class="callout">
+      <div class="callout-title">The Loop Strategy</div>
+      <p>The algorithm measures "completion rate" — what percentage of viewers watch to the end. Short videos get watched multiple times (looped), which counts as multiple completions. A 7-second video watched 3 times beats a 30-second video watched once. <strong>When in doubt, shorter wins.</strong></p>
+    </div>
+
+    <div class="spacer-md"></div>
+
+    <h3>The Hook Formula</h3>
+
+    <p>Every successful short-form video follows this structure:</p>
+
+    <div class="card">
+      <ol>
+        <li><strong>Hook (0–1.5 seconds):</strong> Visual or text that stops the scroll. This is non-negotiable. If they don't stop, nothing else matters.</li>
+        <li><strong>Payoff (1.5–8 seconds):</strong> The content they stopped for. Make it satisfying. Match the hook's promise.</li>
+        <li><strong>CTA (last 2 seconds):</strong> Give them something to do — comment, share, follow, check bio. Even a simple "👀" text overlay with a question works.</li>
+      </ol>
+    </div>
+
+    <p>Nail the hook. The rest is execution.</p>
+
+    <div class="footer">AI Influencer Blueprint · AI Video Mastery · 22</div>
+  </div>
+</div>
+
+<!-- ===================== BONUS — PROMPT LIBRARY (PAGE 1) ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Bonus</div>
+    <div class="section-title">Prompt Library</div>
+    <div class="section-divider"></div>
+
+    <div class="spacer-sm"></div>
+
+    <p>Copy-paste ready. Each prompt is tested with Kling 3.0 Pro and optimized for consistent, high-quality output. Adjust character descriptions to match your AI influencer.</p>
+
+    <div class="spacer-md"></div>
+
+    <h3 style="color: #4ECDC4;">Lifestyle &amp; Casual</h3>
+
+    <div class="prompt-block">
+      <div class="prompt-label">01 — Morning Coffee</div>
+      "The woman sits in a sunlit café, bringing a coffee cup to her lips. She takes a slow sip, then lowers the cup with a relaxed smile. Warm, golden morning light. Shallow depth of field. Slow camera push-in."
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-label">02 — City Walk</div>
+      "The woman walks confidently down a busy city street, hair gently blowing in the breeze. She glances at the camera with a subtle smirk. Tracking shot from the side, slightly low angle. Urban background with bokeh lights."
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-label">03 — Sunset Silhouette</div>
+      "The woman stands on a rooftop at golden hour, wind gently moving her hair and dress. She turns slowly to face the camera. Warm orange backlight creates a soft glow. Static camera, cinematic wide shot."
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-label">04 — Phone Scroll</div>
+      "The woman sits on a couch, casually scrolling her phone. She sees something surprising, raises her eyebrows and smiles. Cozy interior lighting. Medium close-up, static camera."
+    </div>
+
+    <div class="spacer-md"></div>
+
+    <h3 style="color: #4ECDC4;">Fashion &amp; Beauty</h3>
+
+    <div class="prompt-block">
+      <div class="prompt-label">05 — Outfit Reveal</div>
+      "The woman steps forward into frame, showing off her full outfit. She does a slow spin, hands on hips, then faces the camera with a confident pose. Studio lighting. Camera tilts up from feet to face."
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-label">06 — Hair Toss</div>
+      "The woman flips her hair dramatically to one side, then looks at the camera with an intense gaze. Wind effect catches the hair mid-motion. High-contrast beauty lighting. Slow motion feel."
+    </div>
+
+    <div class="footer">AI Influencer Blueprint · AI Video Mastery · 23</div>
+  </div>
+</div>
+
+<!-- ===================== BONUS — PROMPT LIBRARY (PAGE 2) ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Bonus</div>
+    <div class="section-title-sm">Prompt Library (continued)</div>
+    <div class="section-divider"></div>
+
+    <div class="spacer-sm"></div>
+
+    <div class="prompt-block">
+      <div class="prompt-label">07 — Mirror Selfie</div>
+      "The woman poses in front of a large mirror, adjusting her outfit. She holds up her phone as if taking a selfie, tilts her head and smiles. Modern bathroom or closet setting. Static camera."
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-label">08 — Jewelry Close-Up</div>
+      "Close-up of the woman touching a necklace at her collarbone. She looks down, then up at the camera with a soft smile. Dramatic lighting highlights the jewelry. Slow zoom out to medium shot."
+    </div>
+
+    <div class="spacer-md"></div>
+
+    <h3 style="color: #4ECDC4;">Cinematic &amp; Mood</h3>
+
+    <div class="prompt-block">
+      <div class="prompt-label">09 — Rain Window</div>
+      "The woman sits by a rain-streaked window, looking outside pensively. She turns slowly toward the camera. Moody blue lighting reflects off the glass. Slow orbit camera movement. Melancholic atmosphere."
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-label">10 — Night City</div>
+      "The woman walks through neon-lit city streets at night. Colorful reflections on wet pavement. She looks over her shoulder at the camera. Tracking shot, cinematic anamorphic feel. Bokeh from city lights."
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-label">11 — Dramatic Entrance</div>
+      "The woman pushes open double doors and walks through them toward the camera. Dramatic backlighting silhouettes her figure. She steps into the light revealing her face. Slow-motion feel."
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-label">12 — Beach Sunset</div>
+      "The woman walks along the shoreline at sunset, waves gently washing over her feet. She pauses, looks out at the ocean, then turns to camera. Golden hour light. Wide tracking shot transitioning to medium."
+    </div>
+
+    <div class="spacer-md"></div>
+
+    <h3 style="color: #4ECDC4;">Reaction &amp; POV</h3>
+
+    <div class="prompt-block">
+      <div class="prompt-label">13 — The Compliment Reaction</div>
+      "Close-up of the woman's face. Her eyes widen slightly, then she breaks into a genuine, warm smile. She bites her lower lip and looks down shyly, then back up. Static camera, soft lighting."
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-label">14 — The Eye Roll</div>
+      "The woman gives an exaggerated eye roll, then crosses her arms and smirks at the camera. Playful, sarcastic energy. Close-up framing. Static camera. Natural lighting."
+    </div>
+
+    <div class="footer">AI Influencer Blueprint · AI Video Mastery · 24</div>
+  </div>
+</div>
+
+<!-- ===================== BONUS — PROMPT LIBRARY (PAGE 3) ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Bonus</div>
+    <div class="section-title-sm">Prompt Library (continued)</div>
+    <div class="section-divider"></div>
+
+    <div class="spacer-sm"></div>
+
+    <div class="prompt-block">
+      <div class="prompt-label">15 — The Shock</div>
+      "The woman's expression shifts from neutral to wide-eyed shock. Her mouth opens slightly, she brings her hand to her chest. Dramatic pause, then a slow smile. Close-up, static camera."
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-label">16 — The Wink</div>
+      "The woman looks directly at the camera, gives a slow deliberate wink, then a knowing smile. She tilts her head slightly. Warm, flattering lighting. Close-up framing. Static camera."
+    </div>
+
+    <div class="spacer-md"></div>
+
+    <h3 style="color: #4ECDC4;">Action &amp; Dynamic</h3>
+
+    <div class="prompt-block">
+      <div class="prompt-label">17 — Workout / Fitness</div>
+      "The woman performs a yoga pose in a bright, airy studio. She moves smoothly from one position to the next with controlled grace. Natural light from large windows. Wide shot, static camera."
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-label">18 — Car Vibes</div>
+      "The woman sits in the passenger seat of a car, vibing to music. She nods her head to the beat, mouths lyrics. Sunlight streams through the window. Medium shot, slight sway from car movement."
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-label">19 — Cooking Scene</div>
+      "The woman stands at a modern kitchen counter, stirring a pan. She picks up an ingredient, adds it to the pan. Steam rises. She tastes with a spoon and nods approvingly. Warm kitchen lighting. Medium shot."
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-label">20 — Dancing Solo</div>
+      "The woman dances freely in her living room, moving to an invisible beat. Natural, joyful movement — not choreographed. She laughs mid-dance. Warm interior lighting. Wide shot, static camera."
+    </div>
+
+    <div class="spacer-lg"></div>
+
+    <div class="callout">
+      <div class="callout-title">Customization Tip</div>
+      <p>Replace "the woman" with a specific character description matching your AI influencer for best results. Add outfit details, hair color, and distinguishing features to each prompt for maximum character consistency across all your video content.</p>
+    </div>
+
+    <div class="footer">AI Influencer Blueprint · AI Video Mastery · 25</div>
+  </div>
+</div>
+
+<!-- ===================== CLOSING PAGE ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; height: calc(297mm - 4px);">
+
+    <div class="section-label" style="margin-bottom: 30px;">AI Influencer Blueprint</div>
+    <div class="section-title" style="font-size: 32pt; margin-bottom: 20px;">Start Creating.</div>
+    <div class="section-divider" style="margin: 0 auto 30px auto;"></div>
+
+    <p style="max-width: 400px; text-align: center; font-size: 11pt; line-height: 1.7;">You have the tools. You have the workflow. You have the prompts. The only thing left is execution.</p>
+
+    <div class="spacer-lg"></div>
+
+    <p style="color: #707070; font-size: 9pt; letter-spacing: 2px; text-transform: uppercase;">© 2026 AI Influencer Blueprint. All rights reserved.</p>
+
+    <div class="footer">AI Influencer Blueprint · AI Video Mastery · 26</div>
+  </div>
+</div>
+
+</body>
+</html>

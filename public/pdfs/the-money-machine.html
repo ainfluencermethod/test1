@@ -1,0 +1,2154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THE MONEY MACHINE — AI Influencer Monetization Playbook</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+  :root {
+    --bg: #0D0F11;
+    --card: #1A1D21;
+    --accent: #4ECDC4;
+    --accent-dim: rgba(78, 205, 196, 0.08);
+    --accent-border: rgba(78, 205, 196, 0.25);
+    --text-white: #FFFFFF;
+    --text-body: #B8B8B8;
+    --text-muted: #707070;
+    --callout-bg: rgba(78, 205, 196, 0.05);
+    --callout-border: rgba(78, 205, 196, 0.3);
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text-body);
+    font-size: 11pt;
+    line-height: 1.7;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .page {
+    width: 210mm;
+    height: 297mm;
+    padding: 0;
+    page-break-after: always;
+    page-break-inside: avoid;
+    break-after: page;
+    position: relative;
+    background: var(--bg);
+    overflow: hidden;
+  }
+
+  .page:last-child {
+    page-break-after: auto;
+  }
+
+  .page-inner {
+    padding: 50px 55px 60px 55px;
+    position: relative;
+    height: calc(297mm - 4px);
+    overflow: hidden;
+  }
+
+  /* Teal top bar on every page */
+  .page::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 4px;
+    background: var(--accent);
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  /* Footer */
+  .footer {
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 7.5pt;
+    color: var(--text-muted);
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* COVER PAGE */
+  .cover {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 297mm;
+    text-align: center;
+    padding: 60px;
+  }
+
+  .cover-label {
+    font-size: 9pt;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 40px;
+  }
+
+  .cover-title {
+    font-size: 48pt;
+    font-weight: 900;
+    color: var(--text-white);
+    letter-spacing: -1px;
+    line-height: 1.05;
+    margin-bottom: 16px;
+  }
+
+  .cover-subtitle {
+    font-size: 14pt;
+    font-weight: 400;
+    color: var(--accent);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 48px;
+  }
+
+  .cover-tagline {
+    font-size: 12pt;
+    color: var(--text-body);
+    font-weight: 300;
+    font-style: italic;
+    max-width: 400px;
+    line-height: 1.6;
+  }
+
+  .cover-divider {
+    width: 80px;
+    height: 3px;
+    background: var(--accent);
+    margin: 40px auto;
+  }
+
+  .cover-brand {
+    font-size: 8pt;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 60px;
+    font-weight: 500;
+  }
+
+  /* SECTION HEADERS */
+  .section-label {
+    font-size: 9pt;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-size: 28pt;
+    font-weight: 800;
+    color: var(--text-white);
+    line-height: 1.15;
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+  }
+
+  .section-divider {
+    width: 60px;
+    height: 3px;
+    background: var(--accent);
+    margin-bottom: 36px;
+  }
+
+  /* MODULE NUMBER */
+  .module-number {
+    font-size: 72pt;
+    font-weight: 900;
+    color: var(--accent);
+    opacity: 0.15;
+    line-height: 1;
+    margin-bottom: -20px;
+    letter-spacing: -3px;
+  }
+
+  .module-number-inline {
+    font-size: 48pt;
+    font-weight: 900;
+    color: var(--accent);
+    opacity: 0.2;
+    line-height: 1;
+    position: absolute;
+    right: 56px;
+    top: 48px;
+  }
+
+  /* HEADINGS */
+  h2 {
+    font-size: 18pt;
+    font-weight: 700;
+    color: var(--text-white);
+    margin-bottom: 16px;
+    margin-top: 32px;
+    line-height: 1.3;
+  }
+
+  h3 {
+    font-size: 13pt;
+    font-weight: 600;
+    color: var(--text-white);
+    margin-bottom: 10px;
+    margin-top: 24px;
+    line-height: 1.4;
+  }
+
+  h4 {
+    font-size: 11pt;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    margin-top: 20px;
+    font-size: 9pt;
+  }
+
+  /* BODY TEXT */
+  p {
+    margin-bottom: 14px;
+    color: var(--text-body);
+    line-height: 1.75;
+  }
+
+  .lead {
+    font-size: 12pt;
+    color: var(--text-body);
+    line-height: 1.8;
+    margin-bottom: 24px;
+  }
+
+  .muted {
+    color: var(--text-muted);
+    font-size: 9pt;
+  }
+
+  /* CARDS */
+  .card {
+    background: var(--card);
+    border-radius: 8px;
+    padding: 28px 32px;
+    margin-bottom: 20px;
+  }
+
+  /* CALLOUT BOXES */
+  .callout {
+    background: var(--callout-bg);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 20px 28px;
+    margin: 24px 0;
+  }
+
+  .callout-title {
+    font-size: 9pt;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+
+  .callout p {
+    margin-bottom: 0;
+    font-size: 10pt;
+  }
+
+  /* NUMBERED STEPS */
+  .step {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 24px;
+    align-items: flex-start;
+  }
+
+  .step-num {
+    font-size: 32pt;
+    font-weight: 900;
+    color: var(--accent);
+    line-height: 1;
+    min-width: 50px;
+    opacity: 0.8;
+  }
+
+  .step-content {
+    flex: 1;
+    padding-top: 4px;
+  }
+
+  .step-content h3 {
+    margin-top: 0;
+  }
+
+  /* LISTS */
+  ul, ol {
+    padding-left: 20px;
+    margin-bottom: 16px;
+  }
+
+  li {
+    margin-bottom: 8px;
+    line-height: 1.65;
+    color: var(--text-body);
+  }
+
+  li strong {
+    color: var(--text-white);
+    font-weight: 600;
+  }
+
+  /* TABLE OF CONTENTS */
+  .toc-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .toc-item:last-child {
+    border-bottom: none;
+  }
+
+  .toc-module {
+    font-size: 9pt;
+    color: var(--accent);
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    min-width: 100px;
+  }
+
+  .toc-title {
+    font-size: 11pt;
+    color: var(--text-white);
+    font-weight: 500;
+    flex: 1;
+    padding-left: 16px;
+  }
+
+  .toc-page {
+    font-size: 10pt;
+    color: var(--text-muted);
+    font-weight: 400;
+    min-width: 30px;
+    text-align: right;
+  }
+
+  /* TIER CARDS */
+  .tier-card {
+    background: var(--card);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin-bottom: 16px;
+    border-left: 3px solid var(--accent);
+  }
+
+  .tier-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 10px;
+  }
+
+  .tier-name {
+    font-size: 12pt;
+    font-weight: 700;
+    color: var(--text-white);
+  }
+
+  .tier-revenue {
+    font-size: 12pt;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .tier-followers {
+    font-size: 9pt;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* TEMPLATE BOX */
+  .template-box {
+    background: var(--card);
+    border-radius: 8px;
+    padding: 28px 32px;
+    margin: 20px 0;
+    border: 1px solid rgba(78, 205, 196, 0.1);
+  }
+
+  .template-box .template-label {
+    font-size: 8pt;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 16px;
+  }
+
+  .template-box p {
+    font-size: 10pt;
+    line-height: 1.8;
+    color: var(--text-body);
+    margin-bottom: 10px;
+  }
+
+  .template-box .placeholder {
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  /* GRID */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  /* PRICING TABLE */
+  .price-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .price-row:last-child {
+    border-bottom: none;
+  }
+
+  .price-label {
+    color: var(--text-body);
+    font-size: 10pt;
+  }
+
+  .price-value {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 10pt;
+  }
+
+  /* SPACERS */
+  .spacer-sm { height: 16px; }
+  .spacer-md { height: 32px; }
+  .spacer-lg { height: 48px; }
+  .spacer-xl { height: 64px; }
+
+  /* KEY METRIC */
+  .metric {
+    text-align: center;
+    padding: 20px;
+  }
+
+  .metric-value {
+    font-size: 36pt;
+    font-weight: 900;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .metric-label {
+    font-size: 9pt;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  /* EMAIL SEQUENCE */
+  .email-step {
+    background: var(--card);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 12px;
+  }
+
+  .email-day {
+    font-size: 9pt;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+
+  .email-subject {
+    font-size: 11pt;
+    font-weight: 600;
+    color: var(--text-white);
+    margin-bottom: 6px;
+  }
+
+  .email-desc {
+    font-size: 9.5pt;
+    color: var(--text-muted);
+    margin-bottom: 0;
+  }
+
+  /* Rate card table */
+  .rate-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+  }
+
+  .rate-table th {
+    font-size: 8pt;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(78,205,196,0.2);
+  }
+
+  .rate-table td {
+    font-size: 10pt;
+    color: var(--text-body);
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .rate-table td:last-child {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* Calendar grid */
+  .cal-week {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 12px;
+    margin-bottom: 12px;
+    align-items: start;
+  }
+
+  .cal-week-label {
+    font-size: 9pt;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding-top: 4px;
+  }
+
+  .cal-week-content {
+    font-size: 10pt;
+    color: var(--text-body);
+    line-height: 1.7;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================ -->
+<!-- COVER PAGE -->
+<!-- ============================================ -->
+<div class="page">
+  <div class="cover">
+    <div class="cover-label">AI Influencer Blueprint</div>
+    <div class="spacer-lg"></div>
+    <div class="cover-title">THE MONEY<br>MACHINE</div>
+    <div class="spacer-sm"></div>
+    <div class="cover-subtitle">AI Influencer Monetization Playbook</div>
+    <div class="cover-divider"></div>
+    <div class="cover-tagline">Turn followers into revenue — without showing your face.</div>
+    <div class="cover-brand">AI INFLUENCER BLUEPRINT · 2025</div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- TABLE OF CONTENTS -->
+<!-- ============================================ -->
+<div class="page">
+  <div class="page-inner">
+    <div class="spacer-lg"></div>
+    <div class="section-label">Contents</div>
+    <div class="section-title">What's Inside</div>
+    <div class="section-divider"></div>
+    <div class="spacer-md"></div>
+
+    <div class="toc-item">
+      <span class="toc-module">Intro</span>
+      <span class="toc-title">The Economics of AI Influence</span>
+      <span class="toc-page">03</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-module">Module 01</span>
+      <span class="toc-title">Fanvue Setup & Optimization</span>
+      <span class="toc-page">05</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-module">Module 02</span>
+      <span class="toc-title">Digital Products</span>
+      <span class="toc-page">09</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-module">Module 03</span>
+      <span class="toc-title">Affiliate & Brand Deals</span>
+      <span class="toc-page">12</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-module">Module 04</span>
+      <span class="toc-title">Funnels & Email</span>
+      <span class="toc-page">15</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-module">Module 05</span>
+      <span class="toc-title">Scaling Revenue</span>
+      <span class="toc-page">18</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-module">Module 06</span>
+      <span class="toc-title">Revenue Benchmarks</span>
+      <span class="toc-page">21</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-module">Bonus</span>
+      <span class="toc-title">Templates & Resources</span>
+      <span class="toc-page">23</span>
+    </div>
+
+    <div class="footer">AI INFLUENCER BLUEPRINT · THE MONEY MACHINE · 02</div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- INTRODUCTION — PAGE 3 -->
+<!-- ============================================ -->
+<div class="page">
+  <div class="page-inner">
+    <div class="spacer-md"></div>
+    <div class="section-label">Introduction</div>
+    <div class="section-title">The Economics of<br>AI Influence</div>
+    <div class="section-divider"></div>
+
+    <p class="lead">AI influencers aren't a novelty — they're a business model. And the economics are better than you think.</p>
+
+    <p>Here's the reality most people miss: AI influencers can be <strong style="color: var(--text-white);">more profitable</strong> than real ones. Not because they're better — but because the cost structure is fundamentally different.</p>
+
+    <p>A human influencer needs to schedule shoots, travel to locations, manage a team, deal with burnout, and take days off. An AI influencer needs none of that. Your "talent" works 24/7, never complains, never has a bad hair day, and can produce an infinite volume of content at near-zero marginal cost.</p>
+
+    <div class="spacer-sm"></div>
+
+    <h2>Why AI Wins on Economics</h2>
+
+    <div class="grid-2">
+      <div class="card">
+        <h4>Human Influencer</h4>
+        <ul>
+          <li>Limited by time and energy</li>
+          <li>Travel and production costs</li>
+          <li>Team salaries and management</li>
+          <li>Burnout and inconsistency</li>
+          <li>One identity, one brand</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>AI Influencer</h4>
+        <ul>
+          <li>Unlimited content generation</li>
+          <li>Near-zero marginal cost</li>
+          <li>No team required (at first)</li>
+          <li>Perfect consistency, always on</li>
+          <li>Multiple characters simultaneously</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">Key Insight</div>
+      <p>The ceiling for a single AI influencer account is $10K–$30K/month. But because you can run multiple accounts with the same workflow, the real ceiling is whatever you want it to be.</p>
+    </div>
+
+    <div class="footer">AI INFLUENCER BLUEPRINT · THE MONEY MACHINE · 03</div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- INTRODUCTION — PAGE 4 -->
+<!-- ============================================ -->
+<div class="page">
+  <div class="page-inner">
+    <div class="spacer-md"></div>
+    <h2>The 3 Monetization Tiers</h2>
+    <p>Every revenue stream for AI influencers falls into one of three tiers. Your job is to build all three — starting with Passive, then layering Active and Premium on top.</p>
+
+    <div class="spacer-sm"></div>
+
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <h3>Passive Revenue</h3>
+        <p>Income that comes in whether you're working or not. Subscriptions on Fanvue, affiliate links in your bio, digital products on autopilot. This is your foundation — build it first.</p>
+        <p class="muted">Examples: Fanvue subscriptions, Gumroad digital products, affiliate commissions</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <h3>Active Revenue</h3>
+        <p>Income that requires your involvement but scales with demand. Custom content requests, one-on-one interactions, brand deal negotiations. Higher per-transaction value, but requires your time.</p>
+        <p class="muted">Examples: Custom content, tipping, paid DMs, sponsored posts</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <h3>Premium Revenue</h3>
+        <p>High-ticket offerings for your most engaged audience. Courses, exclusive communities, licensing deals, white-label services. This is where AI influencer income goes from "side hustle" to "real business."</p>
+        <p class="muted">Examples: Premium courses, licensing, consulting for brands, exclusive tiers</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">The Revenue Stack</div>
+      <p>The most successful AI influencer operators don't rely on one revenue stream. They stack 4–6 streams across all three tiers. By the time you finish this guide, you'll have the blueprint to do exactly that.</p>
+    </div>
+
+    <div class="footer">AI INFLUENCER BLUEPRINT · THE MONEY MACHINE · 04</div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- MODULE 01 — FANVUE — PAGE 5 -->
+<!-- ============================================ -->
+<div class="page">
+  <div class="page-inner">
+    <div class="module-number-inline">01</div>
+    <div class="spacer-md"></div>
+    <div class="section-label">Module 01</div>
+    <div class="section-title">Fanvue Setup &<br>Optimization</div>
+    <div class="section-divider"></div>
+
+    <p class="lead">Fanvue is the #1 monetization platform for AI influencers. Think of it as OnlyFans — but purpose-built for AI-generated characters. It's where most of your recurring revenue will come from.</p>
+
+    <h2>What Fanvue Is (And Why It Matters)</h2>
+
+    <p>Fanvue is a subscription-based platform where creators — including AI characters — can charge fans for exclusive content. Unlike OnlyFans, Fanvue explicitly welcomes AI creators. They've built features specifically for the AI influencer space, including AI chat integration and content verification tools.</p>
+
+    <p>Why Fanvue over other platforms:</p>
+    <ul>
+      <li><strong>AI-friendly policies</strong> — No risk of account bans for being AI-generated</li>
+      <li><strong>Built-in discovery</strong> — Their algorithm promotes new creators</li>
+      <li><strong>80/20 split</strong> — You keep 80% of all revenue</li>
+      <li><strong>Tipping and extras</strong> — Multiple revenue streams within the platform</li>
+      <li><strong>Lower stigma</strong> — Easier to promote than OnlyFans links</li>
+    </ul>
+
+    <div class="spacer-sm"></div>
+
+    <h2>Account Setup: Step by Step</h2>
+
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <h3>Create Your Account</h3>
+        <p>Sign up at fanvue.com with a dedicated email for your AI character. Use a business email (character@yourdomain.com) for professionalism. You'll need to verify your identity — this is <em>your</em> identity as the operator, not the AI character's.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <h3>Complete Verification</h3>
+        <p>Fanvue requires ID verification and a selfie. This stays private — fans never see it. You also need to set up payment processing (Stripe or direct deposit). Have your tax info ready.</p>
+      </div>
+    </div>
+
+    <div class="footer">AI INFLUENCER BLUEPRINT · THE MONEY MACHINE · 05</div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- MODULE 01 — FANVUE — PAGE 6 -->
+<!-- ============================================ -->
+<div class="page">
+  <div class="page-inner">
+    <div class="spacer-md"></div>
+
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <h3>Optimize Your Profile</h3>
+        <p>Your profile is your storefront. Every element should be optimized for conversion.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h4>Profile Optimization Checklist</h4>
+      <div class="spacer-sm"></div>
+      <ul>
+        <li><strong>Display Name:</strong> Your AI character's name — keep it memorable, searchable</li>
+        <li><strong>Bio:</strong> 2–3 lines max. State what fans get. Include personality hooks. Example: "Your favorite AI girlfriend. Exclusive content daily. DMs always open 💋"</li>
+        <li><strong>Profile Photo:</strong> Your character's best headshot — high quality, eye-catching</li>
+        <li><strong>Banner Image:</strong> Lifestyle shot of your character that sets the tone</li>
+        <li><strong>Welcome Message:</strong> Auto-send to new subscribers. Make it personal and warm</li>
+        <li><strong>Content Tiers:</strong> Set up 2–3 pricing tiers (covered below)</li>
+      </ul>
+    </div>
+
+    <div class="spacer-sm"></div>
+
+    <h2>Subscription Pricing Strategy</h2>
+
+    <p>Pricing is where most new creators get it wrong. Price too high and nobody subscribes. Price too low and you leave money on the table. Here's what works:</p>
+
+    <div class="spacer-sm"></div>
+
+    <div class="grid-2">
+      <div class="tier-card">
+        <div class="tier-header">
+          <span class="tier-name">Free Tier</span>
+          <span class="tier-revenue">$0/mo</span>
+        </div>
+        <p style="font-size: 10pt; margin-bottom: 0;">Teaser content. SFW posts, personality content, behind-the-scenes. Purpose: build trust and convert to paid.</p>
+      </div>
+      <div class="tier-card">
+        <div class="tier-header">
+          <span class="tier-name">Standard</span>
+          <span class="tier-revenue">$9.99/mo</span>
+        </div>
+        <p style="font-size: 10pt; margin-bottom: 0;">Exclusive content, regular posts, DM access. This is your bread and butter — the highest volume tier.</p>
+      </div>
+      <div class="tier-card">
+        <div class="tier-header">
+          <span class="tier-name">VIP</span>
+          <span class="tier-revenue">$24.99/mo</span>
+        </div>
+        <p style="font-size: 10pt; margin-bottom: 0;">Premium content, priority DMs, custom requests, early access. For superfans who want the full experience.</p>
+      </div>
+      <div class="tier-card">
+        <div class="tier-header">
+          <span class="tier-name">Diamond</span>
+          <span class="tier-revenue">$49.99/mo</span>
+        </div>
+        <p style="font-size: 10pt; margin-bottom: 0;">Ultra-exclusive. Personalized content, voice messages, name-specific content. Low volume, high value.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">Pro Tip</div>
+      <p>Start with a free tier + one paid tier ($9.99). Add higher tiers once you have 50+ paid subscribers and understand what your audience wants. Don't over-complicate it early.</p>
+    </div>
+
+    <div class="footer">AI INFLUENCER BLUEPRINT · THE MONEY MACHINE · 06</div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- MODULE 01 — FANVUE — PAGE 7 -->
+<!-- ============================================ -->
+<div class="page">
+  <div class="page-inner">
+    <div class="spacer-md"></div>
+
+    <h2>Content Calendar for Fanvue</h2>
+    <p>Consistency is everything on Fanvue. The algorithm rewards regular posting, and subscribers expect fresh content. Here's the posting cadence that works:</p>
+
+    <div class="spacer-sm"></div>
+
+    <div class="card">
+      <h4>Weekly Posting Schedule</h4>
+      <div class="spacer-sm"></div>
+      <div class="price-row">
+        <span class="price-label">Monday</span>
+        <span class="price-value">Lifestyle content (outfit, setting)</span>
+      </div>
+      <div class="price-row">
+        <span class="price-label">Tuesday</span>
+        <span class="price-value">Interactive post (poll, Q&A, "choose my outfit")</span>
+      </div>
+      <div class="price-row">
+        <span class="price-label">Wednesday</span>
+        <span class="price-value">Premium exclusive (VIP tier)</span>
+      </div>
+      <div class="price-row">
+        <span class="price-label">Thursday</span>
+        <span class="price-value">Behind-the-scenes / personality content</span>
+      </div>
+      <div class="price-row">
+        <span class="price-label">Friday</span>
+        <span class="price-value">Themed content (trending topics)</span>
+      </div>
+      <div class="price-row">
+        <span class="price-label">Saturday</span>
+        <span class="price-value">Special drop (PPV or custom batch)</span>
+      </div>
+      <div class="price-row">
+        <span class="price-label">Sunday</span>
+        <span class="price-value">Free tier teaser + DM engagement</span>
+      </div>
+    </div>
+
+    <div class="spacer-sm"></div>
+
+    <h2>Tipping & Custom Content</h2>
+
+    <p>Subscriptions are your base revenue. Tips and custom content are your multiplier. Top AI influencer accounts earn 40–60% of their Fanvue revenue from tips and customs alone.</p>
+
+    <div class="callout">
+      <div class="callout-title">Custom Content Pricing</div>
+      <p>Standard custom image: $15–$25. Themed set (5–10 images): $50–$100. "Boyfriend/girlfriend experience" packages: $75–$200. Voice messages (if you use AI voice): $10–$30. Always charge premium — scarcity drives value.</p>
+    </div>
+
+    <div class="footer">AI INFLUENCER BLUEPRINT · THE MONEY MACHINE · 07</div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- MODULE 01 — FANVUE — PAGE 8 -->
+<!-- ============================================ -->
+<div class="page">
+  <div class="page-inner">
+    <div class="spacer-md"></div>
+
+    <h2>Revenue Expectations by Follower Count</h2>
+    <p>These are realistic Fanvue revenue benchmarks based on conversion rates of 2–5% from your social media following to paid subscribers:</p>
+
+    <div class="spacer-sm"></div>
+
+    <div class="card">
+      <table class="rate-table">
+        <thead>
+          <tr>
+            <th>Social Followers</th>
+            <th>Est. Subscribers</th>
+            <th>Monthly Revenue</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1,000</td>
+            <td>20–50</td>
+            <td>$200–$500</td>
+          </tr>
+          <tr>
+            <td>5,000</td>
+            <td>100–250</td>
+            <td>$1,000–$2,500</td>
+          </tr>
+          <tr>
+            <td>10,000</td>
+            <td>200–500</td>
+            <td>$2,000–$5,000</td>
+          </tr>
+          <tr>
+            <td>25,000</td>
+            <td>500–1,250</td>
+            <td>$5,000–$12,500</td>
+          </tr>
+          <tr>
+            <td>50,000</td>
+            <td>1,000–2,500</td>
+            <td>$10,000–$25,000</td>
+          </tr>
+          <tr>
+            <td>100,000+</td>
+            <td>2,000–5,000</td>
+            <td>$20,000–$50,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="muted">* Based on $9.99 average subscription price. Actual revenue varies based on content quality, engagement rate, niche, and tip income. Tips and customs can add 40–60% on top.</p>
+
+    <div class="spacer-md"></div>
+
+    <div class="callout">
+      <div class="callout-title">Reality Check</div>
+      <p>These numbers assume you're driving traffic consistently and your content quality is high. Most creators hit the lower end of these ranges in their first 3 months, then scale up as they optimize their funnel and content strategy. Don't expect $10K in month one — but know that it's absolutely achievable by month 6–12 with consistent effort.</p>
+    </div>
+
+    <div class="spacer-md"></div>
+
+    <div class="grid-2">
+      <div class="card" style="text-align: center;">
+        <div class="metric-value">80%</div>
+        <div class="metric-label">Revenue You Keep</div>
+      </div>
+      <div class="card" style="text-align: center;">
+        <div class="metric-value">2-5%</div>
+        <div class="metric-label">Follower-to-Sub Rate</div>
+      </div>
+    </div>
+
+    <div class="footer">AI INFLUENCER BLUEPRINT · THE MONEY MACHINE · 08</div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- MODULE 02 — DIGITAL PRODUCTS — PAGE 9 -->
+<!-- ============================================ -->
+<div class="page">
+  <div class="page-inner">
+    <div class="module-number-inline">02</div>
+    <div class="spacer-md"></div>
+    <div class="section-label">Module 02</div>
+    <div class="section-title">Digital Products</div>
+    <div class="section-divider"></div>
+
+    <p class="lead">Digital products are the most scalable revenue stream for AI influencers. Create once, sell infinitely. Zero inventory, zero shipping, near-100% profit margins.</p>
+
+    <h2>Product Types That Sell</h2>
+
+    <div class="spacer-sm"></div>
+
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <h3>Prompt Packs</h3>
+        <p>Sell the exact prompts used to create your AI character. This is the easiest product to create — you already have the prompts. Package them nicely with instructions, example outputs, and tips for customization.</p>
+        <p><strong style="color: var(--accent);">Price range: $7–$19</strong></p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <h3>PDF Guides & Tutorials</h3>
+        <p>Teach your audience how you create AI content. Topics: "How I Built a 50K AI Influencer," workflow breakdowns, tool guides, character design tutorials. People will pay for the shortcut.</p>
+        <p><strong style="color: var(--accent);">Price range: $14–$47</strong></p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <h3>Preset & Style Packs</h3>
+        <p>Curated collections of settings, LoRAs, checkpoints, or style configurations for popular AI image generators. Bundle with before/after examples and setup instructions.</p>
+        <p><strong style="color: var(--accent);">Price range: $12–$29</strong></p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-content">
+        <h3>Exclusive Content Bundles</h3>
+        <p>Curated sets of your character's best content — themed collections, "greatest hits," seasonal packs. Sell as one-time purchases on Gumroad or Whop.</p>
+        <p><strong style="color: var(--accent);">Price range: $9–$29</strong></p>
+      </div>
+    </div>
+
+    <div class="footer">AI INFLUENCER BLUEPRINT · THE MONEY MACHINE · 09</div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- MODULE 02 — DIGITAL PRODUCTS — PAGE 10 -->
+<!-- ============================================ -->
+<div class="page">
+  <div class="page-inner">
+    <div class="spacer-md"></div>
+
+    <h2>Where to Sell</h2>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3 style="margin-top: 0;">Gumroad</h3>
+        <p style="font-size: 10pt;">Best for beginners. Simple setup, handles payments, and has built-in discovery. 10% fee on free plan. Trusted by buyers. Set up your store in under 30 minutes.</p>
+      </div>
+      <div class="card">
+        <h3 style="margin-top: 0;">Whop</h3>
+        <p style="font-size: 10pt;">Best for communities and recurring products. Supports subscriptions, one-time purchases, and gated content. Popular in the AI space. 3% transaction fee.</p>
+      </div>
+      <div class="card">
+        <h3 style="margin-top: 0;">Stan Store</h3>
+        <p style="font-size: 10pt;">Built for creators. Clean checkout, link-in-bio store, email capture built in. $29/month but higher conversions than free alternatives.</p>
+      </div>
+      <div class="card">
+        <h3 style="margin-top: 0;">Your Own Site</h3>
+        <p style="font-size: 10pt;">Maximum control. Use Stripe + a simple landing page. Best for established creators with existing traffic. Zero platform fees beyond payment processing.</p>
+      </div>
+    </div>
+
+    <div class="spacer-sm"></div>
+
+    <h2>The $7–$47 Sweet Spot</h2>
+
+    <p>Digital product pricing follows a simple rule: <strong style="color: var(--text-white);">low enough to be an impulse buy, high enough to be taken seriously.</strong></p>
+
+    <p>The $7–$47 range is where AI influencer digital products convert best. Here's how to think about pricing:</p>
+
+    <div class="card">
+      <div class="price-row">
+        <span class="price-label">$7–$12 (Impulse)</span>
+        <span class="price-value">Single prompt packs, mini-guides, basic presets</span>
+      </div>
+      <div class="price-row">
+        <span class="price-label">$14–$27 (Value)</span>
+        <span class="price-value">Comprehensive guides, preset bundles, tutorials with video</span>
+      </div>
+      <div class="price-row">
+        <span class="price-label">$29–$47 (Premium)</span>
+        <span class="price-value">Full courses, mega bundles, character creation kits</span>
+      </div>
+      <div class="price-row">
+        <span class="price-label">$97+ (Authority)</span>
+        <span class="price-value">Complete systems, coaching access, community membership</span>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">Launch Strategy</div>
+      <p>Start with one product at $12–$19. Validate demand. Then create a bundle of 3–5 products at $37–$47. Your first product teaches you what your audience wants — your bundle captures the revenue.</p>
+    </div>
+
+    <div class="footer">AI INFLUENCER BLUEPRINT · THE MONEY MACHINE · 10</div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- MODULE 02 — DIGITAL PRODUCTS — PAGE 11 -->
+<!-- ============================================ -->
+<div class="page">
+  <div class="page-inner">
+    <div class="spacer-md"></div>
+
+    <h2>Product Launch Formula</h2>
+    <p>Don't just list your product and pray. Follow this 7-day launch sequence to maximize sales:</p>
+
+    <div class="spacer-sm"></div>
+
+    <div class="step">
+      <div class="step-num">D-7</div>
+      <div class="step-content">
+        <h3>Tease</h3>
+        <p>Post a story or feed post hinting at something coming. "Been working on something for you..." — build curiosity without revealing the product.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">D-5</div>
+      <div class="step-content">
+        <h3>Reveal</h3>
+        <p>Show what the product is. Share a preview — a page from the guide, one prompt from the pack, a before/after from the preset. Give enough value that people want more.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">D-3</div>
+      <div class="step-content">
+        <h3>Social Proof</h3>
+        <p>If you have beta testers or early access users, share their reactions. No testimonials yet? Share your own results: "These prompts generated 50K likes for me — now they're yours."</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">D-1</div>
+      <div class="step-content">
+        <h3>Countdown</h3>
+        <p>"Dropping tomorrow at 12 PM EST." Create urgency. Offer an early-bird price for the first 24 hours (15–25% discount).</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">D-0</div>
+      <div class="step-content">
+        <h3>Launch</h3>
+        <p>Post across all platforms. Story, feed post, Fanvue message, email blast. Pin the purchase link. Go hard for 48 hours — most sales happen in the first 2 days.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">Numbers That Matter</div>
+      <p>A well-executed launch to a 10K following typically generates 50–200 sales in the first week. At $19 per product, that's $950–$3,800. One product. One week. Then it keeps selling passively.</p>
+    </div>
+
+    <div class="footer">AI INFLUENCER BLUEPRINT · THE MONEY MACHINE · 11</div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- MODULE 03 — AFFILIATE & BRAND DEALS — PAGE 12 -->
+<!-- ============================================ -->
+<div class="page">
+  <div class="page-inner">
+    <div class="module-number-inline">03</div>
+    <div class="spacer-md"></div>
+    <div class="section-label">Module 03</div>
+    <div class="section-title">Affiliate &<br>Brand Deals</div>
+    <div class="section-divider"></div>
+
+    <p class="lead">Yes, AI influencers land brand deals. Fashion brands, tech companies, lifestyle products, and gaming studios are actively partnering with virtual creators. Here's how to get your share.</p>
+
+    <h2>How AI Influencers Land Brand Deals</h2>
+
+    <p>Brands care about three things: reach, engagement, and aesthetic fit. They don't care if your influencer is "real" — they care if your audience buys. AI influencers often have <em>higher</em> engagement rates than human ones because the content is novel and highly curated.</p>
+
+    <div class="spacer-sm"></div>
+
+    <h3>Types of Brand Partnerships</h3>
+    <ul>
+      <li><strong>Sponsored Posts:</strong> Brand pays for a post featuring their product on your AI character. $100–$5,000+ per post depending on following.</li>
+      <li><strong>Affiliate Deals:</strong> You promote a product with a trackable link. Earn 10–30% commission per sale. No upfront payment, but unlimited earning potential.</li>
+      <li><strong>Ambassador Programs:</strong> Long-term partnerships where your AI character becomes the "face" of a brand. Monthly retainer + per-post fees.</li>
+      <li><strong>Product Integration:</strong> Brand's product naturally appears in your content. Subtle, high-converting, premium pricing.</li>
+    </ul>
+
+    <div class="spacer-sm"></div>
+
+    <h2>Affiliate Programs That Work</h2>
+
+    <div class="card">
+      <h4>Top Affiliate Categories for AI Influencers</h4>
+      <div class="spacer-sm"></div>
+      <ul>
+        <li><strong>AI Tools:</strong> Midjourney, RunwayML, ElevenLabs, ChatGPT Plus — promote the tools you actually use</li>
+        <li><strong>Fashion & Beauty:</strong> Fashion Nova, SHEIN, Savage X Fenty — dress your character in their clothes</li>
+        <li><strong>Tech & Gaming:</strong> Gaming peripherals, VR headsets, streaming gear</li>
+        <li><strong>Lifestyle:</strong> Fitness apps, wellness brands, travel products</li>
+        <li><strong>Digital Services:</strong> VPNs, hosting, creative software — high commissions, recurring payouts</li>
+      </ul>
+    </div>
+
+    <div class="footer">AI INFLUENCER BLUEPRINT · THE MONEY MACHINE · 12</div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- MODULE 03 — BRAND DEALS — PAGE 13 -->
+<!-- ============================================ -->
+<div class="page">
+  <div class="page-inner">
+    <div class="spacer-md"></div>
+
+    <h2>Rate Card: What to Charge</h2>
+    <p>Use this rate card as a starting point. Adjust based on your niche, engagement rate, and the brand's budget.</p>
+
+    <div class="spacer-sm"></div>
+
+    <div class="card">
+      <table class="rate-table">
+        <thead>
+          <tr>
+            <th>Followers</th>
+            <th>Feed Post</th>
+            <th>Story</th>
+            <th>Reel/Video</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1K–5K</td>
+            <td>$50–$150</td>
+            <td>$25–$75</td>
+            <td>$100–$300</td>
+          </tr>
+          <tr>
+            <td>5K–10K</td>
+            <td>$150–$400</td>
+            <td>$75–$150</td>
+            <td>$300–$750</td>
+          </tr>
+          <tr>
+            <td>10K–25K</td>
+            <td>$400–$1,000</td>
+            <td>$150–$400</td>
+            <td>$750–$2,000</td>
+          </tr>
+          <tr>
+            <td>25K–50K</td>
+            <td>$1,000–$2,500</td>
+            <td>$400–$800</td>
+            <td>$2,000–$5,000</td>
+          </tr>
+          <tr>
+            <td>50K–100K</td>
+            <td>$2,500–$5,000</td>
+            <td>$800–$1,500</td>
+            <td>$5,000–$10,000</td>
+          </tr>
+          <tr>
+            <td>100K+</td>
+            <td>$5,000+</td>
+            <td>$1,500+</td>
+            <td>$10,000+</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="muted">* Rates are per-post. Bundle deals (3+ posts) typically offer 15–20% discount. Engagement rate above 5% commands premium pricing.</p>
+
+    <div class="spacer-md"></div>
+
+    <h2>Reaching Out to Brands</h2>
+    <p>Don't wait for brands to find you. Proactive outreach closes 10x more deals than waiting for inbound. Use this framework:</p>
+
+    <div class="spacer-sm"></div>
+
+    <div class="template-box">
+      <div class="template-label">Brand Outreach Template</div>
+      <p>Subject: <span class="placeholder">[Brand Name]</span> × <span class="placeholder">[Your AI Character Name]</span> — Partnership Inquiry</p>
+      <p>Hi <span class="placeholder">[Name]</span>,</p>
+      <p>I run <span class="placeholder">[Character Name]</span>, an AI-generated influencer with <span class="placeholder">[X]</span> followers on Instagram and a <span class="placeholder">[X%]</span> engagement rate. My audience is <span class="placeholder">[demographic: age, interest, location]</span> — which aligns perfectly with <span class="placeholder">[Brand Name]</span>.</p>
+      <p>I'd love to explore a content partnership. I can create fully styled posts featuring your products with my character, and my audience responds incredibly well to authentic integrations.</p>
+      <p>Here's my media kit: <span class="placeholder">[link]</span></p>
+      <p>Would you be open to a quick chat this week?</p>
+      <p>Best,<br><span class="placeholder">[Your Name / Business Name]</span></p>
+    </div>
+
+    <div class="footer">AI INFLUENCER BLUEPRINT · THE MONEY MACHINE · 13</div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- MODULE 03 — BRAND DEALS — PAGE 14 -->
+<!-- ============================================ -->
+<div class="page">
+  <div class="page-inner">
+    <div class="spacer-md"></div>
+
+    <h2>Case Studies</h2>
+
+    <div class="spacer-sm"></div>
+
+    <div class="card">
+      <h4>Case Study 01</h4>
+      <h3 style="margin-top: 8px;">Lil Miquela × Prada</h3>
+      <p>The most famous AI influencer, Lil Miquela (3M+ followers), has partnered with Prada, Calvin Klein, Samsung, and BMW. Her sponsored posts command $8,500+ each. She's generated millions in brand value — proving that virtual influencers can drive real purchasing decisions.</p>
+      <p class="muted">Takeaway: Brands at the highest level are already investing in AI influencers. The market is validated.</p>
+    </div>
+
+    <div class="card">
+      <h4>Case Study 02</h4>
+      <h3 style="margin-top: 8px;">Aitana Lopez — Fashion & Lifestyle</h3>
+      <p>Spanish AI influencer Aitana Lopez grew to 300K+ followers and earns an estimated $10,000/month from brand deals alone. She partners with fashion brands, fitness companies, and lifestyle products. Her creator, The Clueless agency, runs her as a full business with media kits and rate cards — exactly what we teach in this guide.</p>
+      <p class="muted">Takeaway: You don't need millions of followers. 100K–300K with high engagement is enough for five-figure monthly brand income.</p>
+    </div>
+
+    <div class="card">
+      <h4>Case Study 03</h4>
+      <h3 style="margin-top: 8px;">Micro AI Influencers (5K–20K)</h3>
+      <p>Dozens of smaller AI influencers are quietly earning $500–$2,000/month from affiliate deals and small brand partnerships. They target niche audiences — fitness, gaming, anime-style — where engagement rates of 8–15% make them more valuable per follower than accounts with millions.</p>
+      <p class="muted">Takeaway: Start small. A focused niche with high engagement beats a generic large account every time.</p>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">Key Principle</div>
+      <p>Brands are buying access to your audience, not your character. Your media kit should lead with engagement metrics, audience demographics, and conversion data — not just follower count. A 10K account with 8% engagement is worth more than a 100K account with 0.5%.</p>
+    </div>
+
+    <div class="footer">AI INFLUENCER BLUEPRINT · THE MONEY MACHINE · 14</div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- MODULE 04 — FUNNELS & EMAIL — PAGE 15 -->
+<!-- ============================================ -->
+<div class="page">
+  <div class="page-inner">
+    <div class="module-number-inline">04</div>
+    <div class="spacer-md"></div>
+    <div class="section-label">Module 04</div>
+    <div class="section-title">Funnels & Email</div>
+    <div class="section-divider"></div>
+
+    <p class="lead">Social media followers aren't yours. Instagram can change the algorithm tomorrow and kill your reach. Email subscribers? Those are yours forever. This module shows you how to build the bridge.</p>
+
+    <h2>The AI Influencer Funnel</h2>
+    <p>Every successful AI influencer operation follows the same funnel. Here's the blueprint:</p>
+
+    <div class="spacer-sm"></div>
+
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <h3>Instagram Bio → Link-in-Bio</h3>
+        <p>Your Instagram bio has ONE job: get clicks to your link. Use a link-in-bio tool (Stan Store, Linktree, Beacons) to house all your monetization links in one place.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <h3>Freebie Landing Page</h3>
+        <p>The first link on your page should be a freebie — something valuable enough to trade an email address for. Examples: free prompt pack, mini-guide, wallpaper set, or exclusive content preview.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <h3>Email Capture</h3>
+        <p>Visitor enters email → receives freebie automatically → enters your email sequence. Use Mailchimp (free up to 500 contacts), ConvertKit, or Beehiiv.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-content">
+        <h3>Automated Email Sequence</h3>
+        <p>5-email welcome sequence that nurtures the subscriber and introduces your paid offerings. Runs on autopilot — set it up once, it works forever.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">05</div>
+      <div class="step-content">
+        <h3>Upsell to Paid</h3>
+        <p>The sequence naturally leads to your paid products: Fanvue subscription, digital products, premium content. By email #5, subscribers know you, trust you, and are ready to buy.</p>
+      </div>
+    </div>
+
+    <div class="footer">AI INFLUENCER BLUEPRINT · THE MONEY MACHINE · 15</div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- MODULE 04 — FUNNELS & EMAIL — PAGE 16 -->
+<!-- ============================================ -->
+<div class="page">
+  <div class="page-inner">
+    <div class="spacer-md"></div>
+
+    <h2>Building Your Landing Page</h2>
+    <p>You don't need a developer. These free tools get you a high-converting landing page in under an hour:</p>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3 style="margin-top: 0;">Carrd ($0–$19/yr)</h3>
+        <p style="font-size: 10pt;">Dead simple. One-page sites that look premium. Perfect for a freebie opt-in page. Custom domain support on the paid plan.</p>
+      </div>
+      <div class="card">
+        <h3 style="margin-top: 0;">ConvertKit (Free)</h3>
+        <p style="font-size: 10pt;">Email platform with built-in landing pages. Two birds, one stone. Free up to 1,000 subscribers with landing page builder included.</p>
+      </div>
+    </div>
+
+    <div class="spacer-sm"></div>
+
+    <h2>The 5-Email Welcome Sequence</h2>
+    <p>This sequence converts strangers into buyers. Set it up once, then let it run on autopilot. Every new email subscriber gets this sequence automatically.</p>
+
+    <div class="spacer-sm"></div>
+
+    <div class="email-step">
+      <div class="email-day">Email 1 — Immediately</div>
+      <div class="email-subject">"Here's your free [product] 🎁"</div>
+      <p class="email-desc">Deliver the freebie. Short, warm, friendly. Include a one-line intro about who you (the AI character) are. End with: "I'll be sending you some exclusive stuff this week — keep an eye out."</p>
+    </div>
+
+    <div class="email-step">
+      <div class="email-day">Email 2 — Day 2</div>
+      <div class="email-subject">"The story behind [Character Name]"</div>
+      <p class="email-desc">Share your character's "origin story." Build emotional connection. People buy from characters they connect with. Include a link to your best Instagram content.</p>
+    </div>
+
+    <div class="email-step">
+      <div class="email-day">Email 3 — Day 4</div>
+      <div class="email-subject">"My most popular [content type] ever"</div>
+      <p class="email-desc">Share a piece of exclusive content — something they can't get on Instagram. Build the habit of opening your emails. Soft-mention your Fanvue: "Want more like this? I post daily on Fanvue."</p>
+    </div>
+
+    <div class="email-step">
+      <div class="email-day">Email 4 — Day 6</div>
+      <div class="email-subject">"People keep asking me about this..."</div>
+      <p class="email-desc">Introduce your paid product(s). Frame it as answering demand: "So many of you asked how I create my content — so I made this guide." Include a special email-subscriber discount (10–15% off).</p>
+    </div>
+
+    <div class="email-step">
+      <div class="email-day">Email 5 — Day 8</div>
+      <div class="email-subject">"Last chance for [discount/exclusive]"</div>
+      <p class="email-desc">Urgency close. The email-only discount expires. Recap all offerings: Fanvue, digital products, exclusive content. This email typically generates 40% of the sequence's total revenue.</p>
+    </div>
+
+    <div class="footer">AI INFLUENCER BLUEPRINT · THE MONEY MACHINE · 16</div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- MODULE 04 — FUNNELS — PAGE 17 -->
+<!-- ============================================ -->
+<div class="page">
+  <div class="page-inner">
+    <div class="spacer-md"></div>
+
+    <h2>Converting Followers to Subscribers</h2>
+
+    <p>Getting followers to give you their email requires consistent effort. These tactics work best for AI influencer accounts:</p>
+
+    <div class="spacer-sm"></div>
+
+    <div class="card">
+      <h4>Conversion Tactics</h4>
+      <div class="spacer-sm"></div>
+      <ul>
+        <li><strong>Story CTAs:</strong> Post stories 2–3x per week directing to your freebie. "DM me 'FREE' for my prompt pack" works especially well — it triggers DM automation.</li>
+        <li><strong>Pin a Reel:</strong> Create a Reel about your freebie and pin it to the top of your grid. This becomes your 24/7 opt-in machine.</li>
+        <li><strong>Comment Triggers:</strong> "Comment 'PROMPTS' and I'll DM you my free pack." Use ManyChat or similar to automate the DM delivery.</li>
+        <li><strong>Bio Link:</strong> Your link-in-bio should have the freebie as the FIRST and most prominent option. Not buried below 6 other links.</li>
+        <li><strong>Exclusive Content Previews:</strong> Post a blurred or cropped preview on stories: "Full version free when you join my list." Curiosity converts.</li>
+      </ul>
+    </div>
+
+    <div class="spacer-md"></div>
+
+    <div class="grid-2">
+      <div class="card" style="text-align: center;">
+        <div class="metric-value">3-8%</div>
+        <div class="metric-label">Story-to-Opt-In Rate</div>
+      </div>
+      <div class="card" style="text-align: center;">
+        <div class="metric-value">15-25%</div>
+        <div class="metric-label">DM Trigger Conversion</div>
+      </div>
+    </div>
+
+    <div class="spacer-md"></div>
+
+    <div class="callout">
+      <div class="callout-title">The Math</div>
+      <p>With a 10K following and 5% email conversion rate, you build a 500-person email list. At a 3% purchase rate on a $19 product, that's 15 sales = $285 from one email. Send one product email per week? That's $1,140/month — just from email. And the list keeps growing.</p>
+    </div>
+
+    <div class="footer">AI INFLUENCER BLUEPRINT · THE MONEY MACHINE · 17</div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- MODULE 05 — SCALING REVENUE — PAGE 18 -->
+<!-- ============================================ -->
+<div class="page">
+  <div class="page-inner">
+    <div class="module-number-inline">05</div>
+    <div class="spacer-md"></div>
+    <div class="section-label">Module 05</div>
+    <div class="section-title">Scaling Revenue</div>
+    <div class="section-divider"></div>
+
+    <p class="lead">Once your first AI influencer account is profitable, it's time to scale. The beauty of this model? You can duplicate it. Same workflow, different character, different niche, additional revenue stream.</p>
+
+    <h2>Running Multiple Accounts</h2>
+
+    <p>The single biggest advantage AI influencers have over real ones: you can run multiple characters simultaneously. Each character targets a different niche, audience, and monetization strategy.</p>
+
+    <div class="spacer-sm"></div>
+
+    <div class="card">
+      <h4>Multi-Account Strategy</h4>
+      <div class="spacer-sm"></div>
+      <ul>
+        <li><strong>Character 1 — Lifestyle/Fashion:</strong> Your primary account. Broad appeal, brand deal potential, Fanvue-driven revenue.</li>
+        <li><strong>Character 2 — Fitness/Wellness:</strong> Different aesthetic, different audience. Affiliate-heavy (supplements, workout gear).</li>
+        <li><strong>Character 3 — Anime/Gaming:</strong> Niche community, high engagement, digital product-focused.</li>
+        <li><strong>Character 4 — Luxury/Travel:</strong> Aspirational content. Premium brand deals, higher-ticket everything.</li>
+      </ul>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">Important</div>
+      <p>Don't launch character 2 until character 1 is generating at least $1,000/month consistently. Master the workflow first, then replicate. Spreading too thin too early is the #1 scaling mistake.</p>
+    </div>
+
+    <div class="spacer-md"></div>
+
+    <h2>Automation Tools & Workflows</h2>
+
+    <p>Scaling requires systems, not more hours. Here are the tools that make multi-account operations possible:</p>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3 style="margin-top: 0;">Content Generation</h3>
+        <p style="font-size: 10pt;">Batch-generate content weekly. Use ComfyUI workflows to produce 50–100 images per character per session. Store in organized folders by character and content type.</p>
+      </div>
+      <div class="card">
+        <h3 style="margin-top: 0;">Scheduling</h3>
+        <p style="font-size: 10pt;">Buffer, Later, or Metricool for scheduling posts across all accounts. Load a week's content in one sitting. Set it and forget it.</p>
+      </div>
+      <div class="card">
+        <h3 style="margin-top: 0;">DM Automation</h3>
+        <p style="font-size: 10pt;">ManyChat for automated DM responses, comment triggers, and freebie delivery. Handles the repetitive engagement tasks that eat your time.</p>
+      </div>
+      <div class="card">
+        <h3 style="margin-top: 0;">Analytics</h3>
+        <p style="font-size: 10pt;">Track all accounts in one dashboard. Social Blade + platform native analytics. Focus on the metrics that matter: engagement rate, link clicks, conversion rate.</p>
+      </div>
+    </div>
+
+    <div class="footer">AI INFLUENCER BLUEPRINT · THE MONEY MACHINE · 18</div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- MODULE 05 — SCALING — PAGE 19 -->
+<!-- ============================================ -->
+<div class="page">
+  <div class="page-inner">
+    <div class="spacer-md"></div>
+
+    <h2>Hiring VAs for Scaling</h2>
+
+    <p>At some point, you can't do everything yourself. Virtual assistants (VAs) are the key to scaling past $5K–$10K/month without burning out.</p>
+
+    <div class="spacer-sm"></div>
+
+    <div class="card">
+      <h4>What to Delegate</h4>
+      <div class="spacer-sm"></div>
+      <div class="price-row">
+        <span class="price-label">Community Management</span>
+        <span class="price-value">$3–$7/hr</span>
+      </div>
+      <div class="price-row">
+        <span class="price-label">Content Scheduling</span>
+        <span class="price-value">$4–$8/hr</span>
+      </div>
+      <div class="price-row">
+        <span class="price-label">Fanvue DM Responses</span>
+        <span class="price-value">$5–$10/hr</span>
+      </div>
+      <div class="price-row">
+        <span class="price-label">Caption Writing</span>
+        <span class="price-value">$5–$10/hr</span>
+      </div>
+      <div class="price-row">
+        <span class="price-label">Brand Outreach</span>
+        <span class="price-value">$6–$12/hr</span>
+      </div>
+    </div>
+
+    <p class="muted">Source VAs from Fiverr, Upwork, or OnlineJobs.ph. Start with 5–10 hours/week and scale from there. Always provide detailed SOPs (standard operating procedures) and content guidelines.</p>
+
+    <div class="spacer-md"></div>
+
+    <h2>Revenue Stacking</h2>
+
+    <p>The most successful AI influencer operators combine all channels into one cohesive revenue machine. Here's what a mature, optimized revenue stack looks like:</p>
+
+    <div class="spacer-sm"></div>
+
+    <div class="card">
+      <h4>Monthly Revenue Stack Example — 30K Followers</h4>
+      <div class="spacer-sm"></div>
+      <div class="price-row">
+        <span class="price-label">Fanvue Subscriptions (300 subs × $9.99)</span>
+        <span class="price-value">$2,400</span>
+      </div>
+      <div class="price-row">
+        <span class="price-label">Tips & Custom Content</span>
+        <span class="price-value">$1,200</span>
+      </div>
+      <div class="price-row">
+        <span class="price-label">Digital Products (Gumroad)</span>
+        <span class="price-value">$800</span>
+      </div>
+      <div class="price-row">
+        <span class="price-label">Brand Deals (2 per month)</span>
+        <span class="price-value">$2,000</span>
+      </div>
+      <div class="price-row">
+        <span class="price-label">Affiliate Revenue</span>
+        <span class="price-value">$400</span>
+      </div>
+      <div class="price-row">
+        <span class="price-label">Email Product Sales</span>
+        <span class="price-value">$600</span>
+      </div>
+      <div class="price-row" style="border-top: 2px solid var(--accent); margin-top: 8px; padding-top: 12px;">
+        <span class="price-label" style="color: var(--text-white); font-weight: 700;">Total Monthly Revenue</span>
+        <span class="price-value" style="font-size: 14pt;">$7,400</span>
+      </div>
+    </div>
+
+    <p class="muted">After Fanvue's 20% cut and VA costs (~$400/month), net profit: ~$5,480/month from a single account.</p>
+
+    <div class="footer">AI INFLUENCER BLUEPRINT · THE MONEY MACHINE · 19</div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- MODULE 05 — SCALING — PAGE 20 -->
+<!-- ============================================ -->
+<div class="page">
+  <div class="page-inner">
+    <div class="spacer-md"></div>
+
+    <h2>Tax & Legal Basics</h2>
+
+    <p>Once you're generating real revenue, you need to handle the business side properly. This isn't optional — it protects you and saves you money.</p>
+
+    <div class="spacer-sm"></div>
+
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <h3>Form an LLC</h3>
+        <p>Set up a single-member LLC in your state. Cost: $50–$500 depending on state. Wyoming, Delaware, and New Mexico are popular for low fees and privacy. An LLC separates your personal assets from your business and provides tax flexibility.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <h3>Get an EIN</h3>
+        <p>Apply for a free Employer Identification Number from the IRS. Takes 5 minutes online. You'll need this for business bank accounts and payment processing.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <h3>Business Bank Account</h3>
+        <p>Open a separate business checking account. Never mix personal and business finances. Relay, Mercury, or your local bank all work. This makes taxes 10x easier.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-content">
+        <h3>Track Everything</h3>
+        <p>Use a simple spreadsheet or tool like Wave (free) to track all income and expenses. Categories: content tools, subscriptions, VA costs, software, equipment. These are all deductible.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">05</div>
+      <div class="step-content">
+        <h3>Quarterly Taxes</h3>
+        <p>If you're earning more than $1,000/quarter, you need to pay estimated quarterly taxes. Set aside 25–30% of net profit. A basic accountant costs $200–$500/year and pays for itself in savings.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">Disclaimer</div>
+      <p>This is general guidance, not legal or tax advice. Consult a tax professional for your specific situation. The investment in an accountant is one of the best ROI decisions you'll make.</p>
+    </div>
+
+    <div class="footer">AI INFLUENCER BLUEPRINT · THE MONEY MACHINE · 20</div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- MODULE 06 — REVENUE BENCHMARKS — PAGE 21 -->
+<!-- ============================================ -->
+<div class="page">
+  <div class="page-inner">
+    <div class="module-number-inline">06</div>
+    <div class="spacer-md"></div>
+    <div class="section-label">Module 06</div>
+    <div class="section-title">Revenue Benchmarks</div>
+    <div class="section-divider"></div>
+
+    <p class="lead">Here's what realistic revenue looks like at each stage of growth. No hype, no inflated numbers — just benchmarks based on real data from AI influencer operators.</p>
+
+    <div class="spacer-md"></div>
+
+    <div class="tier-card">
+      <div class="tier-header">
+        <span class="tier-name">Tier 1 — The Foundation</span>
+        <span class="tier-revenue">$0–$200/mo</span>
+      </div>
+      <div class="tier-followers">0–1,000 Followers · Months 1–3</div>
+      <p style="font-size: 10pt; margin-bottom: 8px;">Focus: Content quality and consistency. Don't monetize yet — build the audience first. Test content styles, find your character's voice, establish a posting rhythm. Revenue at this stage is a bonus, not a goal.</p>
+      <p style="font-size: 10pt; margin-bottom: 0;"><strong style="color: var(--text-white);">Priority:</strong> Post daily. Engage with every comment. Study what content performs. Set up your Fanvue profile but don't push it hard yet.</p>
+    </div>
+
+    <div class="tier-card">
+      <div class="tier-header">
+        <span class="tier-name">Tier 2 — First Revenue</span>
+        <span class="tier-revenue">$200–$2,000/mo</span>
+      </div>
+      <div class="tier-followers">1,000–10,000 Followers · Months 3–6</div>
+      <p style="font-size: 10pt; margin-bottom: 8px;">Focus: Activate Fanvue, launch first digital product. This is where your monetization engine starts. You'll have enough followers to generate real data on what converts.</p>
+      <p style="font-size: 10pt; margin-bottom: 0;"><strong style="color: var(--text-white);">Priority:</strong> Drive Fanvue subscriptions. Launch one digital product. Start building your email list. Experiment with affiliate links.</p>
+    </div>
+
+    <div class="tier-card">
+      <div class="tier-header">
+        <span class="tier-name">Tier 3 — Growth Mode</span>
+        <span class="tier-revenue">$2,000–$10,000/mo</span>
+      </div>
+      <div class="tier-followers">10,000–50,000 Followers · Months 6–12</div>
+      <p style="font-size: 10pt; margin-bottom: 8px;">Focus: Brand deals, scaled content, multiple revenue streams. You're a real business now. Start reaching out to brands, optimize your funnel, consider your first VA hire.</p>
+      <p style="font-size: 10pt; margin-bottom: 0;"><strong style="color: var(--text-white);">Priority:</strong> Proactive brand outreach. Scale content production. Optimize email funnel. Add second digital product.</p>
+    </div>
+
+    <div class="footer">AI INFLUENCER BLUEPRINT · THE MONEY MACHINE · 21</div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- MODULE 06 — REVENUE BENCHMARKS — PAGE 22 -->
+<!-- ============================================ -->
+<div class="page">
+  <div class="page-inner">
+    <div class="spacer-md"></div>
+
+    <div class="tier-card">
+      <div class="tier-header">
+        <span class="tier-name">Tier 4 — Scale</span>
+        <span class="tier-revenue">$10,000–$30,000/mo</span>
+      </div>
+      <div class="tier-followers">50,000–100,000 Followers · Months 12–18</div>
+      <p style="font-size: 10pt; margin-bottom: 8px;">Focus: Premium products, multiple accounts, team building. Revenue from a single account is significant. Time to launch character #2 and build your product suite.</p>
+      <p style="font-size: 10pt; margin-bottom: 0;"><strong style="color: var(--text-white);">Priority:</strong> Launch second AI character. Hire VA team. Create premium offerings ($47–$197). Negotiate long-term brand partnerships.</p>
+    </div>
+
+    <div class="tier-card">
+      <div class="tier-header">
+        <span class="tier-name">Tier 5 — Full Business Mode</span>
+        <span class="tier-revenue">$30,000+/mo</span>
+      </div>
+      <div class="tier-followers">100,000+ Followers · Month 18+</div>
+      <p style="font-size: 10pt; margin-bottom: 8px;">Focus: Systems, delegation, and empire building. At this level, you're running a media company. Multiple characters, a team, diversified revenue, and potentially licensing your characters to brands.</p>
+      <p style="font-size: 10pt; margin-bottom: 0;"><strong style="color: var(--text-white);">Priority:</strong> Build SOPs for everything. Hire a manager. Explore licensing and white-label opportunities. Consider creating your own course or community.</p>
+    </div>
+
+    <div class="spacer-lg"></div>
+
+    <h2>Realistic Timelines</h2>
+
+    <div class="card">
+      <h4>What to Expect</h4>
+      <div class="spacer-sm"></div>
+      <ul>
+        <li><strong>Month 1–2:</strong> Building content library, growing from 0 to 500–1,000 followers. Revenue: minimal or zero. This is normal.</li>
+        <li><strong>Month 3–4:</strong> First Fanvue subscribers, first digital product sale. Revenue: $100–$500. You're validating the model.</li>
+        <li><strong>Month 5–6:</strong> Growth accelerates. Content rhythm is dialed in. Revenue: $500–$2,000. You see the path forward.</li>
+        <li><strong>Month 7–12:</strong> Scale phase. Brand deals start coming in. Revenue: $2,000–$10,000. The machine is working.</li>
+        <li><strong>Month 12+:</strong> Optimization and multiplication. Revenue: $10,000+. You're running a real business.</li>
+      </ul>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">The Truth</div>
+      <p>Most people quit in month 2 when they're not rich yet. The ones who make it to month 6 almost always succeed. This is a business — treat it like one. Consistency beats talent every single time.</p>
+    </div>
+
+    <div class="footer">AI INFLUENCER BLUEPRINT · THE MONEY MACHINE · 22</div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- BONUS — TEMPLATES — PAGE 23 -->
+<!-- ============================================ -->
+<div class="page">
+  <div class="page-inner">
+    <div class="spacer-md"></div>
+    <div class="section-label">Bonus</div>
+    <div class="section-title">Templates &<br>Resources</div>
+    <div class="section-divider"></div>
+
+    <p class="lead">Copy, customize, and deploy. These templates are ready to use — just fill in the blanks and start generating revenue.</p>
+
+    <div class="spacer-md"></div>
+
+    <h2>Brand Outreach Email Template</h2>
+
+    <div class="template-box">
+      <div class="template-label">Copy & Customize</div>
+      <p><strong style="color: var(--text-white);">Subject:</strong> Partnership Opportunity — <span class="placeholder">[Character Name]</span> × <span class="placeholder">[Brand]</span></p>
+      <div class="spacer-sm"></div>
+      <p>Hi <span class="placeholder">[Contact Name]</span>,</p>
+      <p>I'm reaching out because <span class="placeholder">[Brand Name]</span> is a perfect fit for my audience.</p>
+      <p>I'm the creator behind <span class="placeholder">[Character Name]</span>, an AI-generated influencer with <span class="placeholder">[X followers]</span> on Instagram (<span class="placeholder">[X%]</span> engagement rate). My audience is primarily <span class="placeholder">[age range, gender, interests]</span> — highly aligned with your customer base.</p>
+      <p>I've been featuring products similar to yours in my content, and my audience responds incredibly well. I'd love to discuss a sponsored post or ongoing partnership.</p>
+      <p><strong style="color: var(--text-white);">What I offer:</strong></p>
+      <p>• Custom-styled content featuring your product<br>
+      • Story coverage + permanent feed post<br>
+      • Authentic integration that matches my character's aesthetic<br>
+      • Full usage rights for your marketing channels</p>
+      <p>I've attached my media kit with full analytics. Happy to hop on a call this week.</p>
+      <p>Best,<br><span class="placeholder">[Your Name]</span><br><span class="placeholder">[Email / Website]</span></p>
+    </div>
+
+    <div class="footer">AI INFLUENCER BLUEPRINT · THE MONEY MACHINE · 23</div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- BONUS — TEMPLATES — PAGE 24 -->
+<!-- ============================================ -->
+<div class="page">
+  <div class="page-inner">
+    <div class="spacer-md"></div>
+
+    <h2>Rate Card Template</h2>
+
+    <div class="card">
+      <h4 style="text-align: center; margin-bottom: 20px;">— <span class="placeholder">[Character Name]</span> — Rate Card —</h4>
+      <table class="rate-table">
+        <thead>
+          <tr>
+            <th>Deliverable</th>
+            <th>Description</th>
+            <th>Rate</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Instagram Feed Post</td>
+            <td>Styled photo with product + caption</td>
+            <td><span class="placeholder">$___</span></td>
+          </tr>
+          <tr>
+            <td>Instagram Story (3-frame)</td>
+            <td>3 story frames with swipe-up link</td>
+            <td><span class="placeholder">$___</span></td>
+          </tr>
+          <tr>
+            <td>Instagram Reel</td>
+            <td>15–30s video featuring product</td>
+            <td><span class="placeholder">$___</span></td>
+          </tr>
+          <tr>
+            <td>TikTok Video</td>
+            <td>15–60s native TikTok content</td>
+            <td><span class="placeholder">$___</span></td>
+          </tr>
+          <tr>
+            <td>Content Bundle</td>
+            <td>3 feed posts + 5 stories + 1 reel</td>
+            <td><span class="placeholder">$___</span></td>
+          </tr>
+          <tr>
+            <td>Monthly Ambassador</td>
+            <td>4 posts + 8 stories + 2 reels/month</td>
+            <td><span class="placeholder">$___/mo</span></td>
+          </tr>
+          <tr>
+            <td>Content License</td>
+            <td>Usage rights for brand's own channels</td>
+            <td><span class="placeholder">$___</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="spacer-sm"></div>
+      <p class="muted" style="text-align: center;">Rates based on current audience of <span class="placeholder">[X]</span> followers with <span class="placeholder">[X%]</span> avg. engagement rate.<br>Bundle discounts available for 3+ month commitments.</p>
+    </div>
+
+    <div class="spacer-md"></div>
+
+    <div class="callout">
+      <div class="callout-title">Rate Card Tips</div>
+      <p>Always present a rate card — even if you're small. It signals professionalism and sets expectations. Start at the lower end of the ranges in Module 03, then raise prices every 5K–10K followers. Never negotiate below 70% of your listed rate.</p>
+    </div>
+
+    <div class="footer">AI INFLUENCER BLUEPRINT · THE MONEY MACHINE · 24</div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- BONUS — TEMPLATES — PAGE 25 -->
+<!-- ============================================ -->
+<div class="page">
+  <div class="page-inner">
+    <div class="spacer-md"></div>
+
+    <h2>30-Day Fanvue Content Calendar</h2>
+    <p>A complete month of content, planned and ready to execute. Customize themes to match your character's niche.</p>
+
+    <div class="spacer-sm"></div>
+
+    <div class="card">
+      <div class="cal-week">
+        <div class="cal-week-label">Week 1</div>
+        <div class="cal-week-content">
+          <strong style="color: var(--text-white);">Theme: Introduction & First Impressions</strong><br>
+          Mon: Welcome post — introduce yourself to new subscribers<br>
+          Tue: Behind-the-scenes "day in my life" content<br>
+          Wed: VIP-exclusive drop (premium tier reward)<br>
+          Thu: Q&A — ask subscribers what content they want<br>
+          Fri: Themed photo set (seasonal or trending)<br>
+          Sat: PPV special content ($5–$15 unlock)<br>
+          Sun: Free tier teaser — preview of next week's paid content
+        </div>
+      </div>
+
+      <div class="cal-week">
+        <div class="cal-week-label">Week 2</div>
+        <div class="cal-week-content">
+          <strong style="color: var(--text-white);">Theme: Engagement & Connection</strong><br>
+          Mon: "Choose my outfit" poll — subscribers pick your look<br>
+          Tue: Lifestyle/casual content (personality showcase)<br>
+          Wed: Custom content promotion — announce availability<br>
+          Thu: Story-driven post (mini storyline or scenario)<br>
+          Fri: Collaboration or crossover teaser<br>
+          Sat: Top-tier exclusive content drop<br>
+          Sun: Subscriber appreciation — free bonus content
+        </div>
+      </div>
+
+      <div class="cal-week">
+        <div class="cal-week-label">Week 3</div>
+        <div class="cal-week-content">
+          <strong style="color: var(--text-white);">Theme: Exclusivity & Scarcity</strong><br>
+          Mon: "Limited time" content (available for 48hrs only)<br>
+          Tue: Progress/transformation content (new look, style evolution)<br>
+          Wed: VIP-only live Q&A or DM session<br>
+          Thu: Themed set based on subscriber requests<br>
+          Fri: Countdown to special weekend drop<br>
+          Sat: Major content drop — highest production value<br>
+          Sun: Recap and preview of Month 2
+        </div>
+      </div>
+
+      <div class="cal-week">
+        <div class="cal-week-label">Week 4</div>
+        <div class="cal-week-content">
+          <strong style="color: var(--text-white);">Theme: Monetization & Retention</strong><br>
+          Mon: Digital product soft launch (prompt pack, guide)<br>
+          Tue: Testimonial/engagement showcase<br>
+          Wed: Flash sale on custom content<br>
+          Thu: "Best of the month" compilation<br>
+          Fri: Special content for long-term subscribers<br>
+          Sat: Month-end PPV bundle<br>
+          Sun: Next month preview + re-subscription incentive
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">AI INFLUENCER BLUEPRINT · THE MONEY MACHINE · 25</div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- BONUS — REVENUE TRACKER — PAGE 26 -->
+<!-- ============================================ -->
+<div class="page">
+  <div class="page-inner">
+    <div class="spacer-md"></div>
+
+    <h2>Revenue Tracking Spreadsheet Layout</h2>
+    <p>Track every dollar. This layout works in Google Sheets, Notion, or Excel. Update weekly — it takes 5 minutes and gives you complete visibility into your business.</p>
+
+    <div class="spacer-sm"></div>
+
+    <div class="card">
+      <h4>Monthly Revenue Tracker</h4>
+      <div class="spacer-sm"></div>
+      <table class="rate-table">
+        <thead>
+          <tr>
+            <th>Revenue Source</th>
+            <th>Week 1</th>
+            <th>Week 2</th>
+            <th>Week 3</th>
+            <th>Week 4</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Fanvue Subscriptions</td><td>$___</td><td>$___</td><td>$___</td><td>$___</td></tr>
+          <tr><td>Fanvue Tips</td><td>$___</td><td>$___</td><td>$___</td><td>$___</td></tr>
+          <tr><td>Custom Content</td><td>$___</td><td>$___</td><td>$___</td><td>$___</td></tr>
+          <tr><td>Digital Products</td><td>$___</td><td>$___</td><td>$___</td><td>$___</td></tr>
+          <tr><td>Affiliate Revenue</td><td>$___</td><td>$___</td><td>$___</td><td>$___</td></tr>
+          <tr><td>Brand Deals</td><td>$___</td><td>$___</td><td>$___</td><td>$___</td></tr>
+          <tr><td>Email Sales</td><td>$___</td><td>$___</td><td>$___</td><td>$___</td></tr>
+          <tr><td style="color: var(--text-white); font-weight: 700;">TOTAL</td><td style="color: var(--accent);">$___</td><td style="color: var(--accent);">$___</td><td style="color: var(--accent);">$___</td><td style="color: var(--accent);">$___</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="spacer-sm"></div>
+
+    <div class="card">
+      <h4>Monthly Expense Tracker</h4>
+      <div class="spacer-sm"></div>
+      <table class="rate-table">
+        <thead>
+          <tr>
+            <th>Expense</th>
+            <th>Amount</th>
+            <th>Category</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>AI Image Generation Tools</td><td>$___</td><td>Software</td></tr>
+          <tr><td>Scheduling Tools</td><td>$___</td><td>Software</td></tr>
+          <tr><td>VA Costs</td><td>$___</td><td>Labor</td></tr>
+          <tr><td>Email Platform</td><td>$___</td><td>Software</td></tr>
+          <tr><td>Platform Fees (Fanvue 20%)</td><td>$___</td><td>Fees</td></tr>
+          <tr><td>Other</td><td>$___</td><td>Misc</td></tr>
+          <tr><td style="color: var(--text-white); font-weight: 700;">TOTAL EXPENSES</td><td style="color: #ff6b6b;">$___</td><td></td></tr>
+          <tr><td style="color: var(--text-white); font-weight: 700;">NET PROFIT</td><td style="color: var(--accent); font-weight: 700;">$___</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">Track or Fail</div>
+      <p>If you don't track it, you can't optimize it. Spend 5 minutes every Sunday updating this tracker. You'll spot trends, identify your best revenue streams, and make smarter decisions about where to invest your time.</p>
+    </div>
+
+    <div class="footer">AI INFLUENCER BLUEPRINT · THE MONEY MACHINE · 26</div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- CLOSING PAGE — PAGE 27 -->
+<!-- ============================================ -->
+<div class="page">
+  <div class="page-inner" style="display: flex; flex-direction: column; justify-content: center; min-height: 297mm;">
+    <div class="spacer-xl"></div>
+    <div style="text-align: center;">
+      <div class="section-label">Final Word</div>
+      <div class="spacer-sm"></div>
+      <div class="section-title" style="text-align: center;">Now Go Build<br>Your Machine</div>
+      <div style="width: 60px; height: 3px; background: var(--accent); margin: 24px auto 40px auto;"></div>
+    </div>
+
+    <div style="max-width: 520px; margin: 0 auto; text-align: center;">
+      <p style="font-size: 12pt; line-height: 1.9; color: var(--text-body);">You now have everything you need: the platforms, the strategies, the templates, the pricing, and the benchmarks. The difference between people who make money with AI influencers and those who don't isn't knowledge — it's execution.</p>
+
+      <div class="spacer-md"></div>
+
+      <p style="font-size: 12pt; line-height: 1.9; color: var(--text-body);">Start with one revenue stream. Master it. Then stack the next one. Don't try to launch everything at once. The playbook works — but only if you work it.</p>
+
+      <div class="spacer-md"></div>
+
+      <p style="font-size: 14pt; font-weight: 700; color: var(--accent);">The machine is waiting.<br>All you have to do is turn it on.</p>
+    </div>
+
+    <div class="spacer-xl"></div>
+    <div class="spacer-xl"></div>
+
+    <div style="text-align: center;">
+      <p class="muted" style="letter-spacing: 4px; text-transform: uppercase; font-size: 8pt;">AI INFLUENCER BLUEPRINT</p>
+      <p class="muted" style="margin-top: 8px; font-size: 8pt;">© 2025 · All Rights Reserved</p>
+      <p class="muted" style="margin-top: 4px; font-size: 8pt;">For personal use only. Do not distribute.</p>
+    </div>
+
+    <div class="footer">AI INFLUENCER BLUEPRINT · THE MONEY MACHINE · 27</div>
+  </div>
+</div>
+
+</body>
+</html>

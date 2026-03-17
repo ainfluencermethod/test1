@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI Universa – Delovni zvezek #2</title>
+
+<style>
+  @page { size: A4 portrait; margin: 0; }
+  :root {
+    --bg: #0F1214;
+    --bg-soft: #15191d;
+    --card: #1B2024;
+    --card-2: #20262b;
+    --text: #C9D1D4;
+    --muted: #97A2A8;
+    --white: #F6FAFB;
+    --accent: #4ECDC4;
+    --accent-2: #00E5CC;
+    --callout: #13282A;
+    --line: rgba(78, 205, 196, 0.32);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Inter, Arial, Helvetica, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-size: 14.5px; line-height: 1.6; }
+  .page { width: 210mm; height: 297mm; background: linear-gradient(180deg, #0D0F11 0%, #121416 100%); position: relative; page-break-after: always; overflow: hidden; }
+  .page:last-child { page-break-after: auto; }
+  .topbar { position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); }
+  .inner { padding: 26mm 18mm 24mm; height: 100%; }
+  .cover { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20mm 18mm 24mm; }
+  .logo { width: 62mm; height: auto; margin-bottom: 18mm; filter: drop-shadow(0 8px 22px rgba(0,229,204,.08)); }
+  .brand { color: var(--accent); text-transform: uppercase; letter-spacing: 0.34em; font-size: 12px; font-weight: 800; margin-bottom: 16px; }
+  .cover-title { color: var(--white); font-size: 42pt; line-height: 1.02; font-weight: 800; max-width: 150mm; margin: 0 auto 12px; }
+  .cover-subtitle { font-size: 16px; color: var(--text); max-width: 125mm; margin: 0 auto 14mm; }
+  .cover-meta { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; max-width: 145mm; }
+  .pill { display: inline-block; padding: 8px 12px; border: 1px solid rgba(255,255,255,.07); background: rgba(255,255,255,.02); border-radius: 999px; color: var(--muted); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
+  .divider { width: 36mm; height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); border-radius: 99px; margin: 14mm auto 0; }
+  .section-label { color: var(--accent); font-size: 11px; text-transform: uppercase; letter-spacing: 0.28em; font-weight: 800; margin-bottom: 8px; }
+  .section-title { color: var(--white); font-size: 34px; line-height: 1.1; font-weight: 800; margin: 0 0 10px; }
+  .section-rule { width: 100%; height: 2px; background: linear-gradient(90deg, var(--accent), transparent 60%); margin: 0 0 16px; }
+  p { margin: 0 0 10px; }
+  .lede { max-width: 145mm; color: var(--text); }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .card { background: linear-gradient(180deg, var(--card), var(--card-2)); border: 1px solid rgba(255,255,255,.05); border-radius: 16px; padding: 14px 15px; }
+  .card h3 { margin: 0 0 8px; color: var(--white); font-size: 18px; line-height: 1.25; }
+  .mini { color: var(--accent); text-transform: uppercase; letter-spacing: .2em; font-size: 10px; font-weight: 800; margin-bottom: 7px; }
+  ul, ol { margin: 8px 0 0 18px; padding: 0; }
+  li { margin: 0 0 8px; }
+  .callout { background: linear-gradient(180deg, rgba(19,40,42,.96), rgba(18,33,35,.96)); border-left: 4px solid var(--accent); border-radius: 10px; padding: 12px 14px; margin-top: 12px; color: #D7F4F1; }
+  .quote { color: var(--white); font-size: 24px; line-height: 1.3; max-width: 150mm; margin-top: 18mm; }
+  .split { display: grid; grid-template-columns: 1.1fr .9fr; gap: 16px; align-items: start; }
+  .split-even { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .worksheet-box { min-height: 28mm; border: 1px dashed rgba(255,255,255,.18); border-radius: 12px; margin-top: 8px; }
+  .line { border-bottom: 1px dashed rgba(255,255,255,.18); height: 18px; margin: 8px 0; }
+  .tall { min-height: 36mm; }
+  .code { white-space: pre-wrap; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11.2px; line-height: 1.55; background: #111518; color: #D8FFFB; border: 1px solid rgba(78,205,196,.22); border-radius: 12px; padding: 12px; margin-top: 8px; }
+  .prompt-card { margin-bottom: 10px; }
+  .two-col-list { columns: 2; column-gap: 18px; margin-top: 6px; }
+  .two-col-list li { break-inside: avoid; }
+  .price { font-size: 26px; color: var(--white); font-weight: 800; margin: 4px 0 8px; }
+  .footer { position: absolute; left: 18mm; right: 18mm; bottom: 9mm; text-align: center; color: #6F767B; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; }
+  .spacer-xl { height: 18mm; }
+  .spacer-lg { height: 12mm; }
+  .spacer-md { height: 8mm; }
+  .checklist li::marker { color: var(--accent); }
+  .muted { color: var(--muted); }
+  .center { text-align: center; }
+  .right { text-align: right; }
+  .big-number { font-size: 44px; color: var(--white); font-weight: 800; line-height: 1; }
+  .page-no::after { content: counter(page); }
+  @media print {
+    html, body { width: 210mm; height: auto; }
+  }
+</style>
+
+</head>
+<body>
+<section class="page"><div class="topbar"></div><div class="inner cover">
+  <img src="/ai-universa-logo.png" alt="AI Universa logo" class="logo" />
+  <div class="brand">AI Universa</div>
+  <h1 class="cover-title">Delovni zvezek #2<br/>Prompt Pack</h1>
+  <p class="cover-subtitle">Bonus paket promptov po Day 1 — za hitrejšo produkcijo vsebin, boljše ponudbe in pametnejšo avtomatizacijo.</p>
+  <div class="cover-meta">
+    <span class="pill">bonus po Day 1</span>
+    <span class="pill">ready-to-use prompti</span>
+    <span class="pill">taktična vrednost</span>
+  </div>
+  <div class="divider"></div>
+</div></section><section class="page"><div class="topbar"></div><div class="inner">
+  <div class="section-label">Intro</div>
+  <h2 class="section-title">Zakaj so prompti #1 skill za AI zaslužek</h2>
+  <div class="section-rule"></div>
+  <p class="lede">Orodja se menjajo. Vmesniki se spreminjajo. Ampak sposobnost, da AI-ju podaš jasen kontekst, cilj, ton in output format, ostaja ena najbolj donosnih veščin.</p>
+  <div class="grid-2">
+    <div class="card"><div class="mini">Dober prompt</div><h3>Prihrani čas</h3><p>Namesto 20 slabih poskusov prideš bližje uporabnemu outputu v 1–3 iteracijah.</p></div>
+    <div class="card"><div class="mini">Dober prompt</div><h3>Poveča kvaliteto</h3><p>Ko je prompt boljši, je rezultat bolj uporaben za content, prodajo ali delivery.</p></div>
+  </div>
+  <div class="callout">Prompt ni “čarovnija”. Je strukturirano briefanje. Boljši brief = boljši rezultat.</div>
+</div><div class="footer">AI UNIVERSA · 1</div></section><section class="page"><div class="topbar"></div><div class="inner">
+      <div class="section-label">AI Influencer prompti</div>
+      <h2 class="section-title">AI Influencer Persona Builder</h2>
+      <div class="section-rule"></div>
+      <div class="prompt-card">
+        <div class="mini">Prompt</div>
+        <div class="code">Deluj kot senior brand strategist za AI creatorje. Ustvari 3 različne persone za AI influencer brand v niši [niša]. Za vsako persono podaj: ime arhetipa, ton komunikacije, 5 content stebrov, tipične fraze, videz/vibe, glavni pain point publike in monetizacijski kot.</div>
+      </div>
+      <div class="grid-2">
+        <div class="card"><div class="mini">Kdaj uporabiš</div><p>Uporabi, ko iščeš jasno identiteto za profil ali brand.</p></div>
+        <div class="card"><div class="mini">Pro tip</div><p>Najprej zamenjaj [niša] z zelo specifično nišo, ne z generičnim ‘podjetništvo’.</p></div>
+      </div>
+    </div><div class="footer">AI UNIVERSA · 2</div></section><section class="page"><div class="topbar"></div><div class="inner">
+      <div class="section-label">AI Influencer prompti</div>
+      <h2 class="section-title">Hook Generator za kratke videe</h2>
+      <div class="section-rule"></div>
+      <div class="prompt-card">
+        <div class="mini">Prompt</div>
+        <div class="code">Si elite short-form copywriter. Napiši 25 hookov za Reels/TikTok v niši [niša] na temo [tema]. Hooki naj bodo kratki, močni, radovednostni in brez klišejev. Razdeli jih v 5 kategorij: pain, kontroverza, rezultat, napaka, ‘nobody tells you this’.</div>
+      </div>
+      <div class="grid-2">
+        <div class="card"><div class="mini">Kdaj uporabiš</div><p>Za hitro ideacijo opening stavkov ali naslovov.</p></div>
+        <div class="card"><div class="mini">Pro tip</div><p>Če dobiš preveč generične hooke, dodaj še zahtevo: ‘naj zvenijo kot resnična oseba, ne kot marketing bot’.</p></div>
+      </div>
+    </div><div class="footer">AI UNIVERSA · 3</div></section><section class="page"><div class="topbar"></div><div class="inner">
+      <div class="section-label">AI Influencer prompti</div>
+      <h2 class="section-title">Content Angle Finder</h2>
+      <div class="section-rule"></div>
+      <div class="prompt-card">
+        <div class="mini">Prompt</div>
+        <div class="code">Daj mi 15 svežih content angle-ov za publiko [ciljna publika], ki želi [želeni rezultat]. Za vsak angle napiši: glavno obljubo, zakaj pritegne pozornost in primer 30-sekundnega videa.</div>
+      </div>
+      <div class="grid-2">
+        <div class="card"><div class="mini">Kdaj uporabiš</div><p>Ko ti zmanjka novih zornih kotov za isto temo.</p></div>
+        <div class="card"><div class="mini">Pro tip</div><p>Dodaj realno situacijo publike, da AI ne ostane preširok.</p></div>
+      </div>
+    </div><div class="footer">AI UNIVERSA · 4</div></section><section class="page"><div class="topbar"></div><div class="inner">
+      <div class="section-label">AI Influencer prompti</div>
+      <h2 class="section-title">Caption & CTA Writer</h2>
+      <div class="section-rule"></div>
+      <div class="prompt-card">
+        <div class="mini">Prompt</div>
+        <div class="code">Napiši 10 captionov za Instagram/LinkedIn objavo o [tema]. Ton naj bo [ton]. Vsak caption naj vsebuje močan prvi stavek, kratko zgodbo ali poanto, ter CTA, ki sproži komentar ali DM.</div>
+      </div>
+      <div class="grid-2">
+        <div class="card"><div class="mini">Kdaj uporabiš</div><p>Ko imaš idejo ali video, manjka pa ti spremljevalni tekst.</p></div>
+        <div class="card"><div class="mini">Pro tip</div><p>CTA naj bo enostaven. Ne kompliciraj z več koraki hkrati.</p></div>
+      </div>
+    </div><div class="footer">AI UNIVERSA · 5</div></section><section class="page"><div class="topbar"></div><div class="inner">
+      <div class="section-label">AI Influencer prompti</div>
+      <h2 class="section-title">Viral Trend Analyzer</h2>
+      <div class="section-rule"></div>
+      <div class="prompt-card">
+        <div class="mini">Prompt</div>
+        <div class="code">Analiziraj naslednji trend ali format: [opiši trend / prilepi opis videa]. Povej, zakaj deluje, kateri psihološki sprožilci so v ozadju, kako ga lahko prilagodim za nišo [niša] in podaj 5 originalnih izvedb.</div>
+      </div>
+      <div class="grid-2">
+        <div class="card"><div class="mini">Kdaj uporabiš</div><p>Ko želiš trend uporabiti pametno, ne samo kopirati.</p></div>
+        <div class="card"><div class="mini">Pro tip</div><p>Vedno prosi še za ‘original adaptation’, da se izogneš copy-paste občutku.</p></div>
+      </div>
+    </div><div class="footer">AI UNIVERSA · 6</div></section><section class="page"><div class="topbar"></div><div class="inner">
+      <div class="section-label">AI Business prompti</div>
+      <h2 class="section-title">Client Outreach Personalizer</h2>
+      <div class="section-rule"></div>
+      <div class="code">Deluj kot outbound strategist. Napiši personaliziran outreach message za potencialno stranko v niši [niša]. Cilj je ponuditi [tvoja storitev]. Sporočilo naj bo kratko, konkretno, brez prodajnega ‘smrada’ in naj vsebuje opazko, relevantno za njihov biznis.</div>
+      <div class="spacer-md"></div>
+      <div class="grid-2">
+        <div class="card"><div class="mini">Kdaj uporabiš</div><p>Za DM, email ali LinkedIn outreach.</p></div>
+        <div class="card"><div class="mini">Pro tip</div><p>Personalizacija naj temelji na resnični opazki z njihove spletne strani ali social profila.</p></div>
+      </div>
+    </div><div class="footer">AI UNIVERSA · 7</div></section><section class="page"><div class="topbar"></div><div class="inner">
+      <div class="section-label">AI Business prompti</div>
+      <h2 class="section-title">Offer Packaging Prompt</h2>
+      <div class="section-rule"></div>
+      <div class="code">Pomagaj mi zapakirati AI storitev ‘[storitev]’ v jasno ponudbo. Daj mi: ime ponudbe, obljubo, za koga je, kaj je vključeno, kaj ni vključeno, okviren timeline in 3 nivoje paketov.</div>
+      <div class="spacer-md"></div>
+      <div class="grid-2">
+        <div class="card"><div class="mini">Kdaj uporabiš</div><p>Ko znaš nekaj narediti, pa tega še ne znaš lepo zapakirati v ponudbo.</p></div>
+        <div class="card"><div class="mini">Pro tip</div><p>Najprej definiraj rezultat, šele potem deliverable.</p></div>
+      </div>
+    </div><div class="footer">AI UNIVERSA · 8</div></section><section class="page"><div class="topbar"></div><div class="inner">
+      <div class="section-label">AI Business prompti</div>
+      <h2 class="section-title">Pricing Strategy Builder</h2>
+      <div class="section-rule"></div>
+      <div class="code">Deluj kot pricing consultant. Za storitev [storitev] in ciljno publiko [publika] predlagaj 3 cenovne nivoje v EUR: starter, core, premium. Za vsak nivo razloži logiko cene, percepcijo vrednosti in komu je namenjen.</div>
+      <div class="spacer-md"></div>
+      <div class="grid-2">
+        <div class="card"><div class="mini">Kdaj uporabiš</div><p>Ko si v dvomu, koliko zaračunati in kako ceno utemeljiti.</p></div>
+        <div class="card"><div class="mini">Pro tip</div><p>Ne prodajaj ur. Prodajaj rezultat, hitrost ali prihranek časa.</p></div>
+      </div>
+    </div><div class="footer">AI UNIVERSA · 9</div></section><section class="page"><div class="topbar"></div><div class="inner">
+      <div class="section-label">AI Automation prompti</div>
+      <h2 class="section-title">Workflow Automation Designer</h2>
+      <div class="section-rule"></div>
+      <div class="code">Zgradi preprost AI workflow za proces [proces]. Vključi trigger, korake, uporabljena orodja, input/output vsakega koraka, možne napake in prvi ‘manual fallback’ plan.</div>
+      <div class="spacer-md"></div>
+      <div class="grid-2">
+        <div class="card"><div class="mini">Kdaj uporabiš</div><p>Ko želiš iz kaotičnega procesa narediti ponovljiv sistem.</p></div>
+        <div class="card"><div class="mini">Pro tip</div><p>Začni z majhnim workflowom. Avtomatiziraj eno stvar, ne cele firme v enem dnevu.</p></div>
+      </div>
+    </div><div class="footer">AI UNIVERSA · 10</div></section><section class="page"><div class="topbar"></div><div class="inner">
+      <div class="section-label">AI Automation prompti</div>
+      <h2 class="section-title">Content Scheduling System</h2>
+      <div class="section-rule"></div>
+      <div class="code">Ustvari mi 14-dnevni content sistem za nišo [niša]. Potrebujem: dnevno temo, format, CTA, namen vsebine in kateri AI prompt naj uporabim za pripravo osnutka.</div>
+      <div class="spacer-md"></div>
+      <div class="grid-2">
+        <div class="card"><div class="mini">Kdaj uporabiš</div><p>Ko rabiš konsistenco in ne želiš vsak dan izumljati vsega znova.</p></div>
+        <div class="card"><div class="mini">Pro tip</div><p>Naj sistem vsebuje mešanico top-of-funnel, trust in offer contenta.</p></div>
+      </div>
+    </div><div class="footer">AI UNIVERSA · 11</div></section><section class="page"><div class="topbar"></div><div class="inner">
+  <div class="section-label">Bonus</div>
+  <h2 class="section-title">Kako iz slabega prompta narediš uporabnega</h2>
+  <div class="section-rule"></div>
+  <div class="grid-3">
+    <div class="card"><div class="mini">1</div><h3>Dodaj vlogo</h3><p>Povej AI-ju, kdo naj bo: strategist, closer, editor, consultant.</p></div>
+    <div class="card"><div class="mini">2</div><h3>Dodaj kontekst</h3><p>Niša, publika, cilj, omejitve in ton so ključni.</p></div>
+    <div class="card"><div class="mini">3</div><h3>Določi output</h3><p>Seznam, tabela, skripta, CTA, carousel, email …</p></div>
+  </div>
+  <div class="callout">Formula za boljši prompt: vloga + kontekst + cilj + format + kriteriji kvalitete.</div>
+</div><div class="footer">AI UNIVERSA · 12</div></section><section class="page"><div class="topbar"></div><div class="inner">
+  <div class="section-label">Worksheet</div>
+  <h2 class="section-title">Moji top 3 prompti</h2>
+  <div class="section-rule"></div>
+  <div class="card">
+    <div class="mini">Prompt #1</div>
+    <div class="line"></div><div class="line"></div>
+    <div class="mini" style="margin-top:12px;">Zakaj ga bom uporabil</div>
+    <div class="worksheet-box"></div>
+  </div>
+  <div class="spacer-md"></div>
+  <div class="card">
+    <div class="mini">Prompt #2</div>
+    <div class="line"></div><div class="line"></div>
+    <div class="mini" style="margin-top:12px;">Zakaj ga bom uporabil</div>
+    <div class="worksheet-box"></div>
+  </div>
+</div><div class="footer">AI UNIVERSA · 13</div></section><section class="page"><div class="topbar"></div><div class="inner">
+  <div class="section-label">Worksheet</div>
+  <h2 class="section-title">Še en prompt + akcija za jutri</h2>
+  <div class="section-rule"></div>
+  <div class="card">
+    <div class="mini">Prompt #3</div>
+    <div class="line"></div><div class="line"></div>
+    <div class="mini" style="margin-top:12px;">Prva implementacija</div>
+    <div class="worksheet-box tall"></div>
+  </div>
+  <div class="callout">Se vidimo jutri na Day 2. Prinesi svoje najljubše promte, vprašanja in vsaj en konkreten primer, kaj si že testiral.</div>
+</div><div class="footer">AI UNIVERSA · 14</div></section>
+</body>
+</html>

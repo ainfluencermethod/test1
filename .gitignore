@@ -1,0 +1,12 @@
+node_modules/
+.next/
+.env
+.env.local
+ga4-aib-adc.json
+ga4-desktop-credentials.json
+ga4-aib-credentials.json
+ga4-oauth-credentials.json
+*.mp4
+*.mov
+*.avi
+tools/social-media-manager/

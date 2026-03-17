@@ -1,0 +1,2265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Algorithm Decoded</title>
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html, body {
+    background: #0D0F11;
+    color: #B8B8B8;
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 11pt;
+    line-height: 1.65;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .page {
+    width: 210mm;
+    height: 297mm;
+    padding: 0;
+    position: relative;
+    page-break-after: always;
+    page-break-inside: avoid;
+    break-after: page;
+    background: #0D0F11;
+    overflow: hidden;
+  }
+
+  .page:last-child {
+    page-break-after: auto;
+    break-after: auto;
+  }
+
+  .teal-bar {
+    width: 100%;
+    height: 4px;
+    background: #4ECDC4;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .page-content {
+    padding: 50px 55px 60px 55px;
+    position: relative;
+    height: calc(297mm - 4px);
+    overflow: hidden;
+  }
+
+  .footer {
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 7.5pt;
+    color: #707070;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* Cover Page */
+  .cover {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    height: calc(297mm - 4px);
+    padding: 80px 60px;
+  }
+
+  .cover-label {
+    font-size: 10pt;
+    color: #4ECDC4;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 30px;
+  }
+
+  .cover-title {
+    font-size: 42pt;
+    font-weight: 800;
+    color: #FFFFFF;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    letter-spacing: -0.5px;
+  }
+
+  .cover-subtitle {
+    font-size: 16pt;
+    color: #B8B8B8;
+    font-weight: 400;
+    line-height: 1.4;
+    margin-bottom: 40px;
+    max-width: 480px;
+  }
+
+  .cover-tagline {
+    font-size: 11pt;
+    color: #707070;
+    font-style: italic;
+    margin-bottom: 60px;
+  }
+
+  .cover-divider {
+    width: 80px;
+    height: 3px;
+    background: #4ECDC4;
+    margin-bottom: 30px;
+  }
+
+  .cover-footer-text {
+    font-size: 9pt;
+    color: #707070;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  /* Section Label */
+  .section-label {
+    font-size: 9pt;
+    color: #4ECDC4;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  /* Section Title */
+  .section-title {
+    font-size: 26pt;
+    font-weight: 700;
+    color: #FFFFFF;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+
+  .section-title-sm {
+    font-size: 20pt;
+    font-weight: 700;
+    color: #FFFFFF;
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+
+  .section-divider {
+    width: 60px;
+    height: 3px;
+    background: #4ECDC4;
+    margin-bottom: 35px;
+  }
+
+  /* Body text */
+  p {
+    margin-bottom: 14px;
+    color: #B8B8B8;
+    font-size: 10.5pt;
+    line-height: 1.7;
+  }
+
+  .text-white {
+    color: #FFFFFF;
+  }
+
+  .text-muted {
+    color: #707070;
+  }
+
+  .text-teal {
+    color: #4ECDC4;
+  }
+
+  strong {
+    color: #FFFFFF;
+    font-weight: 600;
+  }
+
+  /* Headings within content */
+  h3 {
+    font-size: 13pt;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin-bottom: 10px;
+    margin-top: 28px;
+  }
+
+  h4 {
+    font-size: 11pt;
+    font-weight: 600;
+    color: #FFFFFF;
+    margin-bottom: 8px;
+    margin-top: 22px;
+  }
+
+  /* Callout box */
+  .callout {
+    background: #1A2A2A;
+    border-left: 3px solid #4ECDC4;
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 22px 0;
+  }
+
+  .callout p:last-child {
+    margin-bottom: 0;
+  }
+
+  .callout-title {
+    font-size: 9pt;
+    color: #4ECDC4;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  /* Card */
+  .card {
+    background: #1A1D21;
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin: 18px 0;
+  }
+
+  .card p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Numbered steps */
+  .step {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 24px;
+  }
+
+  .step-number {
+    font-size: 28pt;
+    font-weight: 800;
+    color: #4ECDC4;
+    line-height: 1;
+    margin-right: 22px;
+    min-width: 42px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .step-content {
+    flex: 1;
+  }
+
+  .step-title {
+    font-size: 12pt;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin-bottom: 6px;
+  }
+
+  .step-text {
+    color: #B8B8B8;
+    font-size: 10pt;
+    line-height: 1.65;
+  }
+
+  /* Lists */
+  ul, ol {
+    margin: 12px 0 16px 22px;
+    color: #B8B8B8;
+    font-size: 10.5pt;
+  }
+
+  li {
+    margin-bottom: 7px;
+    line-height: 1.6;
+  }
+
+  li strong {
+    color: #FFFFFF;
+  }
+
+  /* Table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 9.5pt;
+  }
+
+  thead th {
+    background: #1A1D21;
+    color: #4ECDC4;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 8pt;
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 2px solid #2A2D31;
+  }
+
+  tbody td {
+    padding: 11px 16px;
+    border-bottom: 1px solid #1A1D21;
+    color: #B8B8B8;
+  }
+
+  tbody tr:hover {
+    background: #12141780;
+  }
+
+  /* TOC */
+  .toc-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 12px 0;
+    border-bottom: 1px solid #1A1D21;
+  }
+
+  .toc-title {
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 11pt;
+  }
+
+  .toc-page {
+    color: #4ECDC4;
+    font-size: 10pt;
+    font-weight: 600;
+  }
+
+  .toc-subtitle {
+    color: #707070;
+    font-size: 9pt;
+    margin-top: 3px;
+  }
+
+  /* Two-column grid */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 18px 0;
+  }
+
+  .grid-2 .card {
+    margin: 0;
+  }
+
+  /* Spacers */
+  .spacer-sm { height: 16px; }
+  .spacer-md { height: 30px; }
+  .spacer-lg { height: 50px; }
+
+  /* Checklist */
+  .checklist {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+  }
+
+  .checklist li {
+    padding-left: 28px;
+    position: relative;
+    margin-bottom: 10px;
+  }
+
+  .checklist li::before {
+    content: "☐";
+    position: absolute;
+    left: 0;
+    color: #4ECDC4;
+    font-size: 12pt;
+  }
+
+  /* Metric highlight */
+  .metric-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    padding: 14px 20px;
+    background: #1A1D21;
+    border-radius: 8px;
+  }
+
+  .metric-number {
+    font-size: 22pt;
+    font-weight: 800;
+    color: #4ECDC4;
+    min-width: 50px;
+    margin-right: 18px;
+  }
+
+  .metric-label {
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 10.5pt;
+  }
+
+  .metric-detail {
+    color: #707070;
+    font-size: 9pt;
+    margin-top: 2px;
+  }
+
+  @media print {
+    .page {
+      page-break-after: always;
+    }
+    .page:last-child {
+      page-break-after: auto;
+    }
+    body {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== PAGE 1: COVER ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="cover">
+    <div class="cover-label">AI Influencer Blueprint</div>
+    <div class="cover-title">Algorithm<br>Decoded</div>
+    <div class="cover-divider"></div>
+    <div class="cover-subtitle">Master Every Platform's Algorithm</div>
+    <div class="cover-tagline">Stop guessing. Start engineering your reach.</div>
+    <div class="spacer-lg"></div>
+    <div class="cover-footer-text">2026 Edition</div>
+  </div>
+</div>
+
+<!-- ===================== PAGE 2: TABLE OF CONTENTS ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Contents</div>
+    <div class="section-title">Table of Contents</div>
+    <div class="section-divider"></div>
+
+    <div class="spacer-md"></div>
+
+    <div class="toc-item">
+      <div>
+        <div class="toc-title">Introduction</div>
+        <div class="toc-subtitle">The Algorithm Is Not Your Enemy</div>
+      </div>
+      <div class="toc-page">03</div>
+    </div>
+    <div class="toc-item">
+      <div>
+        <div class="toc-title">Module 01 — How Algorithms Actually Work</div>
+        <div class="toc-subtitle">The recommendation loop, batch testing, content half-life</div>
+      </div>
+      <div class="toc-page">05</div>
+    </div>
+    <div class="toc-item">
+      <div>
+        <div class="toc-title">Module 02 — Instagram Algorithm Mastery</div>
+        <div class="toc-subtitle">Reels, ranking factors, shadow bans, AI content</div>
+      </div>
+      <div class="toc-page">08</div>
+    </div>
+    <div class="toc-item">
+      <div>
+        <div class="toc-title">Module 03 — TikTok Algorithm Mastery</div>
+        <div class="toc-subtitle">FYP mechanics, watch time, viral triggers</div>
+      </div>
+      <div class="toc-page">13</div>
+    </div>
+    <div class="toc-item">
+      <div>
+        <div class="toc-title">Module 04 — Threads & YouTube Shorts</div>
+        <div class="toc-subtitle">Text-first algorithms, cross-posting strategy</div>
+      </div>
+      <div class="toc-page">17</div>
+    </div>
+    <div class="toc-item">
+      <div>
+        <div class="toc-title">Module 05 — Engineering Your Metrics</div>
+        <div class="toc-subtitle">The 7 controllable metrics and A/B testing</div>
+      </div>
+      <div class="toc-page">20</div>
+    </div>
+    <div class="toc-item">
+      <div>
+        <div class="toc-title">Module 06 — The Anti-Shadowban Protocol</div>
+        <div class="toc-subtitle">Myths debunked, recovery protocol, prevention</div>
+      </div>
+      <div class="toc-page">23</div>
+    </div>
+    <div class="toc-item">
+      <div>
+        <div class="toc-title">Bonus — The Posting Playbook</div>
+        <div class="toc-subtitle">Weekly schedules, content rotation, 30-day reset</div>
+      </div>
+      <div class="toc-page">26</div>
+    </div>
+
+    <div class="footer">AI Influencer Blueprint · Algorithm Decoded · 02</div>
+  </div>
+</div>
+
+<!-- ===================== PAGE 3: INTRODUCTION ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Introduction</div>
+    <div class="section-title">The Algorithm Is<br>Not Your Enemy</div>
+    <div class="section-divider"></div>
+
+    <p>Every creator who's ever posted content and watched it die at 47 views has said the same thing: <strong>"The algorithm buried me."</strong></p>
+
+    <p>Wrong. The algorithm didn't bury you. It tested you — and your content didn't pass.</p>
+
+    <p>Here's what most creators get catastrophically wrong: they treat the algorithm as a gatekeeper. Some mysterious, malicious force that decides who wins and who loses. In reality, algorithms are <strong>matchmaking systems</strong>. Their entire job is to connect the right content with the right audience at the right time. They're not trying to suppress you. They're trying to avoid showing boring content to people who don't want it.</p>
+
+    <p>Once you understand this, everything changes. You stop fighting the algorithm and start <strong>engineering for it</strong>.</p>
+
+    <div class="callout">
+      <div class="callout-title">The Mindset Shift</div>
+      <p>The algorithm doesn't decide if your content is "good." It measures whether <strong>people respond to it</strong>. Your opinion of your content is irrelevant. The data is everything.</p>
+    </div>
+
+    <h3>The 3 Universal Signals</h3>
+
+    <p>Every single algorithm — Instagram, TikTok, Threads, YouTube — measures the same three core signals. The weight differs by platform, but the fundamentals are identical:</p>
+
+    <div class="step">
+      <div class="step-number">01</div>
+      <div class="step-content">
+        <div class="step-title">Engagement</div>
+        <div class="step-text">Are people interacting with this content? Likes, comments, shares, saves, replies. Each action has a different weight (shares > saves > comments > likes), but they all signal that someone cared enough to act.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">02</div>
+      <div class="step-content">
+        <div class="step-title">Retention</div>
+        <div class="step-text">Are people actually consuming the content? Watch time, completion rate, time on post. The algorithm wants to know: did this hold attention or did people scroll past?</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">03</div>
+      <div class="step-content">
+        <div class="step-title">Velocity</div>
+        <div class="step-text">How quickly are those signals accumulating? A post that gets 100 likes in 10 minutes is infinitely more interesting than one that gets 100 likes in 10 days. Speed of engagement is the accelerant.</div>
+      </div>
+    </div>
+
+    <div class="footer">AI Influencer Blueprint · Algorithm Decoded · 03</div>
+  </div>
+</div>
+
+<!-- ===================== PAGE 4: INTRO CONTINUED ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Introduction</div>
+    <div class="section-title-sm">Why This Guide Exists</div>
+    <div class="section-divider"></div>
+
+    <p>This isn't a generic social media tips guide. This is an <strong>engineering manual for reach</strong>. Every tactic in this guide is specifically calibrated for AI influencer content — the unique challenges of AI-generated imagery, the detection systems you need to navigate, and the content patterns that perform best with algorithmically-driven distribution.</p>
+
+    <p>AI content creators have a paradox: the platforms simultaneously <strong>push short-form video</strong> (which AI tools excel at creating) while building <strong>detection systems</strong> that flag AI-generated content. This guide shows you how to thrive in that tension.</p>
+
+    <div class="callout">
+      <div class="callout-title">What You'll Walk Away With</div>
+      <p>A complete understanding of how Instagram, TikTok, Threads, and YouTube Shorts rank and distribute content — and a step-by-step system for engineering your content to score high on every signal that matters. No guesswork. No "just post consistently and hope." <strong>Precision.</strong></p>
+    </div>
+
+    <h3>How to Use This Guide</h3>
+
+    <p>Each module is self-contained. If you only post on Instagram, skip to Module 02. If you're dealing with a shadow ban right now, jump to Module 06. But if you want the full picture — how all these platforms connect and how to build a cross-platform system — read it front to back.</p>
+
+    <p>Every recommendation is backed by either <strong>platform documentation</strong>, <strong>creator data</strong> (from accounts with 100K+ followers), or <strong>direct testing</strong>. When we speculate, we tell you. When we know, we show you the receipts.</p>
+
+    <p>Let's decode the algorithm.</p>
+
+    <div class="spacer-lg"></div>
+
+    <div class="footer">AI Influencer Blueprint · Algorithm Decoded · 04</div>
+  </div>
+</div>
+
+<!-- ===================== PAGE 5: MODULE 01 ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Module 01</div>
+    <div class="section-title">How Algorithms<br>Actually Work</div>
+    <div class="section-divider"></div>
+
+    <p>Before we get platform-specific, you need to understand the universal mechanics. Every recommendation algorithm on every platform follows the same fundamental loop.</p>
+
+    <h3>The Recommendation Loop</h3>
+
+    <p>When you publish a piece of content, it enters a four-stage cycle:</p>
+
+    <div class="step">
+      <div class="step-number">01</div>
+      <div class="step-content">
+        <div class="step-title">Create</div>
+        <div class="step-text">You publish. The algorithm immediately categorizes your content — topic, format, audio, visual elements, caption keywords. It builds a "content fingerprint" before anyone sees it.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">02</div>
+      <div class="step-content">
+        <div class="step-title">Test</div>
+        <div class="step-text">Your content is shown to a small batch — typically 200-500 accounts. These are a mix of your followers and non-followers who match the content's predicted interest profile.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">03</div>
+      <div class="step-content">
+        <div class="step-title">Measure</div>
+        <div class="step-text">The algorithm watches the test batch like a hawk. Are people watching to the end? Sharing? Commenting? Scrolling past? Every micro-interaction is logged and scored against benchmarks.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">04</div>
+      <div class="step-content">
+        <div class="step-title">Distribute or Kill</div>
+        <div class="step-text">If signals are strong: wider distribution. 1K views, then 10K, then 100K. Each tier re-measures. If signals are weak at any stage: distribution stops. Your content is effectively dead.</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">Key Insight</div>
+      <p>Your content doesn't need to be "good" in the abstract — it needs to <strong>outperform the benchmarks at each distribution tier</strong>. A post that's great for 500 people but mediocre for 5,000 will stall at 500.</p>
+    </div>
+
+    <div class="footer">AI Influencer Blueprint · Algorithm Decoded · 05</div>
+  </div>
+</div>
+
+<!-- ===================== PAGE 6: MODULE 01 CONTINUED ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Module 01</div>
+    <div class="section-title-sm">The 300 Views Jail</div>
+    <div class="section-divider"></div>
+
+    <p>New accounts and accounts with inconsistent posting often get stuck at 200-500 views per post. Creators call this "the 300 views jail." It's not a punishment — it's the algorithm being <strong>cautious</strong>.</p>
+
+    <p>Here's why: the algorithm has no data on you. It doesn't know your content quality, your audience match, or your engagement patterns. So it tests conservatively. The fix isn't to hack the algorithm — it's to <strong>give it consistent data points</strong> by posting regularly with strong engagement signals.</p>
+
+    <div class="card">
+      <h4>Breaking Out of 300 Views Jail</h4>
+      <ul>
+        <li><strong>Post daily for 14-21 days</strong> — give the algorithm enough data to trust you</li>
+        <li><strong>Optimize for completion rate</strong> — make 7-15 second videos people watch to the end</li>
+        <li><strong>Engage in your niche</strong> — comment on 20-30 posts before and after publishing</li>
+        <li><strong>Use niche-specific hashtags</strong> — help the algorithm categorize you correctly</li>
+        <li><strong>Don't delete underperforming posts</strong> — the algorithm tracks deletion patterns</li>
+      </ul>
+    </div>
+
+    <h3>Content Half-Life</h3>
+
+    <p>Every piece of content has a window to prove itself. This window varies dramatically by platform:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Platform</th>
+          <th>Initial Test Window</th>
+          <th>Peak Distribution</th>
+          <th>Content Lifespan</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Instagram Reels</strong></td>
+          <td>30-60 minutes</td>
+          <td>24-48 hours</td>
+          <td>Up to 30 days</td>
+        </tr>
+        <tr>
+          <td><strong>TikTok</strong></td>
+          <td>15-30 minutes</td>
+          <td>2-5 days</td>
+          <td>Up to 90 days</td>
+        </tr>
+        <tr>
+          <td><strong>YouTube Shorts</strong></td>
+          <td>2-4 hours</td>
+          <td>3-7 days</td>
+          <td>Up to 6 months</td>
+        </tr>
+        <tr>
+          <td><strong>Threads</strong></td>
+          <td>15-30 minutes</td>
+          <td>4-12 hours</td>
+          <td>1-2 days</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <div class="callout-title">Why This Matters for AI Creators</div>
+      <p>YouTube Shorts has the longest content lifespan, making it the highest-ROI platform for evergreen AI content. TikTok offers the fastest viral potential. Instagram sits in the middle. <strong>Your strategy should account for these different time horizons.</strong></p>
+    </div>
+
+    <div class="footer">AI Influencer Blueprint · Algorithm Decoded · 06</div>
+  </div>
+</div>
+
+<!-- ===================== PAGE 7: MODULE 01 CONTINUED ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Module 01</div>
+    <div class="section-title-sm">The Compound Effect</div>
+    <div class="section-divider"></div>
+
+    <p>Here's the most counterintuitive truth about algorithms: <strong>consistency beats virality</strong>. Every single time.</p>
+
+    <p>A viral post gets you a spike — maybe 500K views, maybe a million. But then what? If your next 10 posts go back to 300 views, the algorithm learns that you're inconsistent. Your "average" drops. Your baseline resets.</p>
+
+    <p>Meanwhile, the creator who posts daily at a steady 10K-20K views per post is building something the algorithm values far more: <strong>predictability</strong>. The algorithm can rely on them to generate engagement. They get recommended more often. Their baseline rises over time.</p>
+
+    <div class="card">
+      <h4>The Math of Consistency</h4>
+      <p>Creator A: 1 viral post at 1M views, then 29 posts at 500 views = <strong>34,500 avg views</strong></p>
+      <p>Creator B: 30 posts at 15K views = <strong>15,000 avg views</strong></p>
+      <p style="margin-top: 12px;">Creator A looks like they won. But Creator B has a <strong>higher floor</strong>, a <strong>growing baseline</strong>, and the algorithm's <strong>trust</strong>. By month 3, Creator B's average is 25K and climbing. Creator A is still stuck at 500 between random spikes.</p>
+    </div>
+
+    <h3>The Trust Score</h3>
+
+    <p>While no platform publicly confirms it, extensive testing reveals that every algorithm maintains an implicit "trust score" for each account. This score is influenced by:</p>
+
+    <ul>
+      <li><strong>Posting consistency</strong> — regular posting on a predictable schedule</li>
+      <li><strong>Engagement consistency</strong> — steady interaction rates, not wild fluctuations</li>
+      <li><strong>Content quality consistency</strong> — maintaining production value across posts</li>
+      <li><strong>Community violations</strong> — strikes, reports, and policy violations tank your score</li>
+      <li><strong>Account age</strong> — older accounts with clean histories get more distribution leeway</li>
+    </ul>
+
+    <p>For AI influencer accounts, this trust score is especially important. The algorithm is already more cautious with AI-generated content. You need every trust signal you can get.</p>
+
+    <div class="callout">
+      <div class="callout-title">The Bottom Line</div>
+      <p>Don't chase virality. <strong>Engineer consistency.</strong> Set a posting schedule you can maintain for 6 months without burning out. The algorithm rewards reliability more than any single piece of brilliant content.</p>
+    </div>
+
+    <div class="footer">AI Influencer Blueprint · Algorithm Decoded · 07</div>
+  </div>
+</div>
+
+<!-- ===================== PAGE 8: MODULE 02 — INSTAGRAM ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Module 02</div>
+    <div class="section-title">Instagram Algorithm<br>Mastery</div>
+    <div class="section-divider"></div>
+
+    <p>Instagram doesn't have <em>one</em> algorithm. It has multiple ranking systems — one for Feed, one for Stories, one for Explore, and one for Reels. Each weighs different signals. As an AI influencer, <strong>Reels is your primary battlefield</strong>, but understanding all four gives you a compounding advantage.</p>
+
+    <h3>The 4 Ranking Factors</h3>
+
+    <p>Instagram's head of product, Adam Mosseri, has publicly confirmed these four ranking signals (in order of weight):</p>
+
+    <div class="step">
+      <div class="step-number">01</div>
+      <div class="step-content">
+        <div class="step-title">Interest</div>
+        <div class="step-text">How likely is this specific user to engage with this specific type of content? Based on their past behavior — what they've liked, saved, shared, and watched before.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">02</div>
+      <div class="step-content">
+        <div class="step-title">Timeliness</div>
+        <div class="step-text">Recent posts rank higher than old ones. Instagram still shows chronological signals even though the feed isn't chronological. Post when your audience is active.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">03</div>
+      <div class="step-content">
+        <div class="step-title">Relationship</div>
+        <div class="step-text">Content from accounts a user frequently interacts with ranks higher. DMs, comments, profile visits, and story views all strengthen this signal.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">04</div>
+      <div class="step-content">
+        <div class="step-title">Frequency</div>
+        <div class="step-text">How often the user opens Instagram affects what they see. Frequent users see a more chronological feed. Infrequent users see "best of" highlights.</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">What This Means for You</div>
+      <p>You can't control factors 3 and 4 directly. But you can control <strong>Interest</strong> (by creating content your niche obsesses over) and <strong>Timeliness</strong> (by posting at optimal times). That's where the leverage is.</p>
+    </div>
+
+    <div class="footer">AI Influencer Blueprint · Algorithm Decoded · 08</div>
+  </div>
+</div>
+
+<!-- ===================== PAGE 9: INSTAGRAM REELS ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Module 02</div>
+    <div class="section-title-sm">The Reels Algorithm</div>
+    <div class="section-divider"></div>
+
+    <p>Reels has its own dedicated algorithm, and it's where 90%+ of your discoverability comes from. Instagram has publicly stated that <strong>Reels is their highest priority format</strong> — they're competing with TikTok, and they're over-indexing on Reels distribution to keep users on the platform.</p>
+
+    <p>The Reels algorithm cares about one thing above all else: <strong>watch time</strong>. Not views, not likes — <em>how long people watch</em>.</p>
+
+    <h3>Reels Ranking Signals (Weighted)</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Signal</th>
+          <th>Weight</th>
+          <th>What It Means</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Watch time</strong></td>
+          <td>Very high</td>
+          <td>Total seconds watched across all viewers</td>
+        </tr>
+        <tr>
+          <td><strong>Completion rate</strong></td>
+          <td>High</td>
+          <td>% of viewers who watch to the end</td>
+        </tr>
+        <tr>
+          <td><strong>Replays</strong></td>
+          <td>High</td>
+          <td>How many times viewers rewatch</td>
+        </tr>
+        <tr>
+          <td><strong>Shares</strong></td>
+          <td>High</td>
+          <td>Shares to DMs, stories, external</td>
+        </tr>
+        <tr>
+          <td><strong>Saves</strong></td>
+          <td>Medium-high</td>
+          <td>Bookmarks for later</td>
+        </tr>
+        <tr>
+          <td><strong>Comments</strong></td>
+          <td>Medium</td>
+          <td>Especially replies from the creator</td>
+        </tr>
+        <tr>
+          <td><strong>Likes</strong></td>
+          <td>Medium-low</td>
+          <td>Lowest-effort signal, lowest weight</td>
+        </tr>
+        <tr>
+          <td><strong>Audio usage</strong></td>
+          <td>Variable</td>
+          <td>Trending audio gets a temporary boost</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>The First 30 Minutes</h3>
+
+    <p>When you publish a Reel, the algorithm observes its performance in the first <strong>30-60 minutes</strong>. This initial window is disproportionately important. The signals gathered here determine whether your Reel gets pushed to the Explore page and Reels tab, or quietly dies.</p>
+
+    <div class="callout">
+      <div class="callout-title">Engagement Velocity Trick</div>
+      <p>Post when your most engaged followers are online (check Instagram Insights → Audience). In the first 30 minutes after posting: respond to every comment, share the Reel to your story, and engage with 10-15 posts in your niche. This creates a <strong>burst of engagement velocity</strong> that signals importance to the algorithm.</p>
+    </div>
+
+    <div class="footer">AI Influencer Blueprint · Algorithm Decoded · 09</div>
+  </div>
+</div>
+
+<!-- ===================== PAGE 10: INSTAGRAM HASHTAGS + POSTING ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Module 02</div>
+    <div class="section-title-sm">Hashtag Strategy 2026</div>
+    <div class="section-divider"></div>
+
+    <p>The hashtag game has changed completely. In 2022, creators stuffed 30 hashtags on every post. In 2026, that strategy actively <strong>hurts</strong> your reach. Instagram's own recommendations have shifted dramatically.</p>
+
+    <div class="card">
+      <h4>The New Hashtag Rules</h4>
+      <ul>
+        <li><strong>3-5 hashtags maximum</strong> — Instagram's own team has recommended this range</li>
+        <li><strong>Highly specific over broadly popular</strong> — #AIInfluencer (50K posts) beats #Viral (500M posts)</li>
+        <li><strong>Mix sizes</strong> — 1-2 niche tags (under 100K), 1-2 mid-range (100K-1M), 1 large (1M+)</li>
+        <li><strong>Rotate your sets</strong> — using the same 5 hashtags every post triggers spam detection</li>
+        <li><strong>Place in caption, not comments</strong> — Instagram now processes caption hashtags differently from comment hashtags</li>
+      </ul>
+    </div>
+
+    <h3>AI Influencer Hashtag Sets</h3>
+
+    <div class="grid-2">
+      <div class="card">
+        <h4 style="margin-top: 0;">Set A — Character Content</h4>
+        <p style="color: #4ECDC4; font-size: 9.5pt;">#AIInfluencer #VirtualModel #AICreator #DigitalInfluencer #AIArt</p>
+      </div>
+      <div class="card">
+        <h4 style="margin-top: 0;">Set B — Lifestyle Content</h4>
+        <p style="color: #4ECDC4; font-size: 9.5pt;">#AIModel #VirtualCreator #AIFashion #GenerativeAI #AIContent</p>
+      </div>
+      <div class="card">
+        <h4 style="margin-top: 0;">Set C — Video Content</h4>
+        <p style="color: #4ECDC4; font-size: 9.5pt;">#AIVideo #AIReels #VirtualInfluencer #AIGenerated #FutureOfContent</p>
+      </div>
+      <div class="card">
+        <h4 style="margin-top: 0;">Set D — Growth Content</h4>
+        <p style="color: #4ECDC4; font-size: 9.5pt;">#ContentCreator #DigitalArt #AITools #CreatorEconomy #AIPhotography</p>
+      </div>
+    </div>
+
+    <h3>Optimal Posting Schedule</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Day</th>
+          <th>Best Time (EST)</th>
+          <th>Second Best</th>
+          <th>Content Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Monday</strong></td>
+          <td>11:00 AM</td>
+          <td>7:00 PM</td>
+          <td>Reels (motivational)</td>
+        </tr>
+        <tr>
+          <td><strong>Tuesday</strong></td>
+          <td>10:00 AM</td>
+          <td>2:00 PM</td>
+          <td>Carousel / Feed</td>
+        </tr>
+        <tr>
+          <td><strong>Wednesday</strong></td>
+          <td>11:00 AM</td>
+          <td>7:00 PM</td>
+          <td>Reels (trending)</td>
+        </tr>
+        <tr>
+          <td><strong>Thursday</strong></td>
+          <td>12:00 PM</td>
+          <td>7:00 PM</td>
+          <td>Reels (educational)</td>
+        </tr>
+        <tr>
+          <td><strong>Friday</strong></td>
+          <td>9:00 AM</td>
+          <td>1:00 PM</td>
+          <td>Reels (fun/viral)</td>
+        </tr>
+        <tr>
+          <td><strong>Saturday</strong></td>
+          <td>10:00 AM</td>
+          <td>8:00 PM</td>
+          <td>Stories + Reel</td>
+        </tr>
+        <tr>
+          <td><strong>Sunday</strong></td>
+          <td>10:00 AM</td>
+          <td>7:00 PM</td>
+          <td>Carousel / Recap</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="footer">AI Influencer Blueprint · Algorithm Decoded · 10</div>
+  </div>
+</div>
+
+<!-- ===================== PAGE 11: INSTAGRAM FORMAT PRIORITY ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Module 02</div>
+    <div class="section-title-sm">Format Priority & AI Detection</div>
+    <div class="section-divider"></div>
+
+    <h3>Stories vs Reels vs Feed Posts</h3>
+
+    <p>Not all Instagram formats are created equal. The algorithm allocates distribution differently depending on format — and in 2026, the hierarchy is clear:</p>
+
+    <div class="step">
+      <div class="step-number">01</div>
+      <div class="step-content">
+        <div class="step-title">Reels — Maximum Reach</div>
+        <div class="step-text">Reels get 2-3x more reach than any other format. They're shown in the Reels tab, Explore page, home feed, and recommended feeds. This is your primary growth driver.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">02</div>
+      <div class="step-content">
+        <div class="step-title">Carousels — High Engagement</div>
+        <div class="step-text">Carousel posts generate 1.4x more engagement than single images. The algorithm re-shows them if a user didn't swipe through all slides on first view, giving you multiple impressions.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">03</div>
+      <div class="step-content">
+        <div class="step-title">Stories — Relationship Building</div>
+        <div class="step-text">Stories don't drive discovery, but they strengthen the "relationship" ranking signal. Regular story posting keeps you at the top of followers' feeds. Use polls, questions, and sliders to drive interaction.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">04</div>
+      <div class="step-content">
+        <div class="step-title">Single Feed Posts — Lowest Priority</div>
+        <div class="step-text">Static single-image posts get the least algorithmic support. They're not dead, but they shouldn't be your primary content type in 2026.</div>
+      </div>
+    </div>
+
+    <h3>How Instagram Handles AI Content</h3>
+
+    <p>As of 2026, Instagram requires "AI Generated" labels on content created with AI tools. Here's what you need to know:</p>
+
+    <div class="callout">
+      <div class="callout-title">AI Content Detection — The Reality</div>
+      <p>Instagram uses C2PA metadata and internal classifiers to detect AI-generated content. Content flagged as AI-generated doesn't get <em>suppressed</em> algorithmically — but it does get a label. <strong>The label itself doesn't reduce reach.</strong> What reduces reach is low engagement, which can happen if audiences distrust AI-labeled content.</p>
+      <p style="margin-top: 10px;"><strong>The move:</strong> Don't try to hide AI labels — lean into them. Position your AI persona as intentionally AI. Audiences respect transparency far more than deception.</p>
+    </div>
+
+    <div class="footer">AI Influencer Blueprint · Algorithm Decoded · 11</div>
+  </div>
+</div>
+
+<!-- ===================== PAGE 12: INSTAGRAM SHADOW BANS ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Module 02</div>
+    <div class="section-title-sm">Instagram Shadow Ban Triggers</div>
+    <div class="section-divider"></div>
+
+    <p>Instagram officially calls it "reduced distribution" rather than shadow banning. Regardless of the name, the effect is real: your content reaches dramatically fewer people. Here are the confirmed triggers:</p>
+
+    <div class="card">
+      <h4>Confirmed Shadow Ban Triggers</h4>
+      <ul>
+        <li><strong>Using banned or broken hashtags</strong> — some hashtags are periodically flagged; using them tanks your post</li>
+        <li><strong>Aggressive follow/unfollow behavior</strong> — following 100+ accounts per day triggers automation detection</li>
+        <li><strong>Third-party automation tools</strong> — bots for likes, comments, or follows are detectable and punished</li>
+        <li><strong>Excessive posting then deletion</strong> — posting and immediately deleting multiple times signals manipulation</li>
+        <li><strong>Community guideline violations</strong> — even "soft" violations accumulate and reduce distribution</li>
+        <li><strong>Being reported frequently</strong> — high report rates (even if unfounded) trigger review and reduced reach</li>
+        <li><strong>Switching account type rapidly</strong> — toggling between personal/creator/business confuses the algorithm</li>
+      </ul>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">AI-Specific Trigger</div>
+      <p>Posting AI-generated content that closely resembles real photography without disclosure can trigger content review. If Instagram's classifiers detect potential AI generation and you haven't disclosed it, <strong>you may get flagged for inauthentic behavior</strong>. Always use the AI label when applicable.</p>
+    </div>
+
+    <h3>Quick Shadow Ban Check</h3>
+
+    <p>Suspect you're shadow banned? Here's how to check:</p>
+
+    <ol>
+      <li>Post a Reel with a unique, specific hashtag nobody else uses</li>
+      <li>Wait 30 minutes, then search that hashtag from a different account</li>
+      <li>If your post doesn't appear → you're likely under reduced distribution</li>
+      <li>Check Instagram's Account Status in Settings → it now tells you if you have restrictions</li>
+    </ol>
+
+    <p>Full recovery protocol is covered in <strong>Module 06</strong>.</p>
+
+    <div class="spacer-md"></div>
+
+    <div class="footer">AI Influencer Blueprint · Algorithm Decoded · 12</div>
+  </div>
+</div>
+
+<!-- ===================== PAGE 13: MODULE 03 — TIKTOK ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Module 03</div>
+    <div class="section-title">TikTok Algorithm<br>Mastery</div>
+    <div class="section-divider"></div>
+
+    <p>TikTok's algorithm is the most democratic in social media. Unlike Instagram, where existing followers heavily influence distribution, TikTok's For You Page gives <strong>every video a chance</strong> — regardless of follower count. A zero-follower account can hit 1M views on its first post if the content hits.</p>
+
+    <p>This makes TikTok both the <strong>highest-opportunity</strong> and <strong>highest-variance</strong> platform for AI influencers.</p>
+
+    <h3>The 3-Stage Distribution System</h3>
+
+    <p>Every TikTok video goes through three stages of distribution. Think of it as three gates — pass one, and you get access to the next.</p>
+
+    <div class="step">
+      <div class="step-number">01</div>
+      <div class="step-content">
+        <div class="step-title">Stage 1: The Test Pool (200-500 views)</div>
+        <div class="step-text">Your video is shown to a small group — a mix of followers and non-followers who match the video's predicted interest. The algorithm measures watch time, completion rate, shares, and comments. <strong>If completion rate exceeds ~60% and engagement rate exceeds ~10%, you advance.</strong></div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">02</div>
+      <div class="step-content">
+        <div class="step-title">Stage 2: The Expansion Pool (1K-50K views)</div>
+        <div class="step-text">Wider distribution to users with similar interest profiles. The same metrics are measured but against a higher benchmark — you're now competing with more established content. Videos that maintain strong signals here can sit in this stage for 2-5 days.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">03</div>
+      <div class="step-content">
+        <div class="step-title">Stage 3: The Viral Pool (50K+ views)</div>
+        <div class="step-text">Broad distribution across the platform. At this stage, TikTok actively pushes your video to new demographics, regions, and interest groups. This is where videos jump from 50K to 500K to 5M. The algorithm is aggressively testing to find the ceiling.</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">The TikTok Advantage for AI Creators</div>
+      <p>TikTok's algorithm doesn't penalize AI content the same way Instagram's classifiers do. AI-generated videos that are entertaining, surprising, or educational perform <strong>exceptionally well</strong> on TikTok because the algorithm only cares about signals — not how the content was made.</p>
+    </div>
+
+    <div class="footer">AI Influencer Blueprint · Algorithm Decoded · 13</div>
+  </div>
+</div>
+
+<!-- ===================== PAGE 14: TIKTOK METRICS ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Module 03</div>
+    <div class="section-title-sm">The Metric Hierarchy</div>
+    <div class="section-divider"></div>
+
+    <p>Not all engagement is equal on TikTok. The algorithm weights interactions in a clear hierarchy. Understanding this hierarchy is the difference between 500 views and 500K views.</p>
+
+    <div class="metric-row">
+      <div class="metric-number">#1</div>
+      <div>
+        <div class="metric-label">Shares</div>
+        <div class="metric-detail">The strongest signal. A share means "this is so good I need someone else to see it."</div>
+      </div>
+    </div>
+
+    <div class="metric-row">
+      <div class="metric-number">#2</div>
+      <div>
+        <div class="metric-label">Saves</div>
+        <div class="metric-detail">User wants to return to this. Signals high-value, reference-worthy content.</div>
+      </div>
+    </div>
+
+    <div class="metric-row">
+      <div class="metric-number">#3</div>
+      <div>
+        <div class="metric-label">Comments</div>
+        <div class="metric-detail">Active engagement. Debate, questions, and tags all count. Longer comments weight more.</div>
+      </div>
+    </div>
+
+    <div class="metric-row">
+      <div class="metric-number">#4</div>
+      <div>
+        <div class="metric-label">Completion Rate</div>
+        <div class="metric-detail">What % watched to the end? The single most important passive metric.</div>
+      </div>
+    </div>
+
+    <div class="metric-row">
+      <div class="metric-number">#5</div>
+      <div>
+        <div class="metric-label">Watch Time</div>
+        <div class="metric-detail">Total time spent on your video. Replays multiply this signal significantly.</div>
+      </div>
+    </div>
+
+    <div class="metric-row">
+      <div class="metric-number">#6</div>
+      <div>
+        <div class="metric-label">Likes</div>
+        <div class="metric-detail">The least valuable engagement. Easy to give, low signal value for the algorithm.</div>
+      </div>
+    </div>
+
+    <h3>Optimal Video Lengths</h3>
+
+    <p>Video length isn't one-size-fits-all. Different lengths serve different purposes:</p>
+
+    <div class="grid-2">
+      <div class="card">
+        <h4 style="margin-top: 0;">7 seconds</h4>
+        <p>Maximum completion rate. Perfect for shocking reveals, outfit transitions, or "wait for it" moments. <strong>Best for viral potential.</strong></p>
+      </div>
+      <div class="card">
+        <h4 style="margin-top: 0;">15 seconds</h4>
+        <p>Sweet spot for storytelling + completion. Enough time for a hook, value, and CTA. <strong>Best for consistent growth.</strong></p>
+      </div>
+      <div class="card">
+        <h4 style="margin-top: 0;">30 seconds</h4>
+        <p>Tutorial and educational content. Requires a strong hook to maintain watch time. <strong>Best for saves and shares.</strong></p>
+      </div>
+      <div class="card">
+        <h4 style="margin-top: 0;">60 seconds</h4>
+        <p>Deep-dive content. Only use if the content genuinely needs the time. Low completion rates unless content is exceptional. <strong>Best for authority building.</strong></p>
+      </div>
+    </div>
+
+    <div class="footer">AI Influencer Blueprint · Algorithm Decoded · 14</div>
+  </div>
+</div>
+
+<!-- ===================== PAGE 15: TIKTOK FEATURES + STRATEGY ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Module 03</div>
+    <div class="section-title-sm">Features, Frequency & Virality</div>
+    <div class="section-divider"></div>
+
+    <h3>Duets, Stitches & Sounds</h3>
+
+    <p>TikTok's native features aren't just creative tools — they're <strong>distribution multipliers</strong>:</p>
+
+    <ul>
+      <li><strong>Trending sounds</strong> — using a trending audio gives you a temporary boost because TikTok is actively promoting content with that sound. For AI influencers: pair trending audio with AI character content for maximum algorithmic push.</li>
+      <li><strong>Duets</strong> — dueting a viral video piggybacks on its distribution. The original creator's audience sees your duet. Strategic for commentary and reaction content.</li>
+      <li><strong>Stitches</strong> — stitching lets you use the first 5 seconds of another video as your hook. Effective for "response" content that adds value to trending conversations.</li>
+      <li><strong>Original sounds</strong> — creating your own sound can snowball if others use it. Lower initial reach but exponential potential if it catches on.</li>
+    </ul>
+
+    <h3>Posting Frequency</h3>
+
+    <p>TikTok rewards volume more than any other platform. The data is clear:</p>
+
+    <div class="card">
+      <h4>Recommended Posting Frequency</h4>
+      <ul>
+        <li><strong>Minimum:</strong> 1 post per day (to maintain algorithmic presence)</li>
+        <li><strong>Optimal:</strong> 2-3 posts per day (maximizes test opportunities)</li>
+        <li><strong>Aggressive growth:</strong> 4+ posts per day (only if quality can be maintained)</li>
+      </ul>
+      <p style="margin-top: 12px;"><strong>Why more posts work on TikTok:</strong> Each post is an independent test. The algorithm evaluates each video on its own merits. More posts = more lottery tickets. Unlike Instagram where over-posting can dilute per-post engagement, TikTok's FYP-driven distribution means each video reaches a largely independent audience.</p>
+    </div>
+
+    <h3>What Triggers the Viral Snowball</h3>
+
+    <p>After analyzing thousands of viral TikToks, these are the patterns that consistently trigger explosive distribution:</p>
+
+    <ul>
+      <li><strong>Pattern interrupt in first 0.5 seconds</strong> — something unexpected that stops the scroll</li>
+      <li><strong>Information gap</strong> — creating curiosity that can only be satisfied by watching to the end</li>
+      <li><strong>Emotional spike</strong> — content that triggers a strong emotional reaction (awe, humor, controversy)</li>
+      <li><strong>Share trigger</strong> — content that makes someone think "X needs to see this"</li>
+      <li><strong>Comment bait</strong> — an intentional element that provokes debate or responses</li>
+    </ul>
+
+    <div class="footer">AI Influencer Blueprint · Algorithm Decoded · 15</div>
+  </div>
+</div>
+
+<!-- ===================== PAGE 16: TIKTOK AI POLICIES ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Module 03</div>
+    <div class="section-title-sm">AI Content on TikTok</div>
+    <div class="section-divider"></div>
+
+    <p>TikTok's approach to AI-generated content is more nuanced than Instagram's. Here's the current landscape:</p>
+
+    <div class="card">
+      <h4>TikTok AI Content Policies (2026)</h4>
+      <ul>
+        <li><strong>Disclosure required</strong> — TikTok requires creators to label AI-generated content using their built-in toggle</li>
+        <li><strong>AIGC label</strong> — content created with TikTok's own AI tools is automatically labeled</li>
+        <li><strong>No distribution penalty</strong> — properly labeled AI content is treated the same as non-AI content by the algorithm</li>
+        <li><strong>Deepfake restrictions</strong> — AI content depicting real people without consent is prohibited and actively removed</li>
+        <li><strong>C2PA detection</strong> — TikTok reads embedded metadata from AI tools to auto-detect generation</li>
+      </ul>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">The AI Creator's TikTok Advantage</div>
+      <p>Here's what most creators miss: TikTok audiences are <strong>fascinated by AI content</strong>. Videos tagged as AI-generated often get <em>higher</em> engagement because of curiosity. The "how did they make this?" factor drives comments and shares. <strong>Lean into the AI identity</strong> — it's a feature, not a bug.</p>
+    </div>
+
+    <h3>Best Practices for AI Content on TikTok</h3>
+
+    <div class="step">
+      <div class="step-number">01</div>
+      <div class="step-content">
+        <div class="step-title">Always Disclose</div>
+        <div class="step-text">Use TikTok's built-in AI label. Trying to pass AI content as real is both against policy and unnecessary — AI content performs well when labeled.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">02</div>
+      <div class="step-content">
+        <div class="step-title">Showcase the Process</div>
+        <div class="step-text">Behind-the-scenes content showing how you create AI visuals performs exceptionally well. It drives saves (people want to learn) and shares (people find it impressive).</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">03</div>
+      <div class="step-content">
+        <div class="step-title">Build a Character, Not a Fake Person</div>
+        <div class="step-text">Position your AI persona as a character with personality — not a human pretending to be real. Audiences connect with characters just as strongly as real people (see: Lil Miquela, Aitana Lopez).</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">04</div>
+      <div class="step-content">
+        <div class="step-title">Mix Content Types</div>
+        <div class="step-text">Don't only post AI-generated visuals. Mix in text-based tips, voice-over tutorials, and engagement posts. This prevents algorithmic fatigue and builds a more complete creator profile.</div>
+      </div>
+    </div>
+
+    <div class="footer">AI Influencer Blueprint · Algorithm Decoded · 16</div>
+  </div>
+</div>
+
+<!-- ===================== PAGE 17: MODULE 04 — THREADS & YOUTUBE SHORTS ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Module 04</div>
+    <div class="section-title">Threads &<br>YouTube Shorts</div>
+    <div class="section-divider"></div>
+
+    <h3>Threads: The Text-First Algorithm</h3>
+
+    <p>Threads is Meta's answer to X (Twitter), and its algorithm works fundamentally differently from Instagram or TikTok. It's <strong>text-first</strong>, which creates a unique opportunity for AI influencers to build a different type of audience.</p>
+
+    <div class="card">
+      <h4>How Threads Ranks Content</h4>
+      <ul>
+        <li><strong>Replies are king</strong> — Threads values conversation threads over passive engagement. Posts that generate replies get 3-5x more distribution than posts with only likes.</li>
+        <li><strong>Cross-platform signal</strong> — your Instagram engagement influences your Threads distribution. Strong IG accounts get a head start on Threads.</li>
+        <li><strong>Recency matters heavily</strong> — Threads has a much shorter content lifespan than other platforms. Posts peak within 4-6 hours.</li>
+        <li><strong>Carousel posts perform well</strong> — image carousels on Threads get higher engagement than text-only posts, making them ideal for AI visual content.</li>
+        <li><strong>No hashtags (yet)</strong> — Threads has limited hashtag support. Discovery is primarily algorithm-driven based on interest signals.</li>
+      </ul>
+    </div>
+
+    <h3>Threads Strategy for AI Influencers</h3>
+
+    <ul>
+      <li><strong>Lead with opinions and hot takes</strong> — text platforms reward strong positions that provoke discussion</li>
+      <li><strong>Post AI visuals as carousels</strong> — showcase your character in lifestyle scenarios with text commentary</li>
+      <li><strong>Ask questions</strong> — every post should invite a response. "What do you think?" drives the reply signal</li>
+      <li><strong>Post 3-5 times per day</strong> — Threads rewards frequency. The short content lifespan means more posts = more chances</li>
+      <li><strong>Reply to your own posts</strong> — creating a thread (self-replies) keeps your content surfacing in feeds longer</li>
+      <li><strong>Cross-post to Instagram story</strong> — sharing Threads posts to IG Stories drives initial engagement velocity</li>
+    </ul>
+
+    <div class="callout">
+      <div class="callout-title">Growth Hack</div>
+      <p>Reply to large accounts in your niche with <strong>genuinely valuable comments</strong>. When a big account's audience sees your insightful reply, they check your profile. This is the fastest organic growth strategy on Threads right now.</p>
+    </div>
+
+    <div class="footer">AI Influencer Blueprint · Algorithm Decoded · 17</div>
+  </div>
+</div>
+
+<!-- ===================== PAGE 18: YOUTUBE SHORTS ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Module 04</div>
+    <div class="section-title-sm">YouTube Shorts</div>
+    <div class="section-divider"></div>
+
+    <p>YouTube Shorts is the most underrated platform for AI influencers. While everyone fights over Instagram and TikTok, Shorts offers three massive advantages: <strong>longer content lifespan</strong>, <strong>better monetization</strong>, and <strong>the bridge to long-form content</strong>.</p>
+
+    <div class="card">
+      <h4>How Shorts Differs from Reels & TikTok</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Factor</th>
+            <th>Reels</th>
+            <th>TikTok</th>
+            <th>Shorts</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Content lifespan</strong></td>
+            <td>~30 days</td>
+            <td>~90 days</td>
+            <td>~6 months</td>
+          </tr>
+          <tr>
+            <td><strong>Discovery method</strong></td>
+            <td>Explore + Reels tab</td>
+            <td>FYP (primary)</td>
+            <td>Shorts shelf + Search</td>
+          </tr>
+          <tr>
+            <td><strong>Subscriber weight</strong></td>
+            <td>Medium</td>
+            <td>Low</td>
+            <td>Medium-high</td>
+          </tr>
+          <tr>
+            <td><strong>Search discoverability</strong></td>
+            <td>Low</td>
+            <td>Medium</td>
+            <td>High</td>
+          </tr>
+          <tr>
+            <td><strong>Monetization</strong></td>
+            <td>Limited</td>
+            <td>Creator Fund</td>
+            <td>Ad revenue share</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>The Shorts Shelf Algorithm</h3>
+
+    <p>YouTube Shorts uses a <strong>Shorts shelf</strong> for distribution — a dedicated vertical-scrolling feed similar to TikTok's FYP. But it also surfaces Shorts in regular search results, suggested videos, and the homepage. This multi-surface distribution is what gives Shorts its long lifespan.</p>
+
+    <p>Key ranking signals for the Shorts algorithm:</p>
+
+    <ul>
+      <li><strong>Swipe-away rate</strong> — how quickly people swipe past your Short. This is the #1 negative signal.</li>
+      <li><strong>Watch time relative to length</strong> — a 15-second Short watched for 14 seconds scores higher than a 60-second Short watched for 30.</li>
+      <li><strong>Subscriber conversions</strong> — Shorts that drive subscriptions get massive distribution boosts.</li>
+      <li><strong>Replay rate</strong> — looping behavior is a strong positive signal.</li>
+    </ul>
+
+    <h3>Cross-Posting Strategy</h3>
+
+    <p>You can adapt one video for all three platforms — but you need to customize each version:</p>
+
+    <div class="callout">
+      <div class="callout-title">The Cross-Platform Formula</div>
+      <p><strong>Create for TikTok first</strong> (fastest feedback loop), then adapt: remove TikTok watermark for Reels (IG deprioritizes watermarked content), add keyword-rich title for Shorts (YouTube's search algorithm), and post at platform-specific optimal times.</p>
+    </div>
+
+    <div class="footer">AI Influencer Blueprint · Algorithm Decoded · 18</div>
+  </div>
+</div>
+
+<!-- ===================== PAGE 19: CROSS-POSTING DETAILS ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Module 04</div>
+    <div class="section-title-sm">Platform-Specific Adaptations</div>
+    <div class="section-divider"></div>
+
+    <p>Cross-posting doesn't mean copy-pasting. Each platform has unique requirements that affect algorithmic performance:</p>
+
+    <div class="card">
+      <h4>Caption & CTA Differences</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Instagram</th>
+            <th>TikTok</th>
+            <th>YouTube Shorts</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Caption length</strong></td>
+            <td>Short (50-100 chars)</td>
+            <td>Medium (100-200 chars)</td>
+            <td>Title-focused (40-60 chars)</td>
+          </tr>
+          <tr>
+            <td><strong>Hashtags</strong></td>
+            <td>3-5 targeted</td>
+            <td>3-5 trending + niche</td>
+            <td>2-3 keyword-focused</td>
+          </tr>
+          <tr>
+            <td><strong>CTA style</strong></td>
+            <td>"Save this for later"</td>
+            <td>"Share with someone who..."</td>
+            <td>"Subscribe for more"</td>
+          </tr>
+          <tr>
+            <td><strong>Text on screen</strong></td>
+            <td>Minimal, aesthetic</td>
+            <td>Bold, attention-grabbing</td>
+            <td>Keyword-rich, searchable</td>
+          </tr>
+          <tr>
+            <td><strong>Watermarks</strong></td>
+            <td>Remove TikTok logos</td>
+            <td>Native only</td>
+            <td>Remove all platform logos</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>The One-Video, Three-Platform Workflow</h3>
+
+    <div class="step">
+      <div class="step-number">01</div>
+      <div class="step-content">
+        <div class="step-title">Create the Master Video</div>
+        <div class="step-text">Film or generate your AI content as a clean, unbranded vertical video. No platform-specific elements. This is your source file.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">02</div>
+      <div class="step-content">
+        <div class="step-title">TikTok Version (Post First)</div>
+        <div class="step-text">Add trending sound, bold text overlay, share-oriented CTA. Post first for fastest feedback. If it performs well, you know the concept works.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">03</div>
+      <div class="step-content">
+        <div class="step-title">Instagram Reels Version (Post 4-6 Hours Later)</div>
+        <div class="step-text">Clean export without TikTok watermark. Swap sound if needed (IG has different trending audio). Adjust caption for save-oriented CTA. Add 3-5 hashtags.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">04</div>
+      <div class="step-content">
+        <div class="step-title">YouTube Shorts Version (Post Next Day)</div>
+        <div class="step-text">Add keyword-rich title text. Optimize caption for search. Include subscribe CTA. YouTube's longer content lifespan means timing is less critical — quality of metadata matters more.</div>
+      </div>
+    </div>
+
+    <div class="footer">AI Influencer Blueprint · Algorithm Decoded · 19</div>
+  </div>
+</div>
+
+<!-- ===================== PAGE 20: MODULE 05 — ENGINEERING METRICS ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Module 05</div>
+    <div class="section-title">Engineering<br>Your Metrics</div>
+    <div class="section-divider"></div>
+
+    <p>You now understand how each platform's algorithm works. Now let's get surgical: <strong>the 7 metrics you can directly control</strong>, and exactly how to improve each one.</p>
+
+    <p>Every piece of content you publish generates data across these 7 dimensions. Master them, and you master distribution.</p>
+
+    <div class="step">
+      <div class="step-number">01</div>
+      <div class="step-content">
+        <div class="step-title">Hook Rate (First 1-3 Seconds)</div>
+        <div class="step-text"><strong>What it is:</strong> The percentage of people who stop scrolling and watch past the first 1-3 seconds of your content.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <p><strong>Why it matters:</strong> If people don't stop scrolling, nothing else matters. A 0% hook rate means 0% watch time, 0% engagement, 0% everything. This is the gateway metric.</p>
+      <p><strong>Target:</strong> 40%+ hook rate (measured via Instagram/TikTok analytics as "reach to 3-second view" ratio)</p>
+      <p style="margin-top: 10px;"><strong>How to improve it:</strong></p>
+      <ul>
+        <li>Start with movement — a face turning, a dramatic zoom, a visual surprise</li>
+        <li>Use text hooks: "Nobody talks about this..." / "Here's what they don't tell you..."</li>
+        <li>Never start with a logo, intro animation, or blank frame</li>
+        <li>Match the first frame to the most visually compelling moment</li>
+        <li>Use contrast — something unexpected against a familiar backdrop</li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <div class="step-number">02</div>
+      <div class="step-content">
+        <div class="step-title">Watch Time (Total & Average)</div>
+        <div class="step-text"><strong>What it is:</strong> The total accumulated seconds/minutes viewers spend watching your content, and the average per viewer.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <p><strong>Why it matters:</strong> Watch time is the #1 weighted metric on both Instagram Reels and TikTok. Higher watch time = the algorithm believes your content is valuable enough to keep people on the platform.</p>
+      <p><strong>How to improve it:</strong></p>
+      <ul>
+        <li>Create loops — end the video in a way that flows back into the beginning</li>
+        <li>Use progressive reveals — don't show the best part first</li>
+        <li>Add "wait for it" moments that create anticipation</li>
+        <li>Shorter videos with full completion often beat longer videos with partial watch</li>
+      </ul>
+    </div>
+
+    <div class="footer">AI Influencer Blueprint · Algorithm Decoded · 20</div>
+  </div>
+</div>
+
+<!-- ===================== PAGE 21: METRICS CONTINUED ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Module 05</div>
+    <div class="section-title-sm">Metrics 3-5</div>
+    <div class="section-divider"></div>
+
+    <div class="step">
+      <div class="step-number">03</div>
+      <div class="step-content">
+        <div class="step-title">Completion Rate</div>
+        <div class="step-text"><strong>What it is:</strong> The percentage of viewers who watch your video from start to finish. Replays count and can push this above 100%.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <p><strong>Target:</strong> 60%+ for short-form (under 15 seconds), 40%+ for medium-form (15-30 seconds)</p>
+      <p><strong>How to improve it:</strong></p>
+      <ul>
+        <li>Keep videos as short as the content allows — ruthlessly cut filler</li>
+        <li>Front-load the hook but back-load the payoff</li>
+        <li>Use text like "watch to the end" (cliché but it works — 12% avg improvement)</li>
+        <li>Create seamless loops so viewers watch twice without realizing it</li>
+        <li>Remove any dead space — every second must earn its place</li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <div class="step-number">04</div>
+      <div class="step-content">
+        <div class="step-title">Share Rate</div>
+        <div class="step-text"><strong>What it is:</strong> The percentage of viewers who share your content via DM, story, or external platforms.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <p><strong>Why it matters:</strong> Shares are the highest-weighted engagement signal on every platform. A share says "this is worth interrupting someone else's day for."</p>
+      <p><strong>How to improve it:</strong></p>
+      <ul>
+        <li>Create "tag someone who..." moments — identify a relatable scenario</li>
+        <li>Make content that makes the sharer look good (funny, smart, in-the-know)</li>
+        <li>Educational content with clear takeaways gets shared as "you need to see this"</li>
+        <li>Controversial or polarizing content triggers share-to-debate behavior</li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <div class="step-number">05</div>
+      <div class="step-content">
+        <div class="step-title">Save Rate</div>
+        <div class="step-text"><strong>What it is:</strong> The percentage of viewers who bookmark your content for later reference.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <p><strong>How to improve it:</strong> Create content people need to reference again — tutorials, tool lists, prompt templates, step-by-step guides. End with "Save this for when you need it." Saves are especially important on Instagram, where they weight nearly as high as shares.</p>
+    </div>
+
+    <div class="footer">AI Influencer Blueprint · Algorithm Decoded · 21</div>
+  </div>
+</div>
+
+<!-- ===================== PAGE 22: METRICS 6-7 + A/B TESTING ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Module 05</div>
+    <div class="section-title-sm">Metrics 6-7 & A/B Testing</div>
+    <div class="section-divider"></div>
+
+    <div class="step">
+      <div class="step-number">06</div>
+      <div class="step-content">
+        <div class="step-title">Comment Rate</div>
+        <div class="step-text"><strong>What it is:</strong> The percentage of viewers who leave a comment. Active comments (questions, debates) weight more than passive ones ("nice!").</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <p><strong>How to improve it:</strong></p>
+      <ul>
+        <li>Ask a direct question in your caption or video text</li>
+        <li>Make a slightly controversial statement that invites disagreement</li>
+        <li>Include an intentional "mistake" that people will correct (use sparingly)</li>
+        <li>Reply to every comment within the first hour — this doubles comment counts</li>
+        <li>Pin a provocative comment to spark discussion threads</li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <div class="step-number">07</div>
+      <div class="step-content">
+        <div class="step-title">Profile Visits</div>
+        <div class="step-text"><strong>What it is:</strong> How many viewers tap through to your profile after seeing your content. This is the bridge between reach and follower growth.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <p><strong>How to improve it:</strong></p>
+      <ul>
+        <li>End videos with "more on my profile" or "part 2 on my page"</li>
+        <li>Create series content that makes people want to see the rest</li>
+        <li>Use a distinctive visual style that makes people curious about who you are</li>
+        <li>Your profile bio must immediately communicate value — what do they get by following?</li>
+      </ul>
+    </div>
+
+    <h3>A/B Testing Framework</h3>
+
+    <p>Stop guessing what works. Test systematically:</p>
+
+    <div class="callout">
+      <div class="callout-title">The 1-Variable Test</div>
+      <p>Change only <strong>one variable at a time</strong>. Post two similar videos with different hooks, same content. Or same hook, different lengths. Or same video, different posting times. Track which performs better across your key metric (watch time, shares, etc.) over 5-10 tests before drawing conclusions.</p>
+      <p style="margin-top: 10px;"><strong>Variables to test:</strong> Hook style, video length, posting time, caption style, CTA type, text overlay vs. no text, trending audio vs. original audio, hashtag sets.</p>
+      <p style="margin-top: 10px;"><strong>Sample size:</strong> You need at least 5 posts per variant to get meaningful data. Don't draw conclusions from single posts — the algorithm has too much variance.</p>
+    </div>
+
+    <div class="footer">AI Influencer Blueprint · Algorithm Decoded · 22</div>
+  </div>
+</div>
+
+<!-- ===================== PAGE 23: MODULE 06 — ANTI-SHADOWBAN ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Module 06</div>
+    <div class="section-title">The Anti-Shadowban<br>Protocol</div>
+    <div class="section-divider"></div>
+
+    <p>"Shadow ban" is the most overused excuse in social media. Creators blame shadow bans for bad content, poor timing, and weak hooks. But real shadow bans <em>do</em> exist — and if you're actually experiencing one, here's exactly what to do.</p>
+
+    <h3>What Actually Causes Shadow Bans</h3>
+
+    <div class="card">
+      <h4>Confirmed Triggers (All Platforms)</h4>
+      <ul>
+        <li><strong>Automation tools</strong> — any third-party bot for likes, follows, or comments</li>
+        <li><strong>Rapid follow/unfollow</strong> — following and unfollowing hundreds of accounts</li>
+        <li><strong>Banned hashtags</strong> — using hashtags that have been flagged for spam or inappropriate content</li>
+        <li><strong>Community guideline violations</strong> — nudity, hate speech, misinformation, even borderline content</li>
+        <li><strong>High report volume</strong> — if many users report your content (even falsely)</li>
+        <li><strong>Spam behavior patterns</strong> — posting the same comment on multiple posts, mass DMs</li>
+        <li><strong>Inauthentic engagement pods</strong> — organized groups that artificially inflate engagement</li>
+        <li><strong>Copyright violations</strong> — using copyrighted music or content without license</li>
+      </ul>
+    </div>
+
+    <h3>The 10 Myths — Things That DON'T Cause Shadow Bans</h3>
+
+    <div class="grid-2">
+      <div class="card">
+        <ol>
+          <li><strong>Switching to business account</strong></li>
+          <li><strong>Using too many hashtags</strong> (hurts reach, not a ban)</li>
+          <li><strong>Posting too frequently</strong></li>
+          <li><strong>Using the same hashtags</strong> (just reduces effectiveness)</li>
+          <li><strong>Having a new account</strong> (throttling ≠ shadow ban)</li>
+        </ol>
+      </div>
+      <div class="card">
+        <ol start="6">
+          <li><strong>Editing posts after publishing</strong></li>
+          <li><strong>Using scheduling tools</strong> (Meta-approved ones)</li>
+          <li><strong>Posting AI content</strong> (labeling issues aside)</li>
+          <li><strong>Low engagement rates</strong> (symptom, not cause)</li>
+          <li><strong>Competitors reporting you</strong> (unless it's mass-coordinated)</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="footer">AI Influencer Blueprint · Algorithm Decoded · 23</div>
+  </div>
+</div>
+
+<!-- ===================== PAGE 24: SHADOWBAN CHECK + RECOVERY ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Module 06</div>
+    <div class="section-title-sm">Detection & Recovery</div>
+    <div class="section-divider"></div>
+
+    <h3>How to Check If You're Shadow Banned</h3>
+
+    <div class="step">
+      <div class="step-number">01</div>
+      <div class="step-content">
+        <div class="step-title">Check Account Status</div>
+        <div class="step-text"><strong>Instagram:</strong> Settings → Account → Account Status. This shows any active restrictions. <strong>TikTok:</strong> Settings → Account → Account Status. Both platforms now provide transparency on restrictions.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">02</div>
+      <div class="step-content">
+        <div class="step-title">The Hashtag Test</div>
+        <div class="step-text">Post content with a completely unique hashtag. Wait 30 minutes. Search for that hashtag from a different account (logged out). If your post doesn't appear, you likely have reduced distribution.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">03</div>
+      <div class="step-content">
+        <div class="step-title">Analytics Comparison</div>
+        <div class="step-text">Compare your reach metrics over the last 30 days. A shadow ban typically shows as a sudden 70-90% drop in reach (not gradual decline — that's usually content quality).</div>
+      </div>
+    </div>
+
+    <h3>The Recovery Protocol</h3>
+
+    <p>If you've confirmed reduced distribution, follow this protocol in order:</p>
+
+    <div class="card">
+      <h4>7-Day Shadow Ban Recovery</h4>
+      <ul>
+        <li><strong>Day 1-2:</strong> Stop posting completely. Remove any banned hashtags from recent posts. Disconnect all third-party apps (Settings → Security → Apps and Websites). Remove any automation tools.</li>
+        <li><strong>Day 3-4:</strong> Resume light engagement — like and comment on 10-15 posts in your niche. Don't post your own content yet. Keep interactions natural and spaced out.</li>
+        <li><strong>Day 5:</strong> Post one high-quality piece of content. Use 3 safe, niche-specific hashtags. Don't use any previously problematic hashtags.</li>
+        <li><strong>Day 6-7:</strong> Post once per day. Monitor reach metrics. If reach is recovering (even slightly), continue with normal posting schedule.</li>
+        <li><strong>If no improvement after 7 days:</strong> Contact platform support through the app. File an appeal through Account Status. In rare cases, create a fresh account (last resort).</li>
+      </ul>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">Prevention Checklist</div>
+      <p>□ No third-party automation tools &nbsp; □ No follow/unfollow tactics &nbsp; □ Hashtags verified as non-banned &nbsp; □ Community guidelines reviewed monthly &nbsp; □ AI content properly labeled &nbsp; □ No engagement pods &nbsp; □ Consistent posting schedule &nbsp; □ All content is original</p>
+    </div>
+
+    <div class="footer">AI Influencer Blueprint · Algorithm Decoded · 24</div>
+  </div>
+</div>
+
+<!-- ===================== PAGE 25: SHADOWBAN PREVENTION ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Module 06</div>
+    <div class="section-title-sm">Long-Term Protection</div>
+    <div class="section-divider"></div>
+
+    <h3>The AI Creator's Shadow Ban Shield</h3>
+
+    <p>AI influencer accounts face unique shadow ban risks that traditional creators don't. Here's your protection protocol:</p>
+
+    <div class="step">
+      <div class="step-number">01</div>
+      <div class="step-content">
+        <div class="step-title">Always Disclose AI Generation</div>
+        <div class="step-text">Use platform-native AI labels. Trying to pass AI content as real photography is the fastest way to get flagged. Transparency is your shield.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">02</div>
+      <div class="step-content">
+        <div class="step-title">Diversify Content Types</div>
+        <div class="step-text">Don't post only AI-generated images. Mix in behind-the-scenes content, text posts, engagement posts, and authentic interactions. A 100% AI feed looks inauthentic to both algorithms and audiences.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">03</div>
+      <div class="step-content">
+        <div class="step-title">Build Genuine Community</div>
+        <div class="step-text">Reply to comments, engage in DMs, participate in conversations. Algorithms detect when engagement is one-directional (you post, people react, you never respond). Two-way interaction protects your distribution.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">04</div>
+      <div class="step-content">
+        <div class="step-title">Monitor Your Account Health Weekly</div>
+        <div class="step-text">Check Account Status every week. Review your reach trends monthly. Catch potential issues before they become full shadow bans. A 20% reach drop is a warning — a 70% drop means you're already restricted.</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">The Nuclear Option</div>
+      <p>If your account has been in shadow ban jail for 30+ days despite following the recovery protocol, it may be more efficient to <strong>start fresh</strong>. Create a new account, import your best content (re-create, don't repost), and apply every prevention measure from day one. Sometimes a clean slate beats trying to rehabilitate a permanently flagged account.</p>
+    </div>
+
+    <div class="spacer-lg"></div>
+
+    <div class="footer">AI Influencer Blueprint · Algorithm Decoded · 25</div>
+  </div>
+</div>
+
+<!-- ===================== PAGE 26: BONUS — POSTING PLAYBOOK ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Bonus</div>
+    <div class="section-title">The Posting<br>Playbook</div>
+    <div class="section-divider"></div>
+
+    <p>Theory is worthless without execution. Here's your complete, copy-paste posting system — the exact weekly schedule, content rotation, and timing strategy that maximizes algorithmic distribution across all platforms.</p>
+
+    <h3>Weekly Posting Schedule</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Day</th>
+          <th>Instagram</th>
+          <th>TikTok</th>
+          <th>Threads</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Monday</strong></td>
+          <td>1 Reel + Stories</td>
+          <td>2-3 Videos</td>
+          <td>3-4 Posts</td>
+        </tr>
+        <tr>
+          <td><strong>Tuesday</strong></td>
+          <td>1 Carousel</td>
+          <td>2-3 Videos</td>
+          <td>3-4 Posts</td>
+        </tr>
+        <tr>
+          <td><strong>Wednesday</strong></td>
+          <td>1 Reel + Stories</td>
+          <td>2-3 Videos</td>
+          <td>3-4 Posts</td>
+        </tr>
+        <tr>
+          <td><strong>Thursday</strong></td>
+          <td>1 Reel</td>
+          <td>2-3 Videos</td>
+          <td>3-4 Posts</td>
+        </tr>
+        <tr>
+          <td><strong>Friday</strong></td>
+          <td>1 Reel + Stories</td>
+          <td>3-4 Videos</td>
+          <td>3-4 Posts</td>
+        </tr>
+        <tr>
+          <td><strong>Saturday</strong></td>
+          <td>1 Reel</td>
+          <td>2-3 Videos</td>
+          <td>2-3 Posts</td>
+        </tr>
+        <tr>
+          <td><strong>Sunday</strong></td>
+          <td>1 Carousel + Stories</td>
+          <td>1-2 Videos</td>
+          <td>2-3 Posts</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="text-muted" style="font-size: 9pt;">Weekly totals: Instagram 5-7 posts + daily stories | TikTok 14-21 videos | Threads 20-25 posts</p>
+
+    <h3>Content Type Rotation</h3>
+
+    <p>Don't post the same type of content every day. Rotate through these categories to keep the algorithm (and your audience) engaged:</p>
+
+    <div class="grid-2">
+      <div class="card">
+        <h4 style="margin-top: 0; color: #4ECDC4;">Growth Content (40%)</h4>
+        <p>Trending audio Reels, viral hooks, share-worthy moments. Optimized for reach and new follower acquisition.</p>
+      </div>
+      <div class="card">
+        <h4 style="margin-top: 0; color: #4ECDC4;">Value Content (30%)</h4>
+        <p>Tutorials, tips, how-tos, tool recommendations. Optimized for saves and shares. Builds authority.</p>
+      </div>
+      <div class="card">
+        <h4 style="margin-top: 0; color: #4ECDC4;">Community Content (20%)</h4>
+        <p>Polls, questions, hot takes, engagement posts. Optimized for comments and relationship building.</p>
+      </div>
+      <div class="card">
+        <h4 style="margin-top: 0; color: #4ECDC4;">Conversion Content (10%)</h4>
+        <p>CTAs, product mentions, link-in-bio drivers. Optimized for profile visits and off-platform action.</p>
+      </div>
+    </div>
+
+    <div class="footer">AI Influencer Blueprint · Algorithm Decoded · 26</div>
+  </div>
+</div>
+
+<!-- ===================== PAGE 27: POSTING TIMES ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Bonus</div>
+    <div class="section-title-sm">Best Posting Times by Platform</div>
+    <div class="section-divider"></div>
+
+    <p>These times are based on aggregated data from accounts with 10K-500K followers. <strong>Always check your own analytics</strong> — your specific audience may differ. These are starting points, not gospel.</p>
+
+    <div class="card">
+      <h4>Instagram — Best Posting Times (EST)</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Tier</th>
+            <th>Time Slots</th>
+            <th>Why</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Best</strong></td>
+            <td>11 AM, 1 PM, 7 PM</td>
+            <td>Lunch break, post-lunch scroll, evening wind-down</td>
+          </tr>
+          <tr>
+            <td><strong>Good</strong></td>
+            <td>9 AM, 5 PM</td>
+            <td>Morning commute, end of workday</td>
+          </tr>
+          <tr>
+            <td><strong>Avoid</strong></td>
+            <td>1-5 AM, 3-4 PM</td>
+            <td>Lowest active user counts</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h4>TikTok — Best Posting Times (EST)</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Tier</th>
+            <th>Time Slots</th>
+            <th>Why</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Best</strong></td>
+            <td>7 AM, 12 PM, 7 PM, 10 PM</td>
+            <td>Wake-up scroll, lunch, dinner, bedtime</td>
+          </tr>
+          <tr>
+            <td><strong>Good</strong></td>
+            <td>9 AM, 3 PM</td>
+            <td>Mid-morning, afternoon break</td>
+          </tr>
+          <tr>
+            <td><strong>Avoid</strong></td>
+            <td>2-5 AM</td>
+            <td>Lowest activity across all demographics</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h4>YouTube Shorts — Best Posting Times (EST)</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Tier</th>
+            <th>Time Slots</th>
+            <th>Why</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Best</strong></td>
+            <td>12 PM, 3 PM, 6 PM</td>
+            <td>YouTube usage peaks in afternoon/evening</td>
+          </tr>
+          <tr>
+            <td><strong>Good</strong></td>
+            <td>9 AM, 9 PM</td>
+            <td>Morning and late evening sessions</td>
+          </tr>
+          <tr>
+            <td><strong>Note</strong></td>
+            <td colspan="2">Timing matters less on Shorts due to longer lifespan</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">Timezone Tip</div>
+      <p>If your audience is global, <strong>optimize for US Eastern Time</strong> as your default — it covers the largest English-speaking market. Use platform analytics to identify your actual audience distribution and adjust accordingly.</p>
+    </div>
+
+    <div class="footer">AI Influencer Blueprint · Algorithm Decoded · 27</div>
+  </div>
+</div>
+
+<!-- ===================== PAGE 28: 30-DAY RESET PLAN ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Bonus</div>
+    <div class="section-title-sm">30-Day Algorithm Reset Plan</div>
+    <div class="section-divider"></div>
+
+    <p>If your account has flatlined — stuck at low views, engagement has cratered, nothing seems to work — this 30-day plan will reset your algorithmic standing and rebuild momentum from scratch.</p>
+
+    <div class="card">
+      <h4>Week 1: Clean Slate (Days 1-7)</h4>
+      <ul>
+        <li><strong>Day 1:</strong> Audit your account. Remove banned hashtags from all posts. Disconnect third-party apps. Update bio with clear value proposition.</li>
+        <li><strong>Day 2-3:</strong> Post nothing. Engage organically — like and comment on 20 posts in your niche per day. No DM blasts, no follow sprees.</li>
+        <li><strong>Day 4-7:</strong> Post 1 high-quality Reel per day. Short (7-15 seconds), strong hook, trending audio. Use only 3 safe hashtags. Engage for 15 minutes before and after posting.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h4>Week 2: Build Momentum (Days 8-14)</h4>
+      <ul>
+        <li>Post 1 Reel + 1 Story per day on Instagram</li>
+        <li>Post 2 videos per day on TikTok</li>
+        <li>Focus on completion rate — make every video watchable to the end</li>
+        <li>Reply to every comment within 1 hour</li>
+        <li>Share your best Reel to your story with a poll or question</li>
+        <li>Track which content types get the most saves and shares</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h4>Week 3: Accelerate (Days 15-21)</h4>
+      <ul>
+        <li>Increase to 1-2 Reels per day on Instagram</li>
+        <li>Increase to 3 videos per day on TikTok</li>
+        <li>Start posting on Threads (3-4 times per day)</li>
+        <li>Double down on what's working — check analytics daily</li>
+        <li>Start A/B testing hooks and posting times</li>
+        <li>Collaborate with 1-2 creators in your niche (duets, stitches)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h4>Week 4: Optimize & Sustain (Days 22-30)</h4>
+      <ul>
+        <li>Full posting schedule: follow the weekly template from page 26</li>
+        <li>Analyze your top 5 performing posts — identify the patterns</li>
+        <li>Create a content system based on your winning formula</li>
+        <li>Set up your ongoing A/B testing framework</li>
+        <li>Plan next month's content calendar based on data</li>
+      </ul>
+    </div>
+
+    <div class="footer">AI Influencer Blueprint · Algorithm Decoded · 28</div>
+  </div>
+</div>
+
+<!-- ===================== PAGE 29: CLOSING ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="page-content">
+    <div class="section-label">Final Word</div>
+    <div class="section-title">The Algorithm<br>Is Your Tool</div>
+    <div class="section-divider"></div>
+
+    <p>You now have something 99% of creators don't: a <strong>systematic understanding</strong> of how content distribution actually works. Not vibes, not hunches — mechanics.</p>
+
+    <p>Let's recap the principles that matter most:</p>
+
+    <div class="step">
+      <div class="step-number">01</div>
+      <div class="step-content">
+        <div class="step-title">Algorithms Are Matchmakers</div>
+        <div class="step-text">They connect content with interested audiences. Work with them, not against them. Give them clear signals about who your content is for.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">02</div>
+      <div class="step-content">
+        <div class="step-title">Consistency Compounds</div>
+        <div class="step-text">Daily posting with steady engagement beats sporadic viral attempts. Build the algorithm's trust through reliability.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">03</div>
+      <div class="step-content">
+        <div class="step-title">Engineer, Don't Guess</div>
+        <div class="step-text">Measure your 7 metrics. A/B test your variables. Make decisions based on data, not feelings. The algorithm doesn't care about your artistic vision — it cares about signals.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">04</div>
+      <div class="step-content">
+        <div class="step-title">AI Is Your Superpower</div>
+        <div class="step-text">Being an AI creator isn't a disadvantage — it's a competitive edge. You can produce more content, test more variations, and iterate faster than traditional creators. Lean into it.</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">Your Next Step</div>
+      <p>Don't try to implement everything at once. Pick <strong>one platform</strong>, follow the <strong>30-day reset plan</strong>, and measure your results. Once you've cracked one platform, expand to the next. The principles transfer — only the tactics differ.</p>
+    </div>
+
+    <div class="spacer-lg"></div>
+
+    <p class="text-muted" style="text-align: center; font-size: 9pt; letter-spacing: 2px;">NOW GO ENGINEER YOUR REACH.</p>
+
+    <div class="footer">AI Influencer Blueprint · Algorithm Decoded · 29</div>
+  </div>
+</div>
+
+<!-- ===================== PAGE 30: BACK COVER ===================== -->
+<div class="page">
+  <div class="teal-bar"></div>
+  <div class="cover" style="align-items: center; text-align: center;">
+    <div class="cover-label">AI Influencer Blueprint</div>
+    <div class="spacer-md"></div>
+    <div class="cover-title" style="font-size: 36pt;">Algorithm<br>Decoded</div>
+    <div class="cover-divider" style="margin-left: auto; margin-right: auto;"></div>
+    <div class="cover-subtitle" style="text-align: center; max-width: 400px;">Master Every Platform's Algorithm</div>
+    <div class="spacer-md"></div>
+    <p style="color: #707070; font-size: 10pt; max-width: 380px; text-align: center;">The complete guide to understanding, engineering, and dominating algorithmic distribution across Instagram, TikTok, Threads, and YouTube Shorts.</p>
+    <div class="spacer-lg"></div>
+    <div class="cover-footer-text">2026 Edition · AI Influencer Blueprint</div>
+  </div>
+</div>
+
+</body>
+</html>

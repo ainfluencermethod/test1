@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>AI Universa — Social Proof Ad</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background: #0F1117;
+    position: relative;
+  }
+
+  /* Background effects */
+  .bg-glow {
+    position: absolute;
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(34,197,94,0.12) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    filter: blur(100px);
+  }
+  .bg-grid {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(rgba(34,197,94,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(34,197,94,0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 60px;
+  }
+
+  /* Top badge */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(34,197,94,0.1);
+    border: 1px solid rgba(34,197,94,0.25);
+    border-radius: 100px;
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #4ADE80;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    width: fit-content;
+    margin-bottom: 28px;
+  }
+  .badge-icon { font-size: 16px; }
+
+  /* Headline */
+  .headline {
+    font-size: 50px;
+    font-weight: 900;
+    color: #FFFFFF;
+    line-height: 1.12;
+    margin-bottom: 12px;
+    letter-spacing: -1.5px;
+  }
+  .headline .money {
+    color: #22C55E;
+    text-shadow: 0 0 30px rgba(34,197,94,0.3);
+  }
+
+  .subtitle {
+    font-size: 20px;
+    color: rgba(255,255,255,0.4);
+    font-weight: 500;
+    margin-bottom: 44px;
+  }
+
+  /* Testimonial cards */
+  .cards {
+    display: flex;
+    gap: 20px;
+    flex: 1;
+    align-items: stretch;
+  }
+
+  .card {
+    flex: 1;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 20px;
+    padding: 32px 24px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #22C55E, #4ADE80);
+    border-radius: 20px 20px 0 0;
+  }
+
+  .card-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1a2e1a, #0F1117);
+    border: 2px solid rgba(34,197,94,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 800;
+    color: #22C55E;
+    margin-bottom: 20px;
+  }
+
+  .card-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin-bottom: 6px;
+  }
+
+  .card-desc {
+    font-size: 14px;
+    color: rgba(255,255,255,0.4);
+    font-weight: 500;
+    margin-bottom: 24px;
+    line-height: 1.4;
+  }
+
+  .card-result {
+    margin-top: auto;
+    background: rgba(34,197,94,0.08);
+    border: 1px solid rgba(34,197,94,0.15);
+    border-radius: 14px;
+    padding: 20px;
+    text-align: center;
+  }
+  .card-result-number {
+    font-size: 34px;
+    font-weight: 900;
+    color: #22C55E;
+    text-shadow: 0 0 20px rgba(34,197,94,0.3);
+    margin-bottom: 4px;
+  }
+  .card-result-label {
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+    font-weight: 500;
+  }
+
+  /* Stars */
+  .stars {
+    display: flex;
+    gap: 3px;
+    margin-bottom: 16px;
+  }
+  .star {
+    font-size: 16px;
+    color: #FBBF24;
+  }
+
+  /* Social proof bar */
+  .social-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 36px;
+    padding: 20px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px;
+  }
+
+  .avatar-stack {
+    display: flex;
+  }
+  .avatar-stack-item {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid #0F1117;
+    margin-left: -10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: white;
+  }
+  .avatar-stack-item:first-child { margin-left: 0; }
+  .avatar-stack-item:nth-child(1) { background: #7C5CFC; }
+  .avatar-stack-item:nth-child(2) { background: #22C55E; }
+  .avatar-stack-item:nth-child(3) { background: #F59E0B; }
+  .avatar-stack-item:nth-child(4) { background: #EF4444; }
+  .avatar-stack-item:nth-child(5) { background: rgba(255,255,255,0.15); font-size: 11px; }
+
+  .social-text {
+    font-size: 17px;
+    color: rgba(255,255,255,0.5);
+    font-weight: 500;
+  }
+  .social-text strong {
+    color: #FFFFFF;
+    font-weight: 700;
+  }
+
+  /* Bottom */
+  .bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 36px;
+  }
+
+  .free-tag {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    color: rgba(255,255,255,0.4);
+    font-weight: 500;
+  }
+  .free-tag .date {
+    color: rgba(255,255,255,0.7);
+    font-weight: 600;
+  }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #22C55E, #16A34A);
+    color: #FFFFFF;
+    font-size: 20px;
+    font-weight: 700;
+    padding: 20px 40px;
+    border-radius: 14px;
+    letter-spacing: 0.3px;
+    box-shadow: 0 8px 32px rgba(34,197,94,0.35), inset 0 1px 0 rgba(255,255,255,0.15);
+    text-decoration: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-glow"></div>
+<div class="bg-grid"></div>
+
+<div class="container">
+  <div class="badge">
+    <span class="badge-icon">📊</span>
+    Dokazani rezultati
+  </div>
+
+  <h1 class="headline"><span class="money">€41.127+</span> zaslužka učencev<br>v manj kot 90 dneh</h1>
+  <p class="subtitle">Resnični rezultati resničnih ljudi — brez predhodnega znanja</p>
+
+  <div class="cards">
+    <!-- Luka -->
+    <div class="card">
+      <div class="card-avatar">L</div>
+      <div class="stars">
+        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+      </div>
+      <div class="card-name">Luka</div>
+      <div class="card-desc">Začel iz nič, brez tehničnega znanja</div>
+      <div class="card-result">
+        <div class="card-result-number">€1.840</div>
+        <div class="card-result-label">mesečno</div>
+      </div>
+    </div>
+
+    <!-- Matej -->
+    <div class="card">
+      <div class="card-avatar">M</div>
+      <div class="stars">
+        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+      </div>
+      <div class="card-name">Matej</div>
+      <div class="card-desc">Od ideje do zaslužka v 2 mesecih</div>
+      <div class="card-result">
+        <div class="card-result-number">€4.750</div>
+        <div class="card-result-label">v 2 mesecih</div>
+      </div>
+    </div>
+
+    <!-- Nina -->
+    <div class="card">
+      <div class="card-avatar">N</div>
+      <div class="stars">
+        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+      </div>
+      <div class="card-name">Nina</div>
+      <div class="card-desc">Zgradila osebni brand z AI orodji</div>
+      <div class="card-result">
+        <div class="card-result-number">23.000+</div>
+        <div class="card-result-label">sledilcev</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="social-bar">
+    <div class="avatar-stack">
+      <div class="avatar-stack-item">A</div>
+      <div class="avatar-stack-item">K</div>
+      <div class="avatar-stack-item">T</div>
+      <div class="avatar-stack-item">S</div>
+      <div class="avatar-stack-item">+</div>
+    </div>
+    <div class="social-text">Pridruži se <strong>22.000+ prijavljenim</strong></div>
+  </div>
+
+  <div class="bottom">
+    <div class="free-tag">
+      Brezplačno · <span class="date">15.–17. april 2026</span>
+    </div>
+    <div class="cta">BREZPLAČNA PRIJAVA →</div>
+  </div>
+</div>
+
+</body>
+</html>

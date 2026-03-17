@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 1 – AI Influencer Launch Workbook</title>
+<style>
+  @page { size: A4 portrait; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif; background: #0B0D10; color: #B8B8B8; font-size: 11pt; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page { width: 210mm; height: 297mm; page-break-after: always; background: #0B0D10; position: relative; }
+  .page:last-child { page-break-after: auto; }
+  .teal-bar { height: 4px; width: 100%; background: linear-gradient(90deg,#4ECDC4,#7C5CFC); }
+  .content { padding: 55px 55px 70px 55px; height: calc(100% - 4px); }
+  .footer { position: absolute; bottom: 30px; left: 55px; right: 55px; text-align: center; font-size: 7.5pt; letter-spacing: 2px; color: #666; text-transform: uppercase; }
+  .cover { display: flex; flex-direction: column; justify-content: center; padding: 80px 70px; }
+  .cover-label { color: #4ECDC4; letter-spacing: 5px; font-size: 10pt; text-transform: uppercase; margin-bottom: 26px; font-weight: 600; }
+  .cover-title { color: #FFF; font-size: 44pt; font-weight: 800; line-height: 1.05; margin-bottom: 16px; }
+  .cover-subtitle { font-size: 15pt; color: #B8B8B8; max-width: 520px; line-height: 1.4; margin-bottom: 32px; }
+  .cover-divider { width: 90px; height: 3px; background: #4ECDC4; margin: 40px 0; }
+  .section-label { color: #4ECDC4; text-transform: uppercase; letter-spacing: 4px; font-size: 9pt; font-weight: 600; margin-bottom: 12px; }
+  .section-title { color: #FFF; font-size: 26pt; font-weight: 700; margin-bottom: 18px; }
+  .section-subtitle { color: #FFF; font-size: 18pt; font-weight: 700; margin-top: 30px; margin-bottom: 12px; }
+  p { margin-bottom: 12px; line-height: 1.6; }
+  .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 26px; }
+  .card { border: 1px solid rgba(255,255,255,0.05); border-radius: 18px; padding: 20px 22px; background: rgba(255,255,255,0.01); }
+  .card-title { font-size: 12pt; color: #FFF; font-weight: 600; margin-bottom: 12px; }
+  .list { margin-top: 8px; }
+  .list li { margin-left: 18px; margin-bottom: 8px; }
+  .bullet-label { font-size: 9pt; letter-spacing: 3px; text-transform: uppercase; color: #7C5CFC; margin-top: 22px; margin-bottom: 8px; display: block; }
+  .input-line { margin: 10px 0; border-bottom: 1px dashed rgba(255,255,255,0.2); height: 18px; }
+  .pill { display: inline-flex; align-items: center; padding: 6px 12px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.08); margin: 4px; font-size: 9pt; }
+  table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+  th, td { border: 1px solid rgba(255,255,255,0.09); padding: 10px 12px; font-size: 10pt; }
+  th { text-transform: uppercase; letter-spacing: 2px; font-size: 9pt; color: #7C5CFC; }
+  .graphic-panel { margin-top: 28px; border-radius: 20px; padding: 20px; background: radial-gradient(circle at top,#17202e,#090c13); border: 1px solid rgba(255,255,255,0.04); }
+  .graphic-panel svg { width: 100%; height: auto; display: block; }
+  .graphic-caption { text-align: center; font-size: 9pt; letter-spacing: 2px; color: #6C7A8C; margin-top: 10px; text-transform: uppercase; }
+  .graphic-badges { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+  .graphic-badges span { flex: 1; min-width: 120px; padding: 10px 14px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.01); font-size: 9pt; text-transform: uppercase; letter-spacing: 2px; text-align: center; color: #C3D4FF; }
+</style>
+</head>
+<body>
+  <!-- Cover -->
+  <div class="page">
+    <div class="teal-bar"></div>
+    <div class="cover">
+      <div class="cover-label">AI Universa | Day 1</div>
+      <div class="cover-title">AI Influencer Launch Workbook</div>
+      <div class="cover-subtitle">Map out your character DNA, audience promises, and revenue plan before we go live on 15 April 2026.</div>
+      <div class="graphic-panel">
+        <svg viewBox="0 0 600 220" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#4ECDC4" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#7C5CFC" stop-opacity="0.9"/>
+            </linearGradient>
+          </defs>
+          <rect x="30" y="40" width="540" height="140" rx="26" fill="#121826" stroke="#1f2a3c" stroke-width="2" />
+          <circle cx="120" cy="110" r="48" fill="url(#grad)" opacity="0.85" />
+          <circle cx="200" cy="110" r="36" fill="url(#grad)" opacity="0.45" />
+          <rect x="260" y="85" width="230" height="20" rx="10" fill="#1f2a3c" />
+          <rect x="260" y="125" width="180" height="18" rx="9" fill="#1f2a3c" />
+          <rect x="480" y="80" width="60" height="60" rx="14" fill="#0E141F" stroke="#253044" />
+          <path d="M500 105 L520 125 L545 90" stroke="#4ECDC4" stroke-width="6" fill="none" stroke-linecap="round" />
+        </svg>
+        <div class="graphic-caption">Visualize Day 1 momentum</div>
+      </div>
+      <div class="graphic-badges">
+        <span>Day 1 • Character</span>
+        <span>Day 2 • Automation</span>
+        <span>Day 3 • Offer</span>
+      </div>
+      <div class="cover-divider"></div>
+      <p style="max-width:420px; font-size:11pt; color:#8F8F8F;">Bring this workbook to the live WhatsApp group. Each section mirrors the Day 1 teaching blocks so you can respond in seconds when prospects ask for proof, clarity, or direction.</p>
+    </div>
+  </div>
+
+  <!-- Page 2: Launch Objectives -->
+  <div class="page">
+    <div class="teal-bar"></div>
+    <div class="content">
+      <div class="section-label">Kickoff</div>
+      <div class="section-title">Launch Objectives & Scorecard</div>
+      <p>Use this page to anchor your Day 1 intention. What outcome must happen by midnight? Who needs clarity from you? Write it once and revisit every time the chat spikes.</p>
+      <div class="grid-2" style="margin-top:30px;">
+        <div class="card">
+          <div class="card-title">North Star Metrics</div>
+          <span class="bullet-label">Target</span>
+          <ul class="list">
+            <li>New WhatsApp members welcomed today:</li>
+            <div class="input-line"></div>
+            <li>Workbook downloads to track:</li>
+            <div class="input-line"></div>
+            <li>VIP upsell DMs to start:</li>
+            <div class="input-line"></div>
+          </ul>
+          <span class="bullet-label">Win Condition</span>
+          <p>When will you call Day 1 a win? Define the number, the feeling, or the testimonial you need.</p>
+          <div class="input-line"></div>
+          <div class="input-line"></div>
+        </div>
+        <div class="card">
+          <div class="card-title">Live Agenda (15 April)</div>
+          <table>
+            <tr><th>Time (CEST)</th><th>Moment</th></tr>
+            <tr><td>18:30</td><td>Warm-up: voice note + reminder to print the workbook.</td></tr>
+            <tr><td>19:00</td><td>Day 1 session starts (Character + Audience).</td></tr>
+            <tr><td>20:30</td><td>Live Q&A, objection handling.</td></tr>
+            <tr><td>21:15</td><td>Certificate of completion + share wins.</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="graphic-panel">
+        <svg viewBox="0 0 600 140" xmlns="http://www.w3.org/2000/svg">
+          <rect x="30" y="30" width="540" height="80" rx="18" fill="#111726" stroke="#202A3E" />
+          <rect x="60" y="60" width="180" height="22" rx="11" fill="#1f2f3f" />
+          <rect x="60" y="60" width="120" height="22" rx="11" fill="#4ECDC4" />
+          <text x="60" y="95" fill="#6b7c93" font-size="12" font-family="'JetBrains Mono', monospace">DAY 1 SPEED • %</text>
+          <circle cx="360" cy="70" r="32" fill="#0E141F" stroke="#253044" stroke-width="3" />
+          <path d="M360 40 A30 30 0 1 1 330 70" stroke="#7C5CFC" stroke-width="6" fill="none" stroke-linecap="round" />
+          <text x="348" y="77" fill="#C8DFFF" font-family="'Inter'" font-size="16" font-weight="700">72%</text>
+        </svg>
+        <div class="graphic-caption">Momentum meter</div>
+      </div>
+      <div class="section-subtitle">Promise Statement</div>
+      <p>Complete this sentence and repeat it throughout the day: “By the end of Day 1 you will…”</p>
+      <div class="input-line"></div>
+      <div class="input-line"></div>
+      <div class="footer">Page 1 • Launch Scorecard</div>
+    </div>
+  </div>
+
+  <!-- Page 3: Character DNA -->
+  <div class="page">
+    <div class="teal-bar"></div>
+    <div class="content">
+      <div class="section-label">Character</div>
+      <div class="section-title">Audience + Character DNA Canvas</div>
+      <div class="grid-2" style="margin-top:20px;">
+        <div class="card">
+          <div class="card-title">Audience Snapshot</div>
+          <span class="bullet-label">WHO THEY ARE</span>
+          <div class="input-line"></div>
+          <div class="input-line"></div>
+          <span class="bullet-label">WHAT THEY WANT</span>
+          <div class="input-line"></div>
+          <div class="input-line"></div>
+          <span class="bullet-label">WHAT BLOCKS THEM</span>
+          <div class="input-line"></div>
+          <div class="input-line"></div>
+        </div>
+        <div class="card">
+          <div class="card-title">Character DNA</div>
+          <span class="bullet-label">VISUALS</span>
+          <p class="pill">Camera angles</p><p class="pill">Color palette</p>
+          <div class="input-line"></div>
+          <span class="bullet-label">PERSONALITY SLIDERS</span>
+          <table>
+            <tr><th>Trait</th><th>Level</th></tr>
+            <tr><td>Confidence</td><td>Low ⬜⬜⬜⬜⬜ High</td></tr>
+            <tr><td>Energy</td><td>Calm ⬜⬜⬜⬜⬜ Electric</td></tr>
+            <tr><td>Authority</td><td>Peer ⬜⬜⬜⬜⬜ Mentor</td></tr>
+          </table>
+          <span class="bullet-label">NON-NEGOTIABLES</span>
+          <div class="input-line"></div>
+        </div>
+      </div>
+      <div class="graphic-panel">
+        <svg viewBox="0 0 600 160" xmlns="http://www.w3.org/2000/svg">
+          <rect x="30" y="30" width="150" height="100" rx="18" fill="#101726" stroke="#202A3E" />
+          <rect x="210" y="30" width="150" height="100" rx="18" fill="#101726" stroke="#202A3E" />
+          <rect x="390" y="30" width="150" height="100" rx="18" fill="#101726" stroke="#202A3E" />
+          <circle cx="105" cy="70" r="28" fill="#4ECDC4" opacity="0.8" />
+          <circle cx="285" cy="70" r="28" fill="#7C5CFC" opacity="0.8" />
+          <circle cx="465" cy="70" r="28" fill="#4ECDC4" opacity="0.4" />
+          <text x="75" y="125" fill="#6F819B" font-size="12">VISION</text>
+          <text x="255" y="125" fill="#6F819B" font-size="12">VOICE</text>
+          <text x="435" y="125" fill="#6F819B" font-size="12">VALUES</text>
+        </svg>
+        <div class="graphic-caption">Character tiles</div>
+      </div>
+      <div class="section-subtitle">Proof Stories</div>
+      <p>List three micro stories you can drop in chat to reinforce the promise.</p>
+      <ol class="list">
+        <li><div class="input-line"></div></li>
+        <li><div class="input-line"></div></li>
+        <li><div class="input-line"></div></li>
+      </ol>
+      <div class="footer">Page 2 • Character DNA</div>
+    </div>
+  </div>
+
+  <!-- Page 4: Content Engine -->
+  <div class="page">
+    <div class="teal-bar"></div>
+    <div class="content">
+      <div class="section-label">Content</div>
+      <div class="section-title">Hook & Content Engine Worksheet</div>
+      <div class="grid-2" style="margin-top:20px;">
+        <div class="card">
+          <div class="card-title">Hook Bank</div>
+          <p>Write hooks that combine pain + promise + novelty. Drop the best one into WhatsApp every morning.</p>
+          <ol class="list">
+            <li><div class="input-line"></div></li>
+            <li><div class="input-line"></div></li>
+            <li><div class="input-line"></div></li>
+          </ol>
+          <span class="bullet-label">CTA SNIPPETS</span>
+          <p class="pill">“Reply READY if you filmed today.”</p>
+          <p class="pill">“DM VIP if you want 1:1 help.”</p>
+        </div>
+        <div class="card">
+          <div class="card-title">Daily Content Stack</div>
+          <table>
+            <tr><th>Asset</th><th>Owner</th><th>Status</th></tr>
+            <tr><td>Morning voice note</td><td></td><td></td></tr>
+            <tr><td>Evidence carousel</td><td></td><td></td></tr>
+            <tr><td>Behind-the-scenes reel</td><td></td><td></td></tr>
+            <tr><td>Evening CTA broadcast</td><td></td><td></td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="graphic-panel">
+        <svg viewBox="0 0 600 140" xmlns="http://www.w3.org/2000/svg">
+          <path d="M60 90 L540 90" stroke="#1F2C3C" stroke-width="4" stroke-linecap="round" />
+          <circle cx="60" cy="90" r="22" fill="#4ECDC4" />
+          <circle cx="240" cy="90" r="22" fill="#7C5CFC" />
+          <circle cx="420" cy="90" r="22" fill="#A855F7" />
+          <circle cx="540" cy="90" r="22" fill="#4ECDC4" opacity="0.4" />
+          <text x="50" y="120" fill="#6B7C93" font-size="10">IDEA</text>
+          <text x="223" y="120" fill="#6B7C93" font-size="10">HOOK</text>
+          <text x="402" y="120" fill="#6B7C93" font-size="10">EDIT</text>
+          <text x="520" y="120" fill="#6B7C93" font-size="10">PUBLISH</text>
+        </svg>
+        <div class="graphic-caption">Pipeline visual</div>
+      </div>
+      <div class="section-subtitle">Engagement Prompts</div>
+      <p>Keep these ready to paste when the chat slows down.</p>
+      <ul class="list">
+        <li>“What’s the #1 block stopping you from launching your AI character?”</li>
+        <li>“Drop your hook + niche, I’ll voice note feedback in 5 minutes.”</li>
+        <li>“Screenshot your Canva moodboard and tag me. Winner gets a private audit.”</li>
+      </ul>
+      <div class="footer">Page 3 • Content Engine</div>
+    </div>
+  </div>
+
+  <!-- Page 5: Offer & Objections -->
+  <div class="page">
+    <div class="teal-bar"></div>
+    <div class="content">
+      <div class="section-label">Offer & Objections</div>
+      <div class="section-title">Revenue Bridge</div>
+      <div class="grid-2" style="margin-top:20px;">
+        <div class="card">
+          <div class="card-title">Offer Snapshot</div>
+          <span class="bullet-label">MAIN OFFER</span>
+          <div class="input-line"></div>
+          <p>Write the exact line you’ll paste when someone asks “what do I get?”</p>
+          <div class="input-line"></div>
+          <span class="bullet-label">VIP UPGRADE</span>
+          <div class="input-line"></div>
+          <span class="bullet-label">BONUS / DEADLINE</span>
+          <div class="input-line"></div>
+        </div>
+        <div class="card">
+          <div class="card-title">Objection Matrix</div>
+          <table>
+            <tr><th>Objection</th><th>Reframe</th><th>CTA</th></tr>
+            <tr><td>“No time”</td><td>Show 30-minute workflow + automation wins.</td><td>“Reply Time and I’ll schedule a 1:1 planning sprint.”</td></tr>
+            <tr><td>“Too expensive”</td><td>Anchor ROI vs freelance rates.</td><td>“We can split into 2 payments—type PAYMENT.”</td></tr>
+            <tr><td>“I’m not techy”</td><td>Demo plug-and-play prompts + support.</td><td>“Send TECH and we’ll screen-share tomorrow.”</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="graphic-panel">
+        <svg viewBox="0 0 600 150" xmlns="http://www.w3.org/2000/svg">
+          <path d="M100 50 L260 50 L300 100 L60 100 Z" fill="#142032" stroke="#253044" />
+          <path d="M340 50 L500 50 L540 100 L300 100 Z" fill="#0F1724" stroke="#253044" />
+          <text x="140" y="75" fill="#4ECDC4" font-size="12" letter-spacing="3">VALUE</text>
+          <text x="400" y="75" fill="#7C5CFC" font-size="12" letter-spacing="3">DECISION</text>
+          <circle cx="170" cy="115" r="18" fill="#4ECDC4" opacity="0.7" />
+          <circle cx="410" cy="115" r="18" fill="#7C5CFC" opacity="0.7" />
+        </svg>
+        <div class="graphic-caption">Offer bridge visual</div>
+      </div>
+      <div class="section-subtitle">Follow-up Tracker</div>
+      <table>
+        <tr><th>Name</th><th>Promise</th><th>Next Touch</th><th>Status</th></tr>
+        <tr><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td></tr>
+      </table>
+      <p style="margin-top:18px; color:#7C5CFC; font-size:10pt;">Reminder: log every commitment in WhatsApp so the automation tags stay accurate.</p>
+      <div class="footer">Page 4 • Offers & Objections</div>
+    </div>
+  </div>
+</body>
+</html>

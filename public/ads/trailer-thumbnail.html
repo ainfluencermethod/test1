@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280, height=720">
+<title>AI Universa — YouTube Thumbnail</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@700;800;900&family=Space+Grotesk:wght@700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1280px;
+    height: 720px;
+    overflow: hidden;
+    font-family: 'Inter', 'Space Grotesk', sans-serif;
+    background: #0a0a0f;
+    position: relative;
+  }
+
+  .thumbnail {
+    width: 1280px;
+    height: 720px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #0a0a1a 0%, #0d0620 30%, #120828 60%, #0a0a1a 100%);
+  }
+
+  /* === BACKGROUND GRID PATTERN === */
+  .bg-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(139, 92, 246, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(139, 92, 246, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: 1;
+  }
+
+  /* === PURPLE GLOW EFFECTS === */
+  .glow-primary {
+    position: absolute;
+    width: 800px;
+    height: 800px;
+    right: -100px;
+    top: -200px;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.35) 0%, rgba(139, 92, 246, 0.15) 30%, rgba(88, 28, 235, 0.05) 60%, transparent 80%);
+    filter: blur(60px);
+    z-index: 2;
+    animation: glowPulse 4s ease-in-out infinite alternate;
+  }
+
+  .glow-secondary {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    right: 100px;
+    bottom: -150px;
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.25) 0%, rgba(124, 58, 237, 0.1) 40%, transparent 70%);
+    filter: blur(80px);
+    z-index: 2;
+  }
+
+  .glow-accent {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    left: 50px;
+    bottom: -100px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+    filter: blur(60px);
+    z-index: 2;
+  }
+
+  .glow-hero {
+    position: absolute;
+    width: 700px;
+    height: 700px;
+    right: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: radial-gradient(ellipse, rgba(147, 51, 234, 0.4) 0%, rgba(126, 34, 206, 0.15) 35%, transparent 65%);
+    filter: blur(50px);
+    z-index: 3;
+  }
+
+  @keyframes glowPulse {
+    from { opacity: 0.8; transform: scale(1); }
+    to { opacity: 1; transform: scale(1.05); }
+  }
+
+  /* === PICI HERO IMAGE === */
+  .hero-container {
+    position: absolute;
+    right: -20px;
+    bottom: 0;
+    width: 680px;
+    height: 720px;
+    z-index: 10;
+    overflow: hidden;
+  }
+
+  .hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    filter: contrast(1.1) brightness(1.05);
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, #0a0a1a 0%, rgba(10, 10, 26, 0.6) 25%, transparent 50%);
+    z-index: 11;
+  }
+
+  .hero-bottom-fade {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 150px;
+    background: linear-gradient(to top, rgba(10, 10, 26, 0.8) 0%, transparent 100%);
+    z-index: 11;
+  }
+
+  /* === LEFT SIDE TEXT CONTENT === */
+  .content {
+    position: absolute;
+    left: 60px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 20;
+    max-width: 620px;
+  }
+
+  /* === MAIN HEADLINE === */
+  .headline {
+    font-family: 'Inter', sans-serif;
+    font-weight: 900;
+    font-size: 72px;
+    line-height: 0.95;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: -2px;
+    margin-bottom: 20px;
+    text-shadow:
+      0 0 40px rgba(139, 92, 246, 0.5),
+      0 0 80px rgba(139, 92, 246, 0.2),
+      0 4px 8px rgba(0, 0, 0, 0.8);
+  }
+
+  .headline .highlight {
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #fcd34d 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 20px rgba(251, 191, 36, 0.4));
+  }
+
+  /* === SUBTITLE === */
+  .subtitle {
+    font-family: 'Space Grotesk', 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    color: rgba(255, 255, 255, 0.95);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .subtitle .dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #a855f7;
+    border-radius: 50%;
+    box-shadow: 0 0 12px rgba(168, 85, 247, 0.8);
+  }
+
+  /* === DATE BADGE === */
+  .date-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.25) 0%, rgba(88, 28, 235, 0.15) 100%);
+    border: 2px solid rgba(139, 92, 246, 0.5);
+    border-radius: 12px;
+    padding: 12px 24px;
+    backdrop-filter: blur(10px);
+  }
+
+  .date-badge .date-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    color: #e9d5ff;
+    letter-spacing: 1px;
+  }
+
+  .date-badge .live-dot {
+    width: 12px;
+    height: 12px;
+    background: #ef4444;
+    border-radius: 50%;
+    box-shadow: 0 0 12px rgba(239, 68, 68, 0.8);
+    animation: livePulse 1.5s ease-in-out infinite;
+  }
+
+  @keyframes livePulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 12px rgba(239, 68, 68, 0.8); }
+    50% { opacity: 0.5; box-shadow: 0 0 20px rgba(239, 68, 68, 1); }
+  }
+
+  /* === STATS BAR (bottom) === */
+  .stats-bar {
+    position: absolute;
+    bottom: 20px;
+    left: 60px;
+    z-index: 20;
+    display: flex;
+    gap: 28px;
+    align-items: center;
+  }
+
+  .stat {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .stat-number {
+    font-family: 'Inter', sans-serif;
+    font-weight: 900;
+    font-size: 20px;
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .stat-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .stat-divider {
+    width: 1px;
+    height: 24px;
+    background: rgba(139, 92, 246, 0.4);
+  }
+
+  /* === TOP RIGHT BADGE === */
+  .free-badge {
+    position: absolute;
+    top: 28px;
+    left: 60px;
+    z-index: 25;
+    background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 15px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 8px 20px;
+    border-radius: 6px;
+    box-shadow:
+      0 0 30px rgba(139, 92, 246, 0.5),
+      0 4px 15px rgba(0, 0, 0, 0.4);
+  }
+
+  /* === DECORATIVE ELEMENTS === */
+  .corner-accent {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border: 3px solid rgba(139, 92, 246, 0.3);
+    z-index: 15;
+  }
+
+  .corner-accent.top-left {
+    top: 20px;
+    left: 20px;
+    border-right: none;
+    border-bottom: none;
+    border-radius: 4px 0 0 0;
+  }
+
+  .corner-accent.bottom-right {
+    bottom: 20px;
+    right: 20px;
+    border-left: none;
+    border-top: none;
+    border-radius: 0 0 4px 0;
+  }
+
+  /* === LIGHT RAYS === */
+  .light-rays {
+    position: absolute;
+    right: 200px;
+    top: -100px;
+    width: 400px;
+    height: 900px;
+    background: conic-gradient(from 180deg at 50% 0%,
+      transparent 40%,
+      rgba(139, 92, 246, 0.03) 45%,
+      transparent 50%,
+      rgba(139, 92, 246, 0.05) 55%,
+      transparent 60%
+    );
+    z-index: 2;
+    transform: rotate(-15deg);
+  }
+</style>
+</head>
+<body>
+<div class="thumbnail">
+  <!-- Background effects -->
+  <div class="bg-grid"></div>
+  <div class="glow-primary"></div>
+  <div class="glow-secondary"></div>
+  <div class="glow-accent"></div>
+  <div class="glow-hero"></div>
+  <div class="light-rays"></div>
+
+  <!-- Corner accents -->
+  <div class="corner-accent top-left"></div>
+  <div class="corner-accent bottom-right"></div>
+
+  <!-- Free badge -->
+  <div class="free-badge">BREZPLAČNO</div>
+
+  <!-- Hero image (Pici) -->
+  <div class="hero-container">
+    <div class="hero-overlay"></div>
+    <div class="hero-bottom-fade"></div>
+    <img
+      class="hero-image"
+      src="https://assets.cdn.filesafe.space/TGsyH70nsz7y3hijuqTn/media/69b18f38cab7f7cc28461378.jpeg"
+      alt="Pici — AI Universa"
+    >
+  </div>
+
+  <!-- Main content -->
+  <div class="content">
+    <div class="headline">
+      <span class="highlight">BREZPLAČNA</span><br>
+      DELAVNICA
+    </div>
+    <div class="subtitle">
+      3 DNI <span class="dot"></span> V ŽIVO <span class="dot"></span> AI ZASLUŽEK
+    </div>
+    <div class="date-badge">
+      <span class="live-dot"></span>
+      <span class="date-text">15.–17. APRIL · 19:00</span>
+    </div>
+  </div>
+
+  <!-- Stats bar -->
+  <div class="stats-bar">
+    <div class="stat">
+      <span class="stat-number">200M+</span>
+      <span class="stat-label">ogledov</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <span class="stat-number">1.000+</span>
+      <span class="stat-label">učencev</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <span class="stat-number">€41.127+</span>
+      <span class="stat-label">zaslužka</span>
+    </div>
+  </div>
+</div>
+</body>
+</html>

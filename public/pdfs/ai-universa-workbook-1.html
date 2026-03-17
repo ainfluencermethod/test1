@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI Universa – Delovni zvezek #1</title>
+
+<style>
+  @page { size: A4 portrait; margin: 0; }
+  :root {
+    --bg: #0F1214;
+    --bg-soft: #15191d;
+    --card: #1B2024;
+    --card-2: #20262b;
+    --text: #C9D1D4;
+    --muted: #97A2A8;
+    --white: #F6FAFB;
+    --accent: #4ECDC4;
+    --accent-2: #00E5CC;
+    --callout: #13282A;
+    --line: rgba(78, 205, 196, 0.32);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Inter, Arial, Helvetica, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-size: 14.5px; line-height: 1.6; }
+  .page { width: 210mm; height: 297mm; background: linear-gradient(180deg, #0D0F11 0%, #121416 100%); position: relative; page-break-after: always; overflow: hidden; }
+  .page:last-child { page-break-after: auto; }
+  .topbar { position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); }
+  .inner { padding: 26mm 18mm 24mm; height: 100%; }
+  .cover { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20mm 18mm 24mm; }
+  .logo { width: 62mm; height: auto; margin-bottom: 18mm; filter: drop-shadow(0 8px 22px rgba(0,229,204,.08)); }
+  .brand { color: var(--accent); text-transform: uppercase; letter-spacing: 0.34em; font-size: 12px; font-weight: 800; margin-bottom: 16px; }
+  .cover-title { color: var(--white); font-size: 42pt; line-height: 1.02; font-weight: 800; max-width: 150mm; margin: 0 auto 12px; }
+  .cover-subtitle { font-size: 16px; color: var(--text); max-width: 125mm; margin: 0 auto 14mm; }
+  .cover-meta { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; max-width: 145mm; }
+  .pill { display: inline-block; padding: 8px 12px; border: 1px solid rgba(255,255,255,.07); background: rgba(255,255,255,.02); border-radius: 999px; color: var(--muted); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
+  .divider { width: 36mm; height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); border-radius: 99px; margin: 14mm auto 0; }
+  .section-label { color: var(--accent); font-size: 11px; text-transform: uppercase; letter-spacing: 0.28em; font-weight: 800; margin-bottom: 8px; }
+  .section-title { color: var(--white); font-size: 34px; line-height: 1.1; font-weight: 800; margin: 0 0 10px; }
+  .section-rule { width: 100%; height: 2px; background: linear-gradient(90deg, var(--accent), transparent 60%); margin: 0 0 16px; }
+  p { margin: 0 0 10px; }
+  .lede { max-width: 145mm; color: var(--text); }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .card { background: linear-gradient(180deg, var(--card), var(--card-2)); border: 1px solid rgba(255,255,255,.05); border-radius: 16px; padding: 14px 15px; }
+  .card h3 { margin: 0 0 8px; color: var(--white); font-size: 18px; line-height: 1.25; }
+  .mini { color: var(--accent); text-transform: uppercase; letter-spacing: .2em; font-size: 10px; font-weight: 800; margin-bottom: 7px; }
+  ul, ol { margin: 8px 0 0 18px; padding: 0; }
+  li { margin: 0 0 8px; }
+  .callout { background: linear-gradient(180deg, rgba(19,40,42,.96), rgba(18,33,35,.96)); border-left: 4px solid var(--accent); border-radius: 10px; padding: 12px 14px; margin-top: 12px; color: #D7F4F1; }
+  .quote { color: var(--white); font-size: 24px; line-height: 1.3; max-width: 150mm; margin-top: 18mm; }
+  .split { display: grid; grid-template-columns: 1.1fr .9fr; gap: 16px; align-items: start; }
+  .split-even { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .worksheet-box { min-height: 28mm; border: 1px dashed rgba(255,255,255,.18); border-radius: 12px; margin-top: 8px; }
+  .line { border-bottom: 1px dashed rgba(255,255,255,.18); height: 18px; margin: 8px 0; }
+  .tall { min-height: 36mm; }
+  .code { white-space: pre-wrap; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11.2px; line-height: 1.55; background: #111518; color: #D8FFFB; border: 1px solid rgba(78,205,196,.22); border-radius: 12px; padding: 12px; margin-top: 8px; }
+  .prompt-card { margin-bottom: 10px; }
+  .two-col-list { columns: 2; column-gap: 18px; margin-top: 6px; }
+  .two-col-list li { break-inside: avoid; }
+  .price { font-size: 26px; color: var(--white); font-weight: 800; margin: 4px 0 8px; }
+  .footer { position: absolute; left: 18mm; right: 18mm; bottom: 9mm; text-align: center; color: #6F767B; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; }
+  .spacer-xl { height: 18mm; }
+  .spacer-lg { height: 12mm; }
+  .spacer-md { height: 8mm; }
+  .checklist li::marker { color: var(--accent); }
+  .muted { color: var(--muted); }
+  .center { text-align: center; }
+  .right { text-align: right; }
+  .big-number { font-size: 44px; color: var(--white); font-weight: 800; line-height: 1; }
+  .page-no::after { content: counter(page); }
+  @media print {
+    html, body { width: 210mm; height: auto; }
+  }
+</style>
+
+</head>
+<body>
+<section class="page"><div class="topbar"></div><div class="inner cover">
+  <img src="/ai-universa-logo.png" alt="AI Universa logo" class="logo" />
+  <div class="brand">AI Universa</div>
+  <h1 class="cover-title">Delovni zvezek #1<br/>Kaj te čaka</h1>
+  <p class="cover-subtitle">Tvoj premium vodič za 3-dnevni LIVE workshop, kjer ti Tim Brdnik in Luka Lorencic pokažeta, kako zaslužiš z AI v 2026.</p>
+  <div class="cover-meta">
+    <span class="pill">15.–17. april 2026</span>
+    <span class="pill">3 dni v živo</span>
+    <span class="pill">brezplačna delavnica</span>
+    <span class="pill">aiuniversa.si</span>
+  </div>
+  <div class="divider"></div>
+</div></section><section class="page"><div class="topbar"></div><div class="inner">
+  <div class="section-label">Dobrodošel</div>
+  <h2 class="section-title">Sporočilo od Tima & Luke</h2>
+  <div class="section-rule"></div>
+  <div class="split">
+    <div>
+      <p class="lede">Če to bereš, si že naredil pomemben korak. Večina ljudi o AI samo govori. Ti si se odločil, da boš razumel, kako ga uporabiš za konkreten zaslužek.</p>
+      <p>AI Universa ni še en motivacijski webinar. To je 3-dnevni praktični workshop, kjer boš videl modele, ponudbe in sisteme, ki delujejo zdaj — ne enkrat “v prihodnosti”, ampak v 2026.</p>
+      <p>Naš cilj je preprost: da po teh treh dneh ne ostaneš samo navdušen, ampak da točno veš, kaj ponudiš, komu to prodaš in kako si zgradiš sistem, ki ti prihrani čas.</p>
+      <div class="callout">Pridi z odprto glavo, malo discipline in pripravljenostjo na akcijo. Če sodeluješ, boš iz te delavnice potegnil bistveno več kot povprečen udeleženec.</div>
+    </div>
+    <div class="card">
+      <div class="mini">Tvoj fokus</div>
+      <h3>Tri stvari, ki jih pričakujeva od tebe</h3>
+      <ul class="checklist">
+        <li>Bodi prisoten v živo, ne “za nazaj”.</li>
+        <li>Piši si opombe in sproti rešuj vaje.</li>
+        <li>Po vsakem dnevu izberi eno konkretno akcijo.</li>
+      </ul>
+      <div class="spacer-lg"></div>
+      <div class="mini">Poanta</div>
+      <p class="quote">“Ne rabiš vedeti vsega o AI. Rabiš pa vedeti, kako ga spremeniš v vrednost.”</p>
+    </div>
+  </div>
+</div><div class="footer">AI UNIVERSA · 1</div></section><section class="page"><div class="topbar"></div><div class="inner">
+  <div class="section-label">Pregled</div>
+  <h2 class="section-title">Kaj je AI Universa?</h2>
+  <div class="section-rule"></div>
+  <p class="lede">AI Universa je praktičen ekosistem za ljudi, ki hočejo z AI ustvarjati, prodajati in avtomatizirati. Ne učimo teorije zaradi teorije. Učimo te, kako uporabiš AI za ponudbe, vsebine, lead generation in sisteme.</p>
+  <div class="spacer-md"></div>
+  <div class="grid-3">
+    <div class="card">
+      <div class="mini">01</div>
+      <h3>Monetizacija</h3>
+      <p>Katere AI storitve, produkti in modeli imajo smisel zdaj — in katere so samo hype.</p>
+    </div>
+    <div class="card">
+      <div class="mini">02</div>
+      <h3>Implementacija</h3>
+      <p>Kako hitro sestaviš prvo ponudbo, portfelj in preprost prodajni proces.</p>
+    </div>
+    <div class="card">
+      <div class="mini">03</div>
+      <h3>Sistemi</h3>
+      <p>Kako povežeš AI orodja v procese, ki ti šparajo ure in omogočajo rast.</p>
+    </div>
+  </div>
+  <div class="callout">Če si freelancer, kreator, podjetnik ali nekdo, ki hoče nov vir prihodka, si na pravem mestu. Če iščeš “čarobni gumb brez dela”, to ni to.</div>
+</div><div class="footer">AI UNIVERSA · 2</div></section><section class="page"><div class="topbar"></div><div class="inner">
+  <div class="section-label">3-dnevni plan</div>
+  <h2 class="section-title">Kaj boš osvojil v treh dneh</h2>
+  <div class="section-rule"></div>
+  <div class="grid-3">
+    <div class="card">
+      <div class="mini">Dan 1</div>
+      <h3>AI income modeli</h3>
+      <p>Kateri modeli delujejo ZDAJ. Kaj prodajati. Komu. Zakaj nekateri pristopi prinesejo denar hitro, drugi pa samo zmedejo.</p>
+    </div>
+    <div class="card">
+      <div class="mini">Dan 2</div>
+      <h3>Zgradi svoj prvi AI business</h3>
+      <p>Hands-on sestava ponudbe, pozicioniranja, primerov uporabe in prvega mini prodajnega sistema.</p>
+    </div>
+    <div class="card">
+      <div class="mini">Dan 3</div>
+      <h3>Scale & avtomatizacija</h3>
+      <p>Kako vse skupaj povežeš v sistem, da ne prodajaš samo svojega časa, ampak ustvarjaš vzvod.</p>
+    </div>
+  </div>
+  <div class="spacer-lg"></div>
+  <div class="card">
+    <div class="mini">Rezultat</div>
+    <h3>Po delavnici želiš imeti jasno to trojico</h3>
+    <ul class="two-col-list">
+      <li>kaj je tvoja najbolj realna AI ponudba</li>
+      <li>katera ciljna skupina je zate najlažja za start</li>
+      <li>kateri kanal uporabiš za prve stranke</li>
+      <li>kakšen je tvoj naslednji 7-dnevni plan</li>
+    </ul>
+  </div>
+</div><div class="footer">AI UNIVERSA · 3</div></section><section class="page"><div class="topbar"></div><div class="inner">
+  <div class="section-label">Dan 1</div>
+  <h2 class="section-title">AI income modeli, ki delujejo right now</h2>
+  <div class="section-rule"></div>
+  <div class="split-even">
+    <div class="card">
+      <div class="mini">Kaj boš videl</div>
+      <h3>Modeli za hiter vstop</h3>
+      <ul>
+        <li>AI content creation kot storitev</li>
+        <li>AI outreach & lead gen za lokalne biznise</li>
+        <li>Prompt paketi, SOP-ji in mini digitalni produkti</li>
+        <li>AI automations za prihranek časa podjetjem</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="mini">Ključno vprašanje</div>
+      <h3>Ne sprašuj “kaj je kul?”</h3>
+      <p>Sprašuj se: <strong>kaj rešuje problem, za katerega nekdo že danes plača?</strong></p>
+      <div class="callout">Največ denarja ni v najbolj “naprednem” AI use case-u. Največ denarja je v jasnem rezultatu, ki ga znaš predstaviti preprosto.</div>
+    </div>
+  </div>
+  <div class="spacer-lg"></div>
+  <p class="lede">Dan 1 ti bo dal orientacijo. Po njem boš lažje izločil šum in videl, kateri model je najbolj smiseln zate glede na tvoje sposobnosti, mrežo in hitrost izvedbe.</p>
+</div><div class="footer">AI UNIVERSA · 4</div></section><section class="page"><div class="topbar"></div><div class="inner">
+  <div class="section-label">Dan 2</div>
+  <h2 class="section-title">Zgradi svoj prvi AI business</h2>
+  <div class="section-rule"></div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="mini">Hands-on</div>
+      <h3>Na delavnici ne boš samo poslušal</h3>
+      <p>Skupaj boš oblikoval prvo ponudbo, osnovno sporočilo trgu, primer deliverable-a in preprost način, kako to pokažeš potencialni stranki.</p>
+    </div>
+    <div class="card">
+      <div class="mini">Output dneva</div>
+      <h3>Do konca dneva želiš imeti</h3>
+      <ul>
+        <li>osnutek ponudbe</li>
+        <li>opis rezultata za stranko</li>
+        <li>1–2 konkretna primera uporabe</li>
+        <li>prvo verzijo pitcha</li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout">Perfekcija tukaj ni cilj. Cilj je momentum. Boljše “dovolj dobro in poslano” kot “popolno in nikoli objavljeno”.</div>
+</div><div class="footer">AI UNIVERSA · 5</div></section><section class="page"><div class="topbar"></div><div class="inner">
+  <div class="section-label">Dan 3</div>
+  <h2 class="section-title">Scale & avtomatizacija s sistemi</h2>
+  <div class="section-rule"></div>
+  <div class="split">
+    <div>
+      <p class="lede">Ko imaš ponudbo in prve odzive, pride naslednja faza: kako ustvariš sistem, da se ne vrti vse okoli tvoje ročne energije.</p>
+      <ul>
+        <li>Kako uporabiš AI za hitrejši content pipeline</li>
+        <li>Kako standardiziraš delivery</li>
+        <li>Kako avtomatiziraš follow-up in admin opravila</li>
+        <li>Kako si pripraviš temelje za rast brez kaosa</li>
+      </ul>
+    </div>
+    <div class="card center">
+      <div class="mini">Mindset shift</div>
+      <div class="big-number">1 → 10</div>
+      <p>Ne razmišljaš več samo, kako narediš storitev enkrat. Razmišljaš, kako jo narediš ponovljivo, hitreje in bolj profitabilno.</p>
+    </div>
+  </div>
+</div><div class="footer">AI UNIVERSA · 6</div></section><section class="page"><div class="topbar"></div><div class="inner">
+  <div class="section-label">Priprava</div>
+  <h2 class="section-title">Kako se pripraviš, da odneseš maksimum</h2>
+  <div class="section-rule"></div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="mini">Tehnično</div>
+      <ul>
+        <li>Stabilna internetna povezava</li>
+        <li>Prenosnik ali računalnik, ne samo telefon</li>
+        <li>Dostop do ChatGPT ali podobnega AI orodja</li>
+        <li>Odprt zvezek / Notion / Google Docs za opombe</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="mini">Mentalno</div>
+      <ul>
+        <li>Ne primerjaj svojega začetka s tujim srednjim nivojem</li>
+        <li>Odloči se, da boš testiral, ne samo “študiral”</li>
+        <li>Vzemi si 30–60 min po vsakem dnevu za implementacijo</li>
+        <li>Postavljaj vprašanja, kadar se zatakne</li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout">Največ izgubi tisti, ki pride pasivno. Največ odnese tisti, ki si med delavnico dovoli sprejemati odločitve.</div>
+</div><div class="footer">AI UNIVERSA · 7</div></section><section class="page"><div class="topbar"></div><div class="inner">
+  <div class="section-label">Pravila igre</div>
+  <h2 class="section-title">Kako iz workshopa potegneš največ</h2>
+  <div class="section-rule"></div>
+  <div class="grid-3">
+    <div class="card"><div class="mini">01</div><h3>Bodi v živo</h3><p>Energija, kontekst in Q&A so del vrednosti. Replay nikoli ni isto.</p></div>
+    <div class="card"><div class="mini">02</div><h3>Izberi eno smer</h3><p>Ne lovi 12 idej. Izberi eno ponudbo ali nišo, ki jo boš testiral.</p></div>
+    <div class="card"><div class="mini">03</div><h3>Akcija > zbiranje info</h3><p>Vsak dan naredi vsaj eno potezo v realnem svetu.</p></div>
+  </div>
+  <div class="spacer-lg"></div>
+  <div class="card">
+    <div class="mini">Tvoj commitment</div>
+    <p>Napiši si svoj osebni dogovor za naslednje 3 dni:</p>
+    <div class="line"></div><div class="line"></div><div class="line"></div>
+  </div>
+</div><div class="footer">AI UNIVERSA · 8</div></section><section class="page"><div class="topbar"></div><div class="inner">
+  <div class="section-label">Hitra samopresoja</div>
+  <h2 class="section-title">Kje si trenutno z AI?</h2>
+  <div class="section-rule"></div>
+  <div class="split-even">
+    <div class="card">
+      <div class="mini">Oceni se</div>
+      <ul>
+        <li>AI uporabljam skoraj vsak dan: ___ / 10</li>
+        <li>Imam jasno idejo za monetizacijo: ___ / 10</li>
+        <li>Znam razložiti svojo ponudbo v 1 stavku: ___ / 10</li>
+        <li>Vem, kje najdem prve stranke: ___ / 10</li>
+        <li>Imam sistem za dosledno izvedbo: ___ / 10</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="mini">Odgovori iskreno</div>
+      <p>Kaj je tvoja največja ovira trenutno?</p>
+      <div class="worksheet-box"></div>
+      <p style="margin-top:10px;">Kaj želiš doseči do konca aprila?</p>
+      <div class="worksheet-box"></div>
+    </div>
+  </div>
+</div><div class="footer">AI UNIVERSA · 9</div></section><section class="page"><div class="topbar"></div><div class="inner">
+  <div class="section-label">Skupnost</div>
+  <h2 class="section-title">Ne ostani samo opazovalec</h2>
+  <div class="section-rule"></div>
+  <p class="lede">Vrednost ne bo samo v predavanju. Velik del momentum-a pride iz skupnosti, vprašanj, mini feedbacka in tega, da vidiš, kako drugi razmišljajo.</p>
+  <div class="grid-2">
+    <div class="card">
+      <div class="mini">WhatsApp skupina</div>
+      <h3>Vstopi, predstavi se, sodeluj</h3>
+      <ul>
+        <li>napiši, s čim se trenutno ukvarjaš</li>
+        <li>povej, kaj te pri AI najbolj zanima</li>
+        <li>delaj screenshot-e svojih zmag in vprašanj</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="mini">Mini CTA</div>
+      <h3>Tvoj prvi message v skupino</h3>
+      <div class="code">Hej, jaz sem _______. Trenutno me pri AI najbolj zanima _______. Do konca workshopa želim priti do _______.</div>
+    </div>
+  </div>
+  <div class="callout">Če si tih, boš dobil manj. Če sodeluješ, boš hitreje dobil jasnost.</div>
+</div><div class="footer">AI UNIVERSA · 10</div></section><section class="page"><div class="topbar"></div><div class="inner">
+  <div class="section-label">Teaser</div>
+  <h2 class="section-title">Na Day 1 bom razkril skrivno geslo</h2>
+  <div class="section-rule"></div>
+  <div class="center">
+    <p class="quote">Na prvem dnevu bo razkrito skrivno geslo, ki odklene nekaj posebnega.</p>
+    <div class="spacer-xl"></div>
+    <p class="muted">Zato: ne zamujaj začetka, spremljaj do konca in imej ta zvezek pri sebi.</p>
+    <div class="spacer-xl"></div>
+    <div class="pill">15.–17. april 2026</div>
+    <div class="pill">Tim Brdnik & Luka Lorencic</div>
+    <div class="pill">aiuniversa.si</div>
+  </div>
+</div><div class="footer">AI UNIVERSA · 11</div></section>
+</body>
+</html>

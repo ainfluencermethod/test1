@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>AI Universa — Retarget Testimonial Stack</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background: #0F1117;
+    position: relative;
+  }
+
+  .bg-glow-1 {
+    position: absolute;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(34,197,94,0.15) 0%, transparent 70%);
+    top: -150px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    filter: blur(100px);
+  }
+  .bg-glow-2 {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(124,92,252,0.12) 0%, transparent 70%);
+    bottom: -100px;
+    right: -100px;
+    border-radius: 50%;
+    filter: blur(80px);
+  }
+  .bg-grid {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(rgba(34,197,94,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(34,197,94,0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 56px 56px 52px;
+  }
+
+  /* Badge */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(34,197,94,0.1);
+    border: 1px solid rgba(34,197,94,0.25);
+    border-radius: 100px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #4ADE80;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    width: fit-content;
+    margin-bottom: 28px;
+  }
+  .badge-dot {
+    width: 8px;
+    height: 8px;
+    background: #22C55E;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #22C55E;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  /* Headline */
+  .headline {
+    font-size: 52px;
+    font-weight: 900;
+    color: #FFFFFF;
+    line-height: 1.1;
+    margin-bottom: 8px;
+    letter-spacing: -1.5px;
+  }
+  .headline em {
+    font-style: normal;
+    color: #22C55E;
+    text-shadow: 0 0 40px rgba(34,197,94,0.3);
+  }
+  .subtitle {
+    font-size: 20px;
+    color: rgba(255,255,255,0.4);
+    font-weight: 500;
+    margin-bottom: 40px;
+  }
+
+  /* Cards */
+  .cards {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    flex: 1;
+  }
+
+  .card {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    background: rgba(255,255,255,0.035);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 20px;
+    padding: 28px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, #22C55E, #4ADE80);
+    border-radius: 20px 0 0 20px;
+  }
+
+  .card-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1a2e1a, #0F1117);
+    border: 2px solid rgba(34,197,94,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    font-weight: 800;
+    color: #22C55E;
+    flex-shrink: 0;
+  }
+
+  .card-info {
+    flex: 1;
+  }
+  .card-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin-bottom: 3px;
+  }
+  .card-meta {
+    font-size: 14px;
+    color: rgba(255,255,255,0.35);
+    font-weight: 500;
+  }
+
+  .card-result {
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .card-result-number {
+    font-size: 36px;
+    font-weight: 900;
+    color: #22C55E;
+    text-shadow: 0 0 20px rgba(34,197,94,0.3);
+    line-height: 1.1;
+  }
+  .card-result-label {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    font-weight: 500;
+  }
+
+  .card-stars {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 2px;
+  }
+  .star {
+    font-size: 13px;
+    color: #FBBF24;
+  }
+
+  /* Nudge */
+  .nudge {
+    text-align: center;
+    margin-top: 32px;
+    font-size: 19px;
+    color: rgba(255,255,255,0.45);
+    font-weight: 500;
+  }
+  .nudge strong {
+    color: rgba(255,255,255,0.75);
+    font-weight: 700;
+  }
+
+  /* Bottom */
+  .bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 28px;
+  }
+
+  .date-info {
+    font-size: 17px;
+    color: rgba(255,255,255,0.4);
+    font-weight: 500;
+  }
+  .date-info strong {
+    color: rgba(255,255,255,0.7);
+    font-weight: 600;
+  }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #22C55E, #16A34A);
+    color: #FFFFFF;
+    font-size: 20px;
+    font-weight: 700;
+    padding: 20px 40px;
+    border-radius: 14px;
+    box-shadow: 0 8px 32px rgba(34,197,94,0.35), inset 0 1px 0 rgba(255,255,255,0.15);
+    text-decoration: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-glow-1"></div>
+<div class="bg-glow-2"></div>
+<div class="bg-grid"></div>
+
+<div class="container">
+  <div class="badge">
+    <span class="badge-dot"></span>
+    Resnični rezultati
+  </div>
+
+  <h1 class="headline">Oni so že začeli.<br><em>Kdaj boš ti?</em></h1>
+  <p class="subtitle">Učenci AI Universa že zaslužijo — brez predhodnega znanja.</p>
+
+  <div class="cards">
+    <!-- Eva -->
+    <div class="card">
+      <div class="card-avatar">E</div>
+      <div class="card-info">
+        <div class="card-stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <div class="card-name">Eva Oblak, 31</div>
+        <div class="card-meta">Pustila službo po 3 mesecih z AI</div>
+      </div>
+      <div class="card-result">
+        <div class="card-result-number">€5.100</div>
+        <div class="card-result-label">/ mesec</div>
+      </div>
+    </div>
+
+    <!-- Matej -->
+    <div class="card">
+      <div class="card-avatar">M</div>
+      <div class="card-info">
+        <div class="card-stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <div class="card-name">Matej Zupan, 28</div>
+        <div class="card-meta">Začel ob redni službi, zdaj freelanca</div>
+      </div>
+      <div class="card-result">
+        <div class="card-result-number">€4.750</div>
+        <div class="card-result-label">v 2 mesecih</div>
+      </div>
+    </div>
+
+    <!-- Ana -->
+    <div class="card">
+      <div class="card-avatar">A</div>
+      <div class="card-info">
+        <div class="card-stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <div class="card-name">Ana Horvat, 34</div>
+        <div class="card-meta">Mama dveh otrok, dela od doma</div>
+      </div>
+      <div class="card-result">
+        <div class="card-result-number">€2.100</div>
+        <div class="card-result-label">/ mesec</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nudge">Vsi so bili točno tam, kjer si ti zdaj. <strong>Edina razlika? Začeli so.</strong></div>
+
+  <div class="bottom">
+    <div class="date-info">
+      Brezplačno · <strong>15.–17. april 2026</strong>
+    </div>
+    <div class="cta">PRIDRUŽI SE JIM →</div>
+  </div>
+</div>
+
+</body>
+</html>

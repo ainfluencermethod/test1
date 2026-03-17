@@ -1,0 +1,1974 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Universa | Ustvari prihodek z AI</title>
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #000000;
+            --card-bg: #0a0a0a;
+            --card-border: rgba(255, 255, 255, 0.1);
+            --accent: #faff60;
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1a1;
+            --blue-glow: rgba(0, 163, 255, 0.15);
+            --font-main: 'Inter', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .container-narrow {
+            max-width: 800px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--card-border);
+            z-index: 1000;
+            height: 72px;
+            display: flex;
+            align-items: center;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 22px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-icon {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #00a3ff, #0057ff);
+            transform: skewX(-15deg);
+            border-radius: 2px;
+        }
+
+        .nav-status {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: white;
+            font-weight: 600;
+        }
+
+        .btn-nav {
+            background: var(--accent);
+            color: black;
+            font-weight: 700;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 13px;
+            transition: transform 0.2s;
+        }
+
+        .btn-nav:hover {
+            transform: scale(1.05);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            padding-top: 160px;
+            padding-bottom: 100px;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        /* Background Light Streaks */
+        .hero::before, .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, var(--blue-glow), transparent);
+            z-index: -1;
+            filter: blur(60px);
+        }
+
+        .hero::before { left: -10%; transform: rotate(-15deg); }
+        .hero::after { right: -10%; transform: rotate(15deg); }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero h1 span {
+            color: var(--accent);
+        }
+
+        .hero p {
+            color: var(--text-secondary);
+            font-size: 16px;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .hero p b {
+            color: white;
+        }
+
+        /* Video Player */
+        .video-container {
+            max-width: 800px;
+            margin: 0 auto 48px;
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border: 1px solid var(--card-border);
+        }
+
+        .video-thumbnail {
+            width: 100%;
+            display: block;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            filter: brightness(0.6);
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 320px;
+            background: rgba(250, 255, 96, 0.8);
+            border: 1px solid var(--accent);
+            padding: 32px;
+            border-radius: 12px;
+            text-align: center;
+            backdrop-filter: blur(8px);
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .video-overlay h4 {
+            color: white;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .video-overlay .mute-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .video-overlay p {
+            color: white;
+            font-weight: 700;
+            font-size: 18px;
+            margin: 0;
+        }
+
+        .video-caption {
+            position: absolute;
+            bottom: 40px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-weight: 700;
+            font-size: 18px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Main Button */
+        .btn-main {
+            display: inline-block;
+            background: linear-gradient(to bottom, #faff60, #f0f540);
+            color: black;
+            font-weight: 800;
+            padding: 20px 64px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 20px;
+            text-transform: uppercase;
+            box-shadow: 0 10px 30px rgba(250, 255, 96, 0.3);
+            transition: all 0.3s;
+        }
+
+        .btn-main:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(250, 255, 96, 0.4);
+        }
+
+        /* Record Breaking Section */
+        .record-breaking {
+            padding: 100px 0;
+            text-align: center;
+            background: radial-gradient(circle at center, #0a0a0a 0%, #000000 100%);
+        }
+
+        .record-breaking h2 {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 60px;
+            line-height: 1.1;
+        }
+
+        .record-breaking h2 span {
+            color: var(--accent);
+        }
+
+        .mania-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+
+        .mania-card {
+            background: #0d0d0d;
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mania-logo {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 24px;
+            background: #1a1a1a;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 24px;
+            color: #faff60;
+        }
+
+        .mania-amount {
+            font-size: 36px;
+            font-weight: 900;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .mania-label {
+            color: var(--text-secondary);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .mania-highlight {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--accent);
+        }
+
+        .record-subtext {
+            font-size: 18px;
+            margin-bottom: 40px;
+        }
+
+        .record-subtext b {
+            color: var(--accent);
+        }
+
+        .red-text {
+            color: #ff3b3b;
+            font-weight: 700;
+            font-size: 20px;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        /* Testimonial Grid */
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+            margin-top: 60px;
+            opacity: 0.6;
+        }
+
+        .test-card {
+            background: #0d0d0d;
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: left;
+        }
+
+        .test-card img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        /* AI Agent Operating Section */
+        .shadow-operating {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .shadow-operating h2 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 40px;
+        }
+
+        .shadow-list {
+            max-width: 600px;
+            margin: 0 auto 60px;
+            text-align: left;
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .shadow-list::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, #00a3ff, transparent);
+        }
+
+        .shadow-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+
+        .shadow-icon {
+            width: 48px;
+            height: 48px;
+            background: #0d0d0d;
+            border: 1px solid #00a3ff;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+            color: #00a3ff;
+        }
+
+        .shadow-item p {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        /* DM Grid */
+        .creators-section {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .dm-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 60px;
+        }
+
+        .dm-card {
+            background: white;
+            color: black;
+            padding: 24px;
+            border-radius: 12px;
+            text-align: left;
+            font-size: 14px;
+            line-height: 1.4;
+            position: relative;
+        }
+
+        .dm-card::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 20px;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid white;
+        }
+
+        .dm-highlight {
+            background: #ffcccc;
+            padding: 0 2px;
+        }
+
+        /* 4-Step System */
+        .steps-section {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .steps-container {
+            max-width: 800px;
+            margin: 60px auto;
+            text-align: left;
+            background: #0d0d0d;
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 40px;
+        }
+
+        .step {
+            display: flex;
+            gap: 32px;
+            margin-bottom: 48px;
+            position: relative;
+        }
+
+        .step:last-child { margin-bottom: 0; }
+
+        .step-icon {
+            width: 64px;
+            height: 64px;
+            background: #1a1a1a;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: #00a3ff;
+            flex-shrink: 0;
+        }
+
+        .step-content h3 {
+            font-size: 28px;
+            font-weight: 800;
+            color: #00a3ff;
+            margin-bottom: 8px;
+        }
+
+        .step-content h4 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .step-content p {
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        /* Product Stack */
+        .product-stack {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .product-card {
+            background: #0d0d0d;
+            border: 1px solid var(--card-border);
+            border-radius: 32px;
+            padding: 60px;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            margin-bottom: 40px;
+            text-align: left;
+        }
+
+        .product-card:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .product-info { flex: 1; }
+        .product-image {
+            flex: 1;
+            background: radial-gradient(circle at center, #1a1a1a, #000000);
+            border-radius: 24px;
+            aspect-ratio: 1.2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--card-border);
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 80%;
+            height: auto;
+        }
+
+        .product-info h3 {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .product-value {
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 24px;
+            display: block;
+        }
+
+        .product-info p {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .product-features {
+            list-style: none;
+        }
+
+        .product-features li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 15px;
+        }
+
+        .product-features li::before {
+            content: '✓';
+            color: #00ff85;
+            font-weight: 900;
+        }
+
+        /* Founder Section */
+        .founder-section {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .founder-card {
+            background: #0d0d0d;
+            border: 1px solid var(--card-border);
+            border-radius: 32px;
+            padding: 60px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .founder-image {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 20px;
+            margin: 40px auto;
+            display: block;
+        }
+
+        .founder-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 60px;
+            border-top: 1px solid var(--card-border);
+            padding-top: 40px;
+        }
+
+        .stat-item h4 {
+            font-size: 42px;
+            font-weight: 900;
+            color: #00a3ff;
+            margin-bottom: 8px;
+        }
+
+        .stat-item p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* Perspective Section */
+        .perspective {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .perspective-card {
+            background: #0d0d0d;
+            border: 1px solid var(--card-border);
+            border-radius: 32px;
+            padding: 60px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .perspective-dashboard {
+            width: 100%;
+            border-radius: 12px;
+            margin: 40px 0;
+            border: 1px solid var(--card-border);
+        }
+
+        /* Recap Section */
+        .recap {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .recap-card {
+            background: linear-gradient(135deg, #0d0d0d 0%, #000000 100%);
+            border: 1px solid var(--card-border);
+            border-radius: 32px;
+            padding: 60px;
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .recap-list {
+            text-align: left;
+            margin: 40px 0;
+        }
+
+        .recap-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            font-size: 15px;
+        }
+
+        .recap-dots {
+            flex: 1;
+            border-bottom: 1px dotted rgba(255,255,255,0.2);
+            margin: 0 12px;
+        }
+
+        .recap-total {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 40px;
+        }
+
+        .recap-total span {
+            text-decoration: line-through;
+            color: var(--text-secondary);
+            margin-left: 12px;
+        }
+
+        /* Guarantee Section */
+        .guarantee {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .guarantee-card {
+            background: linear-gradient(to bottom, #302000, #000000);
+            border: 1px solid #faff60;
+            border-radius: 32px;
+            padding: 80px 60px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .guarantee-seal {
+            width: 160px;
+            margin: 0 auto 40px;
+        }
+
+        .guarantee h3 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 24px;
+            color: #faff60;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .faq-badge {
+            background: rgba(0, 163, 255, 0.1);
+            color: #00a3ff;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: inline-block;
+        }
+
+        .faq-container {
+            max-width: 700px;
+            margin: 40px auto;
+            text-align: left;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--card-border);
+            padding: 24px 0;
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            color: var(--text-secondary);
+            margin-top: 0;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            margin-top: 16px;
+        }
+
+        /* Footer */
+        .footer-cta {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .whatsapp-card {
+            background: radial-gradient(circle at center, #0d0d0d 0%, #000000 100%);
+            border: 1px solid var(--card-border);
+            border-radius: 32px;
+            padding: 80px 60px;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .whatsapp-card::before {
+            content: '';
+            position: absolute;
+            bottom: -50%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, var(--blue-glow), transparent);
+            z-index: -1;
+        }
+
+        .btn-whatsapp {
+            display: inline-block;
+            background: #25d366;
+            color: white;
+            font-weight: 800;
+            padding: 20px 48px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 18px;
+            margin-top: 32px;
+            transition: transform 0.2s;
+        }
+
+        .btn-whatsapp:hover {
+            transform: scale(1.05);
+        }
+
+        footer {
+            padding: 60px 0;
+            text-align: center;
+            border-top: 1px solid var(--card-border);
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+
+        .footer-links {
+            margin-bottom: 24px;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin: 0 12px;
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== RESPONSIVE: TABLET (max-width: 768px) ===== */
+        @media (max-width: 768px) {
+            /* Global overflow fix */
+            html, body {
+                overflow-x: hidden;
+                max-width: 100vw;
+            }
+
+            .container {
+                padding: 0 16px;
+            }
+
+            /* Navigation - compact */
+            nav {
+                height: 56px;
+            }
+
+            nav .container {
+                gap: 8px;
+            }
+
+            .logo {
+                font-size: 18px;
+                gap: 6px;
+            }
+
+            .logo-icon {
+                width: 20px;
+                height: 20px;
+            }
+
+            .nav-status {
+                font-size: 9px;
+                display: none;
+            }
+
+            .btn-nav {
+                padding: 8px 12px;
+                font-size: 11px;
+                white-space: nowrap;
+            }
+
+            /* Hero */
+            .hero {
+                padding-top: 100px;
+                padding-bottom: 60px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+                line-height: 1.15;
+                margin-bottom: 20px;
+            }
+
+            .hero h1 br {
+                display: none;
+            }
+
+            .hero p {
+                font-size: 15px;
+                margin-bottom: 32px;
+            }
+
+            .hero p br {
+                display: none;
+            }
+
+            /* Video */
+            .video-container {
+                margin-bottom: 32px;
+                border-radius: 8px;
+            }
+
+            .video-overlay {
+                width: 240px;
+                padding: 20px;
+            }
+
+            .video-overlay h4 {
+                font-size: 15px;
+                margin-bottom: 12px;
+            }
+
+            .video-overlay .mute-icon {
+                font-size: 36px;
+                margin-bottom: 12px;
+            }
+
+            .video-overlay p {
+                font-size: 15px;
+            }
+
+            .video-caption {
+                font-size: 15px;
+                bottom: 20px;
+            }
+
+            /* Buttons - full width tap targets */
+            .btn-main {
+                display: block;
+                width: 100%;
+                padding: 18px 24px;
+                font-size: 16px;
+                text-align: center;
+                min-height: 48px;
+            }
+
+            .btn-whatsapp {
+                display: block;
+                width: 100%;
+                padding: 18px 24px;
+                font-size: 16px;
+                text-align: center;
+                min-height: 48px;
+            }
+
+            /* Record Breaking */
+            .record-breaking {
+                padding: 60px 0;
+            }
+
+            .record-breaking h2 {
+                font-size: 28px;
+                margin-bottom: 40px;
+            }
+
+            .mania-cards {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .mania-card {
+                padding: 28px 20px;
+                border-radius: 16px;
+            }
+
+            .mania-amount {
+                font-size: 28px;
+            }
+
+            .record-subtext {
+                font-size: 16px;
+            }
+
+            .red-text {
+                font-size: 18px;
+            }
+
+            /* Testimonial Grid */
+            .testimonial-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+                margin-top: 40px;
+            }
+
+            .test-card {
+                padding: 12px;
+            }
+
+            .test-card p {
+                font-size: 13px;
+            }
+
+            /* AI Agent Operating */
+            .shadow-operating {
+                padding: 60px 0;
+            }
+
+            .shadow-operating h2 {
+                font-size: 28px;
+                margin-bottom: 24px;
+            }
+
+            .shadow-list {
+                padding-left: 24px;
+            }
+
+            .shadow-item {
+                gap: 14px;
+                margin-bottom: 24px;
+            }
+
+            .shadow-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+
+            .shadow-item p {
+                font-size: 16px;
+            }
+
+            /* Creators / DM Grid */
+            .creators-section {
+                padding: 60px 0;
+            }
+
+            .creators-section h2 {
+                font-size: 28px !important;
+            }
+
+            .dm-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .dm-card {
+                padding: 20px;
+                font-size: 14px;
+            }
+
+            /* 4-Step System */
+            .steps-section {
+                padding: 60px 0;
+            }
+
+            .steps-section h2 {
+                font-size: 28px !important;
+            }
+
+            .steps-container {
+                padding: 24px;
+                border-radius: 16px;
+                margin: 40px auto;
+            }
+
+            .step {
+                flex-direction: column;
+                gap: 16px;
+                margin-bottom: 36px;
+            }
+
+            .step-icon {
+                width: 48px;
+                height: 48px;
+                font-size: 24px;
+            }
+
+            .step-content h3 {
+                font-size: 22px;
+            }
+
+            .step-content h4 {
+                font-size: 16px;
+            }
+
+            .step-content p {
+                font-size: 14px;
+            }
+
+            /* Product Stack */
+            .product-stack {
+                padding: 60px 0;
+            }
+
+            .product-stack h2 {
+                font-size: 28px !important;
+                margin-bottom: 40px !important;
+            }
+
+            .product-card {
+                flex-direction: column !important;
+                padding: 32px 20px;
+                gap: 24px;
+                border-radius: 20px;
+                margin-bottom: 24px;
+            }
+
+            .product-image {
+                width: 100%;
+                aspect-ratio: 16/10;
+                border-radius: 16px;
+                order: -1;
+            }
+
+            .product-info h3 {
+                font-size: 26px;
+            }
+
+            .product-value {
+                font-size: 16px;
+            }
+
+            .product-info p {
+                font-size: 15px;
+            }
+
+            .product-features li {
+                font-size: 14px;
+            }
+
+            /* Founder */
+            .founder-section {
+                padding: 60px 0;
+            }
+
+            .founder-card {
+                padding: 32px 20px;
+                border-radius: 20px;
+            }
+
+            .founder-card h2 {
+                font-size: 28px !important;
+            }
+
+            .founder-stats {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .stat-item h4 {
+                font-size: 32px;
+            }
+
+            /* Perspective */
+            .perspective {
+                padding: 60px 0;
+            }
+
+            .perspective-card {
+                padding: 32px 20px;
+                border-radius: 20px;
+            }
+
+            .perspective-card h2 {
+                font-size: 28px !important;
+            }
+
+            .perspective-dashboard {
+                border-radius: 8px;
+            }
+
+            /* Recap */
+            .recap {
+                padding: 60px 0;
+            }
+
+            .recap h2 {
+                font-size: 28px !important;
+                margin-bottom: 32px !important;
+            }
+
+            .recap-card {
+                padding: 32px 20px;
+                border-radius: 20px;
+            }
+
+            .recap-item {
+                font-size: 13px;
+                gap: 4px;
+            }
+
+            .recap-dots {
+                min-width: 20px;
+                margin: 0 6px;
+            }
+
+            .recap-total {
+                font-size: 20px;
+            }
+
+            /* Guarantee */
+            .guarantee {
+                padding: 60px 0;
+            }
+
+            .guarantee-card {
+                padding: 40px 20px;
+                border-radius: 20px;
+            }
+
+            .guarantee h3 {
+                font-size: 24px;
+            }
+
+            .guarantee-seal {
+                width: 120px;
+            }
+
+            /* FAQ */
+            .faq {
+                padding: 60px 0;
+            }
+
+            .faq h2 {
+                font-size: 28px !important;
+            }
+
+            .faq-container {
+                margin: 24px auto;
+            }
+
+            .faq-question {
+                font-size: 16px;
+                padding: 8px 0;
+                min-height: 48px;
+            }
+
+            .faq-item {
+                padding: 16px 0;
+            }
+
+            /* Footer CTA */
+            .footer-cta {
+                padding: 60px 0;
+            }
+
+            .whatsapp-card {
+                padding: 40px 20px;
+                border-radius: 20px;
+            }
+
+            .whatsapp-card h2 {
+                font-size: 28px !important;
+            }
+
+            /* Footer */
+            footer {
+                padding: 40px 0;
+                font-size: 12px;
+            }
+
+            .footer-links a {
+                margin: 0 8px;
+                font-size: 12px;
+            }
+        }
+
+        /* ===== RESPONSIVE: PHONE (max-width: 480px) ===== */
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 12px;
+            }
+
+            /* Nav - ultra compact */
+            nav {
+                height: 50px;
+            }
+
+            .logo {
+                font-size: 16px;
+            }
+
+            .btn-nav {
+                padding: 6px 10px;
+                font-size: 10px;
+            }
+
+            /* Hero */
+            .hero {
+                padding-top: 80px;
+                padding-bottom: 40px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .hero p {
+                font-size: 15px;
+                margin-bottom: 24px;
+            }
+
+            /* Video overlay smaller */
+            .video-overlay {
+                width: 200px;
+                padding: 16px;
+            }
+
+            .video-overlay h4 {
+                font-size: 13px;
+            }
+
+            .video-overlay .mute-icon {
+                font-size: 28px;
+                margin-bottom: 8px;
+            }
+
+            .video-overlay p {
+                font-size: 13px;
+            }
+
+            .video-caption {
+                font-size: 13px;
+                bottom: 12px;
+            }
+
+            /* Buttons */
+            .btn-main {
+                padding: 16px 20px;
+                font-size: 15px;
+                border-radius: 10px;
+            }
+
+            .btn-whatsapp {
+                padding: 16px 20px;
+                font-size: 15px;
+                border-radius: 10px;
+            }
+
+            /* Section headings */
+            .record-breaking h2,
+            .shadow-operating h2,
+            .creators-section h2,
+            .steps-section h2 {
+                font-size: 24px !important;
+            }
+
+            /* Mania cards */
+            .mania-card {
+                padding: 24px 16px;
+            }
+
+            .mania-amount {
+                font-size: 26px;
+            }
+
+            .mania-logo {
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+                margin-bottom: 16px;
+            }
+
+            /* Testimonials - single column on tiny screens */
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            /* Shadow list */
+            .shadow-list {
+                padding-left: 16px;
+            }
+
+            .shadow-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
+            }
+
+            .shadow-item p {
+                font-size: 15px;
+            }
+
+            /* Steps */
+            .steps-container {
+                padding: 20px 16px;
+            }
+
+            .step-content h3 {
+                font-size: 20px;
+            }
+
+            .step-content h4 {
+                font-size: 15px;
+            }
+
+            /* Product cards */
+            .product-card {
+                padding: 24px 16px;
+                gap: 20px;
+                margin-bottom: 20px;
+            }
+
+            .product-info h3 {
+                font-size: 22px;
+            }
+
+            .product-info p {
+                font-size: 14px;
+            }
+
+            /* Founder */
+            .founder-card {
+                padding: 24px 16px;
+            }
+
+            .founder-card h2 {
+                font-size: 24px !important;
+            }
+
+            .stat-item h4 {
+                font-size: 28px;
+            }
+
+            /* Perspective */
+            .perspective-card {
+                padding: 24px 16px;
+            }
+
+            .perspective-card h2 {
+                font-size: 24px !important;
+            }
+
+            /* Recap */
+            .recap h2 {
+                font-size: 24px !important;
+            }
+
+            .recap-card {
+                padding: 24px 16px;
+            }
+
+            .recap-item {
+                font-size: 12px;
+                flex-wrap: nowrap;
+            }
+
+            .recap-item span:first-child {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 55%;
+                flex-shrink: 1;
+            }
+
+            .recap-item span:last-child {
+                white-space: nowrap;
+                flex-shrink: 0;
+            }
+
+            .recap-dots {
+                min-width: 12px;
+                margin: 0 4px;
+            }
+
+            .recap-total {
+                font-size: 18px;
+            }
+
+            .recap-total span {
+                display: block;
+                margin-left: 0;
+                margin-top: 4px;
+            }
+
+            /* Guarantee */
+            .guarantee-card {
+                padding: 32px 16px;
+            }
+
+            .guarantee h3 {
+                font-size: 20px;
+            }
+
+            .guarantee-seal {
+                width: 100px;
+                margin-bottom: 24px;
+            }
+
+            /* FAQ */
+            .faq h2 {
+                font-size: 24px !important;
+            }
+
+            .faq-question {
+                font-size: 15px;
+            }
+
+            .faq-answer {
+                font-size: 14px;
+            }
+
+            /* WhatsApp CTA */
+            .whatsapp-card {
+                padding: 32px 16px;
+            }
+
+            .whatsapp-card h2 {
+                font-size: 24px !important;
+            }
+
+            /* General body text size */
+            body {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">
+                <div class="logo-icon"></div>
+                AI Universa
+            </div>
+            <div class="nav-status">PONUDBA JE TRENUTNO ZAPRTA</div>
+            <a href="#waitlist" class="btn-nav">PRIDRUŽI SE ČAKALNI LISTI</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container fade-in">
+            <h1>Ustvari <span>Prihodek z AI</span> z Našim<br><span>Sistemom Agentov, Ki So Že Pripravljeni Zate</span> (Medtem Ko<br>Ostaneš Popolnoma v Ozadju)</h1>
+            <p>Poglej video, da razumeš kako dostopati do sistema,<br>ki je našim učencem pomagal ustvariti <b>izjemne rezultate z AI</b>:</p>
+            
+            <div class="video-container">
+                <img src="https://picsum.photos/seed/founder/1280/720" alt="Video predogled" class="video-thumbnail">
+                <div class="video-overlay">
+                    <h4>Tvoj video se je že začel</h4>
+                    <span class="mute-icon">🔇</span>
+                    <p>Klikni za zvok</p>
+                </div>
+                <div class="video-caption">in navijamo zate.</div>
+            </div>
+
+            <a href="#waitlist" class="btn-main">PRIDRUŽI SE ČAKALNI LISTI</a>
+        </div>
+    </section>
+
+    <!-- Record Breaking Section -->
+    <section class="record-breaking">
+        <div class="container fade-in">
+            <h2>Se Nam Boš Pridružil/a Pri<br>Še Enem <span>Rekordnem</span> Projektu?</h2>
+            
+            <div class="mania-cards">
+                <div class="mania-card">
+                    <div class="mania-highlight"></div>
+                    <div class="mania-logo">AI</div>
+                    <span class="mania-amount">€850K</span>
+                    <span class="mania-label">Skupni rezultati</span>
+                </div>
+                <div class="mania-card">
+                    <div class="mania-highlight"></div>
+                    <div class="mania-logo">AI</div>
+                    <span class="mania-amount">€2.1M</span>
+                    <span class="mania-label">Skupni rezultati</span>
+                </div>
+            </div>
+
+            <p class="record-subtext">Naš prvi lansiranje je učencem pomagal ustvariti <b>€850K v samo 90 dneh.</b></p>
+            <p class="record-subtext">Drugič?<br><b>€2.1M v istem obdobju.</b></p>
+
+            <span class="red-text" style="color: var(--accent);">To delamo spet.</span>
+            <p style="color: var(--text-secondary);">Morda si samo ENO partnerstvo s podjetjem stran od rezultatov, kot so jih dosegli naši člani AI Universa:</p>
+
+            <div class="testimonial-grid">
+                <div class="test-card"><img src="https://picsum.photos/seed/t1/200/250" alt="Mnenje"><p>"Prvo AI partnerstvo sem zaprl v 17 dneh."</p></div>
+                <div class="test-card"><img src="https://picsum.photos/seed/t2/200/250" alt="Mnenje"><p>"Končno imam sistem, ne samo teorije."</p></div>
+                <div class="test-card"><img src="https://picsum.photos/seed/t3/200/250" alt="Mnenje"><p>"Stranka je v prvem mesecu prihranila ure dela."</p></div>
+                <div class="test-card"><img src="https://picsum.photos/seed/t4/200/250" alt="Mnenje"><p>"Predloge za kontakt so mi takoj odprle vrata."</p></div>
+                <div class="test-card"><img src="https://picsum.photos/seed/t5/200/250" alt="Mnenje"><p>"AI Universa mi je skrajšala mesece testiranja."</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Agent Operating Section -->
+    <section class="shadow-operating">
+        <div class="container fade-in">
+            <h2>AI Agent Operating:<br>Najboljši Začetniški Posel za 2026</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 40px;">Trenutno obstajajo tisoči podjetij z <b>resnimi prihodki...</b><br>A <b>nimajo pojma, kako pravilno uporabiti AI.</b></p>
+            <p style="margin-bottom: 48px;">Težji del so že opravili:</p>
+
+            <div class="shadow-list">
+                <div class="shadow-item">
+                    <div class="shadow-icon">⭐</div>
+                    <p>Zgradili so uspešne posle skozi leta</p>
+                </div>
+                <div class="shadow-item">
+                    <div class="shadow-icon">📹</div>
+                    <p>Ustvarili so zvesto bazo strank</p>
+                </div>
+                <div class="shadow-item">
+                    <div class="shadow-icon">👥</div>
+                    <p>Imajo procese, ki potrebujejo AI optimizacijo</p>
+                </div>
+            </div>
+
+            <p style="font-size: 18px;">In <b>ti bi lahko zaslužil/a do 30% prihodkov, ki jih ustvariš z implementacijo AI agentov</b><br>medtem ko večino tehničnega dela namesto tebe opravijo naši sistemi, predloge in platforma.</p>
+        </div>
+    </section>
+
+    <!-- Creators Section -->
+    <section class="creators-section">
+        <div class="container fade-in">
+            <h2 style="font-size: 48px; font-weight: 800;">Podjetja Tam Zunaj Potrebujejo Ljudi Kot Si Ti.</h2>
+            <p style="color: var(--text-secondary); margin-top: 16px;">Pred kratkim smo objavili video o tem modelu...</p>
+            <p style="margin-top: 16px;">In <b>dobili smo ogromno sporočil podjetnikov</b>, ki iščejo partnerja za AI avtomatizacijo:</p>
+
+            <div class="dm-grid">
+                <div class="dm-card">
+                    <p>Živjo ekipa,<br><br>vodim agencijo in imamo veliko ponavljajočih procesov pri leadih in nadaljnjih stikih.<br><br>Ekipa je preobremenjena, zato <span class="dm-highlight">iščem nekoga, ki bi nam pomagal postaviti AI agente in avtomatizacijo</span> brez da moram vse graditi sam.</p>
+                </div>
+                <div class="dm-card">
+                    <p>Hej,<br><br>imam coaching posel v Sloveniji in dober promet, ampak podpora in uvajanje požirata preveč časa.<br><br><span class="dm-highlight">Rad bi sodeloval z nekom, ki zna to prevesti v AI sistem</span>, da lahko jaz ostanem fokusiran na prodajo in vsebino.</p>
+                </div>
+                <div class="dm-card">
+                    <p>Živjo,<br><br>vodim e-trgovinsko podjetje in vem, da puščamo denar na mizi, ker nimamo prave AI implementacije.<br><br><span class="dm-highlight">Mi lahko povežete s kom, ki zna postaviti AI agente za prodajo, podporo in nadaljnje stike?</span><br><br>Če najdemo pravo osebo, gremo v partnerstvo takoj.</p>
+                </div>
+            </div>        </div>
+    </section>
+
+    <!-- 4-Step System -->
+    <section class="steps-section">
+        <div class="container fade-in">
+            <h2 style="font-size: 48px; font-weight: 800;">Naš <span style="color: var(--accent);">4-Stopenjski Sistem</span>, Ki Te Popelje<br>Od Ničle Do Tvojega Prvega Partnerstva</h2>
+            <p style="color: var(--text-secondary); margin-top: 24px;">Ta model se imenuje <b>AI Agent Operating.</b></p>
+            <p style="color: var(--text-secondary); margin-top: 16px;">Znotraj AI Universa ti pokažemo točno, kako zgradiš <b>resen AI prihodek</b><br>s tem modelom <b>brez občinstva, brez kompliciranja in tudi če še nimaš izkušenj.</b></p>
+            <p style="margin-top: 24px;">Samo slediš našemu <b>4-stopenjskemu sistemu:</b></p>
+
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-icon">🔍</div>
+                    <div class="step-content">
+                        <h3>1. KORAK: NAJDI</h3>
+                        <h4>Najdi podjetja za partnerstvo in implementacijo AI agentov.</h4>
+                        <p>Dobiš seznam 100 preverjenih podjetij z visokim potencialom, ki jih je naša ekipa ročno izbrala.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-icon">🕵️</div>
+                    <div class="step-content">
+                        <h3>2. KORAK: KONTAKTIRAJ</h3>
+                        <h4>Kontaktiraj podjetja in jim pokaži potencial AI avtomatizacije.</h4>
+                        <p>Naš sistem ti v nekaj klikih pripravi konkreten AI načrt, ki jim ga lahko pošlješ.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-icon">💻</div>
+                    <div class="step-content">
+                        <h3>3. KORAK: RAZVIJ</h3>
+                        <h4>Razvij AI agente z našimi predlogami in platformo.</h4>
+                        <p>Naši sistemi ti pomagajo sestaviti celoten plan, logiko in deliverable brez programiranja iz nule.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-icon">🚀</div>
+                    <div class="step-content">
+                        <h3>4. KORAK: UVEDI</h3>
+                        <h4>Pomagaj jim uvesti agente s preprosto strategijo lansiranja.</h4>
+                        <p>Dobiš enostaven sistem za uvajanje, implementacijo in prve rezultate brez tehničnega kaosa.</p>
+                    </div>
+                </div>
+            </div>
+
+            <a href="#waitlist" class="btn-main">PRIDRUŽI SE ČAKALNI LISTI</a>
+        </div>
+    </section>
+
+    <!-- Product Stack -->
+    <section class="product-stack">
+        <div class="container fade-in">
+            <h2 style="font-size: 48px; font-weight: 800; margin-bottom: 60px;">Tukaj Je <span style="color: var(--accent);">Točno</span>, Kaj Dobiš,<br>Ko Se Pridružiš AI Universa:</h2>
+
+            <div class="product-card">
+                <div class="product-info">
+                    <h3>AI Agent Builder</h3>
+                    <span class="product-value">€2,999/leto</span>
+                    <p>To je zbirka specializiranih AI agentov brez promptov, ki nadomesti cel kup ročnega dela.<br><br>Vzameš poslovni primer, izbereš agenta in sistem ti pripravi strukturo, logiko in izvedbo.<br><br>To je jedro našega sistema, ki je že pripravljen zate.</p>
+                    <ul class="product-features">
+                        <li>Zbirka specializiranih AI agentov brez promptov</li>
+                        <li>Predpripravljeni poteki dela za hitrejšo implementacijo</li>
+                        <li>Uporaba brez tehničnega znanja</li>
+                        <li>Hitrejši izvedba za tvoje stranke</li>
+                    </ul>
+                </div>
+                <div class="product-image">
+                    <img src="https://picsum.photos/seed/ghost/400/400" alt="AI Agent Builder">
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-info">
+                    <h3>Synthesise AI</h3>
+                    <span class="product-value">€2,999/leto</span>
+                    <p><b>Synthesise AI</b> ustvari celotne načrte AI agentov v manj kot 2 urah.<br><br>Namesto da brainstormaš iz nule, dobiš jasen plan implementacije, deliverable in naslednje korake za stranko.</p>
+                </div>
+                <div class="product-image">
+                    <img src="https://picsum.photos/seed/synth/400/400" alt="Synthesise AI">
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-info">
+                    <h3>AI Agent Operator Playbook</h3>
+                    <span class="product-value">€1,495</span>
+                    <p><b>AI Agent Operator Playbook</b> je Netflix-kvaliteten trening, kjer te korak za korakom peljemo skozi celoten model:</p>
+                    <ul class="product-features">
+                        <li>Kako najdeš prava podjetja in dobiš odgovor</li>
+                        <li>Kaj pokažeš na klicu, da vidiš interes</li>
+                        <li>Kako izvedeš implementacijo brez kaosa</li>
+                    </ul>
+                </div>
+                <div class="product-image">
+                    <img src="https://picsum.photos/seed/playbook/400/400" alt="AI Agent Operator Playbook">
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-info">
+                    <h3>100 Preverjenih Podjetij</h3>
+                    <span class="product-value">Neprecenljivo</span>
+                    <p>Naša ekipa je ročno izbrala 100 podjetij, ki imajo visoko verjetnost za AI implementacijo.<br><br>To ti prihrani tedne raziskovanja in ti omogoči, da začneš takoj.</p>
+                </div>
+                <div class="product-image">
+                    <img src="https://picsum.photos/seed/leads/400/400" alt="100 Preverjenih Podjetij">
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-info">
+                    <h3>AI Agents SaaS Platforma</h3>
+                    <span class="product-value" style="background: var(--accent); color: black; display: inline-block; padding: 6px 12px; border-radius: 999px; margin-bottom: 16px;">€200 kreditov predobljenih</span>
+                    <span class="product-value">€1,068/leto</span>
+                    <p><b>Lastniška platforma</b> za gradnjo, testiranje in upravljanje AI agentov na enem mestu.<br><br>Dobiš tudi <b>€200 kreditov predobljenih</b>, da lahko začneš brez dodatnega stroška.</p>
+                    <ul class="product-features">
+                        <li>Lastniška platforma za AI agente</li>
+                        <li>€200 kreditov predobljenih</li>
+                        <li>Hitrejši deployment za stranke</li>
+                    </ul>
+                </div>
+                <div class="product-image">
+                    <img src="https://picsum.photos/seed/saas/400/400" alt="AI Agents SaaS Platforma">
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-info">
+                    <h3>AI Universa Certifikat</h3>
+                    <span class="product-value">Neprecenljivo</span>
+                    <p>Uraden certifikat, ki potrdi, da razumeš naš AI Agent Operating model in znaš implementirati sisteme za podjetja.<br><br>Odličen dodatek za kredibilnost pri prodaji.</p>
+                </div>
+                <div class="product-image">
+                    <img src="https://picsum.photos/seed/cert/400/400" alt="AI Universa Certifikat">
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-info">
+                    <h3>AI Universa Mania</h3>
+                    <span class="product-value">€125,000+ v nagradah</span>
+                    <p>Posebna nagradna aktivacija za člane skupnosti.<br><br>Lahko osvojiš avto, 3x MacBook Pro, iPhone in druge nagrade, medtem ko gradiš svoj AI biznis.</p>
+                </div>
+                <div class="product-image">
+                    <img src="https://picsum.photos/seed/mania/400/400" alt="AI Universa Mania">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Founder Section -->
+    <section class="founder-section">
+        <div class="container fade-in">
+            <div class="founder-card">
+                <h2 style="font-size: 48px; font-weight: 800;">Zakaj To Delam?</h2>
+                <img src="https://picsum.photos/seed/iman/800/450" alt="Tim Brdnik & Luka Lorencic" class="founder-image">
+                <p style="font-size: 18px; margin-bottom: 24px;">Sem <b>soustanovitelj najhitreje rastoče AI platforme v regiji</b>.</p>
+                <p style="color: var(--text-secondary); margin-bottom: 24px;">Naš fokus je preprost: zgraditi čim več uspešnih AI partnerstev, ki ustvarjajo resnične rezultate.</p>
+                <p style="font-size: 18px;">Zato <b>je v našem interesu, da ti pomagamo čim hitreje priti do strank, implementacije in prihodkov.</b></p>
+                
+                <div class="founder-stats">
+                    <div class="stat-item">
+                        <h4>€10,270</h4>
+                        <p>Povprečni Mesečni Zaslužki</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4>€2,355,000+</h4>
+                        <p>Skupni Zaslužki</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Perspective Section -->
+    <section class="perspective">
+        <div class="container fade-in">
+            <div class="perspective-card">
+                <h2 style="font-size: 42px; font-weight: 800;">Samo Za Malo Perspektive:</h2>
+                <p style="color: var(--text-secondary); margin-top: 24px;">Povprečen izvajalec AI storitev običajno zasluži okoli €10,270 mesečno, ko enkrat postavi osnovni sistem.</p>
+                <p style="color: var(--text-secondary); margin-top: 16px;">In povprečni rezultati članov, ki pravilno uporabijo naš model?</p>
+                <p style="color: var(--accent); font-weight: 900; font-size: 20px; margin-top: 24px;">€60,003. 6x več.</p>
+                
+                <img src="https://picsum.photos/seed/dash/800/500" alt="Nadzorna plošča" class="perspective-dashboard">
+
+                <p style="color: var(--text-secondary);">Na prikazu vidiš metrike, kot so Prihodki, Konverzija, Aktivne Stranke in Rast sistema.</p>
+                <p style="color: var(--text-secondary); margin-top: 16px;">To je moč pravih orodij, preverjenih procesov in dostopa do podatkov iz ozadja.</p>
+                <p style="color: var(--text-secondary); margin-top: 16px;">Mi natančno vemo, kaj deluje, kaj ne in kaj se najhitreje proda.</p>
+                <p style="margin-top: 24px;">Z vstopom v AI Universa <b>dobiš sistem ključ-v-roke, s katerim lahko začneš graditi AI prihodek bistveno hitreje.</b></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recap Section -->
+    <section class="recap">
+        <div class="container fade-in">
+            <h2 style="font-size: 42px; font-weight: 800; margin-bottom: 48px;">Hiter Pregled Vsega, Kar Dobiš Z AI Universa:</h2>
+            
+            <div class="recap-card">
+                <div class="logo" style="justify-content: center; margin-bottom: 32px;">
+                    <div class="logo-icon"></div>
+                    AI Universa
+                </div>
+                
+                <div class="recap-list">
+                    <div class="recap-item"><span>✓ AI Agent Builder</span><div class="recap-dots"></div><span>€2,999/leto</span></div>
+                    <div class="recap-item"><span>✓ Synthesise AI</span><div class="recap-dots"></div><span>€2,999/leto</span></div>
+                    <div class="recap-item"><span>✓ AI Agents SaaS Platforma</span><div class="recap-dots"></div><span>€1,068/leto</span></div>
+                    <div class="recap-item"><span>✓ AI Agent Operator Playbook</span><div class="recap-dots"></div><span>€1,495</span></div>
+                    <div class="recap-item"><span>✓ 100 Preverjenih Podjetij</span><div class="recap-dots"></div><span>Neprecenljivo</span></div>
+                    <div class="recap-item"><span>✓ AI Universa Certifikat</span><div class="recap-dots"></div><span>Neprecenljivo</span></div>
+                    <div class="recap-item"><span>✓ AI Universa Mania</span><div class="recap-dots"></div><span>€125,000+ v nagradah</span></div>
+                </div>
+
+                <div class="recap-total">Skupna vrednost: <span>€8,561</span></div>
+
+                <a href="#waitlist" class="btn-main">PRIDRUŽI SE ČAKALNI LISTI</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guarantee Section -->
+    <section class="guarantee">
+        <div class="container fade-in">
+            <div class="guarantee-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/1043/1043424.png" alt="Pečat garancije" class="guarantee-seal">
+                <h3>10x Tvojo Investicijo Ali Pa Nadaljujemo<br>Z Delom Dokler Ne Uspemo</h3>
+                
+                <p style="color: var(--text-secondary); margin-bottom: 24px;">Seveda dobiš tudi standardno 7-dnevno garancijo brez vprašanj:</p>
+                <p style="color: var(--text-secondary); margin-bottom: 24px;">Če v prvih 7 dneh ugotoviš, da to ni zate, nam piši na <b>support@aiuniversa.com</b> in vrnemo ti celoten znesek. Brez kompliciranja.</p>
+                
+                <p style="font-style: italic; margin-bottom: 24px;">Ampak tukaj je še boljša garancija od navadnega vračila denarja:</p>
+                
+                <p style="font-weight: 700; margin-bottom: 24px;">Če ne ustvariš vsaj 10x svoje investicije, bomo nadaljevali z delom s tabo<br>in ti brezplačno dali prihodnje posodobitve, nove treninge, strategije in podporo.</p>
+                
+                <p style="font-weight: 900; font-size: 20px; margin-bottom: 40px;">Edini način, da ti ta investicija ne uspe, je, da odnehaš.</p>
+
+                <a href="#waitlist" class="btn-main">PRIDRUŽI SE ČAKALNI LISTI</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="container fade-in">
+            <span class="faq-badge">FAQ</span>
+            <h2 style="font-size: 48px; font-weight: 800;">Pogosta Vprašanja</h2>
+
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">Kako deluje garancija? <span>∨</span></div>
+                    <div class="faq-answer">Imaš 7-dnevno garancijo brez vprašanj. Poleg tega velja tudi naša 10x garancija: če ne ustvariš vsaj 10x svoje investicije, nadaljujemo z delom s tabo.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Kako je to drugače od drugih AI tečajev? <span>∨</span></div>
+                    <div class="faq-answer">Ker ne dobiš samo teorije. Dobiš sistem, preverjena podjetja, predloge, platformo in konkreten model, kako to prodati ter uvesti.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Ali moram biti tehničen človek? <span>∨</span></div>
+                    <div class="faq-answer">Ne. Sistem je postavljen tako, da lahko začneš tudi brez programerskega znanja. Če znaš uporabljati brskalnik in slediti korakom, si dovolj tehničen.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Ali potrebujem svoje občinstvo ali osebno znamko? <span>∨</span></div>
+                    <div class="faq-answer">Ne. Ravno to je prednost modela. Ti prineseš sistem in implementacijo, podjetje pa že ima trg, procese in stranke.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Kako hitro lahko pridem do prve stranke? <span>∨</span></div>
+                    <div class="faq-answer">To je odvisno od tvoje hitrosti izvajanja, ampak cilj sistema je, da te čim prej pripelje do prvega partnerstva z uporabo preverjenega procesa kontakta.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Kaj točno prodajam podjetjem? <span>∨</span></div>
+                    <div class="faq-answer">Prodajaš implementacijo AI agentov in avtomatizacij, ki podjetjem prihranijo čas, izboljšajo prodajo, uvajanje, podporo ali nadaljnje stike.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Ali dobim tudi podporo in posodobitve? <span>∨</span></div>
+                    <div class="faq-answer">Da. Dobiš dostop do skupnosti, novih strategij, posodobitev sistema in podpore, da ne obstaneš sam/a sredi procesa.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Je to primerno tudi za začetnika? <span>∨</span></div>
+                    <div class="faq-answer">Da. Model je narejen tako, da lahko začne tudi popoln začetnik, če je pripravljen slediti sistemu in dejansko izvajati korake.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer CTA -->
+    <section class="footer-cta" id="waitlist">
+        <div class="container fade-in">
+            <div class="whatsapp-card">
+                <h2 style="font-size: 48px; font-weight: 800; margin-bottom: 16px;">Imaš Še Kakšno Vprašanje?</h2>
+                <p style="color: var(--text-secondary);">Pripravljeni smo ti pomagati prek WhatsAppa.</p>
+                <p style="margin-top: 24px;">Samo pošlji nam WhatsApp sporočilo na <b>+44 7907 501962</b></p>
+                
+                <a href="https://wa.me/447907501962" class="btn-whatsapp">POŠLJI WHATSAPP SPOROČILO</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Pogoji uporabe</a>
+            </div>
+            <p style="margin-bottom: 16px;">Ta stran ni del spletnega mesta Facebook ali podjetja Facebook Inc. Prav tako ni na noben način odobrena s strani Facebooka. FACEBOOK je blagovna znamka podjetja FACEBOOK, Inc.</p>
+            <p>©2026 AI Universa. Vse pravice pridržane.</p>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(q => {
+            q.addEventListener('click', () => {
+                const item = q.parentElement;
+                item.classList.toggle('active');
+            });
+        });
+
+        // Intersection Observer for Fade In
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
